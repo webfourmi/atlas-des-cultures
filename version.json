@@ -1,12 +1,12 @@
 {
   "app": "Atlas des cultures",
-  "version": "4.2.0",
+  "version": "4.3.0",
   "date": "2026-10-18",
   "notes": [
-    "Nouvelle aventure en Inde : Avant l’ouverture",
-    "Trois lieux à explorer, Anaya et Ravi à rencontrer",
-    "Photographie à examiner et énigme de trois légendes à associer",
-    "Deux voies avec des préparatifs et des dénouements différents",
-    "Indices, choix et souvenirs conservés hors connexion et dans les sauvegardes JSON"
+    "Aventure en Inde réorganisée en écrans successifs, avec une activité à la fois",
+    "Barre des trois lieux toujours visible, dès l’introduction",
+    "Boutons de progression visibles en bas et retour à l’écran précédent",
+    "Énigme présentée support par support ; carnet et historique à la demande",
+    "Reprise à l’écran quitté, sans perdre les indices, choix ou souvenirs existants"
   ]
 }

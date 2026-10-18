@@ -224,7 +224,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
 
   // India pilot: every exploration order, both endings and both preparations per ending.
   const indiaState=()=>plain('journeyProgress("inde").adventure');
-  const india=(action,key,from=indiaState().place)=>click('india-'+action,undefined,{key,from});
+  const india=(action,key,from=indiaState().place)=>click('india-'+action,undefined,{key,from,screen:indiaState().screen,piece:action==='answer'?indiaState().piece:undefined});
   const moveIndia=place=>{if(indiaState().place!==place)india('move',place)};
   const orders=[['accueil','bibliotheque','cour'],['accueil','cour','bibliotheque'],['bibliotheque','accueil','cour'],['bibliotheque','cour','accueil'],['cour','accueil','bibliotheque'],['cour','bibliotheque','accueil']];
   let indiaRoutes=0;
@@ -241,16 +241,14 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
         assert(indiaState().observed.includes('legende'));
       } else if(place==='bibliotheque'){
         assert.equal(run('indiaAction("detail","legende","accueil")'),false,'Action from a previous place accepted');
-        india('document','fiche');india('document','livre');
-        assert.match(elements.get('app').innerHTML,/des récitations/);
+        india('document','fiche');assert.match(elements.get('app').innerHTML,/des récitations/);india('document','livre');
         assert.equal(run('indiaAction("place-label","photo","bibliotheque")'),true);
         assert.match(elements.get('app').innerHTML,/Choisis d’abord l’un des trois titres/);
         const choices=exerciseErrors?{photo:'diversite',fiche:'transmission',livre:'textes'}:{photo:'transmission',fiche:'diversite',livre:'textes'};
         for(const [piece,label] of Object.entries(choices)){
-          india('label',label);
+          india('piece',piece);india('answer',label);
           const pending=indiaState();run('state=load();render()');
-          assert.deepEqual(indiaState(),pending,'Reload lost a selected title or partial board');
-          india('place-label',piece);
+          assert.deepEqual(indiaState(),pending,'Reload lost the current support or partial board');
         }
         india('check');
         if(exerciseErrors){
@@ -258,7 +256,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
           assert.match(elements.get('app').innerHTML,/2 associations à revoir/);snapshot('india-puzzle-incorrect');
           india('hint');assert.equal(indiaState().hint,1);india('hint');assert.equal(indiaState().hint,2);
           assert.equal(indiaState().board.photo,'diversite','Hint silently solved the puzzle');
-          india('label','transmission');india('place-label','photo');
+          india('pane','play');india('piece','photo');india('answer','transmission');
           assert.equal(indiaState().board.fiche,'diversite','Moving an occupied title lost the other title');
           assert.equal(indiaState().checked,false);india('check');
         }
@@ -289,7 +287,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
       assert(list.indexOf(first)<list.indexOf('Le livre de la bibliothèque'));
       assert(list.indexOf(first)<list.indexOf(preparation==='photo'?'La fiche des pratiques':'La photographie'));
     } else assert.match(elements.get('app').innerHTML,preparation==='personne'?/J’ai commencé auprès d’un proche/:/Je reprends certaines explications/);
-    const finished=indiaState();assert.equal(run('indiaAction("move","bibliotheque",journeyProgress("inde").adventure.place)'),false);
+    assert.equal(run('indiaAction("move","bibliotheque",journeyProgress("inde").adventure.place)'),true);assert.equal(indiaState().ending,plan);india('screen','ending');const finished=indiaState();
     run('state=load();render()');assert.deepEqual(indiaState(),finished,'Reload lost the ending');
     indiaRoutes++;
   }
@@ -315,7 +313,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   exploreIndia(orders[4],'expo','pratiques');assert.deepEqual(indiaState().endings,['rencontre','expo']);
   // An in-progress save preserves choices and puzzle; local play wins when restoring.
   india('replay');india('start');moveIndia('cour');india('plan','expo');india('plan','rencontre');
-  assert.equal(indiaState().plan,'rencontre');assert.match(elements.get('app').innerHTML,/visite dialoguée/);
+  assert.equal(indiaState().plan,'rencontre');assert.match(elements.get('app').innerHTML,/question pour ouvrir la discussion/);
   india('opening','textes');moveIndia('bibliotheque');india('document','livre');india('label','transmission');india('place-label','photo');
   const pendingIndia=indiaState();run('exportJSON()');const indiaBackup=JSON.parse(downloads.at(-1).data);
   context.indiaBackupFile={size:12000,text:async()=>JSON.stringify(indiaBackup)};
@@ -330,6 +328,70 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   context.newRemote=newRemote;
   assert.equal(run('mergeIndiaAdventure(newIndiaAdventure(),newRemote).place'),'cour','An untouched legacy save blocked a restored adventure');
   assert.equal(run('indiaAction("move","__proto__","accueil")'),false);
+
+  // Regression: a complete journey can be played using only the visible cards and footer.
+  const preservedIndia=plain('state.journeys.inde');
+  function visibleButton(action,key,footerOnly=false){
+    const markup=elements.get('app').innerHTML;
+    const region=footerOnly?markup.match(/<footer class="india-player-controls">([\s\S]*?)<\/footer>/)[1]:markup;
+    const buttons=[...region.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)];
+    const found=footerOnly?buttons.at(-1):buttons.find(match=>match[1].includes('data-action="'+action+'"')&&(key===undefined||match[1].includes('data-key="'+key+'"')));
+    assert(found,'Expected a visible control: '+action+' '+key);assert(!/\bdisabled\b/.test(found[1]),'Visible progression control is disabled: '+found[2]);
+    const data=Object.fromEntries([...found[1].matchAll(/data-([\w-]+)="([^"]*)"/g)].map(([,name,value])=>[name,value]));
+    click(data.action,undefined,data);
+  }
+  const primary=()=>visibleButton(null,undefined,true);
+  function checkPlayer(){
+    const markup=elements.get('app').innerHTML;
+    assert(document.body.classList.contains('india-playing'));
+    assert.equal((markup.match(/class="india-location"/g)||[]).length,3,'The three places disappeared');
+    assert(markup.indexOf('class="india-placebar"')<markup.indexOf('id="india-screen-scroll"'),'Places were rendered after the activity');
+    assert.equal((markup.match(/class="india-screen"/g)||[]).length,1,'More than one activity was rendered');
+    assert(!markup.includes('class="india-layout"'));assert(!markup.includes('class="india-hero"'));
+    assert(markup.includes('class="india-player-controls"'));
+    snapshot('india-screen-'+(run('indiaPane')||indiaState().screen));
+  }
+  for(const [plan,preparation] of [['expo','photo'],['expo','pratiques'],['rencontre','personne'],['rencontre','textes']]){
+    run('state.journeys.inde={node:"begin",seen:[],completed:false};show("travel");openJourney("inde")');
+    checkPlayer();assert.equal(indiaState().screen,'intro');
+    primary();checkPlayer();assert.equal(indiaState().screen,'anaya');
+    primary();checkPlayer();assert.equal(indiaState().screen,'photo');
+    visibleButton('india-detail','personnes');primary();assert.equal(indiaState().detail,'legende');
+    primary();checkPlayer();assert.equal(indiaState().screen,'fiche');
+    primary();assert(indiaState().documents.includes('fiche'));
+    primary();checkPlayer();assert.equal(indiaState().screen,'livre');
+    primary();assert(indiaState().documents.includes('livre'));
+    primary();checkPlayer();assert.equal(indiaState().screen,'ravi');
+    visibleButton('india-talk','ravi-photo');assert.match(elements.get('app').innerHTML,/un bon point de départ/);
+    visibleButton('india-clear-reply');visibleButton('india-talk','ravi-livres');
+    assert(!elements.get('app').innerHTML.includes('un bon point de départ'),'Earlier dialogue was stacked in the active card');
+    primary();checkPlayer();assert.equal(indiaState().screen,'route');
+    visibleButton('india-plan',plan);primary();checkPlayer();assert.equal(indiaState().screen,'puzzle');
+    assert.equal((elements.get('app').innerHTML.match(/class="india-puzzle-support"/g)||[]).length,1);
+    for(const label of ['transmission','diversite','textes']){visibleButton('india-answer',label);primary();checkPlayer()}
+    assert.equal(run('indiaBoardSolved(journeyProgress("inde").adventure)'),true);
+    // Previous and next support keep the chosen titles, and stale card clicks are rejected.
+    const board=indiaState().board;visibleButton('india-piece','photo');assert.deepEqual(indiaState().board,board);
+    assert.equal(run('indiaAction("answer","textes","bibliotheque",null,"puzzle","livre")'),false,'Click from a former support was accepted');
+    visibleButton('india-piece','livre');primary();checkPlayer();assert.equal(indiaState().screen,'preparation');
+    visibleButton(plan==='expo'?'india-order':'india-opening',preparation);primary();checkPlayer();assert.equal(indiaState().screen,'ready');
+    primary();checkPlayer();assert.equal(indiaState().ending,plan);assert.equal(indiaState().screen,'ending');
+    visibleButton('india-pane','mission');checkPlayer();visibleButton('india-pane','dialogues');checkPlayer();
+    assert.match(elements.get('app').innerHTML,/un bon point de départ/,'Earlier dialogue disappeared from the history');
+    visibleButton('india-pane','sources');checkPlayer();
+    click('read','inde');assert(!document.body.classList.contains('india-playing'));
+    click('back-detail');assert(document.body.classList.contains('india-playing'));checkPlayer();
+    visibleButton('india-pane','play');visibleButton('india-move','bibliotheque');checkPlayer();
+    assert.equal(indiaState().ending,plan,'Reviewing a place removed the ending');
+    const screenBeforeReload=indiaState();run('state=load();openJourney("inde")');assert.deepEqual(indiaState(),screenBeforeReload);
+    checkPlayer();click('journey-back');assert(!document.body.classList.contains('india-playing'));
+  }
+  const legacyScreen={started:true,place:'bibliotheque',visited:['accueil','bibliotheque'],documents:['fiche','livre'],observed:['legende'],board:{photo:'transmission',fiche:null,livre:null},selected:'diversite',version:1};
+  context.legacyScreen=legacyScreen;
+  const migratedScreen=plain('cleanIndiaAdventure(legacyScreen)');assert.equal(migratedScreen.screen,'puzzle');assert.equal(migratedScreen.piece,'fiche');
+  assert.equal(migratedScreen.board.photo,'transmission');assert.equal(migratedScreen.selected,'diversite');assert.deepEqual(migratedScreen.documents,['fiche','livre']);
+  context.preservedIndia=preservedIndia;run('state.journeys.inde=preservedIndia;persist();openJourney("inde")');
+
   run('show("home")');assert.equal(run('indiaAction("start")'),false,'Action outside the adventure accepted');
 
   run("show('library');openDetail('vietnam');openJourney('vietnam');openDetail('vietnam');closeDetail()");
@@ -377,5 +439,6 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   console.log('PASS: 13 escales / 39 énigmes, passeport et favoris, portions de 1 à 12, fractions et étapes recalculées, mode cuisine, coches persistantes, sauvegarde/restauration, impression, quatre PDF et cache complet.');
   console.log('PASS: 13 photos créditées, 13 cartes, 60 chemins dans 12 rencontres et aventure indienne à deux dénouements, réponses propres à chaque choix, historique/rechargement/JSON, migration des anciennes rencontres, lecteurs à la demande et arrêt des écoutes.');
   console.log('PASS: Inde : 24 parcours (six ordres d’exploration, deux voies, deux préparatifs), erreurs et indices, déplacements de titres, reprise, migration, sauvegarde JSON et souvenirs cumulés.');
+  console.log('PASS: écrans successifs : quatre parcours par les commandes affichées, lieux présents dès l’introduction, une activité à la fois, reprise du support, carnet/historique séparés et sortie du mode jeu.');
   console.log('Limite : ces tests sans navigateur ne vérifient pas le rendu CSS ni un appareil réel.');
 })().catch(error=>{console.error(error);process.exitCode=1});

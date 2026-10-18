@@ -1,6 +1,6 @@
 /* Atlas des cultures - incrémenter CACHE_VERSION à chaque publication */
 'use strict';
-const CACHE_VERSION = 'atlas-cultures-v4.2.0';
+const CACHE_VERSION = 'atlas-cultures-v4.3.0';
 const CORE = ['./','./index.html','./recipes.js','./notebook.js','./notebook.css','./kitchen.js','./kitchen.css', './recipes/miso.webp', './recipes/miso.pdf', './recipes/kimchi.webp', './recipes/kimchi.pdf', './recipes/cafe-turc.webp', './recipes/cafe-turc.pdf', './recipes/tortillas.webp', './recipes/tortillas.pdf','./manifest.webmanifest','./version.json','./travel-data.js','./journeys.js','./travel.js','./travel.css','./india-adventure.js','./india-adventure.css','./travel/world.svg','./travel/CREDITS.md','./travel/photos.json','./travel/berimbau-angola.mp3','./travel/berimbau-iuna.mp3','./travel/japon.webp','./travel/coree.webp','./travel/vietnam.webp','./travel/indonesie.webp','./travel/inde.webp','./travel/vanuatu.webp','./travel/turquie.webp','./travel/georgie.webp','./travel/maroc.webp','./travel/kenya.webp','./travel/mexique.webp','./travel/bresil.webp','./travel/perou.webp','./icons/atlas-icon.svg','./icons/atlas-192.png','./icons/atlas-512.png','./icons/atlas-maskable-512.png'];
 self.addEventListener('install', event => {
   // Pas de skipWaiting automatique : l'utilisateur accepte sa mise à jour.

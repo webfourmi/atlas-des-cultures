@@ -2,12 +2,12 @@
 
 PWA statique : 13 escales, 39 questions, passeport et progression locale.
 
-## Inde : « Avant l’ouverture » (v4.2.0)
+## Inde : « Avant l’ouverture » (v4.3.0)
 
-L’Inde propose une aventure pilote dans une école de yoga fictive : l’accueil avec Anaya, la bibliothèque avec les documents et l’énigme, et la cour avec Ravi. Les trois lieux sont accessibles librement. Les échanges, les observations, les associations encore incomplètes et les choix sont conservés à la fermeture.
+L’Inde propose une aventure pilote dans une école de yoga fictive : l’accueil avec Anaya, la bibliothèque avec les documents et l’énigme, et la cour avec Ravi. Les trois lieux sont accessibles librement depuis une barre persistante, visible dès l’introduction. L’aventure se joue dans un cadre occupant la fenêtre : une seule activité à la fois, avec les boutons de progression toujours en bas. Le contenu de la carte peut défiler sur un petit écran ou avec un texte agrandi ; les lieux et les commandes restent en place. Le carnet, les sources et les échanges antérieurs s’ouvrent à la demande. Les observations, les associations encore incomplètes, l’écran et le support affichés sont conservés à la fermeture.
 
 - Observer trois détails d’une vraie photographie, dont la légende source qui précise la relation maître-élève. Les personnes photographiées ne représentent pas les personnages du récit.
-- Examiner une fiche et un livre, puis associer trois titres à leurs supports. Les titres se sélectionnent puis se posent par clic ou au clavier ; déplacer un titre déjà posé échange les deux affectations. La vérification explique ce qui reste à revoir ; deux niveaux d’aide sont disponibles sans pénalité.
+- Examiner une fiche et un livre, puis associer trois titres à leurs supports. L’énigme présente un seul support à la fois, avec trois titres au choix. Attribuer un titre déjà utilisé échange les deux affectations. Les boutons précédent et suivant permettent de revoir chaque support sans perdre les réponses. La vérification explique ce qui reste à revoir ; deux niveaux d’aide sont disponibles sans pénalité.
 - Choisir une exposition avec Anaya ou une visite dialoguée avec Ravi. La première voie demande de choisir le premier panneau à l’accueil ; la seconde, une question d’ouverture dans la cour. L’ordre des panneaux et la conversation finale reprennent ces décisions.
 - Obtenir deux souvenirs en rejouant. Les découvertes et souvenirs sont conservés ; une restauration garde l’aventure en cours sur l’appareil et réunit les souvenirs des sauvegardes. Une ancienne rencontre indienne terminée reste acquise et ouvre la nouvelle aventure à son introduction.
 
@@ -79,9 +79,11 @@ node tests/notebook.cjs
 
 Ce test sans dépendance vérifie la compatibilité des anciens passeports, la recherche (accents et unités de mesure), les filtres, les favoris, les retours de navigation, un quiz complet, les sauvegardes JSON et le cache. Il couvre aussi les 12 choix de portions des quatre recettes, les fractions, les quantités dans les étapes, les temps fixes, les cases à cocher, leur persistance, le changement de portions, une nouvelle préparation et la restauration d’une sauvegarde sans écraser la préparation locale. Les quatre PDF de base, inchangés depuis v3.2.0, ont été rendus et contrôlés : une page A4 avec une image et des références par recette.
 
-Pour v4.2.0, le même test parcourt les 60 chemins des 12 rencontres courtes et vérifie que chaque choix affiche sa réponse propre sans effacer les échanges précédents. Il couvre la reprise après rechargement, la migration des anciennes rencontres, la conservation du dialogue dans les sauvegardes JSON, les clics périmés, le rejeu et les retours de navigation. Il vérifie aussi les quatre sections de Voyages, les treize photos et crédits, les projections des repères, le chargement des vidéos à la demande et l’arrêt de l’audio. Les photographies ont été inspectées visuellement ; codecs, durée et présence d’un signal audio ont été vérifiés sur les deux MP3.
+Pour v4.3.0, le même test parcourt les 60 chemins des 12 rencontres courtes et vérifie que chaque choix affiche sa réponse propre sans effacer les échanges précédents. Il couvre la reprise après rechargement, la migration des anciennes rencontres, la conservation du dialogue dans les sauvegardes JSON, les clics périmés, le rejeu et les retours de navigation. Il vérifie aussi les quatre sections de Voyages, les treize photos et crédits, les projections des repères, le chargement des vidéos à la demande et l’arrêt de l’audio. Les photographies ont été inspectées visuellement ; codecs, durée et présence d’un signal audio ont été vérifiés sur les deux MP3.
 
 Pour l’Inde, il couvre les six ordres d’exploration possibles, les deux voies et leurs deux préparatifs, soit 24 parcours complets, ainsi que les associations erronées, les aides, le déplacement de titres, les reprises à mi-énigme, les sauvegardes JSON, les anciennes rencontres et le cumul des souvenirs.
+
+La navigation par écrans est aussi testée sur quatre parcours complets depuis les boutons réellement rendus : lieux présents avant l’activité, une seule activité affichée, énigme support par support, conservation des réponses, refus des clics provenant d’un ancien support, retour au carnet, historique, sortie de la vue de jeu et migration des sauvegardes v4.2.
 
 Limite de cette livraison : le rendu CSS et l’impression du navigateur n’ont pas été contrôlés dans un navigateur. Le test antérieur `tests/recipes.cjs` reste disponible pour Playwright avec Microsoft Edge ; il couvre les largeurs 390 et 1440 px, l’impression, le quiz, les sauvegardes et le mode hors connexion. L’émulation ne remplace pas un test sur téléphone physique.
 

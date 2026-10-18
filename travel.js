@@ -115,6 +115,7 @@ function openJourney(id) {
   if (!JOURNEYS[id] || !STOPS.some(s => s.id === id)) return;
   if (view !== 'journey') journeyReturn = {view,game,readingStop,detailReturn};
   activeJourney = id; game = null; view = 'journey';
+  if(id==='inde'){indiaPane=null;indiaNotice=null;}
   if (!state.journeys[id]) {state.journeys[id] = journeyProgress(id);persist();}
   render();window.scrollTo(0,0);document.getElementById('journey-title')?.focus();
 }
