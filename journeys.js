@@ -326,10 +326,10 @@ const JOURNEYS = {
     }
   },
   "inde": {
-    "title": "Une première visite",
+    "title": "Avant l’ouverture",
     "person": "Anaya",
     "role": "suit un cours de yoga",
-    "goal": "Accompagner Anaya avant le début d’un cours de yoga.",
+    "goal": "Explorer une école de yoga avec Anaya et Ravi, retrouver trois légendes et choisir comment accueillir les visiteurs.",
     "hands": {
       "title": "Plusieurs dimensions ensemble",
       "text": "Le yoga réunit des postures, le travail du souffle, la méditation, des récitations et d’autres techniques. La description patrimoniale dépasse une simple suite de positions."

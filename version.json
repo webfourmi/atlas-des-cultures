@@ -1,12 +1,12 @@
 {
   "app": "Atlas des cultures",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "date": "2026-10-18",
   "notes": [
-    "Treize rencontres réécrites : situations concrètes et dialogues naturels",
-    "Chaque réplique reçoit une réponse spécifique du personnage",
-    "Échanges affichés avec les noms des interlocuteurs et conservés à la reprise",
-    "Repères documentaires séparés du dialogue ; sources UNESCO conservées",
-    "Compatibilité des anciennes rencontres, découvertes et sauvegardes JSON"
+    "Nouvelle aventure en Inde : Avant l’ouverture",
+    "Trois lieux à explorer, Anaya et Ravi à rencontrer",
+    "Photographie à examiner et énigme de trois légendes à associer",
+    "Deux voies avec des préparatifs et des dénouements différents",
+    "Indices, choix et souvenirs conservés hors connexion et dans les sauvegardes JSON"
   ]
 }

@@ -107,6 +107,7 @@
 <link rel="stylesheet" href="./notebook.css">
 <link rel="stylesheet" href="./kitchen.css">
 <link rel="stylesheet" href="./travel.css">
+<link rel="stylesheet" href="./india-adventure.css">
 </head>
 <body>
 <header class="sitehead"><div class="wrap navwrap"><button class="brand" data-action="home" aria-label="Accueil"><span class="brandlogo">🧭</span><span><span class="brandstrong">Atlas des cultures</span><span class="brandsmall">LE MONDE A MILLE HISTOIRES</span></span></button><nav class="nav" aria-label="Navigation"><button data-action="home" id="nav-home">Explorer</button><button data-action="challenge" id="nav-challenge">Défi éclair</button><button data-action="passport" id="nav-passport">Passeport</button><button data-action="library" id="nav-library">Bibliothèque</button><button data-action="recipes" id="nav-recipes">Recettes</button><button data-action="travel" id="nav-travel">Voyages</button><button data-action="settings" id="nav-settings" aria-label="Installation et sauvegardes">⚙️ Options</button><button data-action="install" id="install-header" hidden>📲 Installer</button><span class="xpheader" id="nav-xp">✨ 0 XP</span></nav></div></header>
@@ -122,6 +123,7 @@
 <script src="./travel-data.js"></script>
 <script src="./journeys.js"></script>
 <script src="./travel.js"></script>
+<script src="./india-adventure.js"></script>
 <script>
 'use strict';
 // Une escale = une pratique culturelle particulière. Elle ne prétend jamais résumer tout un pays.
@@ -229,7 +231,7 @@ function reset(){const ok=confirm('Effacer tous tes tampons, les réponses explo
 document.addEventListener('click',ev=>{let b=ev.target.closest('[data-action]');if(!b)return;let a=b.dataset.action;if(a==='home'||a==='passport'||a==='challenge'||a==='library'||a==='recipes'||a==='travel')show(a==='home'?'home':a);else if(a==='start')startTour(b.dataset.id);else if(a==='recipe')openRecipe(b.dataset.id);else if(a==='back-recipe')closeRecipe();else if(a==='print-recipe')printRecipe();else if(a==='read')openDetail(b.dataset.id);else if(a==='back-detail')closeDetail();else if(a==='filter'){filter=b.dataset.filter;render()}else if(a==='answer')answer(Number(b.dataset.index));else if(a==='next')next();else if(a==='redo-challenge')startChallenge();else if(a==='reset')reset()});
 
 /* Atlas des cultures v3 : installation PWA, sauvegardes et mises à jour. */
-const APP_VERSION='4.1.0';
+const APP_VERSION='4.2.0';
 const BACKUP_FORMAT='atlas-des-cultures/progression-v1';
 const ALERTS_KEY='atlas-cultures-system-update-alerts';
 const stored=k=>{try{return localStorage.getItem(k)}catch{return null}};

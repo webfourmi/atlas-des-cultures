@@ -4,9 +4,11 @@ const path = require('node:path');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const root = path.resolve(__dirname, '..');
+const qaDir=process.env.ATLAS_QA_DIR;
+if(qaDir)fs.mkdirSync(qaDir,{recursive:true});
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const inline = html.match(/<script>([\s\S]*?)<\/script>/)[1];
-for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
+for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
 
 const elements = new Map(), events = {}, downloads = [], alerts = [];
 function element() {
@@ -27,12 +29,13 @@ const window = {navigator,matchMedia:()=>({matches:false}),scrollTo(){},addEvent
 const context = vm.createContext({document,window,navigator,location:{protocol:'file:',hostname:''},
   localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},
   confirm:()=>true,alert:m=>alerts.push(m),console,Blob,URL,setTimeout:()=>0,clearTimeout(){}});
-for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
+for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
 vm.runInContext(inline,context,{filename:'index.html'});
 const run = code => vm.runInContext(code,context);
 run('downloadBlob=(data,type,name)=>captureDownload(data,type,name)');
 context.captureDownload = (data,type,name)=>downloads.push({data,type,name});
 const plain = code => JSON.parse(run(`JSON.stringify(${code})`));
+const snapshot=name=>{if(qaDir)fs.writeFileSync(path.join(qaDir,name+'.html'),elements.get('app').innerHTML)};
 const click = (action,id,extra={}) => {const button=element();button.dataset={action,id,...extra};for(const handler of events.click)handler({target:{closest:()=>button}})};
 
 (async()=>{
@@ -158,7 +161,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   assert.equal((elements.get('app').innerHTML.match(/class="travel-figure"/g)||[]).length,13);
   click('travel-tab',undefined,{tab:'stories'});assert.equal((elements.get('app').innerHTML.match(/class="journey-card"/g)||[]).length,13);
   const priorXP=run('xp()');let routes=0;
-  for(const id of plain('STOPS.map(s=>s.id)')){
+  for(const id of plain("STOPS.filter(s=>s.id!=='inde').map(s=>s.id)")){
     const enumerate=(node,path=[],visited=[])=>{
       assert(!visited.includes(node),'Story loop');
       if(node==='finish')return [path];
@@ -198,7 +201,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
       assert.match(elements.get('app').innerHTML,/Cette rencontre est inscrite/);routes++;
     }
   }
-  assert.equal(routes,65);assert.equal(run('xp()'),priorXP);
+  assert.equal(routes,60);assert.equal(run('xp()'),priorXP);
   const beforeReplay=plain('journeyProgress(activeJourney)');click('journey-replay');
   assert.equal(run('journeyProgress(activeJourney).node'),'begin');assert.equal(run('journeyProgress(activeJourney).completed'),true);
   assert.deepEqual(plain('journeyProgress(activeJourney).history'),[]);assert.equal(run('journeyProgress(activeJourney).origin'),'begin');
@@ -218,6 +221,117 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   assert.equal(run('journeyProgress("japon").origin'),'hands');assert.deepEqual(plain('journeyProgress("japon").history'),[0]);
   assert.equal(run('journeyProgress("japon").completed'),true);
   run('state=load()');assert.equal(run('journeyProgress("japon").node'),'voices');
+
+  // India pilot: every exploration order, both endings and both preparations per ending.
+  const indiaState=()=>plain('journeyProgress("inde").adventure');
+  const india=(action,key,from=indiaState().place)=>click('india-'+action,undefined,{key,from});
+  const moveIndia=place=>{if(indiaState().place!==place)india('move',place)};
+  const orders=[['accueil','bibliotheque','cour'],['accueil','cour','bibliotheque'],['bibliotheque','accueil','cour'],['bibliotheque','cour','accueil'],['cour','accueil','bibliotheque'],['cour','bibliotheque','accueil']];
+  let indiaRoutes=0;
+  function exploreIndia(order,plan,preparation,exerciseErrors=false){
+    india('start');assert.equal(indiaState().started,true);snapshot('india-accueil');
+    assert.equal(run('indiaAction("start")'),false,'Repeated start reset the adventure');
+    assert.equal(run('indiaAction("finish",null,"accueil")'),false,'Unfinished mission accepted');
+    for(const place of order){
+      moveIndia(place);
+      if(place==='accueil'){
+        india('talk','anaya-mission');assert.match(elements.get('app').innerHTML,/La photo est ici/);
+        india('detail','personnes');india('detail','geste');india('detail','legende');
+        assert.match(elements.get('app').innerHTML,/la transmission/);
+        assert(indiaState().observed.includes('legende'));
+      } else if(place==='bibliotheque'){
+        assert.equal(run('indiaAction("detail","legende","accueil")'),false,'Action from a previous place accepted');
+        india('document','fiche');india('document','livre');
+        assert.match(elements.get('app').innerHTML,/des récitations/);
+        assert.equal(run('indiaAction("place-label","photo","bibliotheque")'),true);
+        assert.match(elements.get('app').innerHTML,/Choisis d’abord l’un des trois titres/);
+        const choices=exerciseErrors?{photo:'diversite',fiche:'transmission',livre:'textes'}:{photo:'transmission',fiche:'diversite',livre:'textes'};
+        for(const [piece,label] of Object.entries(choices)){
+          india('label',label);
+          const pending=indiaState();run('state=load();render()');
+          assert.deepEqual(indiaState(),pending,'Reload lost a selected title or partial board');
+          india('place-label',piece);
+        }
+        india('check');
+        if(exerciseErrors){
+          assert.equal(run('indiaBoardSolved(journeyProgress("inde").adventure)'),false);
+          assert.match(elements.get('app').innerHTML,/2 associations à revoir/);snapshot('india-puzzle-incorrect');
+          india('hint');assert.equal(indiaState().hint,1);india('hint');assert.equal(indiaState().hint,2);
+          assert.equal(indiaState().board.photo,'diversite','Hint silently solved the puzzle');
+          india('label','transmission');india('place-label','photo');
+          assert.equal(indiaState().board.fiche,'diversite','Moving an occupied title lost the other title');
+          assert.equal(indiaState().checked,false);india('check');
+        }
+        assert.equal(run('indiaBoardSolved(journeyProgress("inde").adventure)'),true);
+        assert.match(elements.get('app').innerHTML,/Le panneau est prêt/);snapshot('india-bibliotheque');
+      } else {
+        const knowsPhoto=indiaState().observed.includes('legende');
+        india('talk',knowsPhoto?'ravi-photo':'ravi-premier');
+        assert.match(elements.get('app').innerHTML,knowsPhoto?/tu as trouvé un bon point de départ/:/Va regarder la photographie/);
+        india('talk','ravi-livres');india('plan',plan);
+        assert.equal(indiaState().plan,plan);snapshot('india-cour-'+plan);
+        if(plan==='rencontre')india('opening',preparation);
+      }
+      const beforeReload=indiaState();run('state=load();show("home");openJourney("inde")');
+      assert.deepEqual(indiaState(),beforeReload,'Reopening lost the place, clues or dialogue');
+    }
+    assert.equal(indiaState().visited.length,3);
+    assert.equal(run('indiaClues(journeyProgress("inde").adventure).length'),3);
+    if(plan==='expo'){moveIndia('accueil');india('order',preparation)}else moveIndia('cour');
+    assert.deepEqual(plain('indiaTasks(journeyProgress("inde").adventure)'),[]);
+    india('finish');
+    assert.equal(indiaState().ending,plan);snapshot('india-ending-'+plan);assert.equal(run('state.journeys.inde.completed'),true);
+    assert.match(elements.get('app').innerHTML,plan==='expo'?/Les portes de l’exposition/:/Une visite à deux voix/);
+    if(plan==='expo'){
+      const markup=elements.get('app').innerHTML;
+      const list=markup.slice(markup.indexOf('class="india-exhibit-order"'));
+      const first=preparation==='photo'?'La photographie':'La fiche des pratiques';
+      assert(list.indexOf(first)<list.indexOf('Le livre de la bibliothèque'));
+      assert(list.indexOf(first)<list.indexOf(preparation==='photo'?'La fiche des pratiques':'La photographie'));
+    } else assert.match(elements.get('app').innerHTML,preparation==='personne'?/J’ai commencé auprès d’un proche/:/Je reprends certaines explications/);
+    const finished=indiaState();assert.equal(run('indiaAction("move","bibliotheque",journeyProgress("inde").adventure.place)'),false);
+    run('state=load();render()');assert.deepEqual(indiaState(),finished,'Reload lost the ending');
+    indiaRoutes++;
+  }
+  for(const order of orders){
+    for(const [plan,preparation] of [['expo','photo'],['expo','pratiques'],['rencontre','personne'],['rencontre','textes']]){
+      run('state.journeys.inde={node:"begin",seen:[],completed:false};show("travel");openJourney("inde")');
+      assert.match(elements.get('app').innerHTML,/Entrer dans l’école/);snapshot('india-intro');
+      assert.equal(run('chooseJourney(0,"begin","inde")'),false,'Old dialogue engine changed the pilot');
+      exploreIndia(order,plan,preparation,indiaRoutes===0);
+    }
+  }
+  assert.equal(indiaRoutes,24);assert.equal(run('xp()'),priorXP);
+  const oldIndia={node:'finish',seen:['hands','voices'],completed:true,origin:'begin',history:[0,0,0,0]};
+  context.oldIndia=oldIndia;run('state.journeys.inde=oldIndia;openJourney("inde")');
+  assert.equal(indiaState().started,false,'An older completed encounter skipped the new adventure');
+  assert.equal(run('journeyProgress("inde").completed'),true);
+  assert.deepEqual(plain('journeyProgress("inde").seen'),['hands','voices']);
+  assert.match(elements.get('app').innerHTML,/découvertes précédentes/);
+  exploreIndia(orders[0],'rencontre','personne');
+  const oldNotes=plain('journeyProgress("inde").seen');india('replay');
+  assert.equal(indiaState().started,false);assert.deepEqual(indiaState().endings,['rencontre']);
+  assert.deepEqual(plain('journeyProgress("inde").seen'),oldNotes);
+  exploreIndia(orders[4],'expo','pratiques');assert.deepEqual(indiaState().endings,['rencontre','expo']);
+  // An in-progress save preserves choices and puzzle; local play wins when restoring.
+  india('replay');india('start');moveIndia('cour');india('plan','expo');india('plan','rencontre');
+  assert.equal(indiaState().plan,'rencontre');assert.match(elements.get('app').innerHTML,/visite dialoguée/);
+  india('opening','textes');moveIndia('bibliotheque');india('document','livre');india('label','transmission');india('place-label','photo');
+  const pendingIndia=indiaState();run('exportJSON()');const indiaBackup=JSON.parse(downloads.at(-1).data);
+  context.indiaBackupFile={size:12000,text:async()=>JSON.stringify(indiaBackup)};
+  run('state.journeys={}');await run('importJSON(indiaBackupFile)');run('openJourney("inde")');
+  assert.deepEqual(indiaState(),pendingIndia,'Backup lost the unfinished adventure');
+  moveIndia('accueil');click('india-move',undefined,{key:'accueil',from:'accueil',target:'india-photo-title'});assert.equal(indiaState().place,'accueil');await run('importJSON(indiaBackupFile)');assert.equal(indiaState().place,'accueil','Restoration overwrote local play');
+  const corrupt=plain('cleanIndiaAdventure({started:true,place:"<script>",visited:["cour","bad","cour"],observed:["legende","bad"],documents:["livre","<script>"],board:{photo:"transmission",fiche:"transmission",livre:"bad"},selected:"<script>",hint:999,log:["<script>","ravi-livres"],plan:"expo",ending:"expo",endings:["expo","bad"]})');
+  assert.equal(corrupt.place,'accueil');assert.deepEqual(corrupt.visited,['accueil','cour']);assert.equal(corrupt.board.fiche,null);
+  assert.equal(corrupt.selected,null);assert.equal(corrupt.hint,2);assert.equal(corrupt.ending,null);assert.deepEqual(corrupt.endings,['expo']);
+  assert.deepEqual(corrupt.log,['ravi-livres']);
+  const newRemote=plain('newIndiaAdventure()');newRemote.started=true;newRemote.place='cour';newRemote.visited=['accueil','cour'];
+  context.newRemote=newRemote;
+  assert.equal(run('mergeIndiaAdventure(newIndiaAdventure(),newRemote).place'),'cour','An untouched legacy save blocked a restored adventure');
+  assert.equal(run('indiaAction("move","__proto__","accueil")'),false);
+  run('show("home")');assert.equal(run('indiaAction("start")'),false,'Action outside the adventure accepted');
+
   run("show('library');openDetail('vietnam');openJourney('vietnam');openDetail('vietnam');closeDetail()");
   assert.equal(run('view'),'journey');click('journey-back');assert.equal(run('view'),'detail');assert.equal(run('readingStop.id'),'vietnam');
   run('exportJSON()');const travelBackup=JSON.parse(downloads.at(-1).data);
@@ -255,12 +369,13 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   assert(cached.includes('./kitchen.js'));assert(cached.includes('./kitchen.css'));
   for(const p of Object.values(plain('TRAVEL_PHOTOS')))assert(cached.includes(p.local));
   for(const a of plain('TRAVEL_AUDIO'))assert(cached.includes(a.src));
-  for(const f of ['./travel/world.svg','./travel/CREDITS.md','./travel-data.js','./journeys.js','./travel.js','./travel.css'])assert(cached.includes(f));
+  for(const f of ['./travel/world.svg','./travel/CREDITS.md','./travel-data.js','./journeys.js','./travel.js','./travel.css','./india-adventure.js','./india-adventure.css'])assert(cached.includes(f));
   assert(fs.readFileSync(path.join(root,'travel/world.svg'),'utf8').includes('Natural Earth'));
   assert(worker.includes("atlas-cultures-v"+run('APP_VERSION')));assert.equal(JSON.parse(fs.readFileSync(path.join(root,'version.json'))).version,run('APP_VERSION'));
-  for(const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js'])assert(html.indexOf(`src="./${file}"`) < html.indexOf('<script>'));
+  for(const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js'])assert(html.indexOf(`src="./${file}"`) < html.indexOf('<script>'));
   assert(html.indexOf('./notebook.css') > html.lastIndexOf('</style>'));
   console.log('PASS: 13 escales / 39 énigmes, passeport et favoris, portions de 1 à 12, fractions et étapes recalculées, mode cuisine, coches persistantes, sauvegarde/restauration, impression, quatre PDF et cache complet.');
-  console.log('PASS: 13 photos créditées, 13 cartes, 65 chemins dans 13 aventures, réponses propres à chaque choix, historique/rechargement/JSON, migration des anciennes rencontres, lecteurs à la demande et arrêt des écoutes.');
+  console.log('PASS: 13 photos créditées, 13 cartes, 60 chemins dans 12 rencontres et aventure indienne à deux dénouements, réponses propres à chaque choix, historique/rechargement/JSON, migration des anciennes rencontres, lecteurs à la demande et arrêt des écoutes.');
+  console.log('PASS: Inde : 24 parcours (six ordres d’exploration, deux voies, deux préparatifs), erreurs et indices, déplacements de titres, reprise, migration, sauvegarde JSON et souvenirs cumulés.');
   console.log('Limite : ces tests sans navigateur ne vérifient pas le rendu CSS ni un appareil réel.');
 })().catch(error=>{console.error(error);process.exitCode=1});
