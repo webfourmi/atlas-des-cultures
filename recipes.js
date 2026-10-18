@@ -1,4 +1,4 @@
-// Ajouter une entrée portant l’identifiant d’une escale pour enrichir son carnet.
+// Les textes de base alimentent aussi les PDF ; les quantités explicites servent au mode cuisine.
 const RECIPES = {
   "japon": {
     "title": "Soupe miso au tofu et wakamé",
@@ -27,7 +27,52 @@ const RECIPES = {
     ],
     "image": "./recipes/miso.webp",
     "imageAlt": "Bol de soupe miso au tofu, au wakamé et à l’oignon nouveau.",
-    "pdf": "./recipes/miso.pdf"
+    "pdf": "./recipes/miso.pdf",
+    "portionModel": {
+      "base": 4,
+      "singular": "petit bol",
+      "plural": "petits bols"
+    },
+    "measuredIngredients": [
+      [
+        {
+          "amount": 800,
+          "name": "de dashi préparé selon son emballage",
+          "unit": "ml"
+        }
+      ],
+      [
+        {
+          "amount": 200,
+          "name": "de tofu soyeux",
+          "unit": "g"
+        }
+      ],
+      [
+        {
+          "amount": 3,
+          "name": "de wakamé séché",
+          "unit": "g"
+        }
+      ],
+      [
+        {
+          "amount": [
+            3,
+            4
+          ],
+          "name": "de miso",
+          "unit": "c. à soupe"
+        }
+      ],
+      [
+        {
+          "amount": 1,
+          "name": "oignon nouveau",
+          "pluralName": "oignons nouveaux"
+        }
+      ]
+    ]
   },
   "coree": {
     "title": "Baechu-geotjeori · kimchi frais",
@@ -60,7 +105,114 @@ const RECIPES = {
     ],
     "image": "./recipes/kimchi.webp",
     "imageAlt": "Assiette de kimchi frais au chou chinois, aux légumes et au sésame.",
-    "pdf": "./recipes/kimchi.pdf"
+    "pdf": "./recipes/kimchi.pdf",
+    "portionModel": {
+      "base": 4,
+      "max": 8
+    },
+    "measuredIngredients": [
+      [
+        {
+          "amount": 450,
+          "name": "de chou chinois",
+          "unit": "g"
+        }
+      ],
+      [
+        {
+          "amount": 1,
+          "name": "de gros sel",
+          "unit": "c. à soupe"
+        },
+        " ; ",
+        {
+          "amount": 240,
+          "name": "d’eau",
+          "unit": "ml"
+        }
+      ],
+      [
+        {
+          "amount": 2,
+          "name": "de farine de riz",
+          "unit": "c. à café"
+        }
+      ],
+      [
+        {
+          "amount": 3,
+          "name": "de sauce de poisson",
+          "unit": "c. à soupe"
+        }
+      ],
+      [
+        {
+          "amount": 1.5,
+          "name": "de sucre",
+          "unit": "c. à café"
+        },
+        " ; ",
+        {
+          "amount": 25,
+          "name": "de gochugaru",
+          "unit": "g"
+        }
+      ],
+      [
+        {
+          "amount": 3,
+          "name": "gousse d’ail",
+          "pluralName": "gousses d’ail"
+        },
+        " ; ",
+        {
+          "amount": 0.5,
+          "name": "de gingembre râpé",
+          "unit": "c. à café"
+        }
+      ],
+      [
+        {
+          "amount": 40,
+          "name": "d’oignon",
+          "unit": "g"
+        },
+        " ; ",
+        {
+          "amount": 2,
+          "name": "oignon nouveau",
+          "pluralName": "oignons nouveaux"
+        }
+      ],
+      [
+        {
+          "amount": 20,
+          "name": "de ciboulette asiatique",
+          "unit": "g"
+        },
+        " ; ",
+        {
+          "amount": 30,
+          "name": "de carotte",
+          "unit": "g"
+        }
+      ],
+      [
+        {
+          "amount": 1,
+          "name": "de sésame grillé",
+          "unit": "c. à soupe"
+        }
+      ]
+    ],
+    "measuredSteps": {
+      "0": {
+        "text": "Couper le chou. Mélanger avec le sel et {0} ml d’eau ; laisser 30 minutes en remuant deux fois.",
+        "amounts": [
+          120
+        ]
+      }
+    }
   },
   "turquie": {
     "title": "Café turc au cezve",
@@ -88,7 +240,46 @@ const RECIPES = {
     ],
     "image": "./recipes/cafe-turc.webp",
     "imageAlt": "Deux petites tasses de café turc, un cezve et deux verres d’eau.",
-    "pdf": "./recipes/cafe-turc.pdf"
+    "pdf": "./recipes/cafe-turc.pdf",
+    "portionModel": {
+      "base": 2,
+      "singular": "petite tasse",
+      "plural": "petites tasses"
+    },
+    "measuredIngredients": [
+      [
+        {
+          "amount": 120,
+          "name": "d’eau à température ambiante",
+          "unit": "ml"
+        },
+        " (60 ml par tasse)"
+      ],
+      [
+        {
+          "amount": 2,
+          "name": "de café moulu très fin",
+          "unit": "c. à café"
+        }
+      ],
+      [
+        {
+          "amount": [
+            0,
+            6
+          ],
+          "name": "de sucre, selon le goût",
+          "unit": "g"
+        }
+      ],
+      [
+        {
+          "amount": 2,
+          "name": "petit verre d’eau pour le service",
+          "pluralName": "petits verres d’eau pour le service"
+        }
+      ]
+    ]
   },
   "mexique": {
     "title": "Tortillas de maïs à la masa harina",
@@ -115,6 +306,43 @@ const RECIPES = {
     ],
     "image": "./recipes/tortillas.webp",
     "imageAlt": "Tortillas de maïs empilées dans un torchon propre.",
-    "pdf": "./recipes/tortillas.pdf"
+    "pdf": "./recipes/tortillas.pdf",
+    "portionModel": {
+      "base": 4,
+      "singular": "personne",
+      "plural": "personnes",
+      "itemsPerPortion": 3
+    },
+    "measuredIngredients": [
+      [
+        {
+          "amount": 200,
+          "name": "de masa harina de maïs nixtamalisé",
+          "unit": "g"
+        }
+      ],
+      [
+        {
+          "amount": 300,
+          "name": "d’eau tiède environ, à ajuster",
+          "unit": "ml"
+        }
+      ],
+      [
+        {
+          "amount": 0.25,
+          "name": "de sel (facultatif)",
+          "unit": "c. à café"
+        }
+      ]
+    ],
+    "measuredSteps": {
+      "1": {
+        "text": "Diviser en {0} boules. Presser chacune entre deux feuilles de plastique alimentaire avec une presse ou une casserole plate.",
+        "amounts": [
+          12
+        ]
+      }
+    }
   }
 };

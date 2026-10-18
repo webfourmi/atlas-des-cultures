@@ -1,13 +1,13 @@
 {
   "app": "Atlas des cultures",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "date": "2026-10-18",
   "notes": [
-    "Carnet Recettes du monde avec recherche par plat, pays ou ingrédient et filtre par destination",
-    "Quatre images originales, une pour chaque recette",
-    "Fiches illustrées A4 à imprimer et PDF prêts à télécharger",
-    "Favoris en tête du carnet, sauvegardés et inclus dans les exports JSON",
-    "Images et fiches PDF accessibles hors connexion après mise à jour",
-    "13 escales, 39 énigmes et progression existante conservées"
+    "Choix de 1 à 12 portions avec quantités recalculées dans les ingrédients et les étapes concernées",
+    "Mode cuisine lisible avec ingrédients et étapes à cocher",
+    "Préparation conservée sur cet appareil et incluse dans la sauvegarde JSON",
+    "Bouton Nouvelle préparation pour recommencer en gardant les portions choisies",
+    "Impression des quantités sélectionnées ; PDF illustrés avec les quantités de base",
+    "Images, favoris, passeport et consultation hors connexion conservés"
   ]
 }

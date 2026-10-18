@@ -1,7 +1,7 @@
 /* Atlas des cultures - incrémenter CACHE_VERSION à chaque publication */
 'use strict';
-const CACHE_VERSION = 'atlas-cultures-v3.2.0';
-const CORE = ['./','./index.html','./recipes.js','./notebook.js','./notebook.css', './recipes/miso.webp', './recipes/miso.pdf', './recipes/kimchi.webp', './recipes/kimchi.pdf', './recipes/cafe-turc.webp', './recipes/cafe-turc.pdf', './recipes/tortillas.webp', './recipes/tortillas.pdf','./manifest.webmanifest','./version.json','./icons/atlas-icon.svg','./icons/atlas-192.png','./icons/atlas-512.png','./icons/atlas-maskable-512.png'];
+const CACHE_VERSION = 'atlas-cultures-v3.3.0';
+const CORE = ['./','./index.html','./recipes.js','./notebook.js','./notebook.css','./kitchen.js','./kitchen.css', './recipes/miso.webp', './recipes/miso.pdf', './recipes/kimchi.webp', './recipes/kimchi.pdf', './recipes/cafe-turc.webp', './recipes/cafe-turc.pdf', './recipes/tortillas.webp', './recipes/tortillas.pdf','./manifest.webmanifest','./version.json','./icons/atlas-icon.svg','./icons/atlas-192.png','./icons/atlas-512.png','./icons/atlas-maskable-512.png'];
 self.addEventListener('install', event => {
   // Pas de skipWaiting automatique : l'utilisateur accepte sa mise à jour.
   event.waitUntil(caches.open(CACHE_VERSION).then(cache => cache.addAll(CORE)));
