@@ -1,13 +1,13 @@
 {
   "app": "Atlas des cultures",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "date": "2026-10-18",
   "notes": [
-    "Quatre recettes contextualisées, consultables hors connexion et imprimables en A4 / PDF",
-    "Application installable sur Android et ordinateur (PWA)",
-    "Alertes de mise à jour lors de l’ouverture ou de l’utilisation",
-    "Sauvegarde et restauration du passeport au format JSON",
-    "Export du passeport illustré en SVG",
-    "13 escales illustrées, fiches et 39 énigmes conservées"
+    "Carnet Recettes du monde avec recherche par plat, pays ou ingrédient et filtre par destination",
+    "Quatre images originales, une pour chaque recette",
+    "Fiches illustrées A4 à imprimer et PDF prêts à télécharger",
+    "Favoris en tête du carnet, sauvegardés et inclus dans les exports JSON",
+    "Images et fiches PDF accessibles hors connexion après mise à jour",
+    "13 escales, 39 énigmes et progression existante conservées"
   ]
 }

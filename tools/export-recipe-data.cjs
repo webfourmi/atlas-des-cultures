@@ -1,0 +1,10 @@
+const fs = require('node:fs');
+const vm = require('node:vm');
+const path = require('node:path');
+const root = path.resolve(__dirname, '..');
+const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+const context = vm.createContext({});
+vm.runInContext(fs.readFileSync(path.join(root, 'recipes.js'), 'utf8'), context);
+vm.runInContext(script.slice(0, script.indexOf("const K=")), context);
+process.stdout.write(vm.runInContext('JSON.stringify({recipes:RECIPES,stops:STOPS.map(({id,country,topic,source})=>({id,country,topic,source}))})', context));

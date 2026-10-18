@@ -24,7 +24,10 @@ const RECIPES = {
     "source": [
       "Namiko Hirasawa Chen · Just One Cookbook",
       "https://www.justonecookbook.com/homemade-miso-soup/"
-    ]
+    ],
+    "image": "./recipes/miso.webp",
+    "imageAlt": "Bol de soupe miso au tofu, au wakamé et à l’oignon nouveau.",
+    "pdf": "./recipes/miso.pdf"
   },
   "coree": {
     "title": "Baechu-geotjeori · kimchi frais",
@@ -54,7 +57,10 @@ const RECIPES = {
     "source": [
       "Maangchi · Baechu-geotjeori",
       "https://www.maangchi.com/recipe/baechu-geotjeori"
-    ]
+    ],
+    "image": "./recipes/kimchi.webp",
+    "imageAlt": "Assiette de kimchi frais au chou chinois, aux légumes et au sésame.",
+    "pdf": "./recipes/kimchi.pdf"
   },
   "turquie": {
     "title": "Café turc au cezve",
@@ -79,7 +85,10 @@ const RECIPES = {
     "source": [
       "GoTürkiye · Turkish Coffee in Istanbul",
       "https://goturkiye.com/istanbul/turkish-coffee"
-    ]
+    ],
+    "image": "./recipes/cafe-turc.webp",
+    "imageAlt": "Deux petites tasses de café turc, un cezve et deux verres d’eau.",
+    "pdf": "./recipes/cafe-turc.pdf"
   },
   "mexique": {
     "title": "Tortillas de maïs à la masa harina",
@@ -103,6 +112,9 @@ const RECIPES = {
     "source": [
       "Mely Martínez · Mexico in My Kitchen",
       "https://www.mexicoinmykitchen.com/corn-tortillas-from-scratch/"
-    ]
+    ],
+    "image": "./recipes/tortillas.webp",
+    "imageAlt": "Tortillas de maïs empilées dans un torchon propre.",
+    "pdf": "./recipes/tortillas.pdf"
   }
 };
