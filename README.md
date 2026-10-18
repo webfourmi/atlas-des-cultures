@@ -2,6 +2,23 @@
 
 PWA statique : 13 escales, 39 questions, passeport et progression locale.
 
+## Voyages, photographies et aventures (v4.0.0)
+
+Le menu **Voyages** réunit quatre entrées : **Carte**, **Aventures**, **Écouter** et **Photos**.
+
+- Treize photographies réelles provenant de Wikimedia Commons, avec une légende, l’auteur, la date, le lien vers l’original et la licence. Elles apparaissent aussi dans les fiches culturelles et la bibliothèque. Les images des recettes conservent leur mention d’illustration de création.
+- Un planisphère des terres émergées, treize repères sélectionnables et treize zooms régionaux, sur un fond Natural Earth. Les repères situent les escales sans réduire une tradition à une ville. Les cartes détaillées s’ouvrent dans OpenStreetMap en ligne.
+- Treize aventures à choix avec un personnage fictif par escale. Chaque rencontre propose deux découvertes documentaires ; les chemins permettent d’observer les gestes et d’écouter ce qui se transmet. Le carnet peut conserver 26 découvertes au total. Rejouer ne retire pas les notes déjà acquises.
+- Deux extraits de berimbau intégrés en MP3 : Toque de Angola, environ 18 secondes, et Iúna, 30 secondes. Deux documentaires musicaux de la chaîne UNESCO sont proposés pour le Quan Họ et l’isukuti ; leur lecteur YouTube se charge à la demande, avec un lien source si la lecture est indisponible.
+
+Les personnages, situations et dialogues sont inventés. Les traditions sont documentées par les fiches UNESCO référencées ; les personnes photographiées ne représentent pas les personnages des récits. Les légendes situent les photographies indépendamment des repères géographiques.
+
+Photos, cartes, aventures et extraits MP3 sont inclus dans le cache hors connexion. Les vidéos et les liens vers les sites sources demandent Internet. La navigation arrête les lecteurs audio de l’écran quitté et aucune écoute ne démarre automatiquement.
+
+La position dans chaque aventure, les découvertes et les rencontres terminées sont conservées sur l’appareil et dans les sauvegardes JSON. La restauration réunit les notes et les rencontres terminées, tout en conservant la position de lecture déjà présente sur l’appareil. Les anciens passeports et sauvegardes restent compatibles ; remettre le passeport à zéro conserve le carnet de voyage et celui de cuisine.
+
+Crédits, licences, modifications des médias et sources : `travel/CREDITS.md`. Données : `travel-data.js`. Récits : `journeys.js`. Interface et validation des sauvegardes : `travel.js`.
+
 ## Carnet « Recettes du monde » (v3.3.0)
 
 L’entrée **Recettes** du menu et le bouton de l’accueil ouvrent le carnet. Il contient les quatre recettes des escales culinaires : soupe miso, kimchi frais, café turc et tortillas de maïs.
@@ -46,6 +63,8 @@ node tests/notebook.cjs
 ```
 
 Ce test sans dépendance vérifie la compatibilité des anciens passeports, la recherche (accents et unités de mesure), les filtres, les favoris, les retours de navigation, un quiz complet, les sauvegardes JSON et le cache. Il couvre aussi les 12 choix de portions des quatre recettes, les fractions, les quantités dans les étapes, les temps fixes, les cases à cocher, leur persistance, le changement de portions, une nouvelle préparation et la restauration d’une sauvegarde sans écraser la préparation locale. Les quatre PDF de base, inchangés depuis v3.2.0, ont été rendus et contrôlés : une page A4 avec une image et des références par recette.
+
+Pour v4.0.0, le même test parcourt les 65 chemins des 13 aventures, vérifie les retours de navigation et les sauvegardes, les quatre sections de Voyages, les treize photos et crédits, les projections des repères, le chargement des vidéos à la demande et l’arrêt de l’audio. Les photographies ont été inspectées visuellement ; codecs, durée et présence d’un signal audio ont été vérifiés sur les deux MP3.
 
 Limite de cette livraison : le rendu CSS et l’impression du navigateur n’ont pas été contrôlés dans un navigateur. Le test antérieur `tests/recipes.cjs` reste disponible pour Playwright avec Microsoft Edge ; il couvre les largeurs 390 et 1440 px, l’impression, le quiz, les sauvegardes et le mode hors connexion. L’émulation ne remplace pas un test sur téléphone physique.
 

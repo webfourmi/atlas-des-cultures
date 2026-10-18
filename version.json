@@ -1,13 +1,13 @@
 {
   "app": "Atlas des cultures",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "date": "2026-10-18",
   "notes": [
-    "Choix de 1 à 12 portions avec quantités recalculées dans les ingrédients et les étapes concernées",
-    "Mode cuisine lisible avec ingrédients et étapes à cocher",
-    "Préparation conservée sur cet appareil et incluse dans la sauvegarde JSON",
-    "Bouton Nouvelle préparation pour recommencer en gardant les portions choisies",
-    "Impression des quantités sélectionnées ; PDF illustrés avec les quantités de base",
-    "Images, favoris, passeport et consultation hors connexion conservés"
+    "13 photographies réelles légendées, datées et créditées avec leurs licences",
+    "Nouveau menu Voyages : carte du monde, zooms régionaux et galerie",
+    "13 aventures à choix avec des personnages fictifs et des traditions documentées",
+    "Carnet de 26 découvertes et reprise des rencontres, inclus dans la sauvegarde JSON",
+    "Deux extraits de berimbau hors connexion et deux documentaires musicaux officiels en ligne",
+    "Photos, cartes, récits, recettes, passeport et progression disponibles hors connexion après mise à jour"
   ]
 }
