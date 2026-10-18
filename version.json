@@ -1,13 +1,12 @@
 {
   "app": "Atlas des cultures",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "date": "2026-10-18",
   "notes": [
-    "13 photographies réelles légendées, datées et créditées avec leurs licences",
-    "Nouveau menu Voyages : carte du monde, zooms régionaux et galerie",
-    "13 aventures à choix avec des personnages fictifs et des traditions documentées",
-    "Carnet de 26 découvertes et reprise des rencontres, inclus dans la sauvegarde JSON",
-    "Deux extraits de berimbau hors connexion et deux documentaires musicaux officiels en ligne",
-    "Photos, cartes, récits, recettes, passeport et progression disponibles hors connexion après mise à jour"
+    "Treize rencontres réécrites : situations concrètes et dialogues naturels",
+    "Chaque réplique reçoit une réponse spécifique du personnage",
+    "Échanges affichés avec les noms des interlocuteurs et conservés à la reprise",
+    "Repères documentaires séparés du dialogue ; sources UNESCO conservées",
+    "Compatibilité des anciennes rencontres, découvertes et sauvegardes JSON"
   ]
 }

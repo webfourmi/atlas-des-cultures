@@ -163,16 +163,34 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
       assert(!visited.includes(node),'Story loop');
       if(node==='finish')return [path];
       const scene=plain(`journeyScene('${id}','${node}')`);assert(scene.choices.length>0);
-      return scene.choices.flatMap((choice,index)=>enumerate(choice.to,[...path,{node,index,to:choice.to}],[...visited,node]));
+      assert.equal(new Set(scene.choices.map(c=>c.reply)).size,scene.choices.length,'Two choices share the same reply');
+      return scene.choices.flatMap((choice,index)=>{
+        assert.equal(typeof choice.reply,'string');assert(choice.reply.length>25,'Missing character reply');
+        return enumerate(choice.to,[...path,{node,index,to:choice.to,label:choice.label,reply:choice.reply}],[...visited,node]);
+      });
     };
     const paths=enumerate('begin');assert.equal(paths.length,5);
     for(const route of paths){
       run(`state.journeys['${id}']={node:'begin',seen:[],completed:false};show('travel');openJourney('${id}')`);
       assert.match(elements.get('app').innerHTML,/Personnage et dialogues fictifs/);
+      const selected=[];
       for(const move of route){
-        click('journey-choice',undefined,{index:String(move.index),node:move.node});
+        click('journey-choice',id,{index:String(move.index),node:move.node});selected.push(move.index);
         assert.equal(run(`journeyProgress('${id}').node`),move.to);
         assert.equal(run(`chooseJourney(0,'${move.node}')`),false,'Stale click accepted');
+        assert.equal(run(`chooseJourney(0,'${move.to}','other-story')`),false,'Click from another encounter accepted');
+        assert.deepEqual(plain(`journeyProgress('${id}').history`),selected);
+        const markup=elements.get('app').innerHTML;
+        for(const previous of route.slice(0,selected.length)){
+          context.expectedLine=previous.label;assert(markup.includes(run('esc(expectedLine)')),'Player reply disappeared');
+          context.expectedLine=previous.reply;assert.equal(markup.split(run('esc(expectedLine)')).length,2,'Character reply missing or duplicated');
+        }
+        assert.match(markup,/journey-speaker">Toi/);assert.match(markup,/id="journey-latest"/);
+        if(selected.length===1){
+          run(`state=load();show('home');openJourney('${id}')`);
+          assert.deepEqual(plain(`journeyProgress('${id}').history`),selected,'Reload lost the conversation');
+          context.expectedLine=move.reply;assert(elements.get('app').innerHTML.includes(run('esc(expectedLine)')));
+        }
       }
       assert.equal(run(`journeyProgress('${id}').completed`),true);
       const expected=[...new Set(route.map(m=>m.to).filter(n=>n==='hands'||n==='voices'))];
@@ -183,16 +201,38 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   assert.equal(routes,65);assert.equal(run('xp()'),priorXP);
   const beforeReplay=plain('journeyProgress(activeJourney)');click('journey-replay');
   assert.equal(run('journeyProgress(activeJourney).node'),'begin');assert.equal(run('journeyProgress(activeJourney).completed'),true);
+  assert.deepEqual(plain('journeyProgress(activeJourney).history'),[]);assert.equal(run('journeyProgress(activeJourney).origin'),'begin');
   assert.deepEqual(plain('journeyProgress(activeJourney).seen'),beforeReplay.seen);
+  // A concrete choice gets an appropriate answer, including two choices that converge.
+  run("state.journeys.turquie={node:'begin'};openJourney('turquie')");
+  click('journey-choice','turquie',{index:'1',node:'begin'});
+  assert.match(elements.get('app').innerHTML,/Prends les petites tasses et les verres d’eau/);
+  assert(!elements.get('app').innerHTML.includes('Je surveille la mousse'));
+  click('journey-choice','turquie',{index:'0',node:'voices'});
+  assert.match(elements.get('app').innerHTML,/Avec ma mère, en la regardant faire/);
+  assert(!elements.get('app').innerHTML.includes('elle est en bas'));
+  // Resume an older encounter without fabricating a past question or losing notes.
+  run("state.journeys.japon={node:'hands',seen:['hands'],completed:true};openJourney('japon')");
+  assert(!elements.get('app').innerHTML.includes('Tu tombes bien'));
+  click('journey-choice','japon',{index:'0',node:'hands'});
+  assert.equal(run('journeyProgress("japon").origin'),'hands');assert.deepEqual(plain('journeyProgress("japon").history'),[0]);
+  assert.equal(run('journeyProgress("japon").completed'),true);
+  run('state=load()');assert.equal(run('journeyProgress("japon").node'),'voices');
   run("show('library');openDetail('vietnam');openJourney('vietnam');openDetail('vietnam');closeDetail()");
   assert.equal(run('view'),'journey');click('journey-back');assert.equal(run('view'),'detail');assert.equal(run('readingStop.id'),'vietnam');
   run('exportJSON()');const travelBackup=JSON.parse(downloads.at(-1).data);
   assert.equal(Object.keys(travelBackup.progress.journeys).length,13);
   context.travelBackupFile={size:4096,text:async()=>JSON.stringify(travelBackup)};
   run('state.journeys={}');await run('importJSON(travelBackupFile)');assert.equal(run('Object.keys(state.journeys).length'),13);
+  assert.deepEqual(plain('state.journeys.turquie.history'),[1,0]);
+  run("openJourney('turquie')");assert.match(elements.get('app').innerHTML,/Avec ma mère, en la regardant faire/);
   const merged=plain("mergeJourneys({japon:{node:'hands',seen:['hands'],completed:false}},{japon:{node:'finish',seen:['voices'],completed:true}})");
-  assert.deepEqual(merged,{japon:{node:'hands',seen:['hands','voices'],completed:true}});
-  assert.deepEqual(plain("cleanJourneys({japon:{node:'bad',seen:['hands','hands','<script>'],completed:'yes'},invalid:{node:'finish'}})"),{japon:{node:'begin',seen:['hands'],completed:false}});
+  assert.deepEqual(merged,{japon:{node:'hands',seen:['hands','voices'],completed:true,origin:'hands',history:[]}});
+  assert.deepEqual(plain("cleanJourneys({japon:{node:'bad',seen:['hands','hands','<script>'],completed:'yes'},invalid:{node:'finish'}})"),{japon:{node:'begin',seen:['hands'],completed:false,origin:'begin',history:[]}});
+  assert.deepEqual(plain("cleanJourneys({japon:{node:'voices',origin:'begin',history:[0,0],seen:['hands','voices']}}).japon.history"),[0,0]);
+  assert.deepEqual(plain("cleanJourneys({japon:{node:'voices',origin:'begin',history:[-1,'<script>',0],seen:[]}}).japon"),{node:'voices',seen:[],completed:false,origin:'voices',history:[]});
+  assert.deepEqual(plain("mergeJourneys({turquie:{node:'voices',origin:'begin',history:[1],seen:['voices']}},{turquie:{node:'finish',origin:'begin',history:[0,1,0],seen:['hands'],completed:true}}).turquie"),{node:'voices',origin:'begin',history:[1],seen:['voices','hands'],completed:true});
+  const escaped=run("journeyLine('<person>','<script>alert(1)</script>')");assert(!escaped.includes('<script>'));assert(escaped.includes('&lt;script&gt;'));
   run('state=load()');assert.equal(run('Object.keys(state.journeys).length'),13);run('reset()');assert.equal(run('Object.keys(state.journeys).length'),13);
   click('travel-sounds');assert(!elements.get('app').innerHTML.includes('<iframe'));
   assert.equal((elements.get('app').innerHTML.match(/<audio /g)||[]).length,2);
@@ -221,6 +261,6 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   for(const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js'])assert(html.indexOf(`src="./${file}"`) < html.indexOf('<script>'));
   assert(html.indexOf('./notebook.css') > html.lastIndexOf('</style>'));
   console.log('PASS: 13 escales / 39 énigmes, passeport et favoris, portions de 1 à 12, fractions et étapes recalculées, mode cuisine, coches persistantes, sauvegarde/restauration, impression, quatre PDF et cache complet.');
-  console.log('PASS: 13 photos créditées, 13 cartes, 65 chemins dans 13 aventures, reprise/JSON, lecteurs à la demande et arrêt des écoutes.');
+  console.log('PASS: 13 photos créditées, 13 cartes, 65 chemins dans 13 aventures, réponses propres à chaque choix, historique/rechargement/JSON, migration des anciennes rencontres, lecteurs à la demande et arrêt des écoutes.');
   console.log('Limite : ces tests sans navigateur ne vérifient pas le rendu CSS ni un appareil réel.');
 })().catch(error=>{console.error(error);process.exitCode=1});
