@@ -1,8 +1,9 @@
 {
   "app": "Atlas des cultures",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "date": "2026-10-18",
   "notes": [
+    "Quatre recettes contextualisées, consultables hors connexion et imprimables en A4 / PDF",
     "Application installable sur Android et ordinateur (PWA)",
     "Alertes de mise à jour lors de l’ouverture ou de l’utilisation",
     "Sauvegarde et restauration du passeport au format JSON",

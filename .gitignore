@@ -1,0 +1,4 @@
+tests/*.png
+tests/*.pdf
+tests/backup.json
+tests/passport.svg
