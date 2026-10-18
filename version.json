@@ -1,0 +1,12 @@
+{
+  "app": "Atlas des cultures",
+  "version": "3.0.0",
+  "date": "2026-10-18",
+  "notes": [
+    "Application installable sur Android et ordinateur (PWA)",
+    "Alertes de mise à jour lors de l’ouverture ou de l’utilisation",
+    "Sauvegarde et restauration du passeport au format JSON",
+    "Export du passeport illustré en SVG",
+    "13 escales illustrées, fiches et 39 énigmes conservées"
+  ]
+}

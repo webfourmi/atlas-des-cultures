@@ -1,0 +1,44 @@
+{
+  "id": "./",
+  "name": "Atlas des cultures · Carnet d’exploration",
+  "short_name": "Atlas cultures",
+  "description": "Jeu culturel : 13 escales illustrées, fiches documentées, quiz et passeport de voyage.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f9f7ef",
+  "theme_color": "#102b37",
+  "categories": [
+    "education",
+    "games",
+    "travel"
+  ],
+  "icons": [
+    {
+      "src": "icons/atlas-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/atlas-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/atlas-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/atlas-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

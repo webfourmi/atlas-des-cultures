@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">Atlas des cultures</title><desc id="desc">Un globe et une rose des vents dorée sur fond bleu nuit</desc>
+<defs>
+ <radialGradient id="bg" cx="35%" cy="25%"><stop stop-color="#23676b"/><stop offset="1" stop-color="#102b37"/></radialGradient>
+ <linearGradient id="land" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#bce2c3"/><stop offset="1" stop-color="#75b6aa"/></linearGradient>
+</defs>
+<rect width="512" height="512" rx="117" fill="url(#bg)"/>
+<circle cx="256" cy="256" r="172" fill="none" stroke="#f1d8a0" stroke-width="8" opacity=".85"/>
+<circle cx="256" cy="256" r="142" fill="#2a7886" stroke="#d7ebde" stroke-width="8"/>
+<path d="M150 194q47-66 99-58l8 27-29 21 13 37-18 21-41-10-16-30zm117-47q48-25 85 14l-2 28-31 6-15 29-39-6-15-34zm-7 101q45-15 70 6l7 39-29 52-18 43-23-24 7-34-38-36z" fill="url(#land)"/>
+<path d="M114 256h284M256 114v284" stroke="#dcf2e9" stroke-width="5" opacity=".45"/>
+<path d="M256 64l29 162 163 30-163 29-29 163-30-163L64 256l162-30Z" fill="#f8d18a" stroke="#fff6d9" stroke-width="5" stroke-linejoin="round"/>
+<path d="M256 127l19 118 98 11-98 19-19 111-19-111-107-19 107-11Z" fill="#f5e5b9"/>
+<circle cx="256" cy="256" r="20" fill="#102b37" stroke="#fffaf0" stroke-width="7"/>
+<circle cx="256" cy="256" r="7" fill="#f8d18a"/>
+</svg>
