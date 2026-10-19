@@ -1,6 +1,20 @@
 /* École, personnages et intrigue fictifs. Les repères culturels sont sourcés dans l’interface. */
 'use strict';
 const INDIA_SOURCE = 'https://ich.unesco.org/fr/RL/le-yoga-01163';
+const INDIA_PRACTICE_SOURCES = {
+  souffle:'https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/breathing-exercises-for-stress/',
+  assise:'https://www.nhs.uk/live-well/exercise/sitting-exercises/'
+};
+const INDIA_ART = {
+  ecole:{alt:'Anaya et Ravi accueillent le visiteur dans la cour de l’école fictive.',caption:'Bienvenue dans l’école d’Anaya et Ravi.'},
+  accueil:{alt:'Anaya arrange des étiquettes détachées près d’un livre, à l’accueil.',caption:'Anaya prépare les documents de l’accueil.'},
+  ravi:{alt:'Ravi, assis dans la cour, est prêt à discuter.',caption:'Un moment pour échanger avec Ravi.'},
+  livre:{alt:'Un livre ouvert et des notes de lecture sur une table de bibliothèque.',caption:'Le livre et les notes de la bibliothèque.'},
+  documents:{alt:'Trois supports et leurs étiquettes détachées sont disposés sur une table.',caption:'Trois supports attendent leur titre.'},
+  exposition:{alt:'Anaya termine l’installation des panneaux, tandis que Ravi accueille les visiteurs.',caption:'Les derniers préparatifs de l’exposition.'},
+  visite:{alt:'Anaya et Ravi échangent avec un petit groupe de visiteurs autour d’un livre.',caption:'Une rencontre autour des documents.'},
+  souffle:{alt:'Ravi est assis sur une chaise, les deux pieds à plat, les mains sur les cuisses et les épaules relâchées.',caption:'Une assise confortable pour observer son souffle.'}
+};
 const INDIA_PLACES = {
   accueil:{name:'L’accueil',person:'Anaya',role:'élève et bénévole',icon:'porte',text:'Anaya dégage une table près de l’entrée. Une photographie et trois étiquettes détachées attendent à côté du panneau de bienvenue.'},
   bibliotheque:{name:'La bibliothèque',person:null,icon:'livre',text:'Une fiche documentaire dépasse d’un livre. Sur la grande table, trois supports attendent leur titre. Tu peux examiner les documents puis préparer le panneau.'},
@@ -40,11 +54,11 @@ const INDIA_CLUES = {
   livre:{title:'Étudier et transmettre',text:'La transmission passe notamment par la relation maître-élève, les établissements d’enseignement et des supports écrits anciens ou modernes.',source:'unesco'}
 };
 const INDIA_ENDINGS = {expo:{title:'Les portes de l’exposition',subtitle:'Un parcours préparé avec Anaya',icon:'porte'},rencontre:{title:'Une visite à deux voix',subtitle:'Un échange préparé avec Ravi',icon:'personnes'}};
-const INDIA_SCREEN_KEYS=['intro','anaya','photo','fiche','livre','ravi','route','puzzle','preparation','ready','ending'];
+const INDIA_SCREEN_KEYS=['intro','anaya','photo','fiche','livre','ravi','pratique','route','puzzle','preparation','ready','ending'];
 let indiaNotice = null, indiaPane = null;
 
 function newIndiaAdventure() {
-  return {version:2,screen:'intro',piece:'photo',reply:null,started:false,place:'accueil',visited:[],observed:[],detail:null,documents:[],log:[],board:{photo:null,fiche:null,livre:null},selected:null,checked:false,hint:0,plan:null,order:null,opening:null,ending:null,endings:[]};
+  return {version:3,screen:'intro',piece:'photo',reply:null,practiceStep:0,practiceStatus:null,started:false,place:'accueil',visited:[],observed:[],detail:null,documents:[],log:[],board:{photo:null,fiche:null,livre:null},selected:null,checked:false,hint:0,plan:null,order:null,opening:null,ending:null,endings:[]};
 }
 function indiaClues(a) {
   return [a.observed.includes('legende') ? 'photo' : null,...a.documents].filter(Boolean);
@@ -88,6 +102,8 @@ function cleanIndiaAdventure(value) {
   a.plan=Object.hasOwn(INDIA_ENDINGS,value.plan)?value.plan:null;
   a.order=['photo','pratiques'].includes(value.order)?value.order:null;
   a.opening=['personne','textes'].includes(value.opening)?value.opening:null;
+  a.practiceStep=Number.isInteger(value.practiceStep)?Math.max(0,Math.min(2,value.practiceStep)):0;
+  a.practiceStatus=['done','skipped'].includes(value.practiceStatus)?value.practiceStatus:null;
   if(value.ending===a.plan&&a.plan&&indiaTasks(a).length===0) {
     a.ending=a.plan;a.endings=[...new Set([...a.endings,a.ending])];
   }
@@ -120,7 +136,7 @@ function indiaIcon(kind) {
 }
 function indiaScreenPlace(a,screen) {
   if(['preparation','ready','ending'].includes(screen))return a.plan==='expo'?'accueil':'cour';
-  return {intro:'accueil',anaya:'accueil',photo:'accueil',fiche:'bibliotheque',livre:'bibliotheque',puzzle:'bibliotheque',ravi:'cour',route:'cour'}[screen]||a.place;
+  return {intro:'accueil',anaya:'accueil',photo:'accueil',fiche:'bibliotheque',livre:'bibliotheque',puzzle:'bibliotheque',ravi:'cour',pratique:'cour',route:'cour'}[screen]||a.place;
 }
 function indiaSuggestedScreen(a,place) {
   if(place==='bibliotheque')return !a.documents.includes('fiche')?'fiche':!a.documents.includes('livre')?'livre':'puzzle';
@@ -131,7 +147,7 @@ function indiaTaskScreen(task,a) {
   return {'india-photo-title':'photo','india-puzzle-title':'puzzle','india-place-title':'ravi','india-route-title':'route','india-order-title':'preparation','india-opening-title':'preparation'}[task.anchor]||(task.text.includes('livre')?'livre':!a.documents.includes('fiche')?'fiche':'livre');
 }
 function indiaButton(a,action,key,label,style='btn ghost',extra='') {
-  const frozen=a.ending&&(!['move','screen','piece','pane','replay','clear-reply','detail','talk'].includes(action)||action==='talk'&&!a.log.includes(key));
+  const frozen=a.ending&&(!['move','screen','piece','pane','replay','clear-reply','detail','talk','practice'].includes(action)||action==='talk'&&!a.log.includes(key));
   return `<button class="${style}" data-action="india-${action}"${key?` data-key="${esc(key)}"`:''} data-from="${a.place}" data-screen="${a.screen}" ${frozen?'disabled':''} ${extra}>${esc(label)}</button>`;
 }
 function indiaReply(a,keys) {
@@ -149,12 +165,31 @@ function indiaPhoto(a) {
   return `<section class="india-photo-activity"><figure class="india-photo"><div class="india-photo-image"><img src="${TRAVEL_PHOTOS.inde.local}" width="960" height="640" alt="Une personne assise et une personne penchée devant elle, les mains jointes."><span class="india-photo-marker" style="left:43%;top:35%" aria-hidden="true">1</span><span class="india-photo-marker" style="left:64%;top:66%" aria-hidden="true">2</span></div><figcaption>Photo : ${esc(TRAVEL_PHOTOS.inde.author)} · <a href="${esc(TRAVEL_PHOTOS.inde.source)}" target="_blank" rel="noopener noreferrer">Source</a> · <a href="${esc(TRAVEL_PHOTOS.inde.licenseUrl)}" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> · <a href="${TRAVEL_PHOTOS.inde.local}" target="_blank" rel="noopener">Agrandir ↗</a></figcaption></figure><div class="india-detail-buttons" role="group" aria-label="Examiner la photographie">${Object.entries(INDIA_DETAILS).map(([key,item],index)=>indiaButton(a,'detail',key,`${index+1}. ${item.label}`,'india-detail-button',`aria-pressed="${a.detail===key}"`)).join('')}</div><div class="india-observation" id="india-observation" tabindex="-1" aria-live="polite">${a.detail?`<strong>${esc(INDIA_DETAILS[a.detail].label)}</strong><p>${esc(INDIA_DETAILS[a.detail].text)}</p>${a.detail==='legende'?'<small>✓ Indice conservé</small>':''}`:'<p>Observe un détail, puis lis la légende source pour identifier la relation entre les personnes.</p>'}</div></section>`;
 }
 function indiaDocument(a,id) {
-  return `<section class="india-document-card">${indiaIcon(INDIA_PIECES[id].icon)}${a.documents.includes(id)?`<p class="india-document-text">${esc(INDIA_CLUES[id].text)}</p><p class="india-found">✓ Indice conservé dans ton carnet</p><a class="india-source-link" href="${INDIA_SOURCE}" target="_blank" rel="noopener noreferrer">Lire le dossier UNESCO ↗</a>`:`<p>${id==='fiche'?'Sur la table, une fiche présente différentes dimensions du yoga. Tu peux l’ouvrir pour retrouver son titre.':'Un livre ouvert accompagne les notes de lecture. Examine-le pour comprendre la place des écrits dans l’apprentissage.'}</p>${indiaButton(a,'document',id,id==='fiche'?'Ouvrir la fiche':'Examiner le livre','btn prime')}`}<small class="india-fiction-small">${id==='livre'?'Le livre dessiné est un objet du récit. ':''}Repère documentaire : synthèse de la fiche UNESCO.</small></section>`;
+  return `<section class="india-document-card">${a.documents.includes(id)?`<p class="india-document-text">${esc(INDIA_CLUES[id].text)}</p><p class="india-found">✓ Indice conservé dans ton carnet</p><a class="india-source-link" href="${INDIA_SOURCE}" target="_blank" rel="noopener noreferrer">Lire le dossier UNESCO ↗</a>`:`<p>${id==='fiche'?'Sur la table, une fiche présente différentes dimensions du yoga. Tu peux l’ouvrir pour retrouver son titre.':'Un livre ouvert accompagne les notes de lecture. Examine-le pour comprendre la place des écrits dans l’apprentissage.'}</p>${indiaButton(a,'document',id,id==='fiche'?'Ouvrir la fiche':'Examiner le livre','btn prime')}`}<small class="india-fiction-small">${id==='livre'?'Le livre dessiné est un objet du récit. ':''}Repère documentaire : synthèse de la fiche UNESCO.</small></section>`;
+}
+function indiaArtImage(id) {
+  return `<img src="./travel/inde/${id}.webp" width="960" height="640" alt="${esc(INDIA_ART[id].alt)}" decoding="async">`;
+}
+function indiaScreenArt(a) {
+  if(!indiaPane&&['photo','puzzle'].includes(a.screen))return '';
+  const endingArt=a.plan==='expo'?'exposition':'visite';
+  const id=indiaPane?{mission:'ecole',indices:'documents',dialogues:'visite',sources:'livre',aide:'documents'}[indiaPane]:{intro:'ecole',anaya:'accueil',fiche:'documents',livre:'livre',ravi:'ravi',pratique:'souffle',route:'ecole',preparation:endingArt,ready:endingArt,ending:endingArt}[a.screen];
+  if(!id)return '';
+  return `<figure class="india-scene${id==='souffle'?' india-scene-practice':''}"><a href="./travel/inde/${id}.webp" target="_blank" rel="noopener" aria-label="Agrandir l’illustration : ${esc(INDIA_ART[id].caption)}">${indiaArtImage(id)}</a><figcaption>${esc(INDIA_ART[id].caption)}<small>Illustration du récit · <a href="./travel/inde/ILLUSTRATIONS.md" target="_blank" rel="noopener">création et crédits ↗</a></small></figcaption></figure>`;
+}
+function indiaPractice(a) {
+  const steps=[
+    ['Trouver une assise confortable','Assieds-toi sur une chaise stable, sans roulettes. Pose les deux pieds à plat, écartés à peu près de la largeur des hanches. Laisse ton dos soutenu par le dossier, sans te raidir, les mains sur les cuisses et les épaules relâchées.'],
+    ['Observer trois respirations','Laisse entrer l’air doucement par le nez si cela t’est confortable, puis laisse-le sortir doucement par la bouche. Observe trois respirations à ton rythme, sans chercher à les allonger, sans forcer et sans retenir le souffle.'],
+    ['Revenir tranquillement','Laisse maintenant ta respiration suivre son rythme habituel. Remarque simplement comment tu te sens. Tu peux prendre un instant de plus avant de poursuivre l’aventure.']
+  ];
+  const [title,text]=steps[a.practiceStep];
+  return `<section class="india-practice" aria-label="Découverte facultative du yoga"><p class="india-practice-intro">Ravi te propose une découverte du yoga assis, centrée sur l’attention au souffle.</p><div class="india-practice-step"><small>À ton rythme · étape ${a.practiceStep+1} / 3</small><h3>${title}</h3><p>${text}</p></div><p class="india-practice-care">Reste à l’aise. En cas de gêne, de douleur ou de vertige, arrête et respire normalement.</p>${indiaButton(a,'practice','passer','Passer cette pratique →','india-text-button')}<details class="india-practice-sources"><summary>À propos de cette pause et sources</summary><p>Cette courte découverte est une adaptation pour le jeu, sans objectif thérapeutique. Elle est facultative et ne change ni tes indices ni les dénouements. Si tu as un doute sur ce qui convient à ta santé, demande conseil à un professionnel.</p><p>Consignes d’assise et de respiration : <a href="${INDIA_PRACTICE_SOURCES.assise}" target="_blank" rel="noopener noreferrer">NHS · s’installer sur une chaise ↗</a> et <a href="${INDIA_PRACTICE_SOURCES.souffle}" target="_blank" rel="noopener noreferrer">NHS · respirer sans forcer ↗</a>. Le <a href="${INDIA_SOURCE}" target="_blank" rel="noopener noreferrer">dossier UNESCO ↗</a> décrit la place du souffle parmi les dimensions du yoga.</p></details></section>`;
 }
 function indiaBoard(a) {
   const id=a.piece,piece=INDIA_PIECES[id],index=Object.keys(INDIA_PIECES).indexOf(id),solved=indiaBoardSolved(a);
   const errors=a.checked?Object.keys(INDIA_PIECES).filter(key=>a.board[key]!==INDIA_PIECES[key].correct):[];
-  return `<section class="india-puzzle" aria-label="L’énigme des trois titres"><div class="india-puzzle-heading"><span>Support ${index+1} / 3</span><div role="group" aria-label="Choisir un support">${Object.entries(INDIA_PIECES).map(([key,item],i)=>indiaButton(a,'piece',key,String(i+1),'india-piece-dot',`aria-label="${esc(item.name)}${a.board[key]?', titre choisi':''}" aria-pressed="${id===key}" aria-invalid="${a.checked&&a.board[key]!==INDIA_PIECES[key].correct}"`)).join('')}</div></div><div class="india-puzzle-support">${id==='photo'?`<img src="${TRAVEL_PHOTOS.inde.local}" width="960" height="640" alt="Le maître de yoga et l’élève décrits dans la légende source.">`:indiaIcon(piece.icon)}<div><h3>${piece.name}</h3><p>${esc(piece.description)}</p></div></div><p class="india-question">Quel titre correspond à ce support ?</p><div class="india-answer-choices" role="group" aria-label="Associer un titre à ${esc(piece.name)}">${Object.entries(INDIA_LABELS).map(([key,label])=>indiaButton(a,'answer',key,label,'india-answer',`aria-pressed="${a.board[id]===key}" data-piece="${id}"`)).join('')}</div>${a.checked?`<p class="india-board-result ${solved?'success':''}" role="status">${solved?'✓ Les trois titres sont bien associés. Le panneau est prêt.':`Il reste ${errors.length} ${errors.length===1?'association à revoir':'associations à revoir'}. ${errors.includes(id)?'Revois le titre de ce support.':'Tu peux revenir aux supports signalés.'}`}</p>`:`<p class="india-board-count">${Object.values(a.board).filter(Boolean).length}/3 titres choisis</p>`}${indiaButton(a,'hint',null,'Un indice','india-text-button')}</section>`;
+  return `<section class="india-puzzle" aria-label="L’énigme des trois titres"><div class="india-puzzle-heading"><span>Support ${index+1} / 3</span><div role="group" aria-label="Choisir un support">${Object.entries(INDIA_PIECES).map(([key,item],i)=>indiaButton(a,'piece',key,String(i+1),'india-piece-dot',`aria-label="${esc(item.name)}${a.board[key]?', titre choisi':''}" aria-pressed="${id===key}" aria-invalid="${a.checked&&a.board[key]!==INDIA_PIECES[key].correct}"`)).join('')}</div></div><div class="india-puzzle-support">${id==='photo'?`<img src="${TRAVEL_PHOTOS.inde.local}" width="960" height="640" alt="Le maître de yoga et l’élève décrits dans la légende source.">`:indiaArtImage(id==='fiche'?'documents':'livre')}<div><h3>${piece.name}</h3><p>${esc(piece.description)}</p></div></div><p class="india-question">Quel titre correspond à ce support ?</p><div class="india-answer-choices" role="group" aria-label="Associer un titre à ${esc(piece.name)}">${Object.entries(INDIA_LABELS).map(([key,label])=>indiaButton(a,'answer',key,label,'india-answer',`aria-pressed="${a.board[id]===key}" data-piece="${id}"`)).join('')}</div>${a.checked?`<p class="india-board-result ${solved?'success':''}" role="status">${solved?'✓ Les trois titres sont bien associés. Le panneau est prêt.':`Il reste ${errors.length} ${errors.length===1?'association à revoir':'associations à revoir'}. ${errors.includes(id)?'Revois le titre de ce support.':'Tu peux revenir aux supports signalés.'}`}</p>`:`<p class="india-board-count">${Object.values(a.board).filter(Boolean).length}/3 titres choisis</p>`}${indiaButton(a,'hint',null,'Un indice','india-text-button')}</section>`;
 }
 function indiaBranch(a) {
   if(a.screen==='route') {
@@ -177,30 +212,32 @@ function indiaEnding(a) {
   return `<p>Anaya accompagne les visiteurs dans la cour. Tu poses la question préparée avec Ravi.</p>${journeyLine('Toi',INDIA_LOG['ouverture-'+a.opening].label,true)}${journeyLine('Ravi',a.opening==='personne'?'J’ai commencé auprès d’un proche, puis j’ai poursuivi mes études avec d’autres enseignants. Regardons cette photo pour parler de la transmission.':'Je reprends certaines explications dans mes lectures, puis j’apporte mes questions au cours. Regardons ensemble le livre et la fiche pour lancer l’échange.')}<p class="india-found">✓ Souvenir conservé · ${a.endings.length}/2 dénouements</p>`;
 }
 function indiaScreenTitle(a) {
-  return {intro:'Avant l’ouverture',anaya:'Un coup de main à Anaya',photo:'Observer la photographie',fiche:'La fiche des pratiques',livre:'Le livre de la bibliothèque',ravi:'Rencontrer Ravi',route:'Choisir l’accueil des visiteurs',puzzle:'Retrouver les trois titres',preparation:a.plan==='expo'?'Choisir le premier panneau':'Préparer la première question',ready:'Avant d’ouvrir les portes',ending:a.ending?INDIA_ENDINGS[a.ending].title:'La fin de la visite'}[a.screen];
+  return {intro:'Avant l’ouverture',anaya:'Un coup de main à Anaya',photo:'Observer la photographie',fiche:'La fiche des pratiques',livre:'Le livre de la bibliothèque',ravi:'Rencontrer Ravi',pratique:'Une pause de yoga avec Ravi',route:'Choisir l’accueil des visiteurs',puzzle:'Retrouver les trois titres',preparation:a.plan==='expo'?'Choisir le premier panneau':'Préparer la première question',ready:'Avant d’ouvrir les portes',ending:a.ending?INDIA_ENDINGS[a.ending].title:'La fin de la visite'}[a.screen];
 }
 function indiaUtility(a,saved) {
   if(indiaPane==='indices')return indiaNotebook(a);
   if(indiaPane==='dialogues')return `<p>Ouvre l’échange que tu souhaites relire.</p><div class="india-history">${a.log.length?a.log.map(key=>`<details name="india-history"><summary>${esc(INDIA_LOG[key].speaker)} · ${esc(INDIA_LOG[key].label)}</summary><p>${esc(INDIA_LOG[key].reply)}</p></details>`).join(''):'<p>Les échanges apparaîtront ici au fil des rencontres.</p>'}</div>`;
-  if(indiaPane==='sources')return `<p class="fiction-note">École, personnages et histoire fictifs, racontés en français. Le yoga est le thème de cette escale ; il ne résume pas l’Inde.</p><p>Les documents résument la <a href="${INDIA_SOURCE}" target="_blank" rel="noopener noreferrer">fiche UNESCO sur le yoga ↗</a>.</p><div class="india-source-photo">${travelCredit('inde',true)}</div><p>Les personnes photographiées ne représentent pas Anaya ni Ravi.</p><button class="btn ghost" data-action="read" data-id="inde">Lire la fiche culturelle</button>`;
+  if(indiaPane==='sources')return `<p class="fiction-note">École, personnages et histoire fictifs, racontés en français. Le yoga est le thème de cette escale ; il ne résume pas l’Inde.</p><p>Les documents résument la <a href="${INDIA_SOURCE}" target="_blank" rel="noopener noreferrer">fiche UNESCO sur le yoga ↗</a>.</p><div class="india-source-photo">${travelCredit('inde',true)}</div><p>Les personnes photographiées ne représentent pas Anaya ni Ravi.</p><p>Les autres images sont des illustrations originales créées avec un outil d’IA pour ce récit fictif. <a href="./travel/inde/ILLUSTRATIONS.md" target="_blank" rel="noopener">Voir les illustrations et leur création ↗</a>.</p><p>Pause de yoga facultative : consignes adaptées des fiches du NHS sur <a href="${INDIA_PRACTICE_SOURCES.assise}" target="_blank" rel="noopener noreferrer">l’assise sur une chaise ↗</a> et <a href="${INDIA_PRACTICE_SOURCES.souffle}" target="_blank" rel="noopener noreferrer">la respiration douce ↗</a>. Trois respirations constituent ici une découverte pour le jeu, sans promesse de bénéfice thérapeutique.</p><button class="btn ghost" data-action="read" data-id="inde">Lire la fiche culturelle</button>`;
   if(indiaPane==='aide')return `<p>${a.hint<2?'Relis la légende de la photographie, puis compare la liste des pratiques au rôle du livre. Chaque support a son propre titre.':'Photographie → apprendre avec une autre personne. Fiche → plusieurs dimensions d’une pratique. Livre → des écrits pour accompagner l’étude.'}</p>${a.hint<2?indiaButton(a,'hint',null,'Voir les trois associations','btn ghost'):''}`;
   const tasks=indiaTasks(a);
-  return `<p>Retrouve les titres des trois documents, puis prépare ${a.plan==='expo'?'l’exposition avec Anaya':a.plan==='rencontre'?'la visite avec Ravi':'l’accueil des visiteurs'}.</p><p class="india-found">${indiaClues(a).length}/3 indices · ${a.endings.length}/2 souvenirs</p>${a.started&&!a.ending&&tasks.length?`<div class="india-mission-next"><strong>La prochaine chose à faire</strong><p>${tasks[0].text}</p>${indiaButton(a,'screen',indiaTaskScreen(tasks[0],a),'Y aller →','btn prime')}</div><details class="india-recap"><summary>Voir les préparatifs restants</summary><ul>${tasks.map(t=>`<li>${indiaButton(a,'screen',indiaTaskScreen(t,a),t.text,'india-task-button')}</li>`).join('')}</ul></details>`:''}${a.ending?Object.entries(INDIA_ENDINGS).map(([id,item])=>`<p>${a.endings.includes(id)?'✓ '+item.title:'○ Un autre dénouement à découvrir'}</p>`).join(''):''}<details class="india-recap"><summary>Recommencer l’aventure</summary><p>Tes découvertes et les souvenirs déjà obtenus seront conservés.</p>${indiaButton(a,'replay',null,'Recommencer','btn ghost')}</details>${!a.started&&(saved.completed||saved.seen.length)?'<p class="travel-small">Tes découvertes précédentes sont conservées.</p>':''}`;
+  return `<p>Retrouve les titres des trois documents, puis prépare ${a.plan==='expo'?'l’exposition avec Anaya':a.plan==='rencontre'?'la visite avec Ravi':'l’accueil des visiteurs'}.</p><p class="india-found">${indiaClues(a).length}/3 indices · ${a.endings.length}/2 souvenirs</p>${a.started&&!a.ending&&tasks.length?`<div class="india-mission-next"><strong>La prochaine chose à faire</strong><p>${tasks[0].text}</p>${indiaButton(a,'screen',indiaTaskScreen(tasks[0],a),'Y aller →','btn prime')}</div><details class="india-recap"><summary>Voir les préparatifs restants</summary><ul>${tasks.map(t=>`<li>${indiaButton(a,'screen',indiaTaskScreen(t,a),t.text,'india-task-button')}</li>`).join('')}</ul></details>`:''}${a.ending?Object.entries(INDIA_ENDINGS).map(([id,item])=>`<p>${a.endings.includes(id)?'✓ '+item.title:'○ Un autre dénouement à découvrir'}</p>`).join(''):''}${a.started?indiaButton(a,'screen','pratique','Retrouver la pause de yoga →','india-text-button'):''}<details class="india-recap"><summary>Recommencer l’aventure</summary><p>Tes découvertes et les souvenirs déjà obtenus seront conservés.</p>${indiaButton(a,'replay',null,'Recommencer','btn ghost')}</details>${!a.started&&(saved.completed||saved.seen.length)?'<p class="travel-small">Tes découvertes précédentes sont conservées.</p>':''}`;
 }
 function indiaScreenBody(a,saved) {
   if(indiaPane)return indiaUtility(a,saved);
-  if(a.screen==='intro')return `<div class="india-intro-pieces">${indiaIcon('photo')}${indiaIcon('pratiques')}${indiaIcon('livre')}</div><p>Anaya et Ravi préparent l’accueil de visiteurs dans une école de yoga fictive. Trois documents ont perdu leur titre.</p><p>Explore les lieux, retrouve les légendes et choisis comment recevoir le groupe.</p><p class="india-start-help">Les trois lieux sont toujours accessibles dans la barre du haut.</p>${saved.completed||saved.seen.length?'<p class="travel-small">Tes découvertes précédentes en Inde sont conservées.</p>':''}`;
+  if(a.screen==='intro')return `<p>Anaya et Ravi préparent l’accueil de visiteurs dans une école de yoga fictive. Trois documents ont perdu leur titre.</p><p>Explore les lieux, retrouve les légendes et choisis comment recevoir le groupe.</p><p class="india-start-help">Les trois lieux sont toujours accessibles dans la barre du haut.</p>${saved.completed||saved.seen.length?'<p class="travel-small">Tes découvertes précédentes en Inde sont conservées.</p>':''}`;
   if(a.screen==='anaya')return indiaDialogue('accueil',a);
   if(a.screen==='ravi')return indiaDialogue('cour',a);
+  if(a.screen==='pratique')return indiaPractice(a);
   if(a.screen==='photo')return indiaPhoto(a);
   if(['fiche','livre'].includes(a.screen))return indiaDocument(a,a.screen);
   if(a.screen==='puzzle')return indiaBoard(a);
   if(['route','preparation'].includes(a.screen))return indiaBranch(a);
   if(a.screen==='ending')return indiaEnding(a);
   const tasks=indiaTasks(a);
-  return tasks.length?`<p>Il reste un préparatif avant de recevoir le groupe.</p><div class="india-mission-next"><strong>${tasks[0].text}</strong><p>${INDIA_PLACES[tasks[0].place].name}</p></div>`:`${indiaIcon(INDIA_ENDINGS[a.plan].icon)}<p>Les trois titres sont vérifiés. ${a.plan==='expo'?'Anaya a préparé le premier panneau que tu as choisi.':'Ravi connaît ta question d’ouverture.'}</p><p>Tout est prêt pour ${a.plan==='expo'?'ouvrir l’exposition':'accueillir le groupe dans la cour'}.</p>`;
+  return tasks.length?`<p>Il reste un préparatif avant de recevoir le groupe.</p><div class="india-mission-next"><strong>${tasks[0].text}</strong><p>${INDIA_PLACES[tasks[0].place].name}</p></div>`:`<p>Les trois titres sont vérifiés. ${a.plan==='expo'?'Anaya a préparé le premier panneau que tu as choisi.':'Ravi connaît ta question d’ouverture.'}</p><p>Tout est prêt pour ${a.plan==='expo'?'ouvrir l’exposition':'accueillir le groupe dans la cour'}.</p>`;
 }
 function indiaPrimary(a) {
+  if(a.screen==='pratique')return {action:'practice',key:a.practiceStep<2?'suivante':'terminer',label:a.practiceStep<2?'Étape suivante →':'Terminer la pause →'};
   if(a.ending)return {action:'screen',key:'ending',label:'Revoir mon dénouement →'};
   const screen=(key,label)=>({action:'screen',key,label});
   if(a.screen==='intro')return {action:'start',label:'Entrer dans l’école →'};
@@ -208,7 +245,7 @@ function indiaPrimary(a) {
   if(a.screen==='photo')return a.observed.includes('legende')?screen('fiche','Aller à la bibliothèque →'):{action:'detail',key:'legende',label:'Lire la légende →'};
   if(a.screen==='fiche')return a.documents.includes('fiche')?screen('livre','Examiner le livre →'):{action:'document',key:'fiche',label:'Lire la fiche →'};
   if(a.screen==='livre')return a.documents.includes('livre')?screen('ravi','Rencontrer Ravi →'):{action:'document',key:'livre',label:'Examiner le livre →'};
-  if(a.screen==='ravi')return screen('route','Choisir la suite →');
+  if(a.screen==='ravi')return screen('pratique','Découvrir un exercice →');
   if(a.screen==='route')return a.plan?screen('puzzle','Retrouver les titres →'):{label:'Choisis une façon d’accueillir',disabled:true};
   if(a.screen==='puzzle') {
     if(indiaBoardSolved(a)) {
@@ -224,11 +261,11 @@ function indiaPrimary(a) {
 }
 function renderIndiaAdventure() {
   const saved=journeyProgress('inde'),a=saved.adventure;
-  const sequence=['anaya','photo','fiche','livre','ravi','route','puzzle','preparation','ready'];
+  const sequence=['anaya','photo','fiche','livre','ravi','pratique','route','puzzle','preparation','ready'];
   const utilityTitles={mission:'Ta mission',indices:'Tes indices',dialogues:'Les échanges',sources:'Sources et récit',aide:'Un indice pour l’énigme'};
   const title=indiaPane?utilityTitles[indiaPane]:indiaScreenTitle(a),primary=indiaPrimary(a),index=sequence.indexOf(a.screen);
-  const previous=a.screen==='puzzle'&&a.piece!=='photo'?{action:'piece',key:Object.keys(INDIA_PIECES)[Object.keys(INDIA_PIECES).indexOf(a.piece)-1]}:index>0?{action:'screen',key:sequence[index-1]==='preparation'&&!a.plan?'route':sequence[index-1]}:null;
-  app.innerHTML=`<section class="india-player" aria-label="Aventure en Inde"><header class="india-player-toolbar"><button class="india-exit" data-action="journey-back">← Atlas</button><div><small>🇮🇳 Inde</small><h1 id="journey-title" tabindex="-1">Avant l’ouverture</h1></div>${indiaButton(a,'pane',indiaPane?'play':'mission',indiaPane?'Fermer le carnet':'Carnet','india-carnet-button',`aria-pressed="${!!indiaPane}"`)}</header><nav class="india-placebar" aria-label="Changer de lieu dans l’école fictive">${[['accueil','Accueil'],['bibliotheque','Bibliothèque'],['cour','Cour']].map(([id,label])=>indiaButton(a,'move',id,label,'india-location',`aria-current="${a.place===id?'location':'false'}"`)).join('')}</nav><div class="india-screen-scroll" id="india-screen-scroll"><article class="india-screen" data-india-screen="${indiaPane||a.screen}"><div class="india-screen-heading"><span class="overline">${indiaPane?'Carnet de voyage':a.screen==='intro'?'Une aventure en trois lieux':INDIA_PLACES[a.place].name}${!indiaPane&&index>=0?' · '+(index+1)+' / '+sequence.length:''}</span><h2 id="india-screen-title" tabindex="-1">${esc(title)}</h2></div>${indiaPane&&indiaPane!=='aide'?`<nav class="india-carnet-tabs" aria-label="Dans ton carnet">${[['mission','Mission'],['indices','Indices'],['dialogues','Échanges'],['sources','Sources']].map(([id,label])=>indiaButton(a,'pane',id,label,'india-carnet-tab',`aria-pressed="${indiaPane===id}"`)).join('')}</nav>`:''}${a.ending&&a.screen!=='ending'&&!indiaPane?'<p class="india-review-note">Aventure terminée · tu peux revoir les lieux et les documents.</p>':''}${indiaNotice?.place===a.place&&!indiaPane?`<p class="india-notice" role="status">${esc(indiaNotice.text)}</p>`:''}${indiaScreenBody(a,saved)}</article></div><footer class="india-player-controls">${indiaPane?`${indiaButton(a,'pane','play','← Revenir au jeu','btn prime')}<span class="india-control-status">${indiaClues(a).length}/3 indices</span>`:a.screen==='ending'?`${indiaButton(a,'pane','mission','Mes souvenirs','btn ghost')}${indiaButton(a,'replay',null,'Rejouer l’aventure','btn prime')}`:`${previous?indiaButton(a,previous.action,previous.key,'← Précédent','btn ghost'):'<button class="btn ghost" disabled>← Précédent</button>'}<span class="india-control-status">${a.screen==='puzzle'?'Support '+(Object.keys(INDIA_PIECES).indexOf(a.piece)+1)+'/3':indiaClues(a).length+'/3 indices'}</span>${primary.disabled?`<button class="btn prime" disabled>${esc(primary.label)}</button>`:indiaButton(a,primary.action,primary.key,primary.label,'btn prime')}`}</footer></section>`;
+  const previous=a.screen==='pratique'&&a.practiceStep>0?{action:'practice',key:'precedente'}:a.screen==='puzzle'&&a.piece!=='photo'?{action:'piece',key:Object.keys(INDIA_PIECES)[Object.keys(INDIA_PIECES).indexOf(a.piece)-1]}:index>0?{action:'screen',key:sequence[index-1]==='preparation'&&!a.plan?'route':sequence[index-1]}:null;
+  app.innerHTML=`<section class="india-player" aria-label="Aventure en Inde"><header class="india-player-toolbar"><button class="india-exit" data-action="journey-back">← Atlas</button><div><small>🇮🇳 Inde</small><h1 id="journey-title" tabindex="-1">Avant l’ouverture</h1></div>${indiaButton(a,'pane',indiaPane?'play':'mission',indiaPane?'Fermer le carnet':'Carnet','india-carnet-button',`aria-pressed="${!!indiaPane}"`)}</header><nav class="india-placebar" aria-label="Changer de lieu dans l’école fictive">${[['accueil','Accueil'],['bibliotheque','Bibliothèque'],['cour','Cour']].map(([id,label])=>indiaButton(a,'move',id,label,'india-location',`aria-current="${a.place===id?'location':'false'}"`)).join('')}</nav><div class="india-screen-scroll" id="india-screen-scroll"><article class="india-screen" data-india-screen="${indiaPane||a.screen}"><div class="india-screen-heading"><span class="overline">${indiaPane?'Carnet de voyage':a.screen==='intro'?'Une aventure en trois lieux':INDIA_PLACES[a.place].name}${!indiaPane&&index>=0?' · '+(index+1)+' / '+sequence.length:''}</span><h2 id="india-screen-title" tabindex="-1">${esc(title)}</h2></div>${indiaPane&&indiaPane!=='aide'?`<nav class="india-carnet-tabs" aria-label="Dans ton carnet">${[['mission','Mission'],['indices','Indices'],['dialogues','Échanges'],['sources','Sources']].map(([id,label])=>indiaButton(a,'pane',id,label,'india-carnet-tab',`aria-pressed="${indiaPane===id}"`)).join('')}</nav>`:''}${a.ending&&a.screen!=='ending'&&!indiaPane?'<p class="india-review-note">Aventure terminée · tu peux revoir les lieux et les documents.</p>':''}${indiaNotice?.place===a.place&&!indiaPane?`<p class="india-notice" role="status">${esc(indiaNotice.text)}</p>`:''}${indiaScreenArt(a)}${indiaScreenBody(a,saved)}</article></div><footer class="india-player-controls">${indiaPane?`${indiaButton(a,'pane','play','← Revenir au jeu','btn prime')}<span class="india-control-status">${indiaClues(a).length}/3 indices</span>`:a.screen==='ending'?`${indiaButton(a,'pane','mission','Mes souvenirs','btn ghost')}${indiaButton(a,'replay',null,'Rejouer l’aventure','btn prime')}`:`${previous?indiaButton(a,previous.action,previous.key,'← Précédent','btn ghost'):'<button class="btn ghost" disabled>← Précédent</button>'}<span class="india-control-status">${a.screen==='pratique'?'Pause '+(a.practiceStep+1)+'/3':a.screen==='puzzle'?'Support '+(Object.keys(INDIA_PIECES).indexOf(a.piece)+1)+'/3':indiaClues(a).length+'/3 indices'}</span>${primary.disabled?`<button class="btn prime" disabled>${esc(primary.label)}</button>`:indiaButton(a,primary.action,primary.key,primary.label,'btn prime')}`}</footer></section>`;
 }
 function indiaAction(action,key,expectedPlace,anchor,expectedScreen,piece) {
   if(view!=='journey'||activeJourney!=='inde')return false;
@@ -244,7 +281,7 @@ function indiaAction(action,key,expectedPlace,anchor,expectedScreen,piece) {
     const fresh=newIndiaAdventure();fresh.endings=a.endings;saved.adventure=fresh;indiaPane=null;indiaNotice=null;state.journeys.inde=saved;persist();render();document.getElementById('india-screen-title')?.focus({preventScroll:true});return true;
   }
   if(expectedPlace&&expectedPlace!==a.place)return false;
-  if(a.ending&&!['move','screen','piece','talk','detail','clear-reply'].includes(action))return false;
+  if(a.ending&&!['move','screen','piece','talk','detail','clear-reply','practice'].includes(action))return false;
   if(action==='start') {
     if(a.started)return false;a.started=true;a.visited=['accueil'];a.screen='anaya';
   } else if(action==='move'||action==='screen') {
@@ -258,10 +295,19 @@ function indiaAction(action,key,expectedPlace,anchor,expectedScreen,piece) {
       screen=key;
     }
     if(!a.started){a.started=true;a.visited=['accueil'];}
+    if(screen==='pratique'&&a.practiceStatus&&a.screen!=='pratique')a.practiceStep=0;
     a.screen=screen;a.place=indiaScreenPlace(a,screen);a.visited=[...new Set([...a.visited,a.place])];a.reply=null;
   } else {
     if(!a.started)return false;
-    if(action==='clear-reply'){a.reply=null;}
+    if(action==='practice') {
+      if(a.place!=='cour'||a.screen!=='pratique')return false;
+      if(key==='suivante'&&a.practiceStep<2)a.practiceStep++;
+      else if(key==='precedente'&&a.practiceStep>0)a.practiceStep--;
+      else if(key==='passer'||key==='terminer'&&a.practiceStep===2){
+        a.practiceStatus=key==='terminer'?'done':a.practiceStatus==='done'?'done':'skipped';
+        a.screen=a.ending?'ending':'route';a.place=indiaScreenPlace(a,a.screen);
+      } else return false;
+    } else if(action==='clear-reply'){a.reply=null;}
     else if(action==='talk') {
       if(!Object.hasOwn(INDIA_LOG,key)||INDIA_LOG[key].place!==a.place||!['anaya-mission','anaya-apprendre','ravi-premier','ravi-photo','ravi-livres'].includes(key))return false;
       if(key==='ravi-photo'&&!a.observed.includes('legende'))return false;

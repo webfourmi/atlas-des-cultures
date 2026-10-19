@@ -349,7 +349,17 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
     assert.equal((markup.match(/class="india-screen"/g)||[]).length,1,'More than one activity was rendered');
     assert(!markup.includes('class="india-layout"'));assert(!markup.includes('class="india-hero"'));
     assert(markup.includes('class="india-player-controls"'));
+    const images=[...markup.matchAll(/<img\b([^>]*)>/g)];
+    assert.equal(images.length,1,'Each activity must have exactly one image');
+    for(const [,attrs] of images){
+      const src=attrs.match(/\bsrc="([^"]+)"/)[1],alt=attrs.match(/\balt="([^"]*)"/)[1];
+      assert(alt.length>20,'Missing descriptive image alternative');
+      assert(fs.existsSync(path.join(root,src)),'Missing activity image: '+src);
+    }
     snapshot('india-screen-'+(run('indiaPane')||indiaState().screen));
+    if(!run('indiaPane')&&indiaState().screen==='pratique')snapshot('india-pratique-'+indiaState().practiceStep);
+    if(!run('indiaPane')&&indiaState().screen==='puzzle')snapshot('india-puzzle-'+indiaState().piece);
+    if(!run('indiaPane')&&indiaState().screen==='ending')snapshot('india-ending-'+indiaState().ending);
   }
   for(const [plan,preparation] of [['expo','photo'],['expo','pratiques'],['rencontre','personne'],['rencontre','textes']]){
     run('state.journeys.inde={node:"begin",seen:[],completed:false};show("travel");openJourney("inde")');
@@ -365,7 +375,24 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
     visibleButton('india-talk','ravi-photo');assert.match(elements.get('app').innerHTML,/un bon point de départ/);
     visibleButton('india-clear-reply');visibleButton('india-talk','ravi-livres');
     assert(!elements.get('app').innerHTML.includes('un bon point de départ'),'Earlier dialogue was stacked in the active card');
-    primary();checkPlayer();assert.equal(indiaState().screen,'route');
+    assert.equal(run('indiaAction("practice","suivante","cour",null,"ravi")'),false,'Exercise action outside its card was accepted');
+    primary();checkPlayer();assert.equal(indiaState().screen,'pratique');assert.equal(indiaState().practiceStep,0);
+    assert.match(elements.get('app').innerHTML,/chaise stable, sans roulettes/);
+    assert.match(elements.get('app').innerHTML,/www\.nhs\.uk/);
+    assert.equal(run('indiaAction("practice","terminer","cour",null,"pratique")'),false,'Exercise could finish before its last step');
+    const tasksBeforePractice=plain('indiaTasks(journeyProgress("inde").adventure)');
+    primary();checkPlayer();assert.equal(indiaState().practiceStep,1);
+    assert.match(elements.get('app').innerHTML,/sans forcer et sans retenir le souffle/);
+    const pauseBeforeReload=indiaState();run('state=load();openJourney("inde")');assert.deepEqual(indiaState(),pauseBeforeReload);
+    checkPlayer();visibleButton('india-practice','precedente');assert.equal(indiaState().practiceStep,0);primary();
+    if(['photo','personne'].includes(preparation)){
+      primary();checkPlayer();assert.equal(indiaState().practiceStep,2);
+      primary();assert.equal(indiaState().practiceStatus,'done');
+    }else{
+      visibleButton('india-practice','passer');assert.equal(indiaState().practiceStatus,'skipped');
+    }
+    checkPlayer();assert.equal(indiaState().screen,'route');
+    assert.deepEqual(plain('indiaTasks(journeyProgress("inde").adventure)'),tasksBeforePractice,'The optional exercise changed mission requirements');
     visibleButton('india-plan',plan);primary();checkPlayer();assert.equal(indiaState().screen,'puzzle');
     assert.equal((elements.get('app').innerHTML.match(/class="india-puzzle-support"/g)||[]).length,1);
     for(const label of ['transmission','diversite','textes']){visibleButton('india-answer',label);primary();checkPlayer()}
@@ -376,7 +403,10 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
     visibleButton('india-piece','livre');primary();checkPlayer();assert.equal(indiaState().screen,'preparation');
     visibleButton(plan==='expo'?'india-order':'india-opening',preparation);primary();checkPlayer();assert.equal(indiaState().screen,'ready');
     primary();checkPlayer();assert.equal(indiaState().ending,plan);assert.equal(indiaState().screen,'ending');
-    visibleButton('india-pane','mission');checkPlayer();visibleButton('india-pane','dialogues');checkPlayer();
+    visibleButton('india-pane','mission');checkPlayer();
+    visibleButton('india-screen','pratique');checkPlayer();assert.equal(indiaState().practiceStep,0);
+    visibleButton('india-practice','passer');assert.equal(indiaState().ending,plan);assert.equal(indiaState().screen,'ending');
+    visibleButton('india-pane','mission');visibleButton('india-pane','indices');checkPlayer();visibleButton('india-pane','dialogues');checkPlayer();
     assert.match(elements.get('app').innerHTML,/un bon point de départ/,'Earlier dialogue disappeared from the history');
     visibleButton('india-pane','sources');checkPlayer();
     click('read','inde');assert(!document.body.classList.contains('india-playing'));
@@ -389,6 +419,9 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   const legacyScreen={started:true,place:'bibliotheque',visited:['accueil','bibliotheque'],documents:['fiche','livre'],observed:['legende'],board:{photo:'transmission',fiche:null,livre:null},selected:'diversite',version:1};
   context.legacyScreen=legacyScreen;
   const migratedScreen=plain('cleanIndiaAdventure(legacyScreen)');assert.equal(migratedScreen.screen,'puzzle');assert.equal(migratedScreen.piece,'fiche');
+  assert.equal(migratedScreen.practiceStep,0);assert.equal(migratedScreen.practiceStatus,null);
+  const corruptPractice=plain('cleanIndiaAdventure({started:true,place:"cour",screen:"pratique",practiceStep:999,practiceStatus:"<script>"})');
+  assert.equal(corruptPractice.practiceStep,2);assert.equal(corruptPractice.practiceStatus,null);
   assert.equal(migratedScreen.board.photo,'transmission');assert.equal(migratedScreen.selected,'diversite');assert.deepEqual(migratedScreen.documents,['fiche','livre']);
   context.preservedIndia=preservedIndia;run('state.journeys.inde=preservedIndia;persist();openJourney("inde")');
 
@@ -432,6 +465,8 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   for(const p of Object.values(plain('TRAVEL_PHOTOS')))assert(cached.includes(p.local));
   for(const a of plain('TRAVEL_AUDIO'))assert(cached.includes(a.src));
   for(const f of ['./travel/world.svg','./travel/CREDITS.md','./travel-data.js','./journeys.js','./travel.js','./travel.css','./india-adventure.js','./india-adventure.css'])assert(cached.includes(f));
+  for(const name of Object.keys(plain('INDIA_ART')))assert(cached.includes('./travel/inde/'+name+'.webp'),'Illustration not cached: '+name);
+  assert(cached.includes('./travel/inde/ILLUSTRATIONS.md'));
   assert(fs.readFileSync(path.join(root,'travel/world.svg'),'utf8').includes('Natural Earth'));
   assert(worker.includes("atlas-cultures-v"+run('APP_VERSION')));assert.equal(JSON.parse(fs.readFileSync(path.join(root,'version.json'))).version,run('APP_VERSION'));
   for(const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js'])assert(html.indexOf(`src="./${file}"`) < html.indexOf('<script>'));
@@ -440,5 +475,6 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   console.log('PASS: 13 photos créditées, 13 cartes, 60 chemins dans 12 rencontres et aventure indienne à deux dénouements, réponses propres à chaque choix, historique/rechargement/JSON, migration des anciennes rencontres, lecteurs à la demande et arrêt des écoutes.');
   console.log('PASS: Inde : 24 parcours (six ordres d’exploration, deux voies, deux préparatifs), erreurs et indices, déplacements de titres, reprise, migration, sauvegarde JSON et souvenirs cumulés.');
   console.log('PASS: écrans successifs : quatre parcours par les commandes affichées, lieux présents dès l’introduction, une activité à la fois, reprise du support, carnet/historique séparés et sortie du mode jeu.');
+  console.log('PASS: une image par écran et support, huit illustrations accessibles hors connexion ; pause facultative suivie ou passée dans les deux dénouements, étapes précédentes, reprise et accès après la fin sans perte du souvenir.');
   console.log('Limite : ces tests sans navigateur ne vérifient pas le rendu CSS ni un appareil réel.');
 })().catch(error=>{console.error(error);process.exitCode=1});

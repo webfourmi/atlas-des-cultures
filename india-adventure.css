@@ -22,3 +22,21 @@ body.india-playing{overflow:hidden;overscroll-behavior:none}
 @media(max-height:620px){.india-player-toolbar{min-height:54px;padding-top:7px;padding-bottom:7px}.india-location{min-height:44px;padding-top:10px;padding-bottom:7px}.india-screen{padding-top:14px}.india-screen-heading{margin-bottom:12px}.india-photo{width:min(100%,290px,36dvh)}.india-puzzle-support{margin-top:3px;margin-bottom:12px}.india-player-controls{padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}}
 
 .india-piece-dot[aria-invalid=true]{border:2px solid #ad6b33;color:#8b4a20;background:#f8ead8}.india-piece-dot[aria-invalid=true][aria-pressed=true]{background:#a65f2f;color:white}
+
+/* Des illustrations entières et compactes, sans allonger inutilement chaque écran. */
+.india-scene{display:flex;align-items:center;gap:17px;margin:0 0 19px;padding:10px;background:#f1ead8;border:1px solid #e1d6bd;border-radius:13px}
+.india-scene>a{display:block;flex:0 0 min(52%,235px);min-width:0;border-radius:8px;overflow:hidden}
+.india-scene img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;background:#eee3cd}
+.india-scene figcaption{font:700 .86rem/1.5 Georgia,serif;color:#5e654d;min-width:0}
+.india-scene figcaption small{display:block;font:400 .63rem/1.55 system-ui,sans-serif;color:#68705b;margin-top:8px}
+.india-scene-practice>a{flex-basis:min(52%,210px)}
+.india-practice-intro{font-size:.86rem;line-height:1.65;margin:0 0 13px}
+.india-practice-step{padding:16px 19px;background:#eaf0e2;border:1px solid #cddbc3;border-radius:12px}
+.india-practice-step>small{display:block;font-size:.7rem;color:#557259;margin-bottom:7px;font-weight:750}
+.india-practice-step h3{font-size:1.17rem}.india-practice-step p{font-size:.96rem;line-height:1.75;margin:8px 0 0}
+.india-practice-care{font-size:.76rem;line-height:1.6;margin:12px 0 0;color:#655d43}
+.india-practice-sources{border-top:1px solid #d7ddc8;padding-top:12px;margin-top:5px}
+.india-practice-sources summary{font-size:.73rem;line-height:1.5;cursor:pointer;min-height:30px}
+.india-practice-sources p{font-size:.78rem;line-height:1.7}
+@media(max-width:600px){.india-scene{gap:12px;padding:8px;margin-bottom:15px}.india-scene figcaption{font-size:.78rem}.india-scene figcaption small{font-size:.59rem;margin-top:5px}.india-practice-intro{font-size:.81rem}.india-practice-step{padding:14px 16px}.india-practice-step h3{font-size:1.08rem}.india-practice-step p{font-size:.88rem;line-height:1.7}}
+@media(max-height:620px){.india-scene>a,.india-scene-practice>a{flex-basis:min(48%,150px)}.india-scene{margin-bottom:12px}.india-practice-step{padding:12px 15px}}

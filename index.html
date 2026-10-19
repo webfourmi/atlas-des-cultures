@@ -231,7 +231,7 @@ function reset(){const ok=confirm('Effacer tous tes tampons, les réponses explo
 document.addEventListener('click',ev=>{let b=ev.target.closest('[data-action]');if(!b)return;let a=b.dataset.action;if(a==='home'||a==='passport'||a==='challenge'||a==='library'||a==='recipes'||a==='travel')show(a==='home'?'home':a);else if(a==='start')startTour(b.dataset.id);else if(a==='recipe')openRecipe(b.dataset.id);else if(a==='back-recipe')closeRecipe();else if(a==='print-recipe')printRecipe();else if(a==='read')openDetail(b.dataset.id);else if(a==='back-detail')closeDetail();else if(a==='filter'){filter=b.dataset.filter;render()}else if(a==='answer')answer(Number(b.dataset.index));else if(a==='next')next();else if(a==='redo-challenge')startChallenge();else if(a==='reset')reset()});
 
 /* Atlas des cultures v3 : installation PWA, sauvegardes et mises à jour. */
-const APP_VERSION='4.3.0';
+const APP_VERSION='4.4.0';
 const BACKUP_FORMAT='atlas-des-cultures/progression-v1';
 const ALERTS_KEY='atlas-cultures-system-update-alerts';
 const stored=k=>{try{return localStorage.getItem(k)}catch{return null}};

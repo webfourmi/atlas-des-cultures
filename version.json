@@ -1,12 +1,12 @@
 {
   "app": "Atlas des cultures",
-  "version": "4.3.0",
-  "date": "2026-10-18",
+  "version": "4.4.0",
+  "date": "2026-10-19",
   "notes": [
-    "Aventure en Inde réorganisée en écrans successifs, avec une activité à la fois",
-    "Barre des trois lieux toujours visible, dès l’introduction",
-    "Boutons de progression visibles en bas et retour à l’écran précédent",
-    "Énigme présentée support par support ; carnet et historique à la demande",
-    "Reprise à l’écran quitté, sans perdre les indices, choix ou souvenirs existants"
+    "Une image légendée sur chaque écran de l’aventure en Inde et du carnet",
+    "Photographie documentaire conservée avec sa source et sa licence",
+    "Pause de découverte du yoga assis avec Ravi, en trois étapes facultatives",
+    "Consignes de respiration douce sourcées, à suivre à son rythme ou à passer",
+    "Reprise de la pause à l’étape quittée et conservation des progrès existants"
   ]
 }
