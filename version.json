@@ -1,12 +1,13 @@
 {
   "app": "Atlas des cultures",
-  "version": "4.4.0",
+  "version": "5.0.0",
   "date": "2026-10-19",
   "notes": [
-    "Une image légendée sur chaque écran de l’aventure en Inde et du carnet",
-    "Photographie documentaire conservée avec sa source et sa licence",
-    "Pause de découverte du yoga assis avec Ravi, en trois étapes facultatives",
-    "Consignes de respiration douce sourcées, à suivre à son rythme ou à passer",
-    "Reprise de la pause à l’étape quittée et conservation des progrès existants"
+    "Les treize voyages suivent désormais le modèle de l’Inde : un écran et une activité à la fois",
+    "Trois lieux toujours visibles, deux personnages et deux dénouements dans chaque aventure",
+    "Une image par écran, avec vingt-quatre nouvelles illustrations et les photographies créditées",
+    "Douze nouvelles découvertes facultatives : composer, imaginer, observer et écouter",
+    "Cartes, carnet, échanges et sources accessibles à la demande",
+    "Progrès précédents, anciens dialogues et sauvegardes JSON conservés"
   ]
 }

@@ -1,13 +1,12 @@
-# Atlas des cultures · Application PWA v3.0.0
+# Atlas des cultures · Application PWA v5.0.0
 
 ## Installer sur Android (Samsung, Chrome)
 
-1. Décompresser `atlas_des_cultures_PWA_v3.zip`.
-2. Placer **tout le contenu** du dossier (fichier `index.html`, `sw.js`, `version.json`, `manifest.webmanifest`, dossier `icons/`) à la racine d’un dépôt GitHub Pages, par exemple `atlas-des-cultures`.
-3. Dans le dépôt GitHub, **Settings > Pages > Deploy from a branch > main > /(root) > Save**.
-4. Ouvrir l’adresse HTTPS fournie, typiquement `https://VOTRE_PSEUDO.github.io/atlas-des-cultures/`, dans **Chrome** sur le téléphone.
-5. Dans Chrome, toucher **⋮ > Installer l’application** (ou **Ajouter à l’écran d’accueil** selon le navigateur). Accepter la proposition : une icône « Atlas cultures » est ajoutée.
+1. Ouvrir [Atlas des cultures](https://webfourmi.github.io/atlas-des-cultures/) dans Chrome sur le téléphone.
+2. Dans Chrome, toucher **⋮ > Installer l’application** ou **Ajouter à l’écran d’accueil**.
+3. Pour une installation existante, accepter la bannière **Mettre à jour** ; les progrès locaux sont conservés.
 
+Pour héberger une copie, publier tout le projet et ses sous-dossiers sur un site HTTPS. Sur GitHub Pages, choisir **Settings > Pages > Deploy from a branch > main > /(root)**.
 > L’application PWA ne peut PAS s’installer directement depuis `index.html` ouvert localement ; HTTPS (ou localhost pour les tests) est obligatoire.
 
 ## Nouveautés et alertes
@@ -28,11 +27,16 @@
 
 ## Hors connexion
 
-Le navigateur stocke l’application, ses 13 illustrations, les 13 fiches et les 39 énigmes pour usage hors connexion après **la première visite en ligne**. Les liens UNESCO externes restent accessibles uniquement lorsqu’une connexion est présente.
+Le navigateur stocke l’application, les treize aventures, leurs illustrations et photographies, les fiches, les trente-neuf énigmes, les recettes et les deux extraits MP3 pour usage hors connexion après **la première visite en ligne**. Les liens externes, cartes détaillées et documentaires vidéo nécessitent une connexion.
 
 ## Structure du paquet
 
-- `index.html` : jeu complet + fiches et illustrations intégrées
+- `index.html` : point d’entrée du jeu
+- `travel.js`, `travel-data.js`, `journeys.js` : navigation, médias et anciennes rencontres
+- `india-adventure.js`, `india-adventure.css` : aventure Inde et styles communs
+- `world-adventure.js`, `world-adventure-data.js`, `world-adventure.css` : douze autres aventures
+- `travel/`, `recipes/` : médias, crédits et fiches PDF
+- `recipes.js`, `kitchen.js`, `notebook.js` et leurs CSS : recettes et progression
 - `manifest.webmanifest` : manifeste JSON installable
 - `version.json` : version et nouveautés
 - `sw.js` : service worker et cache hors connexion
@@ -42,3 +46,4 @@ Le navigateur stocke l’application, ses 13 illustrations, les 13 fiches et les
 ## Tester sans publier
 
 À la racine du dossier : `python -m http.server 8000` puis ouvrir `http://localhost:8000/` sur **l’ordinateur**. Pour installer sur téléphone, utiliser GitHub Pages en HTTPS.
+

@@ -29,6 +29,7 @@ function cleanJourneys(value) {
       origin,history
     };
     if(id==='inde')result[id].adventure=cleanIndiaAdventure(saved.adventure);
+    else if(Object.hasOwn(WORLD_ADVENTURES,id))result[id].adventure=cleanWorldAdventure(id,saved.adventure);
   }
   return result;
 }
@@ -40,6 +41,7 @@ function mergeJourneys(local, restored) {
       result[id].seen = [...new Set([...result[id].seen,...item.seen])];
       result[id].completed = result[id].completed || item.completed;
       if(id==='inde')result[id].adventure=mergeIndiaAdventure(result[id].adventure,item.adventure);
+      else if(Object.hasOwn(WORLD_ADVENTURES,id))result[id].adventure=mergeWorldAdventure(id,result[id].adventure,item.adventure);
     }
   }
   return result;
@@ -69,7 +71,7 @@ function worldMap() {
   return `<div class="world-map" aria-label="Les treize escales sur la carte du monde"><img src="./travel/world.svg" alt="Planisphère des terres émergées, fond Natural Earth" width="1000" height="500">${STOPS.map((s,i) => {const p = projectTravelPoint(TRAVEL_PLACES[s.id]);return `<button class="map-pin ${travelSelected === s.id ? 'selected' : ''}" style="left:${p.x/10}%;top:${p.y/5}%" data-action="travel-select" data-id="${s.id}" title="${esc(s.country)}" aria-label="Situer ${esc(s.country)}" aria-pressed="${travelSelected === s.id}">${i+1}</button>`}).join('')}</div><p class="map-attribution">Fond simplifié : <a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noopener noreferrer">Natural Earth, domaine public</a>. Les points sont des repères ; les pratiques ne se limitent pas à ces lieux.</p>`;
 }
 function travelStopLinks(id) {
-  return `<div class="actions-row"><button class="btn prime" data-action="journey" data-id="${id}">${id==='inde'?'Jouer l’aventure en Inde':'Rencontrer '+esc(JOURNEYS[id].person)} →</button><button class="btn ghost" data-action="read" data-id="${id}">Lire la fiche</button>${RECIPES[id] ? `<button class="btn ghost" data-action="recipe" data-id="${id}">Recette</button>` : ''}</div>`;
+  return `<div class="actions-row"><button class="btn prime" data-action="journey" data-id="${id}">Jouer l’aventure →</button><button class="btn ghost" data-action="read" data-id="${id}">Lire la fiche</button>${RECIPES[id] ? `<button class="btn ghost" data-action="recipe" data-id="${id}">Recette</button>` : ''}</div>`;
 }
 function renderTravelMap() {
   const s = STOPS.find(s => s.id === travelSelected), place = TRAVEL_PLACES[s.id];
@@ -77,11 +79,11 @@ function renderTravelMap() {
 }
 function renderTravelStories() {
   const stops=[STOPS.find(s=>s.id==='inde'),...STOPS.filter(s=>s.id!=='inde')];
-  return `<p class="fiction-note">Personnages et dialogues imaginés, traditions documentées. Les personnes photographiées ne représentent pas les personnages des récits.</p><div class="journey-cards">${stops.map(s => {
-    const j=JOURNEYS[s.id],saved=journeyProgress(s.id),pilot=s.id==='inde',a=saved.adventure;
-    const status=pilot?(a.ending?'✓ Aventure terminée':a.started?'Aventure en cours':'Nouvelle aventure'):saved.completed?'✓ Rencontre terminée':saved.node==='begin'?'À découvrir':'En cours';
-    const label=pilot?(a.ending?'Revoir le dénouement':a.started?'Reprendre l’aventure':'Commencer l’aventure'):saved.node==='finish'?'Relire la rencontre':saved.node==='begin'?'Commencer la rencontre':'Reprendre la rencontre';
-    return `<article class="journey-card"${pilot?' data-pilot="true"':''}><img class="journey-cover" src="${TRAVEL_PHOTOS[s.id].local}" alt="${esc(TRAVEL_PHOTOS[s.id].caption)}" loading="lazy"><div class="journey-card-copy"><span class="overline">${s.flag} ${esc(s.country)} · ${status}</span><h2>${esc(j.title)}</h2><p>${esc(j.goal)}</p>${pilot?`<div class="india-card-tag">3 lieux · 2 personnages · 2 dénouements</div><div class="travel-small">${a.visited.length}/3 lieux explorés · ${a.endings.length}/2 souvenirs</div>`:`<div class="travel-small">${saved.seen.length} / 2 découvertes gardées dans ton carnet</div>`}<button class="btn prime" data-action="journey" data-id="${s.id}">${label} →</button>${travelCredit(s.id)}</div></article>`;
+  return `<p class="fiction-note">Personnages et dialogues imaginés, traditions documentées. Une activité à la fois, trois lieux toujours visibles et deux dénouements par aventure. Les personnes photographiées ne représentent pas les personnages.</p><div class="journey-cards">${stops.map(s=>{
+    const saved=journeyProgress(s.id),a=saved.adventure,data=s.id==='inde'?JOURNEYS.inde:WORLD_ADVENTURES[s.id];
+    const status=a.ending?'✓ Aventure terminée':a.started?'Aventure en cours':'À découvrir';
+    const label=a.ending?'Revoir le dénouement':a.started?'Reprendre l’aventure':'Commencer l’aventure';
+    return `<article class="journey-card"${s.id==='inde'?' data-pilot="true"':''}><img class="journey-cover" src="${TRAVEL_PHOTOS[s.id].local}" alt="${esc(TRAVEL_PHOTOS[s.id].caption)}" loading="lazy"><div class="journey-card-copy"><span class="overline">${s.flag} ${esc(s.country)} · ${status}</span><h2>${esc(data.title)}</h2><p>${esc(data.mission||data.goal)}</p><div class="india-card-tag">3 lieux · 2 personnages · 2 dénouements</div><div class="travel-small">${a.visited.length}/3 lieux explorés · ${a.endings.length}/2 souvenirs</div>${!a.started&&saved.completed?'<p class="travel-small">✓ Escale déjà parcourue · découvertes conservées</p>':''}<button class="btn prime" data-action="journey" data-id="${s.id}">${label} →</button>${travelCredit(s.id)}</div></article>`;
   }).join('')}</div>`;
 }
 function travelAudioCard(item) {
@@ -95,7 +97,7 @@ function renderTravelSounds() {
 }
 function renderTravelHub() {
   const completed = Object.values(state.journeys).filter(s => s.completed).length, notes = Object.values(state.journeys).reduce((n,s) => n + s.seen.length,0);
-  app.innerHTML = `<header class="travel-hero"><span class="eyebrow">Voir · écouter · rencontrer</span><h1>Le monde se raconte.</h1><p>Des photographies réelles, une carte à parcourir et des rencontres où tes choix ouvrent le carnet.</p><div class="travel-counters"><span>${completed} / 13 rencontres terminées</span><span>${notes} / 26 découvertes conservées</span><span>13 photographies légendées</span></div></header><nav class="travel-tabs" aria-label="Parcourir les voyages">${[['map','🗺️ Carte'],['stories','💬 Aventures'],['sounds','🎵 Écouter'],['photos','📷 Photos']].map(([id,label]) => `<button class="chip ${travelTab === id ? 'active' : ''}" data-action="travel-tab" data-tab="${id}" aria-pressed="${travelTab === id}">${label}</button>`).join('')}</nav>${travelTab === 'map' ? renderTravelMap() : travelTab === 'stories' ? renderTravelStories() : travelTab === 'sounds' ? renderTravelSounds() : `<div class="travel-photo-grid">${STOPS.map(s => `<section><h2>${s.flag} ${esc(s.country)} · ${esc(s.topic)}</h2>${travelFigure(s.id)}<button class="btn ghost" data-action="read" data-id="${s.id}">Découvrir la tradition →</button></section>`).join('')}</div>`}<p class="travel-footer">Photos, cartes, récits et extraits sonores sont disponibles hors connexion après la mise à jour complète. Les liens externes et les vidéos officielles demandent Internet. <a href="./travel/CREDITS.md" target="_blank" rel="noopener">Crédits et sources détaillés</a>.</p>`;
+  app.innerHTML = `<header class="travel-hero"><span class="eyebrow">Voir · écouter · rencontrer</span><h1>Le monde se raconte.</h1><p>Treize aventures à explorer, une étape à la fois : des images, des rencontres et de petites activités pour découvrir les traditions.</p><div class="travel-counters"><span>${completed} / 13 escales terminées</span><span>${notes} / 26 découvertes conservées</span><span>13 photographies légendées</span></div></header><nav class="travel-tabs" aria-label="Parcourir les voyages">${[['map','🗺️ Carte'],['stories','💬 Aventures'],['sounds','🎵 Écouter'],['photos','📷 Photos']].map(([id,label]) => `<button class="chip ${travelTab === id ? 'active' : ''}" data-action="travel-tab" data-tab="${id}" aria-pressed="${travelTab === id}">${label}</button>`).join('')}</nav>${travelTab === 'map' ? renderTravelMap() : travelTab === 'stories' ? renderTravelStories() : travelTab === 'sounds' ? renderTravelSounds() : `<div class="travel-photo-grid">${STOPS.map(s => `<section><h2>${s.flag} ${esc(s.country)} · ${esc(s.topic)}</h2>${travelFigure(s.id)}<button class="btn ghost" data-action="read" data-id="${s.id}">Découvrir la tradition →</button></section>`).join('')}</div>`}<p class="travel-footer">Photos, cartes, récits et extraits sonores sont disponibles hors connexion après la mise à jour complète. Les liens externes et les vidéos officielles demandent Internet. <a href="./travel/CREDITS.md" target="_blank" rel="noopener">Crédits et sources détaillés</a>.</p>`;
 }
 function journeyScene(id, node) {
   return JOURNEYS[id].scenes[node] || JOURNEYS[id].scenes.begin;
@@ -115,12 +117,12 @@ function openJourney(id) {
   if (!JOURNEYS[id] || !STOPS.some(s => s.id === id)) return;
   if (view !== 'journey') journeyReturn = {view,game,readingStop,detailReturn};
   activeJourney = id; game = null; view = 'journey';
-  if(id==='inde'){indiaPane=null;indiaNotice=null;}
+  if(id==='inde'){indiaPane=null;indiaNotice=null;}else{worldPane=null;worldNotice=null;}
   if (!state.journeys[id]) {state.journeys[id] = journeyProgress(id);persist();}
   render();window.scrollTo(0,0);document.getElementById('journey-title')?.focus();
 }
 function chooseJourney(index, expectedNode, expectedJourney = activeJourney) {
-  if (view !== 'journey' || activeJourney==='inde' || expectedJourney !== activeJourney || !JOURNEYS[activeJourney] || !Number.isInteger(index)) return false;
+  if (view !== 'journey' || (activeJourney==='inde'||Object.hasOwn(WORLD_ADVENTURES,activeJourney)) || expectedJourney !== activeJourney || !JOURNEYS[activeJourney] || !Number.isInteger(index)) return false;
   const saved = journeyProgress(activeJourney);
   if (saved.node !== expectedNode) return false;
   const choice = journeyScene(activeJourney,saved.node).choices[index];
@@ -137,6 +139,7 @@ function chooseJourney(index, expectedNode, expectedJourney = activeJourney) {
 function renderJourney() {
   if (!activeJourney || !JOURNEYS[activeJourney]) {view='travel';renderTravelHub();return;}
   if(activeJourney==='inde'){renderIndiaAdventure();return;}
+  if(Object.hasOwn(WORLD_ADVENTURES,activeJourney)){renderWorldAdventure(activeJourney);return;}
   const id = activeJourney, j = JOURNEYS[id], stop = STOPS.find(s => s.id === id), saved = journeyProgress(id), scene = journeyScene(id,saved.node);
   app.innerHTML = `<button class="back" data-action="journey-back">← Retour au voyage</button><header class="journey-hero"><div><span class="overline">${stop.flag} ${esc(stop.country)} · ${esc(stop.topic)}</span><h1 id="journey-title" tabindex="-1">${esc(j.title)}</h1><p>Avec ${esc(j.person)}, qui ${esc(j.role)}.</p></div><span class="character-initial" aria-hidden="true">${esc(j.person[0])}</span></header><p class="fiction-note">Personnage et dialogues fictifs, écrits en français. Traditions documentées par l’UNESCO ; les personnes photographiées ne représentent pas le personnage.</p><div class="journey-layout"><article class="journey-scene"><div class="journey-phases" aria-label="Ton chemin"><span class="${saved.node === 'begin' ? 'current' : ''}">Rencontre</span><span class="${['hands','voices'].includes(saved.node) ? 'current' : ''}">Échange</span><span class="${['end','finish'].includes(saved.node) ? 'current' : ''}">Fin de la scène</span></div><h2 id="journey-scene-title" tabindex="-1">${esc(scene.title)}</h2>${journeyConversation(id,saved)}${scene.choices.length ? `<div class="journey-choices" role="group" aria-labelledby="journey-choice-label"><p id="journey-choice-label">Que dis-tu ?</p>${scene.choices.map((choice,index) => `<button class="journey-choice" data-action="journey-choice" data-id="${id}" data-index="${index}" data-node="${saved.node}"><span>${esc(choice.label)}</span><b aria-hidden="true">→</b></button>`).join('')}</div>${saved.node !== 'begin' ? '<button class="btn ghost journey-restart" data-action="journey-replay">Recommencer la scène</button>' : ''}` : `<div class="journey-finish"><strong>✓ Cette rencontre est inscrite dans ton carnet.</strong><button class="btn prime" data-action="journey-replay">Rejouer la scène</button><button class="btn ghost" data-action="travel-stories">Choisir une autre rencontre</button>${RECIPES[id] ? `<button class="btn ghost" data-action="recipe" data-id="${id}">Prolonger en cuisine</button>` : ''}</div>`}<section class="journey-notes"><h3>Ton carnet · ${saved.seen.length} / 2 découvertes</h3><p>Les repères documentaires de cette rencontre.</p>${saved.seen.length ? saved.seen.map(key => `<details ${saved.node === 'finish' ? 'open' : ''}><summary>${esc(j[key].title)}</summary><p>${esc(j[key].text)}</p></details>`).join('') : '<p>Ta première découverte apparaîtra ici.</p>'}</section><div class="travel-source"><a href="${src(stop)}" target="_blank" rel="noopener noreferrer">Vérifier la tradition dans la fiche UNESCO ↗</a><button class="btn ghost" data-action="read" data-id="${id}">Lire la fiche culturelle</button></div></article><aside>${travelFigure(id,true)}${regionalMap(id)}<p class="travel-small">${esc(TRAVEL_PLACES[id].name)} · repère géographique</p>${TRAVEL_AUDIO.filter(a => a.stop === id).slice(0,1).map(travelAudioCard).join('')}${TRAVEL_VIDEO.filter(v => v.stop === id).map(travelVideoCard).join('')}</aside></div>`;
 }
@@ -155,7 +158,7 @@ document.addEventListener('click', event => {
   else if (action === 'travel-sounds') {travelTab='sounds';show('travel');}
   else if (action === 'journey') openJourney(button.dataset.id);
   else if (action === 'journey-choice') chooseJourney(Number(button.dataset.index),button.dataset.node,button.dataset.id);
-  else if (action === 'journey-replay' && view === 'journey' && activeJourney && activeJourney!=='inde') {
+  else if (action === 'journey-replay' && view === 'journey' && activeJourney && activeJourney!=='inde' && !Object.hasOwn(WORLD_ADVENTURES,activeJourney)) {
     const saved=journeyProgress(activeJourney);saved.node='begin';saved.origin='begin';saved.history=[];state.journeys[activeJourney]=saved;persist();render();document.getElementById('journey-title')?.focus();
   } else if (action === 'journey-back') {
     const previous=journeyReturn;journeyReturn=null;view=previous?.view || 'travel';game=previous?.game || null;

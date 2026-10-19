@@ -1,0 +1,28 @@
+/* Les voyages reprennent la fenêtre de jeu et les commandes fixes de l’Inde. */
+.world-carnet-tabs{grid-template-columns:repeat(5,minmax(0,1fr))}
+.world-player .india-location{overflow-wrap:break-word}
+.world-player .india-player-toolbar h1{font-size:clamp(.98rem,2.2vw,1.25rem)}
+.world-player .india-scene{margin-bottom:17px}
+.world-mission{font-weight:650;color:#48654e}
+.world-document-photo{width:min(100%,340px,43dvh)}
+.world-document-photo img{display:block;width:100%;height:auto;max-height:26dvh;object-fit:contain;background:#eee9db}
+.world-original-caption{font-size:.76rem!important;color:#68715b}
+.world-player .india-puzzle-support small{display:block;font-size:.6rem;color:#6a735f;margin-top:6px}
+.world-practice-choices{display:grid;gap:8px;margin-top:14px}
+.world-practice-choices .india-answer{font-size:.8rem;padding:10px 12px}
+.world-practice-response{font-size:.83rem!important;background:#fffdf6;padding:11px 13px;border-left:3px solid #b78b4b;border-radius:0 7px 7px 0}
+.world-practice-finish{font-size:.83rem;line-height:1.65;color:#426b52}
+.world-source-support{display:block;font-size:.72rem;line-height:1.65;color:#65745d;margin-top:6px}
+.world-map-figure{margin:0 0 18px;border:1px solid #d4decc;border-radius:12px;overflow:hidden;background:#e8efe4}
+.world-map-picture{position:relative}.world-map-picture>img{display:block;width:100%;height:auto}
+.world-map-picture>span{position:absolute;width:13px;height:13px;transform:translate(-50%,-50%);background:#c45839;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 2px #c4583960}
+.world-map-figure figcaption{font-size:.76rem;line-height:1.6;padding:10px 14px;background:#f2f3e7}
+.world-media{margin:14px 0 6px;padding:12px 0;border-top:1px solid #d7ddca}
+.world-media summary{font-size:.8rem;font-weight:750;cursor:pointer;min-height:32px;line-height:1.6}
+.world-media>p{font-size:.82rem;line-height:1.65}.world-media small{font-size:.65rem;line-height:1.6;display:block}
+.world-sound{padding:13px;margin:10px 0;background:#f7f4e8;border:1px solid #d7dec9;border-radius:10px}
+.world-sound>strong{font-size:.8rem}.world-sound>p{font-size:.77rem;line-height:1.65}.world-sound audio{display:block;width:100%;height:44px;margin:12px 0}
+.world-player .video-mount{margin:12px 0}.world-player .video-mount iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.world-legacy-history{padding:11px;background:#f2efde;border:1px solid #d5dcc6;border-radius:9px;margin:12px 0}
+.world-recipe{margin:14px 0;min-height:44px}
+@media(max-width:600px){.world-player .india-player-toolbar h1{font-size:1rem}.world-carnet-tabs{gap:4px}.world-carnet-tabs .india-carnet-tab{font-size:.65rem;padding:7px 2px}.world-player .india-location{font-size:.72rem;padding-left:5px;padding-right:5px}.world-practice-choices .india-answer{font-size:.76rem}.world-player .india-practice-step p{line-height:1.65}}

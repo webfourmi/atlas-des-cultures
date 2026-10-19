@@ -172,3 +172,7 @@ Vidéos intégrées via le lecteur officiel YouTube, seulement à la demande du 
 Treize rencontres, personnages et dialogues imaginés pour l’Atlas. Les deux découvertes documentaires de chaque récit reprennent les informations des notices UNESCO déjà associées aux 13 escales. Une photographie ne représente pas le personnage fictif du récit. Les faits sont reliés à la notice correspondante dans l’interface.
 
 Les recettes et leurs illustrations de création conservent leurs crédits distincts dans `recipes/ILLUSTRATIONS.md`.
+
+## Aventures par écrans — version 5.0.0
+
+Les douze escales hors Inde disposent de nouveaux récits et d’illustrations explicitement fictives. Les photographies et les extraits ci-dessus restent documentaires. Voir [les sources des aventures](adventures/SOURCES.md), [les prompts des rencontres](adventures/ART-RENCONTRES.md) et [les prompts des activités](adventures/ART-ATELIERS.md).

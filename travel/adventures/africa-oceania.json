@@ -1,0 +1,979 @@
+{
+  "vanuatu": {
+    "title": "Le fil du dessin",
+    "mission": "Aider Lina à préparer les trois cartes d’accueil d’une démonstration de Toma.",
+    "intro": "Lina a une photo et deux notes, mais leurs titres sont mélangés. Retrouve leur place, puis choisis comment accueillir le groupe qui vient rencontrer Toma. Cette rencontre et ses deux personnages adultes sont fictifs.",
+    "places": [
+      {
+        "name": "Le coin d’accueil",
+        "description": "Un espace fictif à l’ombre, où Lina rassemble les cartes destinées aux visiteurs.",
+        "shortName": "Accueil"
+      },
+      {
+        "name": "La table des carnets",
+        "description": "Deux fiches documentaires attendent à côté de la photographie et des titres détachés.",
+        "shortName": "Carnets"
+      },
+      {
+        "name": "L’espace de démonstration",
+        "description": "Toma a prévu un moment pour montrer son travail et répondre aux questions. Ce lieu est inventé pour le jeu.",
+        "shortName": "Démonstration"
+      }
+    ],
+    "characters": [
+      {
+        "name": "Lina",
+        "role": "accueille les visiteurs",
+        "greeting": "Salut ! J’ai imprimé mes cartes trop vite et mélangé les titres. Tu m’aides à les remettre ensemble avant l’arrivée du groupe ?",
+        "questions": [
+          {
+            "question": "Tu as besoin de quoi exactement ?",
+            "answer": "De trois titres bien placés. Ensuite, on décidera si on prépare un petit panneau ou si on garde surtout du temps pour les questions."
+          },
+          {
+            "question": "La photo raconte toute l’histoire du dessin ?",
+            "answer": "Je ne connais pas le sens précis de celui-là. Je peux décrire ce que je vois ; pour son interprétation, il faudrait entendre une personne qui le connaît."
+          }
+        ]
+      },
+      {
+        "name": "Toma",
+        "role": "dessinateur",
+        "greeting": "Bonjour ! Vous avancez avec les cartes ? J’ai un peu de temps avant de commencer, si un passage vous pose question.",
+        "questions": [
+          {
+            "question": "Qu’est-ce que je peux regarder en premier ?",
+            "answer": "Le chemin du doigt. Dans la tradition décrite par l’UNESCO, il suit une ligne continue sur une grille imaginée. Un croisement peut demander beaucoup d’attention."
+          },
+          {
+            "question": "Et si je perds le fil ?",
+            "answer": "Garde ta question pour après : « Tu peux revenir sur ce passage ? » C’est plus utile que d’essayer de tout deviner en même temps."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "Les lignes",
+        "text": "Des lignes sombres dessinent des boucles et de nombreux croisements sur une surface granuleuse."
+      },
+      {
+        "label": "Le cadrage",
+        "text": "La photographie montre le dessin, sans personne en train de le tracer. Elle ne permet pas de retrouver l’ordre de chaque geste."
+      },
+      {
+        "label": "La légende",
+        "text": "La légende situe ce dessin au Vanuatu. Elle ne donne ni son nom ni l’explication de ses motifs : on ne leur invente pas de signification."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Une trace photographiée",
+        "text": "La photo documente un dessin sur le sable au Vanuatu. Son motif visible ne suffit pas à établir son sens ou les étapes de sa réalisation.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Le chemin du doigt",
+        "text": "Le dessin traditionnel décrit par l’UNESCO est réalisé d’un doigt, en ligne continue, selon une grille imaginée. Le support peut être le sable, la cendre volcanique ou l’argile.",
+        "source": "https://ich.unesco.org/fr/RL/les-dessins-sur-le-sable-de-vanuatu-00073"
+      },
+      {
+        "id": "partage",
+        "title": "Des savoirs à expliquer",
+        "text": "Ces dessins peuvent transmettre des récits et des connaissances. Leurs différents sens demandent le savoir de personnes capables de les expliquer : ce ne sont pas seulement des motifs décoratifs.",
+        "source": "https://ich.unesco.org/fr/RL/les-dessins-sur-le-sable-de-vanuatu-00073"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Quel titre convient à chaque carte d’accueil ? Appuie-toi sur son contenu, sans essayer de décoder le dessin photographié.",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Une image à observer"
+        },
+        {
+          "id": "b",
+          "text": "Une façon de tracer"
+        },
+        {
+          "id": "c",
+          "text": "Des connaissances à transmettre"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie",
+          "text": "Le dessin visible et les limites de ce que montre cette image.",
+          "correct": "a"
+        },
+        {
+          "id": "geste",
+          "name": "La fiche du geste",
+          "text": "Le doigt, la ligne et le canevas imaginé.",
+          "correct": "b"
+        },
+        {
+          "id": "partage",
+          "name": "La fiche des significations",
+          "text": "Les récits, les connaissances et les personnes qui les expliquent.",
+          "correct": "c"
+        }
+      ],
+      "hint": "Cherche successivement ce qu’une image donne à voir, comment un geste est réalisé, puis ce qu’une personne peut transmettre."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Préparer le panneau",
+        "description": "Installer les trois cartes au coin d’accueil pour que les visiteurs sachent quoi regarder et quoi demander.",
+        "reply": "Lina : Merci ! Avec des titres clairs, je pourrai accueillir les gens sans leur faire lire un grand texte.",
+        "place": 0,
+        "preparationTitle": "La première carte",
+        "preparationPrompt": "Lina te laisse choisir ce que les visiteurs découvriront d’abord.",
+        "options": [
+          {
+            "id": "un",
+            "label": "Ouvrir avec la photographie",
+            "reply": "Lina : D’accord. On part de ce que chacun peut observer, puis on propose les deux autres cartes.",
+            "endingText": "Le panneau commence par la photo. Un visiteur remarque un croisement, puis lit la fiche du geste. Lina lui propose de garder sa question pour Toma.",
+            "endingReply": "Lina : Ça fonctionne : le panneau donne envie de regarder de plus près."
+          },
+          {
+            "id": "deux",
+            "label": "Ouvrir avec une question",
+            "reply": "Lina : « Qu’aimeriez-vous demander au dessinateur ? » Voilà une bonne entrée pour notre petit panneau.",
+            "endingText": "La question d’accueil attire les premières réactions. Lina montre ensuite les trois cartes et note les questions que le groupe souhaite poser à Toma.",
+            "endingReply": "Lina : On a déjà de quoi commencer une vraie conversation."
+          }
+        ],
+        "endingTitle": "Les cartes sont prêtes"
+      },
+      {
+        "id": "rencontre",
+        "title": "Préparer les questions",
+        "description": "Rejoindre Toma avec les cartes et choisir une première question pour le groupe.",
+        "reply": "Toma : Très bien. On commencera par votre question et on prendra le temps de regarder ensemble.",
+        "place": 2,
+        "preparationTitle": "La question d’ouverture",
+        "preparationPrompt": "Quel point veux-tu éclaircir avec Toma ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Revenir sur un croisement",
+            "reply": "Toma : Montre-moi celui qui t’intrigue. Je pourrai expliquer le passage sans reprendre tout depuis le début.",
+            "endingText": "Tu désignes le passage que tu veux comprendre. Le groupe se rapproche et Toma reprend tranquillement son explication. Chacun peut enfin poser sa question.",
+            "endingReply": "Toma : Une question précise nous a donné un bon point de départ."
+          },
+          {
+            "id": "deux",
+            "label": "Demander comment il a appris",
+            "reply": "Toma : Avec plaisir. Je vais commencer par les passages qui me donnaient du mal, quand j’apprenais.",
+            "endingText": "Toma commence par raconter un souvenir d’apprentissage. Les visiteurs lui demandent ensuite ce qu’il aime expliquer aux débutants.",
+            "endingReply": "Toma : Merci d’avoir aussi pensé à la personne derrière le dessin."
+          }
+        ],
+        "endingTitle": "Un moment pour comprendre"
+      }
+    ],
+    "practice": {
+      "title": "Imagine ton propre chemin",
+      "intro": "Lina te propose d’imaginer ton propre chemin sur une page vide : un départ, un trajet et une fin. Ce tracé libre est une création personnelle.",
+      "steps": [
+        {
+          "title": "Choisir un départ",
+          "text": "Imagine une page vide et un point de départ. Dans quelle direction ta ligne part-elle ?",
+          "options": [
+            {
+              "label": "Vers une grande boucle",
+              "reply": "Ta ligne s’arrondit. Tu peux en suivre mentalement le contour à ton rythme."
+            },
+            {
+              "label": "Vers un chemin anguleux",
+              "reply": "Ta ligne change de direction. Tu peux imaginer un virage après l’autre."
+            }
+          ]
+        },
+        {
+          "title": "Continuer le trajet",
+          "text": "Garde le même fil imaginaire. Tu décides librement de son prochain passage.",
+          "options": [
+            {
+              "label": "Croiser mon propre chemin",
+              "reply": "Imagine où la ligne passe à nouveau sur son trajet. Rien à réussir : tu choisis simplement son chemin."
+            },
+            {
+              "label": "Contourner la première ligne",
+              "reply": "Ton trajet s’écarte puis revient près du départ. Tu peux le garder très simple."
+            }
+          ]
+        },
+        {
+          "title": "Choisir une fin",
+          "text": "Comment veux-tu terminer ton petit tracé personnel ?",
+          "options": [
+            {
+              "label": "Revenir au point de départ",
+              "reply": "Tu refermes ton parcours imaginaire. C’est la fin que tu as choisie."
+            },
+            {
+              "label": "Laisser le chemin ouvert",
+              "reply": "Ta ligne s’arrête ailleurs sur la page. Tu pourras lui imaginer une suite une autre fois."
+            }
+          ]
+        }
+      ],
+      "finishText": "Tu as imaginé ton propre tracé. Pour découvrir les dessins traditionnels du Vanuatu et leurs sens, retrouve les repères du carnet.",
+      "sourceUrl": "https://ich.unesco.org/fr/RL/les-dessins-sur-le-sable-de-vanuatu-00073",
+      "sourceLabel": "UNESCO · comprendre la tradition, distincte de ce jeu libre"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/RL/les-dessins-sur-le-sable-de-vanuatu-00073",
+        "label": "UNESCO · Les dessins sur le sable de Vanuatu",
+        "supports": "Ligne continue au doigt, canevas imaginaire, supports, fonctions de transmission et nécessité de connaître les significations. Scénario, personnages et tracé libre : créations du jeu."
+      },
+      {
+        "url": "https://ich.unesco.org/en/projects/safeguarding-of-vanuatu-sand-drawings-00022",
+        "label": "UNESCO · Sauvegarde des dessins sur le sable",
+        "supports": "Souligne la transmission, le rôle des dessinateurs experts et la distinction entre dessins et récits pouvant être présentés publiquement. Le jeu ne reproduit pas de motif traditionnel."
+      }
+    ]
+  },
+  "turquie": {
+    "title": "Une place autour du plateau",
+    "mission": "Aider Deniz à préparer l’accueil d’Ece en remettant les trois cartes du café à leur place.",
+    "intro": "Deniz attend son amie Ece. Il veut lui montrer son carnet sur le café turc, mais les titres des trois cartes sont mélangés. Observe la photo, lis les notes, puis prépare leur rencontre. Les personnages adultes et cette visite sont fictifs.",
+    "places": [
+      {
+        "name": "Le coin d’accueil",
+        "description": "Une entrée inventée pour le jeu. Deniz y prépare son carnet et le plateau virtuel.",
+        "shortName": "Accueil"
+      },
+      {
+        "name": "La table des notes",
+        "description": "La photographie et deux fiches documentaires permettent de retrouver les bons titres.",
+        "shortName": "Notes"
+      },
+      {
+        "name": "Le salon",
+        "description": "Ece a rejoint les fauteuils. Un endroit fictif pour discuter tranquillement autour de la table.",
+        "shortName": "Salon"
+      }
+    ],
+    "characters": [
+      {
+        "name": "Deniz",
+        "role": "accueille une amie",
+        "greeting": "Salut ! Ece arrive bientôt. Tu peux regarder ces cartes pendant que je fais de la place sur la table ?",
+        "questions": [
+          {
+            "question": "Pourquoi préparer un carnet pour une visite ?",
+            "answer": "Ece m’a demandé ce que je mettais dans mon carnet de voyage. Je voudrais lui montrer trois petites pages, puis qu’on ait surtout le temps de discuter."
+          },
+          {
+            "question": "Tu as appris à préparer le café avec qui ?",
+            "answer": "Avec ma mère. Je regardais, puis j’essayais à mon tour. Elle me rappelait surtout de ne pas partir bavarder au mauvais moment !"
+          }
+        ]
+      },
+      {
+        "name": "Ece",
+        "role": "amie de Deniz",
+        "greeting": "Bonjour ! Je suis contente de vous voir. Deniz m’a dit qu’il avait besoin d’un coup de main avec son carnet.",
+        "questions": [
+          {
+            "question": "Tu connais déjà la photo ?",
+            "answer": "Non. J’aime ses couleurs, mais je ne peux pas deviner la préparation du café en la regardant. Il faudra que je lise la fiche d’à côté."
+          },
+          {
+            "question": "On commence par le carnet ou par les nouvelles ?",
+            "answer": "Comme vous voulez. J’ai une anecdote à raconter, et j’aimerais aussi voir ce que vous avez préparé. On a le temps."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "La tasse",
+        "text": "Le café est présenté dans une tasse à anse, posée sur une soucoupe. Les deux portent des motifs colorés."
+      },
+      {
+        "label": "La surface",
+        "text": "Une fine bordure mousseuse est visible près du bord. L’image ne montre pas le café en train de chauffer."
+      },
+      {
+        "label": "La légende",
+        "text": "La légende identifie un service de café turc photographié en 2019. Aucun verre d’eau n’est visible dans ce cadrage."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Un service photographié",
+        "text": "La photographie montre une tasse de café et sa soucoupe décorée. Elle documente une présentation particulière, pas toutes les étapes de préparation.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Préparer et servir",
+        "text": "La mouture est très fine. Le café chauffe doucement avec de l’eau pour former de la mousse ; le service traditionnel décrit par l’UNESCO associe de petites tasses et un verre d’eau.",
+        "source": "https://ich.unesco.org/fr/RL/la-culture-et-la-tradition-du-cafe-turc-00645"
+      },
+      {
+        "id": "partage",
+        "title": "Une occasion de se parler",
+        "text": "Cette tradition est liée à l’hospitalité, à l’amitié et à la conversation. Les savoirs se transmettent notamment dans les familles, en observant et en participant.",
+        "source": "https://ich.unesco.org/fr/RL/la-culture-et-la-tradition-du-cafe-turc-00645"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Retrouve le titre de chaque carte du carnet. La photo, la préparation et la rencontre apportent trois éclairages différents.",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Le service dans l’image"
+        },
+        {
+          "id": "b",
+          "text": "Le savoir-faire de préparation"
+        },
+        {
+          "id": "c",
+          "text": "L’accueil et la transmission"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie",
+          "text": "Une tasse décorée et sa soucoupe, dans un cadrage précis.",
+          "correct": "a"
+        },
+        {
+          "id": "geste",
+          "name": "La fiche de préparation",
+          "text": "Mouture, chauffe douce, mousse et service.",
+          "correct": "b"
+        },
+        {
+          "id": "partage",
+          "name": "La fiche de rencontre",
+          "text": "Recevoir, échanger et apprendre auprès d’autres personnes.",
+          "correct": "c"
+        }
+      ],
+      "hint": "Une carte décrit ce qui est visible, une autre un savoir-faire, la dernière la relation entre les personnes."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Installer le carnet et le plateau",
+        "description": "Préparer une petite table d’accueil virtuelle avec Deniz. Aucun geste de cuisson n’est demandé.",
+        "reply": "Deniz : Merci ! On va pouvoir montrer les cartes sans que toute la table soit couverte de papiers.",
+        "place": 0,
+        "preparationTitle": "L’entrée du carnet",
+        "preparationPrompt": "Quelle carte poses-tu sur le dessus ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "La photographie de la tasse",
+            "reply": "Deniz : Très bien. Les couleurs attireront l’œil ; la fiche expliquera ce que la photo ne montre pas.",
+            "endingText": "Ece s’arrête sur la tasse décorée. Tu lui montres les deux fiches, puis vous faites de la place pour vous installer.",
+            "endingReply": "Ece : J’aime bien ce petit carnet. Et maintenant, racontez-moi votre journée !"
+          },
+          {
+            "id": "deux",
+            "label": "La carte de l’accueil",
+            "reply": "Deniz : Elle résume bien ce que j’espérais aujourd’hui : nous retrouver et prendre le temps de parler.",
+            "endingText": "La première carte ouvre la conversation. Ece raconte son arrivée, Deniz ajoute une anecdote et le carnet circule tranquillement entre vous.",
+            "endingReply": "Deniz : Tout est prêt, et on a encore du temps devant nous."
+          }
+        ],
+        "endingTitle": "La table est accueillante"
+      },
+      {
+        "id": "rencontre",
+        "title": "Rejoindre Ece au salon",
+        "description": "Emporter les cartes et choisir ensemble le début de votre conversation.",
+        "reply": "Ece : Venez vous asseoir. Je vous ai gardé deux places près de la table.",
+        "place": 2,
+        "preparationTitle": "Les premiers mots",
+        "preparationPrompt": "Comment veux-tu lancer la rencontre ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Demander des nouvelles d’Ece",
+            "reply": "Ece : Merci ! J’avais justement envie de vous raconter ce qui m’est arrivé en venant.",
+            "endingText": "Ece commence son anecdote. Deniz lui pose une question, puis chacun raconte un petit événement de la journée. Les cartes attendront quelques minutes.",
+            "endingReply": "Ece : Ça fait du bien d’avoir le temps de finir une histoire sans regarder l’heure."
+          },
+          {
+            "id": "deux",
+            "label": "Demander le souvenir d’apprentissage de Deniz",
+            "reply": "Deniz : Je peux vous raconter mon premier essai. Il n’avait pas beaucoup de mousse, mais j’en étais très fier.",
+            "endingText": "Deniz raconte son premier essai. Ece lui demande qui le goûtait et la conversation se poursuit autour du carnet.",
+            "endingReply": "Deniz : Un souvenir en a appelé un autre. Je crois qu’on va rester un moment."
+          }
+        ],
+        "endingTitle": "Une conversation commence"
+      }
+    ],
+    "practice": {
+      "title": "Compose un accueil virtuel",
+      "intro": "Prépare un accueil virtuel pour Ece : choisis les tasses, leur place sur le plateau et une invitation à s’asseoir.",
+      "steps": [
+        {
+          "title": "Choisir les tasses",
+          "text": "Tu prépares virtuellement de petites tasses et leurs verres d’eau. Quel style imagines-tu ?",
+          "options": [
+            {
+              "label": "Des tasses sobres",
+              "reply": "Le plateau reste simple. Les petites tasses et les verres d’eau ont chacun leur place."
+            },
+            {
+              "label": "Des tasses colorées",
+              "reply": "Tu imagines des couleurs différentes pour reconnaître les tasses. Les verres d’eau les accompagnent."
+            }
+          ]
+        },
+        {
+          "title": "Faire de la place",
+          "text": "Comment disposes-tu les objets sur ton plateau imaginaire ? Les deux choix conviennent dans ce jeu.",
+          "options": [
+            {
+              "label": "Une tasse près de chaque verre",
+              "reply": "Tu formes de petits ensembles faciles à repérer. Deniz peut imaginer où poser le plateau."
+            },
+            {
+              "label": "Les tasses au centre, les verres à côté",
+              "reply": "Tu gardes les verres à portée des tasses. Ton plateau virtuel est prêt."
+            }
+          ]
+        },
+        {
+          "title": "Inviter à s’installer",
+          "text": "Ece vient d’arriver. Quelle phrase veux-tu lui proposer ?",
+          "options": [
+            {
+              "label": "Installe-toi, comment s’est passée ta journée ?",
+              "reply": "Ece : Merci ! J’ai plein de choses à raconter. Je m’assieds avec vous."
+            },
+            {
+              "label": "Bienvenue ! Tu nous racontes tes nouvelles ?",
+              "reply": "Ece : Volontiers. Et après, vous me montrez votre carnet ?"
+            }
+          ]
+        }
+      ],
+      "finishText": "Ton plateau imaginaire et ton invitation sont prêts. Deniz peut maintenant accueillir Ece.",
+      "sourceUrl": "https://ich.unesco.org/fr/RL/la-culture-et-la-tradition-du-cafe-turc-00645",
+      "sourceLabel": "UNESCO · La culture et la tradition du café turc"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/RL/la-culture-et-la-tradition-du-cafe-turc-00645",
+        "label": "UNESCO · La culture et la tradition du café turc",
+        "supports": "Mouture fine, chauffe douce et mousse ; petites tasses et eau ; hospitalité, conversation et transmission familiale. Visite et plateau virtuel : créations du jeu."
+      },
+      {
+        "url": "https://www.unesco.org/archives/multimedia/document-3537",
+        "label": "UNESCO · Notice documentaire sur le café turc",
+        "supports": "Confirme les dimensions sociales de la tradition et l’apprentissage familial par observation et participation."
+      }
+    ]
+  },
+  "maroc": {
+    "title": "Avant les premiers mots",
+    "mission": "Aider Youssef et Salma à préparer trois cartes pour un petit rendez-vous d’écoute.",
+    "intro": "Youssef a apporté une vue de Jemaa el-Fna et deux notes documentaires. Salma, une conteuse imaginée pour le jeu, vous attend. Retrouve les titres, puis prépare la rencontre. Les personnages adultes et les espaces de cette rencontre sont fictifs.",
+    "places": [
+      {
+        "name": "Le coin de rendez-vous",
+        "description": "Un point d’accueil fictif près de la place, où Youssef vérifie ses cartes avant la rencontre.",
+        "shortName": "Rendez-vous"
+      },
+      {
+        "name": "La table des carnets",
+        "description": "Une petite table inventée pour comparer la photo et les deux notes sur l’art de raconter.",
+        "shortName": "Carnets"
+      },
+      {
+        "name": "Le cercle d’écoute",
+        "description": "Salma a prévu une rencontre fictive avec quelques personnes. Le groupe laisse les passages libres.",
+        "shortName": "Écoute"
+      }
+    ],
+    "characters": [
+      {
+        "name": "Youssef",
+        "role": "vient écouter un récit",
+        "greeting": "Salut ! Salma nous rejoint dans un moment. J’ai préparé trois cartes pour les nouveaux venus, mais leurs titres se sont détachés.",
+        "questions": [
+          {
+            "question": "Qu’est-ce que tu préfères quand tu écoutes ?",
+            "answer": "J’aime le moment où j’oublie ce qui se passe autour. Je regarde aussi la personne qui raconte. Parfois, une pause me fait attendre la suite plus que beaucoup de mots."
+          },
+          {
+            "question": "On se met où pour la rencontre ?",
+            "answer": "On choisira une place où l’on entend bien en laissant le passage libre. Pour l’instant, j’aimerais surtout finir ces trois cartes."
+          }
+        ]
+      },
+      {
+        "name": "Salma",
+        "role": "conteuse",
+        "greeting": "Bonjour ! Vous avez trouvé les cartes ? Je peux attendre encore un peu. Ce sera plus agréable de commencer quand chacun sera installé.",
+        "questions": [
+          {
+            "question": "Tu racontes toujours de la même manière ?",
+            "answer": "J’ajuste mon récit à ceux qui sont là. Je peux ralentir, préciser un détail ou laisser davantage de place au silence."
+          },
+          {
+            "question": "On peut inventer une toute petite histoire ?",
+            "answer": "Oui ! On peut en créer une en français, juste pour le plaisir. Ce sera notre invention, pas un conte traditionnel de Jemaa el-Fna."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "L’ensemble de la place",
+        "text": "La vue panoramique montre des personnes, des installations éclairées et les bâtiments qui bordent la place."
+      },
+      {
+        "label": "Le début de soirée",
+        "text": "Le ciel est encore clair et des lumières sont allumées. La légende situe cette vue au début de la soirée, en 2013."
+      },
+      {
+        "label": "Ce qu’on ne peut pas entendre",
+        "text": "Cette vue ne permet pas d’identifier un récit ni d’entendre les personnes. Youssef et Salma n’y sont pas représentés."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Une place dans son ensemble",
+        "text": "La photographie montre Jemaa el-Fna à Marrakech au début de la soirée. C’est une vue d’ensemble, pas le portrait d’un conteur ni la trace sonore d’un récit.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "La parole et le geste",
+        "text": "L’UNESCO décrit un art oral qui associe parole et gestes. Les récits peuvent être adaptés au public et au monde contemporain à partir de trames anciennes.",
+        "source": "https://ich.unesco.org/fr/RL/espace-culturel-de-la-place-jemaa-el-fna-00014"
+      },
+      {
+        "id": "partage",
+        "title": "Un lieu de rencontre",
+        "text": "Jemaa el-Fna réunit des activités quotidiennes et des expressions culturelles, dont les contes, la poésie et la musique. Les habitants et les personnes de passage s’y rencontrent.",
+        "source": "https://ich.unesco.org/fr/RL/espace-culturel-de-la-place-jemaa-el-fna-00014"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Replace les titres : quelle carte présente le lieu, laquelle l’art de raconter et laquelle les échanges entre personnes ?",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Le lieu photographié"
+        },
+        {
+          "id": "b",
+          "text": "La manière de raconter"
+        },
+        {
+          "id": "c",
+          "text": "La rencontre sur la place"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La vue panoramique",
+          "text": "Une photographie générale et sa légende de lieu et de date.",
+          "correct": "a"
+        },
+        {
+          "id": "geste",
+          "name": "La fiche du récit",
+          "text": "Les mots, les gestes et l’adaptation d’une histoire à son public.",
+          "correct": "b"
+        },
+        {
+          "id": "partage",
+          "name": "La fiche des échanges",
+          "text": "Différentes activités et des personnes qui se croisent, s’arrêtent ou écoutent.",
+          "correct": "c"
+        }
+      ],
+      "hint": "La première carte situe une image ; la deuxième décrit un art ; la troisième rappelle qu’il existe grâce à des rencontres."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Préparer les cartes d’accueil",
+        "description": "Installer avec Youssef les cartes qui permettront aux nouveaux venus de se repérer.",
+        "reply": "Youssef : Merci. Je pourrai les montrer en quelques mots, puis laisser les gens s’installer.",
+        "place": 0,
+        "preparationTitle": "Une entrée dans la rencontre",
+        "preparationPrompt": "Par quoi souhaites-tu commencer les cartes ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Situer la place avec la photo",
+            "reply": "Youssef : D’accord. La vue donne un repère, et les deux notes invitent ensuite à s’intéresser aux personnes.",
+            "endingText": "Youssef présente la photographie. Tu montres les deux notes, puis vous accompagnez les nouveaux venus vers les places libres.",
+            "endingReply": "Youssef : On est prêts. Je vais enfin pouvoir écouter moi aussi."
+          },
+          {
+            "id": "deux",
+            "label": "Commencer par « Qu’aimez-vous écouter ? »",
+            "reply": "Youssef : J’aime bien. Chacun peut répondre s’il en a envie ; personne n’est obligé de parler.",
+            "endingText": "Les premières réponses font sourire le groupe. Youssef montre ensuite les cartes et propose d’aller s’installer.",
+            "endingReply": "Youssef : On a déjà quelque chose à se raconter après le récit."
+          }
+        ],
+        "endingTitle": "Le groupe peut s’installer"
+      },
+      {
+        "id": "rencontre",
+        "title": "Rejoindre Salma",
+        "description": "Emporter les cartes dans le cercle d’écoute et choisir une courte ouverture avec elle.",
+        "reply": "Salma : Venez, il reste de la place ici. Vous voulez me présenter, ou préférez-vous que je commence tout de suite ?",
+        "place": 2,
+        "preparationTitle": "Avant le récit",
+        "preparationPrompt": "Comment veux-tu ouvrir cette rencontre ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Demander à Salma ce qu’elle aime raconter",
+            "reply": "Salma : Bonne question. Je peux commencer par ce qui m’a donné envie de raconter aujourd’hui.",
+            "endingText": "Salma partage un souvenir. Le groupe l’écoute, puis Youssef lui fait signe qu’il est prêt pour la suite.",
+            "endingReply": "Salma : Merci. Maintenant que nous avons fait connaissance, je peux commencer."
+          },
+          {
+            "id": "deux",
+            "label": "Laisser le récit commencer",
+            "reply": "Salma : D’accord. Gardez vos questions pour après si vous en avez envie.",
+            "endingText": "Vous prenez place. Salma commence : « Au matin, une lettre attendait sur le seuil… » Youssef se tourne vers elle pour ne pas manquer la suite.",
+            "endingReply": "Youssef : On en reparlera après. J’ai envie de savoir à qui cette lettre était destinée."
+          }
+        ],
+        "endingTitle": "Les premiers mots"
+      }
+    ],
+    "practice": {
+      "title": "Invente un micro-récit",
+      "intro": "Invente avec Salma un micro-récit en français. Choisis un début, un détail inattendu et une fin pour cette histoire créée dans le jeu.",
+      "steps": [
+        {
+          "title": "Un personnage et un départ",
+          "text": "Quel début choisis-tu pour ta très courte histoire ?",
+          "options": [
+            {
+              "label": "Une voyageuse trouve une boîte oubliée",
+              "reply": "« En descendant du car, une voyageuse remarqua une petite boîte sous le banc. » Voilà ton départ."
+            },
+            {
+              "label": "Un libraire reçoit un paquet sans adresse",
+              "reply": "« Au matin, un libraire trouva devant sa porte un paquet sans adresse. » Ton histoire commence."
+            }
+          ]
+        },
+        {
+          "title": "Un détail inattendu",
+          "text": "L’objet s’ouvre dans ton imagination. Que contient-il ?",
+          "options": [
+            {
+              "label": "Une clé et un dessin de porte",
+              "reply": "« Une clé reposait sur le dessin d’une porte. Pourtant, personne ne reconnaissait cette porte. »"
+            },
+            {
+              "label": "Une lettre pour demain",
+              "reply": "« Il y avait une lettre datée du lendemain. Elle commençait ainsi : “Merci d’avoir attendu.” »"
+            }
+          ]
+        },
+        {
+          "title": "Une fin à choisir",
+          "text": "Tu peux fermer l’histoire ou lui laisser une ouverture. Quelle dernière phrase préfères-tu ?",
+          "options": [
+            {
+              "label": "Une rencontre apporte la réponse",
+              "reply": "« Une personne arriva, reconnut l’objet et raconta son histoire. Il restait juste assez de temps pour l’écouter. »"
+            },
+            {
+              "label": "Le mystère attendra demain",
+              "reply": "« L’objet fut posé près de la fenêtre. Demain, peut-être, quelqu’un viendrait expliquer ce qu’il signifiait. »"
+            }
+          ]
+        }
+      ],
+      "finishText": "Ton histoire a un début, un détail et une fin. Tu peux la raconter en trois phrases.",
+      "sourceUrl": "https://ich.unesco.org/fr/RL/espace-culturel-de-la-place-jemaa-el-fna-00014",
+      "sourceLabel": "UNESCO · le contexte culturel, distinct de notre récit inventé"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/RL/espace-culturel-de-la-place-jemaa-el-fna-00014",
+        "label": "UNESCO · L’espace culturel de la place Jemaa el-Fna",
+        "supports": "Diversité des activités et des expressions culturelles ; rencontre des publics ; parole, gestes et adaptation des récits. Salma, Youssef et tous les extraits narratifs sont inventés."
+      },
+      {
+        "url": "https://ich.unesco.org/en/individual-case-study-00988?id=00014",
+        "label": "UNESCO · Étude de cas sur Jemaa el-Fna",
+        "supports": "La place comme espace partagé de rencontres, de pratiques culturelles et d’activités commerciales quotidiennes."
+      }
+    ]
+  },
+  "kenya": {
+    "title": "Une place pour écouter",
+    "mission": "Aider Amani et Neema à préparer trois cartes de découverte avant une fête imaginée.",
+    "intro": "Amani accueille les invités d’une fête imaginée. Neema lui a confié une photo et deux notes sur l’isukuti des communautés Isukha et Idakho. Retrouve les titres, puis prépare un accueil ou une rencontre. Ces deux personnages adultes sont fictifs.",
+    "places": [
+      {
+        "name": "La cour d’accueil",
+        "description": "Un lieu fictif de fête, où Amani cherche une petite place pour les cartes d’information.",
+        "shortName": "Accueil"
+      },
+      {
+        "name": "La table des documents",
+        "description": "Une photographie prise lors d’un événement sportif et deux fiches permettent de comparer différents repères.",
+        "shortName": "Documents"
+      },
+      {
+        "name": "Le bord de l’espace musical",
+        "description": "Un lieu fictif un peu à l’écart des préparatifs, où Neema peut parler sans gêner le groupe.",
+        "shortName": "Musique"
+      }
+    ],
+    "characters": [
+      {
+        "name": "Amani",
+        "role": "participe aux préparatifs",
+        "greeting": "Salut ! Tu arrives au bon moment. J’ai gardé une place pour toi, mais je voudrais d’abord installer ces trois cartes. Tu regardes avec moi ?",
+        "questions": [
+          {
+            "question": "La photo vient de votre fête ?",
+            "answer": "Non, elle vient d’un événement sportif. Sa légende le précise. Je l’ai choisie pour montrer un autre contexte : je ne voudrais pas qu’on la confonde avec notre fête."
+          },
+          {
+            "question": "Où pourrons-nous écouter ?",
+            "answer": "Près d’ici, sans nous mettre au milieu des préparatifs. On peut aussi parler avec Neema avant que la rencontre commence."
+          }
+        ]
+      },
+      {
+        "name": "Neema",
+        "role": "musicienne",
+        "greeting": "Bonjour ! Amani m’a dit que vous l’aidiez avec les cartes. Je peux répondre à vos questions avant de retourner auprès du groupe.",
+        "questions": [
+          {
+            "question": "Quels instruments donnent son nom à l’isukuti ?",
+            "answer": "Les tambours. La description de l’UNESCO indique trois tailles : un grand, un moyen et un petit. Ils accompagnent le chant et la danse."
+          },
+          {
+            "question": "Comment commencer quand on ne connaît pas ?",
+            "answer": "Tu peux choisir un seul point d’attention, puis un autre. Pas besoin de tout repérer tout de suite, ni d’essayer de reproduire ce que tu entends."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "Les instruments visibles",
+        "text": "Plusieurs personnes tiennent des tambours de tailles différentes. Certaines ont la bouche ouverte ; l’image ne permet pas d’entendre ce qu’elles font."
+      },
+      {
+        "label": "Le contexte",
+        "text": "Des drapeaux et des bannières entourent la scène. La légende précise un événement contemporain, The Breastfeeding Run."
+      },
+      {
+        "label": "La portée de l’image",
+        "text": "Cette représentation de 2025 ne résume pas toutes les pratiques isukuti. Amani et Neema ne sont pas les personnes photographiées."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Une représentation située",
+        "text": "La photographie documente des danseurs isukuti lors de The Breastfeeding Run. Son contexte sportif est distinct de la fête fictive de cette aventure.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Tambours, chants et danse",
+        "text": "L’isukuti associe danse, tambours et chants. Son nom vient de tambours traditionnellement réunis par trois, de tailles différentes.",
+        "source": "https://ich.unesco.org/fr/USL/la-danse-isukuti-des-communautes-isukha-et-idakho-de-l-ouest-du-kenya-00981"
+      },
+      {
+        "id": "partage",
+        "title": "Des communautés et des occasions",
+        "text": "La tradition concerne les communautés Isukha et Idakho de l’ouest du Kenya. Elle accompagne de nombreuses occasions de la vie et participe à la transmission culturelle entre familles et communautés.",
+        "source": "https://ich.unesco.org/fr/USL/la-danse-isukuti-des-communautes-isukha-et-idakho-de-l-ouest-du-kenya-00981"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Associe les cartes à leurs titres : un événement photographié, les composantes de la pratique et son rôle dans la vie collective.",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Le contexte de cette photo"
+        },
+        {
+          "id": "b",
+          "text": "Musique et mouvement"
+        },
+        {
+          "id": "c",
+          "text": "Vie collective et transmission"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie",
+          "text": "Une représentation de 2025 lors d’un événement sportif nommé dans sa légende.",
+          "correct": "a"
+        },
+        {
+          "id": "geste",
+          "name": "La fiche des composantes",
+          "text": "Des tambours de tailles différentes, le chant et la danse.",
+          "correct": "b"
+        },
+        {
+          "id": "partage",
+          "name": "La fiche des communautés",
+          "text": "Les communautés Isukha et Idakho et les occasions de se rassembler.",
+          "correct": "c"
+        }
+      ],
+      "hint": "Garde le contexte précis de la photo à part. Les deux autres cartes concernent la pratique et les personnes qui la font vivre."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Installer les cartes d’accueil",
+        "description": "Préparer avec Amani un petit panneau de repères pour les invités.",
+        "reply": "Amani : Merci ! On va le placer ici, où chacun peut s’arrêter sans encombrer le passage.",
+        "place": 0,
+        "preparationTitle": "Le premier repère",
+        "preparationPrompt": "Par quelle carte souhaites-tu ouvrir le panneau ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Commencer par la photo et sa légende",
+            "reply": "Amani : Bonne idée. Je préciserai tout de suite qu’elle vient d’un autre événement.",
+            "endingText": "Amani précise d’où vient l’image, puis tu montres les deux notes. Les invités regardent les cartes et posent leurs premières questions.",
+            "endingReply": "Amani : Voilà, les cartes sont lisibles. On peut rejoindre les autres."
+          },
+          {
+            "id": "deux",
+            "label": "Commencer par les communautés",
+            "reply": "Amani : D’accord. Les personnes d’abord ; la photo viendra ensuite, avec sa légende complète.",
+            "endingText": "Le panneau commence par situer les communautés concernées. Les invités parcourent ensuite les trois cartes et Amani leur propose une place.",
+            "endingReply": "Amani : Merci pour ton aide. J’ai gardé une chaise pour toi aussi."
+          }
+        ],
+        "endingTitle": "Un accueil bien préparé"
+      },
+      {
+        "id": "rencontre",
+        "title": "Prendre un moment avec Neema",
+        "description": "Rejoindre Neema et choisir une première question avant que les préparatifs reprennent.",
+        "reply": "Neema : Approchez. Il me reste un moment et je suis contente de voir vos cartes terminées.",
+        "place": 2,
+        "preparationTitle": "Une question pour commencer",
+        "preparationPrompt": "Quel sujet veux-tu proposer à Neema ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Lui demander son souvenir d’apprentissage",
+            "reply": "Neema : Je peux vous raconter ma première répétition. J’avais surtout peur d’oublier tout ce que je venais d’apprendre !",
+            "endingText": "Neema raconte ce souvenir. Amani lui demande qui l’accompagnait. La discussion continue avant qu’elle rejoigne le groupe.",
+            "endingReply": "Neema : Merci d’avoir pris ce temps. Vous pouvez rester près d’Amani si vous le souhaitez."
+          },
+          {
+            "id": "deux",
+            "label": "Demander un point d’attention pour écouter",
+            "reply": "Neema : Choisis ce qui t’attire d’abord : une voix, un instrument ou un déplacement. Tu pourras changer d’attention ensuite.",
+            "endingText": "Tu choisis ton premier repère. Neema rejoint le groupe ; Amani te montre une place libre. Tu peux rester pour observer, sans participer physiquement.",
+            "endingReply": "Amani : Installe-toi comme tu veux. Nous pourrons en parler après."
+          }
+        ],
+        "endingTitle": "Écouter avec un premier repère"
+      }
+    ],
+    "practice": {
+      "title": "Trois angles pour découvrir l’isukuti",
+      "intro": "Neema te propose trois angles d’attention : percussions, voix et mouvements. Tu peux ouvrir le documentaire officiel, puis choisir ce que tu aimerais observer.",
+      "steps": [
+        {
+          "title": "Les percussions",
+          "text": "Quel premier repère veux-tu suivre, si tu regardes le documentaire ?",
+          "options": [
+            {
+              "label": "Regarder les instruments",
+              "reply": "Cherche les tambours dans une représentation. Le cadrage ne montre pas forcément tous les instruments ensemble."
+            },
+            {
+              "label": "Écouter les sons des percussions",
+              "reply": "Choisis un passage où les percussions sont audibles et prête-leur attention. Aucun son n’est à imiter."
+            }
+          ]
+        },
+        {
+          "title": "La voix",
+          "text": "Le film peut contenir des commentaires parlés. Comment veux-tu repérer les passages chantés ?",
+          "options": [
+            {
+              "label": "Chercher une voix qui se détache",
+              "reply": "Cherche une voix plus présente dans un passage chanté. Si tu entends un commentaire, tu peux attendre un autre moment."
+            },
+            {
+              "label": "Comparer voix et percussions",
+              "reply": "Prête attention à la voix, puis aux instruments. Rien à compter ni à reproduire."
+            }
+          ]
+        },
+        {
+          "title": "Le mouvement",
+          "text": "Quel angle choisis-tu pour observer les passages dansés ?",
+          "options": [
+            {
+              "label": "Regarder une personne un instant",
+              "reply": "Suis une personne du regard, sans copier ses gestes. Reviens à l’ensemble quand le cadrage change."
+            },
+            {
+              "label": "Regarder les déplacements du groupe",
+              "reply": "Regarde comment le groupe occupe l’espace. Ces scènes ne sont pas un mode d’emploi de la danse."
+            }
+          ]
+        }
+      ],
+      "finishText": "Tu as choisi tes trois angles d’attention. Tu peux revenir au documentaire quand tu le souhaites.",
+      "sourceUrl": "https://ich.unesco.org/fr/video/22194",
+      "sourceLabel": "UNESCO · documentaire officiel, Department of Culture, 2013"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/USL/la-danse-isukuti-des-communautes-isukha-et-idakho-de-l-ouest-du-kenya-00981",
+        "label": "UNESCO · La danse Isukuti des communautés Isukha et Idakho",
+        "supports": "Communautés de l’ouest du Kenya ; chant, danse et tambours de trois tailles ; occasions collectives et transmission. Personnages, fête et souvenirs sont inventés."
+      },
+      {
+        "url": "https://www.unesco.org/archives/multimedia/document-3681",
+        "label": "UNESCO · Notice du documentaire Isukuti Dance",
+        "supports": "Confirme le documentaire du Department of Culture (2013) et le contexte culturel. La mini-activité propose une observation, pas une reproduction."
+      },
+      {
+        "url": "https://ich.unesco.org/fr/video/22194",
+        "label": "UNESCO · Regarder le documentaire officiel",
+        "supports": "Accès facultatif au film référencé dans l’escale. Aucun visionnage ni geste physique requis pour finir."
+      }
+    ]
+  }
+}
