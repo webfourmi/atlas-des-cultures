@@ -1,4 +1,4 @@
-# Sources des douze nouvelles aventures — version 5.0.0
+# Sources des douze nouvelles aventures — version 5.1.0
 
 Contenus vérifiés le 19 octobre 2026 sur les notices primaires UNESCO et les photographies du projet. Les fiches UNESCO directes ont parfois présenté une vérification JavaScript ; leurs descriptions complètes étaient accessibles dans les résultats officiels indexés. Les scènes, personnages, répliques, créations libres et dénouements sont fictifs. Les photographies, cartes et enregistrements conservent leur provenance.
 
@@ -124,7 +124,7 @@ Aider Dimas et Sari à présenter le batik : retrouver les trois légendes, puis
 - [UNESCO · Le batik indonésien](https://ich.unesco.org/fr/RL/le-batik-indonsien-00170) : Cire résistant à la teinture ; applications répétées ; diversité des usages et des significations ; transmission des savoir-faire.
 - [Photographie · Ian Alexander, CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Batik_craftswomen_in_Java_handmarking_resist_on_batik_tulis_cloth_with_tjantings.jpg) : Identification d’artisanes appliquant la cire à Yogyakarta ; auteur et droits. Dimas, Sari et l’atelier de l’aventure sont fictifs.
 
-Découverte facultative : « Imagine une réserve de couleur ». [Repère ou média officiel](https://ich.unesco.org/fr/RL/le-batik-indonsien-00170).
+Découverte facultative : « Ton atelier de motifs ». Le principe de la réserve de couleur a été revérifié le 21 octobre 2026 dans la description officielle UNESCO indexée : la cire protège les zones tracées pendant la teinture. L’exercice à l’écran conserve des tracés clairs sur une couleur choisie ; les formes libres et la répétition du dessin ne reproduisent pas un motif traditionnel. Aucune signification culturelle n’est attribuée aux quatre couleurs du jeu. [Repère officiel](https://ich.unesco.org/fr/RL/le-batik-indonsien-00170).
 
 ## Maintenir les contenus
 
@@ -132,4 +132,4 @@ Les fichiers `asia.json`, `africa-oceania.json` et `americas-georgia.json` sont 
 
 ## Vérification
 
-Les tests `node tests/notebook.cjs` et `node tests/world-adventures.cjs` vérifient les parcours, les écrans successifs, les images, les retours, les interactions périmées, les anciennes sauvegardes et la restauration JSON. Le mode de vérification sans navigateur ne permet pas de certifier le rendu sur un appareil réel.
+Les tests `node tests/notebook.cjs`, `node tests/world-adventures.cjs` et `node tests/batik-workshop.cjs` vérifient les parcours, les écrans successifs, les images, les retours, les interactions périmées, les anciennes sauvegardes, les créations personnelles et la restauration JSON. Le contrôle visuel de l’atelier v5.1 est décrit dans [le compte rendu](../../docs/ATELIER-INDONESIE-51.md) ; aucun test sur un téléphone physique n’a été réalisé.

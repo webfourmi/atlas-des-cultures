@@ -914,53 +914,53 @@ const WORLD_ADVENTURES = {
       }
     ],
     "practice": {
-      "title": "Imagine une réserve de couleur",
-      "intro": "Dimas te propose un dessin virtuel : choisis des zones à garder blanches, une couleur autour et une légende pour ton motif personnel.",
+      "title": "Ton atelier de motifs",
+      "intro": "Trace un motif personnel, essaie ses couleurs et compose une étoffe à conserver dans ton carnet.",
       "steps": [
         {
-          "title": "Les zones à garder claires",
-          "text": "Sur une feuille imaginaire, quelles formes veux-tu laisser blanches ?",
+          "title": "Trace ton motif",
+          "text": "Dessine au doigt ou à la souris les zones qui resteront claires.",
           "options": [
             {
-              "label": "Quelques lignes",
-              "reply": "Dimas : Imagine des chemins blancs. Ils resteront visibles quand tu ajouteras la couleur autour."
+              "label": "Tracer",
+              "reply": "Compose des lignes libres, puis ajoute des détails à ton rythme."
             },
             {
-              "label": "Quelques points",
-              "reply": "Dimas : Imagine de petites îles blanches. La couleur occupera l’espace entre elles."
+              "label": "Points",
+              "reply": "Pose des points pour créer tes propres intervalles."
             }
           ]
         },
         {
-          "title": "La couleur autour",
-          "text": "Quelle couleur imaginaire veux-tu placer autour des zones claires ?",
+          "title": "Fais apparaître la couleur",
+          "text": "Les tracés restent clairs quand tu choisis une couleur de fond.",
           "options": [
             {
-              "label": "Bleu",
-              "reply": "Sari : Ton bleu entoure les espaces blancs. C’est un choix de dessin personnel, sans signification traditionnelle attribuée."
+              "label": "Indigo",
+              "reply": "Le bleu fait ressortir les zones que tu as réservées."
             },
             {
-              "label": "Ocre",
-              "reply": "Sari : Ton ocre fait ressortir les zones laissées claires. Nous le gardons comme une invention de cet exercice."
+              "label": "Terre cuite",
+              "reply": "Le fond chaud fait ressortir tes tracés clairs."
             }
           ]
         },
         {
-          "title": "Une légende pour ton essai",
-          "text": "Comment veux-tu décrire ton dessin ?",
+          "title": "Compose ton étoffe",
+          "text": "Choisis la présentation de ton motif personnel, puis conserve ta création.",
           "options": [
             {
-              "label": "Des zones restent claires",
-              "reply": "Dimas : Ta légende montre l’idée que tu as explorée. On sait où regarder."
+              "label": "Motif seul",
+              "reply": "Ton dessin occupe toute la pièce de tissu virtuelle."
             },
             {
-              "label": "Du blanc au milieu de la couleur",
-              "reply": "Dimas : Tu décris le contraste obtenu. La légende parle de ton dessin, sans inventer son origine."
+              "label": "Étoffe répétée",
+              "reply": "Le même dessin se répète pour former une étoffe."
             }
           ]
         }
       ],
-      "finishText": "Ton motif personnel a pris forme dans ton imagination. Il explore l’idée de réserve, sans reproduire un motif traditionnel.",
+      "finishText": "Ta création peut rejoindre ton carnet. Tu peux la reprendre et en télécharger le dessin.",
       "sourceUrl": "https://ich.unesco.org/fr/RL/le-batik-indonsien-00170",
       "sourceLabel": "Repère technique et culturel : le batik sur le site de l’UNESCO"
     },

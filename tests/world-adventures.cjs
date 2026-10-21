@@ -8,7 +8,7 @@ const qaDir=process.env.ATLAS_QA_DIR;
 if(qaDir)fs.mkdirSync(qaDir,{recursive:true});
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const inline = html.match(/<script>([\s\S]*?)<\/script>/)[1];
-for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','world-adventure.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
+for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
 
 const elements = new Map(), events = {}, downloads = [], alerts = [];
 function element() {
@@ -29,7 +29,7 @@ const window = {navigator,matchMedia:()=>({matches:false}),scrollTo(){},addEvent
 const context = vm.createContext({document,window,navigator,location:{protocol:'file:',hostname:''},
   localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},
   confirm:()=>true,alert:m=>alerts.push(m),console,Blob,URL,setTimeout:()=>0,clearTimeout(){}});
-for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','world-adventure.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
+for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
 vm.runInContext(inline,context,{filename:'index.html'});
 const run = code => vm.runInContext(code,context);
 run('downloadBlob=(data,type,name)=>captureDownload(data,type,name)');
@@ -63,9 +63,10 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
     assert.equal((markup.match(/class="india-screen"/g)||[]).length,1);
     assert.equal((markup.match(/class="india-player-controls"/g)||[]).length,1);
     assert(!markup.includes('class="journey-layout"'),'The former scrolling page is still displayed');
-    const images=[...markup.matchAll(/<img\b([^>]*)>/g)];assert.equal(images.length,1,'Exactly one image is required on '+id+' '+(pane||a.screen));
-    const attrs=images[0][1],src=attrs.match(/\bsrc="([^"]+)"/)[1],alt=attrs.match(/\balt="([^"]*)"/)[1];
-    assert(alt.length>20,'Missing useful image alternative');assert(fs.existsSync(path.join(root,src)),'Missing image '+src);
+    const images=[...markup.matchAll(/<img\b([^>]*)>/g)],canvases=[...markup.matchAll(/<svg\b[^>]*class="batik-canvas/g)];
+    assert.equal(images.length+canvases.length,1,'Exactly one visual is required on '+id+' '+(pane||a.screen));
+    if(images.length){const attrs=images[0][1],src=attrs.match(/\bsrc="([^"]+)"/)[1],alt=attrs.match(/\balt="([^"]*)"/)[1];assert(alt.length>20,'Missing useful image alternative');assert(fs.existsSync(path.join(root,src)),'Missing image '+src);}
+    else assert.equal(id,'indonesie','A creation appeared in another country');
     if(save)snapshot('world-'+id+'-'+(pane||a.screen)+(a.screen==='practice'&&!pane?'-'+a.practiceStep:a.screen==='puzzle'&&!pane?'-'+a.piece:a.screen==='ending'&&!pane?'-'+a.ending:''));
   };
   const initialXP=run('xp()');
@@ -113,15 +114,14 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
       assert.equal(act('practice','done'),false,'Activity finished before its last step');
       if(option.id==='un'){
         for(let step=0;step<3;step++){
-          visible('world-practice-choice','0');const replyA=elements.get('app').innerHTML;
-          visible('world-practice-choice','1');assert.notEqual(elements.get('app').innerHTML,replyA);
-          assert.equal(adventure().practiceChoices[step],1);check();
+          if(id==='indonesie'){if(step===0)run("batikAction('seed','loop')");if(step===1){visible('batik-palette','indigo');visible('batik-palette','terre');}if(step===2){visible('batik-layout','repeat');visible('batik-save');}assert(adventure().workshop.draft.strokes.length>0);}
+          else{visible('world-practice-choice','0');const replyA=elements.get('app').innerHTML;visible('world-practice-choice','1');assert.notEqual(elements.get('app').innerHTML,replyA);assert.equal(adventure().practiceChoices[step],1);}check();
           const beforeReload=adventure();run('state=load();openJourney(activeJourney)');assert.deepEqual(adventure(),beforeReload);check();
           if(step===1){visible('world-practice','previous');assert.equal(adventure().practiceStep,0);primary();assert.equal(adventure().practiceStep,1);}
           primary();
           if(step<2)assert.equal(act('practice','next',{step}),false,'Stale activity step was accepted');
         }
-        assert.equal(adventure().practiceStatus,'done');assert.deepEqual(adventure().practiceChoices,[1,1,1]);
+        assert.equal(adventure().practiceStatus,'done');if(id==='indonesie')assert(adventure().workshop.cards.length>0);else assert.deepEqual(adventure().practiceChoices,[1,1,1]);
       }else{
         visible('world-practice','skip');assert.equal(adventure().practiceStatus,'skipped');
       }
@@ -184,7 +184,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   }
   const worker=fs.readFileSync(path.join(root,'sw.js'),'utf8');
   for(const id of ids)for(const kind of ['rencontre','atelier'])assert(worker.includes("'./travel/adventures/art/"+id+'-'+kind+".webp'"),'New illustration missing from offline cache');
-  for(const file of ['world-adventure-data.js','world-adventure.js','world-adventure.css','travel/adventures/SOURCES.md'])assert(worker.includes("'./"+file+"'"));
+  for(const file of ['world-adventure-data.js','batik-workshop.js','world-adventure.js','world-adventure.css','travel/adventures/SOURCES.md'])assert(worker.includes("'./"+file+"'"));
   console.log('PASS: 12 nouvelles aventures, 288 parcours dans les six ordres d’exploration et 48 parcours par les seules commandes affichées.');
   console.log('PASS: une image par écran, 3 lieux toujours visibles, réponses et dénouements propres aux choix, activités suivies ou passées, retour, rechargement et souvenirs cumulés.');
   console.log('PASS: sauvegarde JSON et fusion locale, anciennes découvertes et aventure Inde conservées, actions périmées rejetées, médias à la demande et 24 images dans le cache hors connexion.');

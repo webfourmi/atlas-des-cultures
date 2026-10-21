@@ -8,7 +8,7 @@ const qaDir=process.env.ATLAS_QA_DIR;
 if(qaDir)fs.mkdirSync(qaDir,{recursive:true});
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const inline = html.match(/<script>([\s\S]*?)<\/script>/)[1];
-for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','world-adventure.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
+for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
 
 const elements = new Map(), events = {}, downloads = [], alerts = [];
 function element() {
@@ -29,7 +29,7 @@ const window = {navigator,matchMedia:()=>({matches:false}),scrollTo(){},addEvent
 const context = vm.createContext({document,window,navigator,location:{protocol:'file:',hostname:''},
   localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},
   confirm:()=>true,alert:m=>alerts.push(m),console,Blob,URL,setTimeout:()=>0,clearTimeout(){}});
-for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','world-adventure.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
+for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
 vm.runInContext(inline,context,{filename:'index.html'});
 const run = code => vm.runInContext(code,context);
 run('downloadBlob=(data,type,name)=>captureDownload(data,type,name)');
@@ -447,7 +447,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   assert(cached.includes('./travel/inde/ILLUSTRATIONS.md'));
   assert(fs.readFileSync(path.join(root,'travel/world.svg'),'utf8').includes('Natural Earth'));
   assert(worker.includes("atlas-cultures-v"+run('APP_VERSION')));assert.equal(JSON.parse(fs.readFileSync(path.join(root,'version.json'))).version,run('APP_VERSION'));
-  for(const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','world-adventure.js'])assert(html.indexOf(`src="./${file}"`) < html.indexOf('<script>'));
+  for(const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js'])assert(html.indexOf(`src="./${file}"`) < html.indexOf('<script>'));
   assert(html.indexOf('./notebook.css') > html.lastIndexOf('</style>'));
   console.log('PASS: 13 escales / 39 énigmes, passeport et favoris, portions de 1 à 12, fractions et étapes recalculées, mode cuisine, coches persistantes, sauvegarde/restauration, impression, quatre PDF et cache complet.');
   console.log('PASS: 13 photos créditées, 13 cartes, 60 anciens chemins conservés dans les carnets des 12 aventures et aventure indienne à deux dénouements, réponses propres à chaque choix, historique/rechargement/JSON, migration des anciennes rencontres, lecteurs à la demande et arrêt des écoutes.');

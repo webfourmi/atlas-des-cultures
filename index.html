@@ -109,11 +109,12 @@
 <link rel="stylesheet" href="./travel.css">
 <link rel="stylesheet" href="./india-adventure.css">
 <link rel="stylesheet" href="./world-adventure.css">
+<link rel="stylesheet" href="./batik-workshop.css">
 </head>
 <body>
 <header class="sitehead"><div class="wrap navwrap"><button class="brand" data-action="home" aria-label="Accueil"><span class="brandlogo">🧭</span><span><span class="brandstrong">Atlas des cultures</span><span class="brandsmall">LE MONDE A MILLE HISTOIRES</span></span></button><nav class="nav" aria-label="Navigation"><button data-action="home" id="nav-home">Explorer</button><button data-action="challenge" id="nav-challenge">Défi éclair</button><button data-action="passport" id="nav-passport">Passeport</button><button data-action="library" id="nav-library">Bibliothèque</button><button data-action="recipes" id="nav-recipes">Recettes</button><button data-action="travel" id="nav-travel">Voyages</button><button data-action="settings" id="nav-settings" aria-label="Installation et sauvegardes">⚙️ Options</button><button data-action="install" id="install-header" hidden>📲 Installer</button><span class="xpheader" id="nav-xp">✨ 0 XP</span></nav></div></header>
 <main class="main wrap" id="app" aria-live="polite"></main>
-<footer class="foot wrap"><span>🌏 Atlas des cultures, édition découverte · 13 escales · 39 questions</span><span>Sources UNESCO · Illustrations originales · PWA v3.1 · Mode hors connexion · Sauvegarde locale</span></footer>
+<footer class="foot wrap"><span>🌏 Atlas des cultures, édition découverte · 13 escales · 39 questions</span><span>Sources UNESCO · Illustrations originales · PWA v<span id="app-version-footer">5.1.0</span> · Mode hors connexion · Sauvegarde locale</span></footer>
 <div class="pwa-alert" id="pwa-update-banner" role="status" aria-live="polite">
 <div><strong>✨ Une nouvelle édition est arrivée !</strong><small id="pwa-update-label">Une mise à jour est prête.</small></div>
 <div class="pwa-alert-buttons"><button id="pwa-update-button" type="button">Mettre à jour</button><button class="dismiss" id="pwa-update-later" type="button">Plus tard</button></div></div>
@@ -126,6 +127,7 @@
 <script src="./travel.js"></script>
 <script src="./india-adventure.js"></script>
 <script src="./world-adventure-data.js"></script>
+<script src="./batik-workshop.js"></script>
 <script src="./world-adventure.js"></script>
 <script>
 'use strict';
@@ -234,7 +236,8 @@ function reset(){const ok=confirm('Effacer tous tes tampons, les réponses explo
 document.addEventListener('click',ev=>{let b=ev.target.closest('[data-action]');if(!b)return;let a=b.dataset.action;if(a==='home'||a==='passport'||a==='challenge'||a==='library'||a==='recipes'||a==='travel')show(a==='home'?'home':a);else if(a==='start')startTour(b.dataset.id);else if(a==='recipe')openRecipe(b.dataset.id);else if(a==='back-recipe')closeRecipe();else if(a==='print-recipe')printRecipe();else if(a==='read')openDetail(b.dataset.id);else if(a==='back-detail')closeDetail();else if(a==='filter'){filter=b.dataset.filter;render()}else if(a==='answer')answer(Number(b.dataset.index));else if(a==='next')next();else if(a==='redo-challenge')startChallenge();else if(a==='reset')reset()});
 
 /* Atlas des cultures v3 : installation PWA, sauvegardes et mises à jour. */
-const APP_VERSION='5.0.0';
+const APP_VERSION='5.1.0';
+document.getElementById('app-version-footer').textContent=APP_VERSION;
 const BACKUP_FORMAT='atlas-des-cultures/progression-v1';
 const ALERTS_KEY='atlas-cultures-system-update-alerts';
 const stored=k=>{try{return localStorage.getItem(k)}catch{return null}};
@@ -288,7 +291,7 @@ function cleanBackupProgress(obj){
 async function importJSON(file){
  if(!file)return;
  try{
-  if(file.size>1024*1024)throw Error('Fichier trop volumineux.');
+  if(file.size>8*1024*1024)throw Error('Fichier trop volumineux.');
   const raw=JSON.parse(await file.text());
   if(raw.format && raw.format!==BACKUP_FORMAT)throw Error('Ce format JSON ne correspond pas au passeport Atlas des cultures.');
   const newProgress=cleanBackupProgress(raw.progress??raw);

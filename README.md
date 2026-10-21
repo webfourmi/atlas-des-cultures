@@ -2,6 +2,16 @@
 
 PWA statique : 13 escales, 39 questions, passeport et progression locale.
 
+## Atelier de motifs en Indonésie (v5.1.0)
+
+Dans **Voyages → Aventures → Indonésie**, le bouton **Mon atelier de motifs** ouvre une découverte facultative en trois écrans : tracer, colorer, composer. Le dessin au doigt ou à la souris propose des traits et des points ; trois formes libres peuvent aussi être ajoutées avec des boutons. Quatre couleurs et deux présentations, motif seul ou étoffe répétée, permettent d’essayer plusieurs créations.
+
+Le carnet conserve jusqu’à 24 créations. Il les présente une par une avec agrandissement, téléchargement SVG, reprise du dessin et retrait annulable. Le dernier motif conservé apparaît aussi au dénouement. L’essai en cours et le carnet survivent au rechargement, au rejeu et à une restauration JSON ; la fusion conserve l’essai local déjà dessiné et réunit les créations. La limite d’import passe à 8 Mio pour accueillir les sauvegardes contenant des dessins détaillés.
+
+Cet atelier explore visuellement le principe de la réserve de couleur décrit par l’UNESCO. Les tracés et couleurs sont des créations personnelles, sans attribution de signification traditionnelle. La photographie documentaire et les illustrations de l’aventure restent accessibles. L’activité fonctionne hors connexion avec le reste du voyage.
+
+Code et styles : `batik-workshop.js` et `batik-workshop.css`, chargés avant le moteur commun. [Contrôle de cette évolution](docs/ATELIER-INDONESIE-51.md).
+
 ## Treize aventures par écrans (v5.0.0)
 
 Les treize escales suivent le modèle de l’Inde : trois lieux accessibles dès l’introduction, une activité à la fois et des boutons précédent/suivant toujours visibles en bas. Le contenu courant peut défiler sur un petit écran ou avec un texte agrandi ; la barre des lieux et les commandes restent en place. Le carnet, l’historique des échanges, les sources et les cartes s’ouvrent à la demande.
@@ -80,6 +90,7 @@ Prérequis de génération : Python, Node, ReportLab, Pillow et polices DejaVu d
 node tools/build-world-data.cjs --check
 node tests/notebook.cjs
 node tests/world-adventures.cjs
+node tests/batik-workshop.cjs
 ```
 
 Ce test sans dépendance vérifie la compatibilité des anciens passeports, la recherche (accents et unités de mesure), les filtres, les favoris, les retours de navigation, un quiz complet, les sauvegardes JSON et le cache. Il couvre aussi les 12 choix de portions des quatre recettes, les fractions, les quantités dans les étapes, les temps fixes, les cases à cocher, leur persistance, le changement de portions, une nouvelle préparation et la restauration d’une sauvegarde sans écraser la préparation locale. Les quatre PDF de base, inchangés depuis v3.2.0, ont été rendus et contrôlés : une page A4 avec une image et des références par recette.
@@ -90,5 +101,5 @@ Pour l’Inde, il couvre les six ordres d’exploration possibles, les deux voie
 
 La navigation par écrans est aussi testée sur quatre parcours complets depuis les boutons réellement rendus : lieux présents avant l’activité, une seule activité affichée, énigme support par support, conservation des réponses, refus des clics provenant d’un ancien support, retour au carnet, historique, sortie de la vue de jeu et migration des sauvegardes v4.2.
 
-Limite de cette livraison : le rendu CSS et l’impression du navigateur n’ont pas été contrôlés dans un navigateur. Le test antérieur `tests/recipes.cjs` reste disponible pour Playwright avec Microsoft Edge ; il couvre les largeurs 390 et 1440 px, l’impression, le quiz, les sauvegardes et le mode hors connexion. L’émulation ne remplace pas un test sur téléphone physique.
+Pour v5.1.0, le test dédié vérifie les tracés, les outils, les couleurs, la répétition, les doublons, le retrait annulable même pour la dernière création, la reprise, le rejeu, la migration v5.0, le contenu SVG exporté et l’import d’une sauvegarde de plus de 1 Mio. L’atelier et le carnet ont été inspectés dans Chrome sur ordinateur et dans un cadre de 390 × 844 px : les commandes fixes restent visibles, le contenu ne déborde pas horizontalement et l’agrandissement reste dans l’écran. Aucun test sur téléphone physique n’a été réalisé. L’automatisation du téléchargement dans le navigateur n’a pas renvoyé de fichier ; le contenu SVG et son déclenchement sont vérifiés par le test sans navigateur. L’impression des recettes n’a pas été revérifiée dans cette évolution. Le test antérieur `tests/recipes.cjs` reste disponible pour Playwright avec Microsoft Edge.
 
