@@ -8,7 +8,7 @@ const qaDir=process.env.ATLAS_QA_DIR;
 if(qaDir)fs.mkdirSync(qaDir,{recursive:true});
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const inline = html.match(/<script>([\s\S]*?)<\/script>/)[1];
-for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
+for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js','extra-stops.js','travel-tools.js','discovery-workshops.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
 
 const elements = new Map(), events = {}, downloads = [], alerts = [];
 function element() {
@@ -29,7 +29,7 @@ const window = {navigator,matchMedia:()=>({matches:false}),scrollTo(){},addEvent
 const context = vm.createContext({document,window,navigator,location:{protocol:'file:',hostname:''},
   localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},
   confirm:()=>true,alert:m=>alerts.push(m),console,Blob,URL,setTimeout:()=>0,clearTimeout(){}});
-for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
+for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js','extra-stops.js','travel-tools.js','discovery-workshops.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
 vm.runInContext(inline,context,{filename:'index.html'});
 const run = code => vm.runInContext(code,context);
 run('downloadBlob=(data,type,name)=>captureDownload(data,type,name)');

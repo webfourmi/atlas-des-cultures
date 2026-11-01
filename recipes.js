@@ -344,5 +344,137 @@ const RECIPES = {
         ]
       }
     }
+  },
+  "senegal": {
+    "title": "Ceebu jën · riz au poisson",
+    "servings": "4 personnes",
+    "prep": "25 min",
+    "cook": "55 à 65 min",
+    "rest": "0 min",
+    "context": "Une version familiale simplifiée pour prolonger la rencontre autour du ceebu jën. Le plat et les façons de le partager varient selon les familles et les régions.",
+    "ingredients": [
+      "400 g de riz brisé",
+      "800 g de poisson blanc ferme en darnes",
+      "80 ml d’huile de pépins de raisin",
+      "70 g de concentré de tomate ; 1 oignon",
+      "2 carottes ; ½ aubergine ; ¼ de chou blanc",
+      "1 petite patate douce",
+      "2 gousses d’ail ; 4 brins de persil",
+      "1 citron",
+      "1 l d’eau, puis un complément selon le riz",
+      "Sel, poivre et piment doux à convenance"
+    ],
+    "steps": [
+      "Hacher ail et persil. En frotter le poisson. Émincer l’oignon ; peler et couper les légumes en gros morceaux. Rincer le riz.",
+      "Chauffer l’huile. Faire dorer les darnes jusqu’à cuisson à cœur, puis réserver au chaud. Faire revenir l’oignon et le concentré dans la même cocotte.",
+      "Verser l’eau et ajouter les légumes. Laisser frémir environ 35 à 45 minutes, jusqu’à ce qu’ils soient tendres. Les retirer avec une partie du bouillon.",
+      "Verser le riz dans le bouillon restant. Ajuster le liquide selon les indications du paquet ; cuire à couvert et à feu doux jusqu’à absorption. Ajouter un peu de bouillon réservé si nécessaire.",
+      "Vérifier la cuisson du riz. Réchauffer le poisson et les légumes si besoin, puis les disposer sur le riz. Servir avec le citron."
+    ],
+    "notes": "Adaptation de la recette Au Sénégal : quantités arrondies, poisson blanc courant, patate douce à la place du manioc et absence de poisson séché ou de mollusques. Ce choix ne résume pas les variantes traditionnelles. Le poisson est un allergène ; vérifier aussi les ingrédients des assaisonnements. Les durées dépendent des morceaux et du riz.",
+    "source": [
+      "Au Sénégal · Ceebu jen, riz au poisson",
+      "https://www.au-senegal.com/ceebu-jen-riz-au-poisson-le-plat-national,3443.html"
+    ],
+    "image": "./travel/adventures/art/senegal-atelier.webp",
+    "imageAlt": "Illustration d’un grand plat de riz rouge au poisson, carottes, chou et autres légumes, avec du citron.",
+    "pdf": "./recipes/ceebu-jen.pdf",
+    "checkedAt": "31 octobre 2026",
+    "pdfVersion": "5.2.0",
+    "portionModel": {
+      "base": 4,
+      "singular": "personne",
+      "plural": "personnes"
+    },
+    "measuredIngredients": [
+      [
+        {
+          "amount": 400,
+          "unit": "g",
+          "name": "de riz brisé"
+        }
+      ],
+      [
+        {
+          "amount": 800,
+          "unit": "g",
+          "name": "de poisson blanc ferme en darnes"
+        }
+      ],
+      [
+        {
+          "amount": 80,
+          "unit": "ml",
+          "name": "d’huile de pépins de raisin"
+        }
+      ],
+      [
+        {
+          "amount": 70,
+          "unit": "g",
+          "name": "de concentré de tomate"
+        },
+        " ; ",
+        {
+          "amount": 1,
+          "name": "oignon",
+          "pluralName": "oignons"
+        }
+      ],
+      [
+        {
+          "amount": 2,
+          "name": "carotte",
+          "pluralName": "carottes"
+        },
+        " ; ",
+        {
+          "amount": 0.5,
+          "name": "aubergine"
+        },
+        " ; ",
+        {
+          "amount": 0.25,
+          "name": "de chou blanc"
+        }
+      ],
+      [
+        {
+          "amount": 1,
+          "name": "petite patate douce",
+          "pluralName": "petites patates douces"
+        }
+      ],
+      [
+        {
+          "amount": 2,
+          "name": "gousse d’ail",
+          "pluralName": "gousses d’ail"
+        },
+        " ; ",
+        {
+          "amount": 4,
+          "name": "brin de persil",
+          "pluralName": "brins de persil"
+        }
+      ],
+      [
+        {
+          "amount": 1,
+          "name": "citron",
+          "pluralName": "citrons"
+        }
+      ],
+      [
+        {
+          "amount": 1,
+          "unit": "l",
+          "name": "d’eau, puis un complément selon le riz"
+        }
+      ],
+      [
+        "Sel, poivre et piment doux à convenance"
+      ]
+    ]
   }
 };

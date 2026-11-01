@@ -8,7 +8,7 @@ const qaDir=process.env.ATLAS_QA_DIR;
 if(qaDir)fs.mkdirSync(qaDir,{recursive:true});
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const inline = html.match(/<script>([\s\S]*?)<\/script>/)[1];
-for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
+for (const [name, code] of [['index.html',inline], ...['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js','extra-stops.js','travel-tools.js','discovery-workshops.js','sw.js'].map(p => [p,fs.readFileSync(path.join(root,p),'utf8')])]) new vm.Script(code, {filename:name});
 
 const elements = new Map(), events = {}, downloads = [], alerts = [];
 function element() {
@@ -29,7 +29,7 @@ const window = {navigator,matchMedia:()=>({matches:false}),scrollTo(){},addEvent
 const context = vm.createContext({document,window,navigator,location:{protocol:'file:',hostname:''},
   localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},
   confirm:()=>true,alert:m=>alerts.push(m),console,Blob,URL,setTimeout:()=>0,clearTimeout(){}});
-for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
+for (const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js','extra-stops.js','travel-tools.js','discovery-workshops.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
 vm.runInContext(inline,context,{filename:'index.html'});
 const run = code => vm.runInContext(code,context);
 run('downloadBlob=(data,type,name)=>captureDownload(data,type,name)');
@@ -39,13 +39,13 @@ const snapshot=name=>{if(qaDir)fs.writeFileSync(path.join(qaDir,name+'.html'),el
 const click = (action,id,extra={}) => {const button=element();button.dataset={action,id,...extra};for(const handler of events.click)handler({target:{closest:()=>button}})};
 
 (async()=>{
-  assert.equal(run('STOPS.length'),13); assert.equal(run('STOPS.reduce((n,s)=>n+s.q.length,0)'),39);
+  assert.equal(run('STOPS.length'),18); assert.equal(run('STOPS.reduce((n,s)=>n+s.q.length,0)'),54);
   assert.equal(run('state.completed.japon'),true); assert.equal(run('xp()'),10);
   assert.deepEqual(plain('state.recipeFavorites'),{});
   assert.deepEqual(plain('state.recipeKitchen'),{});
   click('recipes'); assert.equal(run('view'),'recipes');
   assert.match(elements.get('app').innerHTML,/Recettes du monde/);
-  assert.equal((elements.get('recipe-results').innerHTML.match(/class="recipe-card"/g)||[]).length,4);
+  assert.equal((elements.get('recipe-results').innerHTML.match(/class="recipe-card"/g)||[]).length,5);
   click('favorite-recipe','mexique');assert.equal(run('state.recipeFavorites.mexique'),true);
   assert.equal(plain('recipeEntries().map(s=>s.id)')[0],'mexique');
   run("recipeSearch='cafe';renderRecipeResults()");assert.deepEqual(plain('recipeEntries().map(s=>s.id)'),['turquie']);
@@ -54,7 +54,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   run("recipeSearch='';recipeCountry='mexique'");assert.deepEqual(plain('recipeEntries().map(s=>s.id)'),['mexique']);
   run("recipeCountry='all'");click('recipe-favorites');assert.deepEqual(plain('recipeEntries().map(s=>s.id)'),['mexique']);
   click('favorite-recipe','mexique');assert.match(elements.get('recipe-results').innerHTML,/Aucun favori/);
-  click('reset-recipe-filters');assert.equal(run('recipeEntries().length'),4);
+  click('reset-recipe-filters');assert.equal(run('recipeEntries().length'),5);
   for(const id of ['japon','coree','turquie','mexique']){
     click('recipe',id); assert.equal(run('view'),'recipe');
     const markup = elements.get('app').innerHTML;
@@ -95,7 +95,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   assert.equal(run("scaledRecipeSteps('mexique',8)[2]"),run('RECIPES.mexique.steps[2]'));
   assert.equal(run("recipePortionsLabel('mexique',1)"),'1 personne · 3 petites tortillas');
   assert.equal(run("recipePortionsLabel('coree',6)"),'6 à 12 accompagnements');
-  for(const id of ['japon','coree','turquie','mexique'])for(let n=1;n<=12;n++){
+  for(const id of ['japon','coree','turquie','mexique','senegal'])for(let n=1;n<=12;n++){
     const lines=plain(`scaledRecipeIngredients('${id}',${n})`);
     assert.equal(lines.length,run(`RECIPES['${id}'].ingredients.length`));
     assert(lines.every(line=>!/(NaN|undefined|Infinity|\{\d+\})/.test(line)));
@@ -143,10 +143,10 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   assert.deepEqual(alerts,[]);
 
   // All four travel sections, all photo captions, every map point and all story branches.
-  assert.equal(run('Object.keys(TRAVEL_PHOTOS).length'),13);
-  assert.equal(run('Object.keys(TRAVEL_PLACES).length'),13);
-  assert.equal(run('Object.keys(JOURNEYS).length'),13);
-  assert.equal(run('TRAVEL_AUDIO.length'),2);assert.equal(run('TRAVEL_VIDEO.length'),2);
+  assert.equal(run('Object.keys(TRAVEL_PHOTOS).length'),18);
+  assert.equal(run('Object.keys(TRAVEL_PLACES).length'),18);
+  assert.equal(run('Object.keys(JOURNEYS).length'),18);
+  assert.equal(run('TRAVEL_AUDIO.length'),2);assert.equal(run('TRAVEL_VIDEO.length'),3);
   click('travel');assert.equal(run('view'),'travel');assert.match(elements.get('app').innerHTML,/Natural Earth/);
   for(const id of plain('STOPS.map(s=>s.id)')){
     click('travel-select',id);assert.equal(run('travelSelected'),id);
@@ -158,11 +158,11 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
     click('travel');
   }
   click('travel-tab',undefined,{tab:'photos'});assert.match(elements.get('app').innerHTML,/Photograph|photograph/);
-  assert.equal((elements.get('app').innerHTML.match(/class="travel-figure"/g)||[]).length,13);
-  click('travel-tab',undefined,{tab:'stories'});assert.equal((elements.get('app').innerHTML.match(/class="journey-card"/g)||[]).length,13);
+  assert.equal((elements.get('app').innerHTML.match(/class="travel-figure"/g)||[]).length,18);
+  click('travel-tab',undefined,{tab:'stories'});assert.equal((elements.get('travel-story-results').innerHTML.match(/class="journey-card"/g)||[]).length,18);
   const priorXP=run('xp()');let routes=0;
   const legacyPart=({adventure,...legacy})=>legacy;
-  for(const id of plain("STOPS.filter(s=>s.id!=='inde').map(s=>s.id)")){
+  for(const id of plain("STOPS.filter(s=>s.id!=='inde'&&!ATLAS_NEW_IDS.includes(s.id)).map(s=>s.id)")){
     const enumerate=(node,path=[],visited=[])=>{
       assert(!visited.includes(node),'Legacy story loop');
       if(node==='finish')return [path];
@@ -447,10 +447,10 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   assert(cached.includes('./travel/inde/ILLUSTRATIONS.md'));
   assert(fs.readFileSync(path.join(root,'travel/world.svg'),'utf8').includes('Natural Earth'));
   assert(worker.includes("atlas-cultures-v"+run('APP_VERSION')));assert.equal(JSON.parse(fs.readFileSync(path.join(root,'version.json'))).version,run('APP_VERSION'));
-  for(const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js'])assert(html.indexOf(`src="./${file}"`) < html.indexOf('<script>'));
+  for(const file of ['recipes.js','kitchen.js','notebook.js','travel-data.js','journeys.js','travel.js','india-adventure.js','world-adventure-data.js','batik-workshop.js','world-adventure.js','extra-stops.js','travel-tools.js','discovery-workshops.js'])assert(html.indexOf(`src="./${file}"`) < html.indexOf('<script>'));
   assert(html.indexOf('./notebook.css') > html.lastIndexOf('</style>'));
-  console.log('PASS: 13 escales / 39 énigmes, passeport et favoris, portions de 1 à 12, fractions et étapes recalculées, mode cuisine, coches persistantes, sauvegarde/restauration, impression, quatre PDF et cache complet.');
-  console.log('PASS: 13 photos créditées, 13 cartes, 60 anciens chemins conservés dans les carnets des 12 aventures et aventure indienne à deux dénouements, réponses propres à chaque choix, historique/rechargement/JSON, migration des anciennes rencontres, lecteurs à la demande et arrêt des écoutes.');
+  console.log('PASS: 18 escales / 54 énigmes, passeport et favoris, portions de 1 à 12, fractions et étapes recalculées, mode cuisine, coches persistantes, sauvegarde/restauration, impression, cinq PDF et cache complet.');
+  console.log('PASS: 18 photos créditées, 18 cartes, 60 anciens chemins conservés dans les carnets des 12 aventures et aventure indienne à deux dénouements, réponses propres à chaque choix, historique/rechargement/JSON, migration des anciennes rencontres, lecteurs à la demande et arrêt des écoutes.');
   console.log('PASS: Inde : 24 parcours (six ordres d’exploration, deux voies, deux préparatifs), erreurs et indices, déplacements de titres, reprise, migration, sauvegarde JSON et souvenirs cumulés.');
   console.log('PASS: écrans successifs : quatre parcours par les commandes affichées, lieux présents dès l’introduction, une activité à la fois, reprise du support, carnet/historique séparés et sortie du mode jeu.');
   console.log('PASS: une image par écran et support, huit illustrations accessibles hors connexion ; pause facultative suivie ou passée dans les deux dénouements, étapes précédentes, reprise et accès après la fin sans perte du souvenir.');

@@ -1,6 +1,18 @@
 # Atlas des cultures
 
-PWA statique : 13 escales, 39 questions, passeport et progression locale.
+PWA statique : 18 escales, 54 questions, cinq recettes, passeport et progression locale.
+
+## Cinq nouveaux horizons (v5.2.0)
+
+L’Espagne (flamenco), la Finlande (culture du sauna), l’Égypte (tissage du Sa’eed), la Mongolie (ger) et le Sénégal (ceebu jën) rejoignent l’Atlas. Chacune dispose d’une fiche documentée, trois questions, une photographie réelle légendée, deux illustrations de récit et une aventure en trois lieux avec deux suites possibles. Les données sont dans `travel/escales-nouvelles.json`, `travel/new-photos.json`, `travel/new-places.json` et les deux groupes `travel/adventures/new-*.json`.
+
+Dans Voyages → Aventures, la recherche ignore les accents ; les filtres sélectionnent une région, les cinq nouveautés, les aventures commencées ou terminées. Les nouveautés apparaissent en premier. Un encart sur l’accueil et dans les voyages reprend la dernière aventure en cours. Cette préférence est conservée sur l’appareil et dans les sauvegardes ; une restauration garde le choix local existant. Les préparatifs de la mission sont visibles pendant les aventures du moteur commun. Le dénouement récapitule les choix et propose une autre escale.
+
+Les cinq découvertes proposent un résultat visuel qui change avec les choix : des invitations et cartes d’accueil pour l’Espagne, la Finlande et le Sénégal, un échantillon tissé libre en Égypte et une maquette illustrative de ger en Mongolie. Les choix sont conservés lors d’une fermeture et d’un rechargement ; un rejeu commence un nouvel essai, tout en gardant les dénouements déjà acquis. Ces activités ne reproduisent pas un motif traditionnel et ne sont pas des instructions de construction.
+
+La recette sénégalaise propose les portions adaptables, le mode cuisine et une nouvelle fiche PDF A4 illustrée. Elle est présentée comme une adaptation familiale simplifiée, avec ses substitutions. Un troisième documentaire musical, consacré au flamenco, se charge à la demande dans Écouter et dans l’activité espagnole ; la présentation est en anglais. Le passeport distingue les souvenirs d’aventure des tampons des quiz ; son export SVG s’allonge pour garder les 18 tampons lisibles.
+
+Les anciens identifiants et la clé locale restent inchangés. Aucun compte ni envoi de progression n’est ajouté. Le cache contient les cinq photos, les dix illustrations, les nouveaux scripts et la nouvelle fiche PDF. Les images générées ont leur provenance et leurs prompts dans `ART-NOUVELLES-RENCONTRES.md` et `ART-NOUVEAUX-ATELIERS.md`.
 
 ## Atelier de motifs en Indonésie (v5.1.0)
 
@@ -88,9 +100,11 @@ Prérequis de génération : Python, Node, ReportLab, Pillow et polices DejaVu d
 
 ```sh
 node tools/build-world-data.cjs --check
+node tools/build-expansion.cjs --check
 node tests/notebook.cjs
 node tests/world-adventures.cjs
 node tests/batik-workshop.cjs
+node tests/expansion.cjs
 ```
 
 Ce test sans dépendance vérifie la compatibilité des anciens passeports, la recherche (accents et unités de mesure), les filtres, les favoris, les retours de navigation, un quiz complet, les sauvegardes JSON et le cache. Il couvre aussi les 12 choix de portions des quatre recettes, les fractions, les quantités dans les étapes, les temps fixes, les cases à cocher, leur persistance, le changement de portions, une nouvelle préparation et la restauration d’une sauvegarde sans écraser la préparation locale. Les quatre PDF de base, inchangés depuis v3.2.0, ont été rendus et contrôlés : une page A4 avec une image et des références par recette.
@@ -103,3 +117,5 @@ La navigation par écrans est aussi testée sur quatre parcours complets depuis 
 
 Pour v5.1.0, le test dédié vérifie les tracés, les outils, les couleurs, la répétition, les doublons, le retrait annulable même pour la dernière création, la reprise, le rejeu, la migration v5.0, le contenu SVG exporté et l’import d’une sauvegarde de plus de 1 Mio. L’atelier et le carnet ont été inspectés dans Chrome sur ordinateur et dans un cadre de 390 × 844 px : les commandes fixes restent visibles, le contenu ne déborde pas horizontalement et l’agrandissement reste dans l’écran. Aucun test sur téléphone physique n’a été réalisé. L’automatisation du téléchargement dans le navigateur n’a pas renvoyé de fichier ; le contenu SVG et son déclenchement sont vérifiés par le test sans navigateur. L’impression des recettes n’a pas été revérifiée dans cette évolution. Le test antérieur `tests/recipes.cjs` reste disponible pour Playwright avec Microsoft Edge.
 
+
+Pour v5.2.0, les vérifications couvrent 408 parcours dans les six ordres d’exploration et 68 parcours par les commandes affichées, ainsi que les cinq nouvelles séries de quiz. Les tests dédiés contrôlent recherche et filtres, reprise, fusion des sauvegardes, activités visuelles, portions sénégalaises et dimensions du passeport SVG. Le nouveau PDF a été rendu et inspecté : une page A4 sans débordement. Le contrôle navigateur, ses captures et ses limites sont consignés dans [le compte rendu v5.2](docs/EVOLUTION-52.md).

@@ -1,0 +1,498 @@
+{
+  "espagne": {
+    "title": "Une place avant la première note",
+    "mission": "Aider Lucía et Diego à préparer la présentation d’une petite rencontre autour du flamenco.",
+    "intro": "Dans une salle de quartier imaginée en Andalousie, Lucía accorde sa guitare pendant que Diego déplie les chaises. La répétition commencera bientôt. Ils aimeraient accueillir les nouveaux venus avec trois repères simples ; les légendes de leurs documents ont été mélangées.",
+    "places": [
+      {
+        "name": "La salle de répétition",
+        "description": "Lucía prépare sa guitare. Les premières chaises sont déjà en place.",
+        "shortName": "Répétition"
+      },
+      {
+        "name": "La table des repères",
+        "description": "Une photographie et deux notes attendent leurs légendes.",
+        "shortName": "Repères"
+      },
+      {
+        "name": "Le petit patio",
+        "description": "Diego prépare l’accueil et cherche une manière de lancer la rencontre.",
+        "shortName": "Patio"
+      }
+    ],
+    "characters": [
+      {
+        "name": "Lucía",
+        "role": "guitariste, prépare la répétition",
+        "greeting": "Tu peux poser ton carnet ici. Je termine mon accordage. Diego a les documents ; aide-nous à leur rendre leurs légendes, puis nous choisirons comment accueillir le public.",
+        "questions": [
+          {
+            "question": "Qu’aimerais-tu faire entendre aux visiteurs ?",
+            "answer": "Pour notre rencontre, j’aimerais qu’on prête attention aux échanges entre les artistes. J’ai préparé une courte introduction ; Diego décidera avec toi comment l’amener."
+          },
+          {
+            "question": "Tu as appris dans cette salle ?",
+            "answer": "J’y ai rencontré plusieurs personnes avec qui je joue aujourd’hui. J’ai commencé auprès de mon oncle, puis travaillé avec une professeure. Ce lieu est devenu notre rendez-vous."
+          }
+        ]
+      },
+      {
+        "name": "Diego",
+        "role": "bénévole d’une association de flamenco",
+        "greeting": "Les chaises sont prêtes, mais ma présentation ressemble encore à une liste de mots ! On pourrait commencer par les documents, ou laisser Lucía ouvrir la rencontre.",
+        "questions": [
+          {
+            "question": "Qu’est-ce qu’une peña ?",
+            "answer": "Une association qui réunit des personnes autour du flamenco. Ici, nous organisons des rencontres pour écouter, apprendre et échanger. Tu peux venir avec tes questions, même si tu découvres cet art."
+          },
+          {
+            "question": "Les visiteurs doivent déjà connaître le flamenco ?",
+            "answer": "Je leur réserverai le même accueil. On peut commencer par une question toute simple : à quoi avez-vous prêté attention ? Chacun trouvera sa porte d’entrée."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "La danse dans la lumière",
+        "text": "Une danseuse occupe le centre de la scène. La lumière bleue souligne sa silhouette, son bras levé et le mouvement de sa robe."
+      },
+      {
+        "label": "Les musiciens à l’arrière",
+        "text": "Des musiciens sont visibles dans la partie sombre de la scène. Leurs positions permettent de regarder la place de la danseuse dans cet ensemble."
+      },
+      {
+        "label": "Un concert à Amsterdam",
+        "text": "La source situe ce concert de Paco Peña à Amsterdam, en 2012. Cette photographie montre une représentation aux Pays-Bas ; Lucía et Diego sont les personnages inventés du jeu."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Un moment à observer",
+        "text": "Cette photographie documente une danseuse et les musiciens du groupe de Paco Peña pendant un concert à Amsterdam en 2012.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Cante, baile, toque",
+        "text": "Le flamenco associe le chant, appelé cante, la danse, appelée baile, et le jeu instrumental, appelé toque, notamment à la guitare.",
+        "source": "https://ich.unesco.org/fr/RL/le-flamenco-00363"
+      },
+      {
+        "id": "partage",
+        "title": "Apprendre et se retrouver",
+        "text": "Les familles, les artistes et les associations appelées peñas participent à la transmission. Les communautés gitanes ont joué un rôle essentiel dans l’histoire du flamenco.",
+        "source": "https://www.juntadeandalucia.es/organismos/culturapatrimoniohistoricoydeporte/areas/cultura/flamenco/patrimonio-cultural-inmaterial/paginas/ley-flamenco.html"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Rends à chaque document sa légende. Diego pourra les utiliser dans son accueil.",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Regarder un moment documenté"
+        },
+        {
+          "id": "b",
+          "text": "Distinguer chant, danse et jeu instrumental"
+        },
+        {
+          "id": "c",
+          "text": "Comprendre les liens qui font vivre cet art"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie légendée",
+          "text": "Un instant réel et ses crédits : regarde le détail que tu as choisi.",
+          "correct": "a"
+        },
+        {
+          "id": "geste",
+          "name": "La note des trois mots",
+          "text": "Cante, baile, toque : trois portes d’entrée dans l’expression artistique.",
+          "correct": "b"
+        },
+        {
+          "id": "partage",
+          "name": "La note des rencontres",
+          "text": "Familles, artistes, associations et communautés : des personnes qui transmettent.",
+          "correct": "c"
+        }
+      ],
+      "hint": "La photographie montre un instant ; les trois mots parlent de l’art ; la dernière note parle des personnes et de la transmission."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Préparer un petit parcours de découverte",
+        "description": "Installer les documents pour que chacun puisse commencer par observer.",
+        "reply": "Je te laisse choisir le premier repère. Lucía nous rejoindra à la table quand elle aura terminé.",
+        "place": 0,
+        "preparationTitle": "Le début du parcours",
+        "preparationPrompt": "Quelle entrée veux-tu donner aux visiteurs ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Commencer par la photographie",
+            "reply": "Alors nous leur laisserons un moment pour regarder avant de nommer ce qu’ils découvrent.",
+            "endingText": "Tu poses la photographie en tête du parcours. Les visiteurs repèrent des détails différents. Lucía les rejoint, puis relie leurs observations aux trois mots que tu as classés.",
+            "endingReply": "Tu as donné à chacun quelque chose à regarder. La répétition peut commencer."
+          },
+          {
+            "id": "deux",
+            "label": "Commencer par cante, baile et toque",
+            "reply": "Je garderai ma guitare près de moi ; ces mots auront tout de suite un point d’appui.",
+            "endingText": "Tu disposes les trois mots à l’entrée. Lucía montre sa guitare, Diego présente les autres repères, puis les visiteurs reviennent à la photographie avec une nouvelle question.",
+            "endingReply": "Nos visiteurs ont déjà leurs trois mots en poche. Merci pour la présentation."
+          }
+        ],
+        "endingTitle": "Un parcours avant la première note"
+      },
+      {
+        "id": "rencontre",
+        "title": "Ouvrir une conversation dans le patio",
+        "description": "Réunir les nouveaux venus autour de Diego avant la répétition.",
+        "reply": "Très bien. Je vais rapprocher les chaises. Il nous reste à choisir une question.",
+        "place": 2,
+        "preparationTitle": "La question d’accueil",
+        "preparationPrompt": "Par quoi souhaites-tu ouvrir l’échange ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Demander ce que l’on aimerait écouter",
+            "reply": "Je noterai leurs curiosités. Lucía pourra choisir à laquelle répondre pendant la présentation.",
+            "endingText": "Dans le patio, les visiteurs disent ce qu’ils aimeraient écouter ou comprendre. Diego retient une question sur la guitare et appelle Lucía. Les documents que tu as classés restent ouverts au milieu du cercle.",
+            "endingReply": "Cette question nous donne un début tout trouvé. Viens, nous avons gardé une chaise."
+          },
+          {
+            "id": "deux",
+            "label": "Demander comment on apprend un art",
+            "reply": "Je raconterai ma première visite ici, puis je laisserai les autres partager leurs souvenirs.",
+            "endingText": "Un visiteur parle de la personne qui lui a appris à chanter. Diego raconte sa première visite à l’association. Lucía arrive avec sa guitare et la rencontre commence par ces souvenirs de transmission.",
+            "endingReply": "On se connaît un peu mieux maintenant. Les premières notes nous attendent."
+          }
+        ],
+        "endingTitle": "Une chaise dans le patio"
+      }
+    ],
+    "practice": {
+      "title": "Ton invitation en trois touches",
+      "intro": "Compose une petite invitation imaginaire pour la rencontre. Tes choix changent sa présentation, librement.",
+      "steps": [
+        {
+          "title": "Une première curiosité",
+          "text": "Qu’aimerais-tu mettre en avant sur ta carte ?",
+          "options": [
+            {
+              "label": "La voix",
+              "reply": "Lucía : Ta carte commence par une voix. Je lui laisse une belle place."
+            },
+            {
+              "label": "La guitare",
+              "reply": "Lucía : La guitare donne le point de départ de ton invitation."
+            }
+          ]
+        },
+        {
+          "title": "Une façon de regarder",
+          "text": "Ajoute un deuxième détail pour compléter ton idée.",
+          "options": [
+            {
+              "label": "Un geste dessiné",
+              "reply": "Diego : Un geste attire le regard. Tu peux le dessiner à ta manière."
+            },
+            {
+              "label": "Un cercle de chaises",
+              "reply": "Diego : Ton invitation évoque déjà un lieu où se rencontrer."
+            }
+          ]
+        },
+        {
+          "title": "Une phrase personnelle",
+          "text": "Choisis le petit mot qui accueillera tes visiteurs.",
+          "options": [
+            {
+              "label": "Qu’aimerais-tu découvrir ?",
+              "reply": "Diego : Ta question laisse la porte ouverte aux curieux."
+            },
+            {
+              "label": "Prends place avec nous",
+              "reply": "Diego : Voici une invitation qui me donne envie de rapprocher une chaise."
+            }
+          ]
+        }
+      ],
+      "finishText": "Ton invitation personnelle est prête. Elle prolonge le récit de cette rencontre.",
+      "sourceUrl": "https://ich.unesco.org/fr/RL/le-flamenco-00363",
+      "sourceLabel": "Repère culturel : le flamenco · UNESCO"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/RL/le-flamenco-00363",
+        "label": "UNESCO · Le flamenco",
+        "supports": "Inscription en 2010 ; cante, baile et toque ; ancrages en Andalousie, Murcie et Estrémadure ; rôle des communautés gitanes."
+      },
+      {
+        "url": "https://www.juntadeandalucia.es/organismos/culturapatrimoniohistoricoydeporte/areas/cultura/flamenco/patrimonio-cultural-inmaterial/paginas/ley-flamenco.html",
+        "label": "Junta de Andalucía · Le flamenco et ses lieux de transmission",
+        "supports": "Pluralité de l’expression artistique, contribution du peuple gitano, transmission familiale et associative, définition des peñas. Dialogues et choix du jeu inventés."
+      },
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Flamenco_dancer.jpg",
+        "label": "Photographie · Karnivoros, CC BY 4.0",
+        "supports": "Concert de Paco Peña à Amsterdam, 2012 ; auteur et licence. La photographie n’est pas située dans l’Andalousie du récit."
+      }
+    ]
+  },
+  "finlande": {
+    "title": "Le carnet posé près de la porte",
+    "mission": "Aider Aino et Mikko à préparer un petit carnet d’accueil sur la culture du sauna.",
+    "intro": "Le sauna de cette histoire est encore éteint. Aino prépare une visite et Mikko apporte quelques souvenirs pour la table d’accueil. Leur carnet doit présenter le lieu, un mot finnois et les personnes qui font vivre la tradition. Trois légendes se sont détachées.",
+    "places": [
+      {
+        "name": "L’entrée du sauna",
+        "description": "Aino rassemble les cartes qui serviront à la visite.",
+        "shortName": "Entrée"
+      },
+      {
+        "name": "La table du carnet",
+        "description": "Une photographie et deux documents attendent leur place dans le carnet.",
+        "shortName": "Carnet"
+      },
+      {
+        "name": "Le banc de l’accueil",
+        "description": "Mikko vient d’apporter un souvenir qu’il aimerait raconter.",
+        "shortName": "Accueil"
+      }
+    ],
+    "characters": [
+      {
+        "name": "Aino",
+        "role": "organise la visite de ce lieu imaginé",
+        "greeting": "Bienvenue. Nous avons encore un peu de temps avant l’arrivée des visiteurs. Tu peux m’aider à remettre les légendes dans le carnet ? Mikko a aussi une histoire à proposer.",
+        "questions": [
+          {
+            "question": "Que veux-tu montrer pendant la visite ?",
+            "answer": "J’aimerais qu’on regarde le lieu et qu’on entende les souvenirs des gens qui le connaissent. J’ai laissé une place dans le carnet pour une question des visiteurs."
+          },
+          {
+            "question": "Il existe une seule forme de sauna ?",
+            "answer": "La source présente plusieurs formes, dont les saunas électriques, à bois et à fumée. Dans notre carnet, je voudrais montrer cette diversité avec des mots simples."
+          }
+        ]
+      },
+      {
+        "name": "Mikko",
+        "role": "prépare les souvenirs de l’accueil",
+        "greeting": "J’ai apporté une page de mon album. Aino me demande d’être bref ; avec moi, c’est parfois la partie difficile ! Tu m’aideras à choisir par où commencer ?",
+        "questions": [
+          {
+            "question": "Quel souvenir as-tu apporté ?",
+            "answer": "Je me rappelle surtout mon grand-père qui réparait le banc près de la porte. Je lui tenais ses outils et il me racontait les visites de ses amis."
+          },
+          {
+            "question": "Comment les savoirs se transmettent-ils ?",
+            "answer": "Les familles y contribuent beaucoup. Les associations et d’autres lieux d’enseignement partagent aussi les connaissances. Mon souvenir personnel trouvera sa place à côté de ces repères."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "Les bancs en bois",
+        "text": "Des bancs en bois, installés à plusieurs niveaux, occupent les côtés de cette pièce vide."
+      },
+      {
+        "label": "La lumière et le passage",
+        "text": "Des ouvertures laissent entrer la lumière. Les lignes du plancher et des bancs guident le regard dans la longueur de la pièce."
+      },
+      {
+        "label": "Le sauna de Tamminiemi",
+        "text": "La photographie montre l’intérieur du sauna de Tamminiemi, à Helsinki, en 2017. Aino, Mikko et leur visite sont imaginés pour le jeu."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Un lieu dans son cadre",
+        "text": "La photographie documente l’intérieur du sauna de Tamminiemi, à Helsinki. Ses bancs et son aménagement donnent un repère visuel sur ce lieu précis.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Le mot löyly",
+        "text": "Löyly désigne notamment la vapeur produite quand de l’eau rencontre les pierres chauffées. Ce mot est au cœur de la description culturelle donnée par l’UNESCO.",
+        "source": "https://ich.unesco.org/fr/RL/la-culture-du-sauna-en-finlande-01596"
+      },
+      {
+        "id": "partage",
+        "title": "Une tradition qui se transmet",
+        "text": "Le sauna appartient à la vie quotidienne et aux moments de fête. Les connaissances circulent dans les familles et les associations qui font vivre cette culture.",
+        "source": "https://www.museovirasto.fi/en/articles/sauna-culture-intangible-cultural-heritage"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Replace les trois légendes pour qu’Aino puisse terminer le carnet d’accueil.",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Situer un lieu photographié"
+        },
+        {
+          "id": "b",
+          "text": "Comprendre le mot löyly"
+        },
+        {
+          "id": "c",
+          "text": "Découvrir qui transmet cette culture"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie légendée",
+          "text": "Un lieu précis et les informations qui accompagnent son image.",
+          "correct": "a"
+        },
+        {
+          "id": "geste",
+          "name": "La page du mot finnois",
+          "text": "Une courte explication de la vapeur et de sa place dans la tradition.",
+          "correct": "b"
+        },
+        {
+          "id": "partage",
+          "name": "La page des personnes",
+          "text": "Parents, proches et associations : une culture partagée et transmise.",
+          "correct": "c"
+        }
+      ],
+      "hint": "Suis les trois sujets du carnet : le lieu, le mot, puis les personnes."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Terminer le carnet d’accueil",
+        "description": "Disposer les documents pour une visite que chacun pourra parcourir à son rythme.",
+        "reply": "Aino sera contente de voir son carnet prêt. Je vais chercher de quoi tenir les pages ouvertes.",
+        "place": 0,
+        "preparationTitle": "La première page",
+        "preparationPrompt": "Quel repère veux-tu placer à l’ouverture du carnet ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Ouvrir sur la photographie",
+            "reply": "Les visiteurs commenceront par le lieu. Je laisserai une page libre juste après pour leurs observations.",
+            "endingText": "Tu ouvres le carnet sur la photographie. Les visiteurs comparent le document au lieu de la visite, puis Aino présente les deux autres pages. Mikko ajoute son souvenir sur le banc de l’entrée.",
+            "endingReply": "Tout le monde a trouvé un détail à regarder. Ton carnet nous a donné un bon départ."
+          },
+          {
+            "id": "deux",
+            "label": "Ouvrir sur le mot löyly",
+            "reply": "Ce mot suscitera sûrement une question. La photographie viendra juste après pour situer la suite.",
+            "endingText": "Le mot löyly accueille les visiteurs sur la première page. Une personne demande comment le prononcer ; Aino propose de retrouver la ressource officielle, puis poursuit la présentation avec la photographie et la transmission.",
+            "endingReply": "Une question a suffi à ouvrir la visite. Merci d’avoir préparé ces pages."
+          }
+        ],
+        "endingTitle": "Un carnet pour les prochains visiteurs"
+      },
+      {
+        "id": "rencontre",
+        "title": "Commencer par les souvenirs",
+        "description": "Rejoindre Mikko pour ouvrir la visite par une conversation.",
+        "reply": "Je vais poser mon album ici. À toi de choisir la question qui lancera mon histoire.",
+        "place": 2,
+        "preparationTitle": "Le premier souvenir",
+        "preparationPrompt": "Comment souhaites-tu lancer la conversation ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Demander qui lui a transmis un souvenir",
+            "reply": "Je commencerai par mon grand-père et ce banc. Ensuite, j’aimerais entendre une autre histoire.",
+            "endingText": "Mikko raconte le banc et les outils de son grand-père. Aino montre la page sur la transmission. Un visiteur ajoute le souvenir d’un lieu important pour sa famille et la conversation prend le relais.",
+            "endingReply": "Je m’étais promis d’être bref. Heureusement que les autres avaient aussi des choses à raconter !"
+          },
+          {
+            "id": "deux",
+            "label": "Demander quel lieu lui reste en mémoire",
+            "reply": "Je vais raconter cette entrée et les gens qui y attendaient leurs amis. Tu peux laisser la photographie près de nous.",
+            "endingText": "Mikko ouvre son album et parle de l’entrée de son enfance. Les visiteurs observent la photographie du carnet, puis Aino les invite à raconter un lieu qui compte pour eux.",
+            "endingReply": "Avec cette image entre nous, j’ai retrouvé le début de mon histoire. Merci."
+          }
+        ],
+        "endingTitle": "Des souvenirs sur le banc de l’accueil"
+      }
+    ],
+    "practice": {
+      "title": "Ta carte d’un lieu accueillant",
+      "intro": "Imagine une carte souvenir pour un lieu où tu aimerais accueillir quelqu’un. Tout se compose à l’écran.",
+      "steps": [
+        {
+          "title": "Un cadre pour la carte",
+          "text": "Choisis librement le décor de ton lieu imaginaire.",
+          "options": [
+            {
+              "label": "Des arbres autour d’une petite maison",
+              "reply": "Aino : Ton accueil commence au milieu des arbres."
+            },
+            {
+              "label": "Une porte dans un quartier vivant",
+              "reply": "Aino : Ta carte évoque un lieu près des autres maisons."
+            }
+          ]
+        },
+        {
+          "title": "Un détail à partager",
+          "text": "Quel détail veux-tu garder dans ton carnet ?",
+          "options": [
+            {
+              "label": "Un banc pour la conversation",
+              "reply": "Mikko : J’imagine déjà quelqu’un qui vient y raconter sa journée."
+            },
+            {
+              "label": "Une page pour dessiner",
+              "reply": "Mikko : Tu laisses aux visiteurs une trace à inventer."
+            }
+          ]
+        },
+        {
+          "title": "Le mot d’accueil",
+          "text": "Choisis la phrase qui termine ta carte personnelle.",
+          "options": [
+            {
+              "label": "Entre, on prend le temps",
+              "reply": "Aino : Cette phrase donne à ta carte un rythme tranquille."
+            },
+            {
+              "label": "Quel souvenir apportes-tu ?",
+              "reply": "Aino : Ta carte invite aussi l’autre à raconter."
+            }
+          ]
+        }
+      ],
+      "finishText": "Ta carte d’accueil imaginaire est composée. Tu peux garder cette idée dans ton carnet personnel.",
+      "sourceUrl": "https://ich.unesco.org/fr/RL/la-culture-du-sauna-en-finlande-01596",
+      "sourceLabel": "Repère culturel : la culture du sauna · UNESCO"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/RL/la-culture-du-sauna-en-finlande-01596",
+        "label": "UNESCO · La culture du sauna en Finlande",
+        "supports": "Inscription en 2020 ; sens culturel du löyly ; diversité des formes et des pratiques ; lieux familiaux et publics."
+      },
+      {
+        "url": "https://www.museovirasto.fi/en/articles/sauna-culture-intangible-cultural-heritage",
+        "label": "Finnish Heritage Agency · Un patrimoine vivant",
+        "supports": "Vie quotidienne et fêtes ; transmission familiale et associative ; importance des communautés qui font vivre la tradition. Visite, personnages et souvenirs du jeu inventés."
+      },
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Tamminiemi_sauna_interior.jpg",
+        "label": "Photographie · Ypsilon from Finland, CC0",
+        "supports": "Intérieur du sauna de Tamminiemi, 2017 ; auteur et domaine public."
+      }
+    ]
+  }
+}

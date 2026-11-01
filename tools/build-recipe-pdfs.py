@@ -1,8 +1,9 @@
-"""Construire les quatre fiches A4 depuis les données utilisées par l'application."""
+"""Construire les fiches A4 depuis les données utilisées par l'application."""
 from pathlib import Path
 from io import BytesIO
 from xml.sax.saxutils import escape
 import json
+import argparse
 import subprocess
 from PIL import Image as PILImage
 from reportlab.pdfgen import canvas
@@ -17,6 +18,9 @@ from reportlab.lib.utils import ImageReader
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = json.loads(subprocess.check_output(['node', str(ROOT / 'tools/export-recipe-data.cjs')]))
+parser = argparse.ArgumentParser()
+parser.add_argument('--only', choices=list(DATA['recipes']))
+ARGS = parser.parse_args()
 FONTS = Path('/usr/share/fonts/truetype/dejavu')
 for name, file in [('AtlasSans','DejaVuSans.ttf'),('AtlasBold','DejaVuSans-Bold.ttf'),('AtlasSerif','DejaVuSerif.ttf'),('AtlasSerifBold','DejaVuSerif-Bold.ttf')]:
     pdfmetrics.registerFont(TTFont(name, str(FONTS / file)))
@@ -82,16 +86,16 @@ def make_pdf(stop, recipe):
     source_label,source_url=recipe['source']
     y=paragraph(c,'<b>Recette :</b> '+escape(source_label)+'<br/><link href="'+escape(source_url)+'" color="#287e79">'+escape(source_url)+'</link>',M,y,CW,SMALL)-6
     y=paragraph(c,'<b>Contexte culturel :</b> UNESCO / '+escape(stop['topic'])+'<br/><link href="'+escape(stop['source'])+'" color="#287e79">'+escape(stop['source'])+'</link>',M,y,CW,SMALL)-8
-    y=paragraph(c,'Sources consultées le 18 octobre 2026. Rédaction et adaptations : Atlas des cultures. Durées indicatives.',M,y,CW,SMALL)
+    y=paragraph(c,'Sources consultées le '+recipe.get('checkedAt','18 octobre 2026')+'. Rédaction et adaptations : Atlas des cultures. Durées indicatives.',M,y,CW,SMALL)
     if y < M+14:
         raise RuntimeError(f'La fiche {stop["id"]} déborde : {y:.1f} pt')
     c.setStrokeColor(HexColor('#ccd8ce'));c.line(M,M+5,W-M,M+5)
     c.setFillColor(MUTED);c.setFont('AtlasSans',6.7)
     c.drawString(M,M-7,'Un voyage de saveurs, une recette à partager.')
-    c.drawRightString(W-M,M-7,'Atlas des cultures / v3.2.0 / 1')
+    c.drawRightString(W-M,M-7,'Atlas des cultures / v'+recipe.get('pdfVersion','3.2.0')+' / 1')
     c.showPage();c.save()
     print(f'{target.name} : 1 page A4, contenu jusqu’à {y/mm:.1f} mm du bas')
 
 for stop in DATA['stops']:
-    if stop['id'] in DATA['recipes']:
+    if stop['id'] in DATA['recipes'] and (not ARGS.only or stop['id']==ARGS.only):
         make_pdf(stop,DATA['recipes'][stop['id']])

@@ -2,8 +2,8 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..');
-const groups=['asia','africa-oceania','americas-georgia'];
-const expected=['japon','coree','vietnam','indonesie','vanuatu','turquie','georgie','maroc','kenya','mexique','bresil','perou'];
+const groups=['asia','africa-oceania','americas-georgia','new-europe','new-africa-asia'];
+const expected=['japon','coree','vietnam','indonesie','vanuatu','turquie','georgie','maroc','kenya','mexique','bresil','perou','espagne','finlande','egypte','mongolie','senegal'];
 const data={};
 for(const group of groups){const content=JSON.parse(fs.readFileSync(path.join(root,'travel/adventures',group+'.json'),'utf8'));for(const [id,value] of Object.entries(content)){assert(!data[id],'Duplicate '+id);data[id]=value;}}
 assert.deepEqual(Object.keys(data).sort(),[...expected].sort());
@@ -30,7 +30,7 @@ for(const [id,d] of Object.entries(data)){
   assert(d.sources.length>0,id);for(const s of d.sources){url(s.url);nonempty(s.label);nonempty(s.supports);}
 }
 const ordered=Object.fromEntries(expected.map(id=>[id,data[id]]));
-const output='/* Contenus documentés le 19 octobre 2026. Généré depuis travel/adventures/*.json. */\nconst WORLD_ADVENTURES = '+JSON.stringify(ordered,null,2)+';\n';
+const output='/* Généré depuis travel/adventures/*.json. Escales initiales : 19 octobre 2026 ; cinq ajouts : 1er novembre 2026. */\nconst WORLD_ADVENTURES = '+JSON.stringify(ordered,null,2)+';\n';
 const target=path.join(root,'world-adventure-data.js');
 if(process.argv.includes('--check'))assert.equal(fs.readFileSync(target,'utf8'),output,'Rebuild world-adventure-data.js');else fs.writeFileSync(target,output);
-console.log('PASS: 12 aventures, 36 lieux, 24 personnages, 48 variantes de dénouement et 72 réponses d’activités.');
+console.log(`PASS: ${expected.length} aventures, ${expected.length*3} lieux, ${expected.length*2} personnages, ${expected.length*4} variantes de dénouement et ${expected.length*6} réponses d’activités.`);

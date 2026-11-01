@@ -1,4 +1,4 @@
-// Médias et repères vérifiés le 18 octobre 2026. Voir travel/CREDITS.md.
+// Médias et repères initiaux : 18 octobre 2026 ; documentaire flamenco revérifié le 1er novembre 2026. Voir travel/CREDITS.md.
 const TRAVEL_PHOTOS = {
   "japon": {
     "local": "./travel/japon.webp",
@@ -294,5 +294,14 @@ const TRAVEL_VIDEO = [
     "source": "https://ich.unesco.org/fr/video/22194",
     "credit": "UNESCO · © Department of Culture, 2013",
     "guide": "Dans ce documentaire officiel, observe la relation entre percussion, voix et déplacements. Les scènes ne résument pas toutes les pratiques isukuti."
+  },
+  {
+    "id": "flamenco",
+    "stop": "espagne",
+    "title": "Flamenco · documentaire UNESCO",
+    "video": "qEJAQuEgGzQ",
+    "source": "https://ich.unesco.org/en/video/04260",
+    "credit": "UNESCO · © 2009 Agence Andalouse pour le Développement du Flamenco",
+    "guide": "Écoute la voix et la guitare, puis observe la danse. Ce documentaire officiel comporte une présentation en anglais ; aucune écoute n’est nécessaire pour terminer le jeu."
   }
 ];

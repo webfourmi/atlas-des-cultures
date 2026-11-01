@@ -176,3 +176,59 @@ Les recettes et leurs illustrations de création conservent leurs crédits disti
 ## Aventures par écrans — version 5.0.0
 
 Les douze escales hors Inde disposent de nouveaux récits et d’illustrations explicitement fictives. Les photographies et les extraits ci-dessus restent documentaires. Voir [les sources des aventures](adventures/SOURCES.md), [les prompts des rencontres](adventures/ART-RENCONTRES.md) et [les prompts des activités](adventures/ART-ATELIERS.md).
+
+
+## Cinq nouvelles photographies · 31 octobre 2026
+
+Les fichiers suivants sont des photographies documentaires. Ils ont été redimensionnés à 960 pixels maximum et convertis en WebP sans recadrage. Les licences et attributions d’origine sont conservées. Les personnes représentées ne sont pas les personnages fictifs du jeu.
+
+### Espagne
+
+Une danseuse de flamenco pendant un concert de Paco Peña à Amsterdam, en 2012. La scène documente une représentation de cet art espagnol hors d’Espagne.
+
+- Fichier : `./travel/espagne.webp` (960 × 607).
+- Auteur : Karnivoros. Date : 2012-11-10.
+- Licence : [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- [Notice et original](https://commons.wikimedia.org/wiki/File:Flamenco_dancer.jpg) ; [fichier original](https://upload.wikimedia.org/wikipedia/commons/1/10/Flamenco_dancer.jpg).
+
+### Finlande
+
+Intérieur du sauna de Tamminiemi, à Helsinki : des bancs de bois et un poêle dans une pièce vide, photographiés en juillet 2017.
+
+- Fichier : `./travel/finlande.webp` (960 × 720).
+- Auteur : Ypsilon from Finland. Date : 2017-07-08.
+- Licence : [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+- [Notice et original](https://commons.wikimedia.org/wiki/File:Tamminiemi_sauna_interior.jpg) ; [fichier original](https://upload.wikimedia.org/wikipedia/commons/f/fd/Tamminiemi_sauna_interior.jpg).
+
+### Egypte
+
+Un tisserand derrière un métier manuel en Égypte, en février 2017. La notice ne précise pas la ville ; cette photo ne situe pas l’atelier fictif du récit.
+
+- Fichier : `./travel/egypte.webp` (960 × 638).
+- Auteur : Ahmed Emad H. Date : 2017-02-27.
+- Licence : [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+- [Notice et original](https://commons.wikimedia.org/wiki/File:Egyption_Hand_Loom_Maker_%D8%B5%D8%A7%D9%86%D8%B9_%D8%A7%D9%84%D9%86%D9%88%D9%84_%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A.jpg) ; [fichier original](https://upload.wikimedia.org/wikipedia/commons/3/3f/Egyption_Hand_Loom_Maker_%D8%B5%D8%A7%D9%86%D8%B9_%D8%A7%D9%84%D9%86%D9%88%D9%84_%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A.jpg).
+
+### Mongolie
+
+Un ger couvert dans la steppe près de Mandalgovi, en Mongolie, en juillet 2010. La photographie montre l’habitation montée, sans dévoiler son ossature.
+
+- Fichier : `./travel/mongolie.webp` (960 × 638).
+- Auteur : Mark Fischer. Date : 2010-07-06.
+- Licence : [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).
+- [Notice et original](https://commons.wikimedia.org/wiki/File:Mongolian_Ger.jpg) ; [fichier original](https://upload.wikimedia.org/wikipedia/commons/4/46/Mongolian_Ger.jpg).
+
+### Senegal
+
+Ceebu jën, riz au poisson accompagné de légumes, présenté dans un grand plat. Photographie de février 2022 ; cette préparation est une variante parmi d’autres.
+
+- Fichier : `./travel/senegal.webp` (960 × 539).
+- Auteur : Khadim pmp. Date : 2022-02-15.
+- Licence : [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+- [Notice et original](https://commons.wikimedia.org/wiki/File:Thieboudiene.jpg) ; [fichier original](https://upload.wikimedia.org/wikipedia/commons/a/ab/Thieboudiene.jpg).
+
+Les cinq scènes de rencontre et les cinq images d’activité sont des illustrations créées par l’outil intégré image_gen. Prompts, limites et provenance : [rencontres](adventures/ART-NOUVELLES-RENCONTRES.md) et [activités](adventures/ART-NOUVEAUX-ATELIERS.md). Le plat illustré du Sénégal accompagne aussi la nouvelle recette.
+
+### Flamenco · documentaire officiel, en ligne
+
+Lecteur chargé uniquement à la demande, sans fichier vidéo recopié. Chaîne UNESCO : [Flamenco](https://www.youtube.com/watch?v=qEJAQuEgGzQ). [Notice documentaire UNESCO, version anglaise](https://ich.unesco.org/en/video/04260) ; crédit © 2009 Agence Andalouse pour le Développement du Flamenco. Une [notice française](https://ich.unesco.org/fr/video/04259) existe aussi ; le jeu ne présume pas que la vidéo YouTube corresponde à cette version linguistique. ID et éditeur vérifiés dans l’index primaire YouTube le 31 octobre 2026 ; lecture externe non contrôlée.

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "espagne",
+    "file": "Flamenco dancer.jpg",
+    "caption": "Une danseuse de flamenco pendant un concert de Paco Peña à Amsterdam, en 2012. La scène documente une représentation de cet art espagnol hors d’Espagne.",
+    "source": "https://commons.wikimedia.org/wiki/File:Flamenco_dancer.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/1/10/Flamenco_dancer.jpg",
+    "author": "Karnivoros",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "date": "2012-11-10",
+    "local": "./travel/espagne.webp",
+    "width": 960,
+    "height": 607
+  },
+  {
+    "id": "finlande",
+    "file": "Tamminiemi sauna interior.jpg",
+    "caption": "Intérieur du sauna de Tamminiemi, à Helsinki : des bancs de bois et un poêle dans une pièce vide, photographiés en juillet 2017.",
+    "source": "https://commons.wikimedia.org/wiki/File:Tamminiemi_sauna_interior.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/f/fd/Tamminiemi_sauna_interior.jpg",
+    "author": "Ypsilon from Finland",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "date": "2017-07-08",
+    "local": "./travel/finlande.webp",
+    "width": 960,
+    "height": 720
+  },
+  {
+    "id": "egypte",
+    "file": "Egyption Hand Loom Maker صانع النول المصري.jpg",
+    "caption": "Un tisserand derrière un métier manuel en Égypte, en février 2017. La notice ne précise pas la ville ; cette photo ne situe pas l’atelier fictif du récit.",
+    "source": "https://commons.wikimedia.org/wiki/File:Egyption_Hand_Loom_Maker_%D8%B5%D8%A7%D9%86%D8%B9_%D8%A7%D9%84%D9%86%D9%88%D9%84_%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Egyption_Hand_Loom_Maker_%D8%B5%D8%A7%D9%86%D8%B9_%D8%A7%D9%84%D9%86%D9%88%D9%84_%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A.jpg",
+    "author": "Ahmed Emad H",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "date": "2017-02-27",
+    "local": "./travel/egypte.webp",
+    "width": 960,
+    "height": 638
+  },
+  {
+    "id": "mongolie",
+    "file": "Mongolian Ger.jpg",
+    "caption": "Un ger couvert dans la steppe près de Mandalgovi, en Mongolie, en juillet 2010. La photographie montre l’habitation montée, sans dévoiler son ossature.",
+    "source": "https://commons.wikimedia.org/wiki/File:Mongolian_Ger.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/4/46/Mongolian_Ger.jpg",
+    "author": "Mark Fischer",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "date": "2010-07-06",
+    "local": "./travel/mongolie.webp",
+    "width": 960,
+    "height": 638
+  },
+  {
+    "id": "senegal",
+    "file": "Thieboudiene.jpg",
+    "caption": "Ceebu jën, riz au poisson accompagné de légumes, présenté dans un grand plat. Photographie de février 2022 ; cette préparation est une variante parmi d’autres.",
+    "source": "https://commons.wikimedia.org/wiki/File:Thieboudiene.jpg",
+    "original": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Thieboudiene.jpg",
+    "author": "Khadim pmp",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "date": "2022-02-15",
+    "local": "./travel/senegal.webp",
+    "width": 960,
+    "height": 539
+  }
+]

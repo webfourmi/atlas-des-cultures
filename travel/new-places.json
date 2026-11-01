@@ -1,0 +1,32 @@
+{
+  "espagne": {
+    "name": "Séville · repère en Andalousie",
+    "lat": 37.38861,
+    "lon": -5.995,
+    "source": "https://en.wikipedia.org/wiki/Seville"
+  },
+  "finlande": {
+    "name": "Helsinki · repère en Finlande",
+    "lat": 60.17083,
+    "lon": 24.9375,
+    "source": "https://en.wikipedia.org/wiki/Helsinki"
+  },
+  "egypte": {
+    "name": "Akhmim · repère en Haute-Égypte",
+    "lat": 26.5622,
+    "lon": 31.745,
+    "source": "https://www.getty.edu/vow/TGNFullDisplay?english=N&find=&nation=Gabon&place=&subjectid=7001190"
+  },
+  "mongolie": {
+    "name": "Mandalgovi · repère dans le Dundgovi",
+    "lat": 45.7625,
+    "lon": 106.27083,
+    "source": "https://www.geonames.org/2030065/mandalgovi.html"
+  },
+  "senegal": {
+    "name": "Saint-Louis · repère au Sénégal",
+    "lat": 16.02778,
+    "lon": -16.50444,
+    "source": "https://whc.unesco.org/en/list/956/maps/"
+  }
+}

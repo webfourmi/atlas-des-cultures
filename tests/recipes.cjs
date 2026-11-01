@@ -8,10 +8,10 @@ const server=require("node:child_process").spawn("python",["-m","http.server","8
  const page=await context.newPage(); const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('http://127.0.0.1:8766');
  await page.evaluate(()=>{state.completed.japon=true;state.best.japon=3;persist()});
- assert.equal(await page.evaluate(()=>STOPS.length),13);assert.equal(await page.evaluate(()=>STOPS.reduce((n,s)=>n+s.q.length,0)),39);
+ assert.equal(await page.evaluate(()=>STOPS.length),18);assert.equal(await page.evaluate(()=>STOPS.reduce((n,s)=>n+s.q.length,0)),54);
  for(const size of [{width:1440,height:1000},{width:390,height:844}]){
   await page.setViewportSize(size);
-  for(const id of ['japon','coree','turquie','mexique']){
+  for(const id of ['japon','coree','turquie','mexique','senegal']){
    await page.evaluate(id=>{show('library');openDetail(id)},id);
    await page.locator('[data-action="recipe"]').click();
    await page.locator('#recipe-title').waitFor();
@@ -34,7 +34,7 @@ const server=require("node:child_process").spawn("python",["-m","http.server","8
  const downloadSVG=page.waitForEvent('download');await page.locator('[data-action="export-svg"]').click();await (await downloadSVG).saveAs('tests/passport.svg');assert(fs.readFileSync('tests/passport.svg','utf8').includes('<svg'));
  await page.reload();assert(await page.evaluate(()=>state.completed.japon&&state.completed.mexique));
  await page.evaluate(async()=>{await navigator.serviceWorker.ready});await page.reload();await context.setOffline(true);await page.reload();await page.evaluate(()=>{show('library');openRecipe('coree')});assert(await page.locator('#recipe-title').isVisible());
- assert.deepEqual(errors,[]);console.log('PASS: 13 stops, 39 questions, 4 recipes at desktop/mobile, print PDFs, quiz, JSON round-trip, SVG, persisted progress and offline recipe.');
+ assert.deepEqual(errors,[]);console.log('PASS: 18 stops, 54 questions, 5 recipes at desktop/mobile, print PDFs, quiz, JSON round-trip, SVG, persisted progress and offline recipe.');
  await browser.close();server.kill();
 })().catch(e=>{console.error(e);process.exit(1)});
 

@@ -133,3 +133,37 @@ Les fichiers `asia.json`, `africa-oceania.json` et `americas-georgia.json` sont 
 ## Vérification
 
 Les tests `node tests/notebook.cjs`, `node tests/world-adventures.cjs` et `node tests/batik-workshop.cjs` vérifient les parcours, les écrans successifs, les images, les retours, les interactions périmées, les anciennes sauvegardes, les créations personnelles et la restauration JSON. Le contrôle visuel de l’atelier v5.1 est décrit dans [le compte rendu](../../docs/ATELIER-INDONESIE-51.md) ; aucun test sur un téléphone physique n’a été réalisé.
+
+
+## Cinq escales ajoutées le 1er novembre 2026
+
+Les cinq dossiers ont été revérifiés le 1er novembre 2026 sur les sources primaires ci-dessous. Les descriptions officielles indexées ont été utilisées lorsque la page directe demandait une vérification JavaScript. Les dialogues, lieux précis de la scène et dénouements sont inventés. Les limites de localisation des photographies sont conservées dans leurs légendes.
+
+### Espagne · Le flamenco
+
+- [UNESCO · Le flamenco](https://ich.unesco.org/fr/RL/le-flamenco-00363) : Inscription en 2010 ; cante, baile et toque ; ancrages en Andalousie, Murcie et Estrémadure ; rôle des communautés gitanes.
+- [Junta de Andalucía · Le flamenco et ses lieux de transmission](https://www.juntadeandalucia.es/organismos/culturapatrimoniohistoricoydeporte/areas/cultura/flamenco/patrimonio-cultural-inmaterial/paginas/ley-flamenco.html) : Pluralité de l’expression artistique, contribution du peuple gitano, transmission familiale et associative, définition des peñas. Dialogues et choix du jeu inventés.
+- [Photographie · Karnivoros, CC BY 4.0](https://commons.wikimedia.org/wiki/File:Flamenco_dancer.jpg) : Concert de Paco Peña à Amsterdam, 2012 ; auteur et licence. La photographie n’est pas située dans l’Andalousie du récit.
+
+### Finlande · La culture du sauna
+
+- [UNESCO · La culture du sauna en Finlande](https://ich.unesco.org/fr/RL/la-culture-du-sauna-en-finlande-01596) : Inscription en 2020 ; sens culturel du löyly ; diversité des formes et des pratiques ; lieux familiaux et publics.
+- [Finnish Heritage Agency · Un patrimoine vivant](https://www.museovirasto.fi/en/articles/sauna-culture-intangible-cultural-heritage) : Vie quotidienne et fêtes ; transmission familiale et associative ; importance des communautés qui font vivre la tradition. Visite, personnages et souvenirs du jeu inventés.
+- [Photographie · Ypsilon from Finland, CC0](https://commons.wikimedia.org/wiki/File:Tamminiemi_sauna_interior.jpg) : Intérieur du sauna de Tamminiemi, 2017 ; auteur et domaine public.
+
+### Égypte · Le tissage en Haute-Égypte
+
+- [UNESCO · Le tissage à la main en Haute-Égypte](https://ich.unesco.org/fr/USL/le-tissage-a-la-main-en-haute-egypte-sa-eed-01605) : Travail de préparation, précision, matériaux et inscription en 2020 sur la Liste de sauvegarde urgente.
+- [UNESCO · Décision 15.COM 8.a.3](https://ich.unesco.org/fr/decisions/15.COM/8.a.3) : Apprentissage par observation et imitation, fragilité de la transmission et participation des communautés.
+
+### Mongolie · Le ger mongol
+
+- [UNESCO · Artisanat du ger mongol](https://ich.unesco.org/en/RL/traditional-craftsmanship-of-the-mongol-ger-and-its-associated-customs-00872) : Structure, matériaux, démontage et transport ; rôle social et culturel de cet habitat.
+- [UNESCO · Décision 8.COM 8.20](https://ich.unesco.org/en/Decisions/8.COM/8.20) : Participation familiale et communautaire, transmission entre générations, inscription en 2013.
+
+### Sénégal · Le ceebu jën
+
+- [UNESCO · Le ceebu jën, art culinaire du Sénégal](https://ich.unesco.org/fr/RL/le-ceebu-jn-art-culinaire-du-sngal-01748) : Origines à Saint-Louis, ingrédients et variantes, préparation et usages du repas.
+- [UNESCO · Décision 16.COM 8.B.36](https://ich.unesco.org/fr/decisions/16.COM/8.B.36) : Transmission orale, participation progressive aux tâches et inscription en 2021.
+
+Les activités tissées et la maquette de ger sont des créations libres. L’escale finlandaise reste une visite virtuelle, sans consigne de chaleur ni bénéfice de santé revendiqué. La recette sénégalaise est adaptée d’[Au Sénégal](https://www.au-senegal.com/ceebu-jen-riz-au-poisson-le-plat-national,3443.html) ; la recette et ses substitutions sont précisées dans la fiche.

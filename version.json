@@ -1,12 +1,13 @@
 {
   "app": "Atlas des cultures",
-  "version": "5.1.0",
-  "date": "2026-10-21",
+  "version": "5.2.0",
+  "date": "2026-11-01",
   "notes": [
-    "Un atelier visuel de motifs à dessiner au doigt ou à la souris dans l’aventure en Indonésie",
-    "Quatre couleurs à essayer et deux présentations : motif seul ou étoffe répétée",
-    "Carnet personnel de créations avec agrandissement et téléchargement du dessin",
-    "Tracés et créations conservés après fermeture, rejeu et sauvegarde JSON",
-    "Accès direct à l’atelier depuis la carte de l’aventure en Indonésie"
+    "Cinq nouvelles escales : Espagne, Finlande, Égypte, Mongolie et Sénégal",
+    "18 aventures et 54 questions, avec cinq nouvelles photographies et dix illustrations",
+    "Recherche et filtres des aventures, reprise du dernier voyage et préparatifs visibles",
+    "Cinq activités visuelles : invitations, carte d’accueil, tissage libre et maquette de ger",
+    "Ceebu jën : recette illustrée, portions adaptables et fiche PDF A4",
+    "Passeport des souvenirs et export SVG agrandi pour les 18 escales"
   ]
 }

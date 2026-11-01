@@ -1,4 +1,4 @@
-/* Contenus documentés le 19 octobre 2026. Généré depuis travel/adventures/*.json. */
+/* Généré depuis travel/adventures/*.json. Escales initiales : 19 octobre 2026 ; cinq ajouts : 1er novembre 2026. */
 const WORLD_ADVENTURES = {
   "japon": {
     "title": "Les trois cartes du repas",
@@ -2933,6 +2933,1231 @@ const WORLD_ADVENTURES = {
         "url": "https://commons.wikimedia.org/wiki/File:Inka_suspension_bridge_Qeswachaka_DSC_2730.jpg",
         "label": "Wikimedia Commons · photographie de Q’eswachaka",
         "supports": "Provenance et crédit du document photographique de 2018, distinct des lieux et personnages fictifs."
+      }
+    ]
+  },
+  "espagne": {
+    "title": "Une place avant la première note",
+    "mission": "Aider Lucía et Diego à préparer la présentation d’une petite rencontre autour du flamenco.",
+    "intro": "Dans une salle de quartier imaginée en Andalousie, Lucía accorde sa guitare pendant que Diego déplie les chaises. La répétition commencera bientôt. Ils aimeraient accueillir les nouveaux venus avec trois repères simples ; les légendes de leurs documents ont été mélangées.",
+    "places": [
+      {
+        "name": "La salle de répétition",
+        "description": "Lucía prépare sa guitare. Les premières chaises sont déjà en place.",
+        "shortName": "Répétition"
+      },
+      {
+        "name": "La table des repères",
+        "description": "Une photographie et deux notes attendent leurs légendes.",
+        "shortName": "Repères"
+      },
+      {
+        "name": "Le petit patio",
+        "description": "Diego prépare l’accueil et cherche une manière de lancer la rencontre.",
+        "shortName": "Patio"
+      }
+    ],
+    "characters": [
+      {
+        "name": "Lucía",
+        "role": "guitariste, prépare la répétition",
+        "greeting": "Tu peux poser ton carnet ici. Je termine mon accordage. Diego a les documents ; aide-nous à leur rendre leurs légendes, puis nous choisirons comment accueillir le public.",
+        "questions": [
+          {
+            "question": "Qu’aimerais-tu faire entendre aux visiteurs ?",
+            "answer": "Pour notre rencontre, j’aimerais qu’on prête attention aux échanges entre les artistes. J’ai préparé une courte introduction ; Diego décidera avec toi comment l’amener."
+          },
+          {
+            "question": "Tu as appris dans cette salle ?",
+            "answer": "J’y ai rencontré plusieurs personnes avec qui je joue aujourd’hui. J’ai commencé auprès de mon oncle, puis travaillé avec une professeure. Ce lieu est devenu notre rendez-vous."
+          }
+        ]
+      },
+      {
+        "name": "Diego",
+        "role": "bénévole d’une association de flamenco",
+        "greeting": "Les chaises sont prêtes, mais ma présentation ressemble encore à une liste de mots ! On pourrait commencer par les documents, ou laisser Lucía ouvrir la rencontre.",
+        "questions": [
+          {
+            "question": "Qu’est-ce qu’une peña ?",
+            "answer": "Une association qui réunit des personnes autour du flamenco. Ici, nous organisons des rencontres pour écouter, apprendre et échanger. Tu peux venir avec tes questions, même si tu découvres cet art."
+          },
+          {
+            "question": "Les visiteurs doivent déjà connaître le flamenco ?",
+            "answer": "Je leur réserverai le même accueil. On peut commencer par une question toute simple : à quoi avez-vous prêté attention ? Chacun trouvera sa porte d’entrée."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "La danse dans la lumière",
+        "text": "Une danseuse occupe le centre de la scène. La lumière bleue souligne sa silhouette, son bras levé et le mouvement de sa robe."
+      },
+      {
+        "label": "Les musiciens à l’arrière",
+        "text": "Des musiciens sont visibles dans la partie sombre de la scène. Leurs positions permettent de regarder la place de la danseuse dans cet ensemble."
+      },
+      {
+        "label": "Un concert à Amsterdam",
+        "text": "La source situe ce concert de Paco Peña à Amsterdam, en 2012. Cette photographie montre une représentation aux Pays-Bas ; Lucía et Diego sont les personnages inventés du jeu."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Un moment à observer",
+        "text": "Cette photographie documente une danseuse et les musiciens du groupe de Paco Peña pendant un concert à Amsterdam en 2012.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Cante, baile, toque",
+        "text": "Le flamenco associe le chant, appelé cante, la danse, appelée baile, et le jeu instrumental, appelé toque, notamment à la guitare.",
+        "source": "https://ich.unesco.org/fr/RL/le-flamenco-00363"
+      },
+      {
+        "id": "partage",
+        "title": "Apprendre et se retrouver",
+        "text": "Les familles, les artistes et les associations appelées peñas participent à la transmission. Les communautés gitanes ont joué un rôle essentiel dans l’histoire du flamenco.",
+        "source": "https://www.juntadeandalucia.es/organismos/culturapatrimoniohistoricoydeporte/areas/cultura/flamenco/patrimonio-cultural-inmaterial/paginas/ley-flamenco.html"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Rends à chaque document sa légende. Diego pourra les utiliser dans son accueil.",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Regarder un moment documenté"
+        },
+        {
+          "id": "b",
+          "text": "Distinguer chant, danse et jeu instrumental"
+        },
+        {
+          "id": "c",
+          "text": "Comprendre les liens qui font vivre cet art"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie légendée",
+          "text": "Un instant réel et ses crédits : regarde le détail que tu as choisi.",
+          "correct": "a"
+        },
+        {
+          "id": "geste",
+          "name": "La note des trois mots",
+          "text": "Cante, baile, toque : trois portes d’entrée dans l’expression artistique.",
+          "correct": "b"
+        },
+        {
+          "id": "partage",
+          "name": "La note des rencontres",
+          "text": "Familles, artistes, associations et communautés : des personnes qui transmettent.",
+          "correct": "c"
+        }
+      ],
+      "hint": "La photographie montre un instant ; les trois mots parlent de l’art ; la dernière note parle des personnes et de la transmission."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Préparer un petit parcours de découverte",
+        "description": "Installer les documents pour que chacun puisse commencer par observer.",
+        "reply": "Je te laisse choisir le premier repère. Lucía nous rejoindra à la table quand elle aura terminé.",
+        "place": 0,
+        "preparationTitle": "Le début du parcours",
+        "preparationPrompt": "Quelle entrée veux-tu donner aux visiteurs ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Commencer par la photographie",
+            "reply": "Alors nous leur laisserons un moment pour regarder avant de nommer ce qu’ils découvrent.",
+            "endingText": "Tu poses la photographie en tête du parcours. Les visiteurs repèrent des détails différents. Lucía les rejoint, puis relie leurs observations aux trois mots que tu as classés.",
+            "endingReply": "Tu as donné à chacun quelque chose à regarder. La répétition peut commencer."
+          },
+          {
+            "id": "deux",
+            "label": "Commencer par cante, baile et toque",
+            "reply": "Je garderai ma guitare près de moi ; ces mots auront tout de suite un point d’appui.",
+            "endingText": "Tu disposes les trois mots à l’entrée. Lucía montre sa guitare, Diego présente les autres repères, puis les visiteurs reviennent à la photographie avec une nouvelle question.",
+            "endingReply": "Nos visiteurs ont déjà leurs trois mots en poche. Merci pour la présentation."
+          }
+        ],
+        "endingTitle": "Un parcours avant la première note"
+      },
+      {
+        "id": "rencontre",
+        "title": "Ouvrir une conversation dans le patio",
+        "description": "Réunir les nouveaux venus autour de Diego avant la répétition.",
+        "reply": "Très bien. Je vais rapprocher les chaises. Il nous reste à choisir une question.",
+        "place": 2,
+        "preparationTitle": "La question d’accueil",
+        "preparationPrompt": "Par quoi souhaites-tu ouvrir l’échange ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Demander ce que l’on aimerait écouter",
+            "reply": "Je noterai leurs curiosités. Lucía pourra choisir à laquelle répondre pendant la présentation.",
+            "endingText": "Dans le patio, les visiteurs disent ce qu’ils aimeraient écouter ou comprendre. Diego retient une question sur la guitare et appelle Lucía. Les documents que tu as classés restent ouverts au milieu du cercle.",
+            "endingReply": "Cette question nous donne un début tout trouvé. Viens, nous avons gardé une chaise."
+          },
+          {
+            "id": "deux",
+            "label": "Demander comment on apprend un art",
+            "reply": "Je raconterai ma première visite ici, puis je laisserai les autres partager leurs souvenirs.",
+            "endingText": "Un visiteur parle de la personne qui lui a appris à chanter. Diego raconte sa première visite à l’association. Lucía arrive avec sa guitare et la rencontre commence par ces souvenirs de transmission.",
+            "endingReply": "On se connaît un peu mieux maintenant. Les premières notes nous attendent."
+          }
+        ],
+        "endingTitle": "Une chaise dans le patio"
+      }
+    ],
+    "practice": {
+      "title": "Ton invitation en trois touches",
+      "intro": "Compose une petite invitation imaginaire pour la rencontre. Tes choix changent sa présentation, librement.",
+      "steps": [
+        {
+          "title": "Une première curiosité",
+          "text": "Qu’aimerais-tu mettre en avant sur ta carte ?",
+          "options": [
+            {
+              "label": "La voix",
+              "reply": "Lucía : Ta carte commence par une voix. Je lui laisse une belle place."
+            },
+            {
+              "label": "La guitare",
+              "reply": "Lucía : La guitare donne le point de départ de ton invitation."
+            }
+          ]
+        },
+        {
+          "title": "Une façon de regarder",
+          "text": "Ajoute un deuxième détail pour compléter ton idée.",
+          "options": [
+            {
+              "label": "Un geste dessiné",
+              "reply": "Diego : Un geste attire le regard. Tu peux le dessiner à ta manière."
+            },
+            {
+              "label": "Un cercle de chaises",
+              "reply": "Diego : Ton invitation évoque déjà un lieu où se rencontrer."
+            }
+          ]
+        },
+        {
+          "title": "Une phrase personnelle",
+          "text": "Choisis le petit mot qui accueillera tes visiteurs.",
+          "options": [
+            {
+              "label": "Qu’aimerais-tu découvrir ?",
+              "reply": "Diego : Ta question laisse la porte ouverte aux curieux."
+            },
+            {
+              "label": "Prends place avec nous",
+              "reply": "Diego : Voici une invitation qui me donne envie de rapprocher une chaise."
+            }
+          ]
+        }
+      ],
+      "finishText": "Ton invitation personnelle est prête. Elle prolonge le récit de cette rencontre.",
+      "sourceUrl": "https://ich.unesco.org/fr/RL/le-flamenco-00363",
+      "sourceLabel": "Repère culturel : le flamenco · UNESCO"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/RL/le-flamenco-00363",
+        "label": "UNESCO · Le flamenco",
+        "supports": "Inscription en 2010 ; cante, baile et toque ; ancrages en Andalousie, Murcie et Estrémadure ; rôle des communautés gitanes."
+      },
+      {
+        "url": "https://www.juntadeandalucia.es/organismos/culturapatrimoniohistoricoydeporte/areas/cultura/flamenco/patrimonio-cultural-inmaterial/paginas/ley-flamenco.html",
+        "label": "Junta de Andalucía · Le flamenco et ses lieux de transmission",
+        "supports": "Pluralité de l’expression artistique, contribution du peuple gitano, transmission familiale et associative, définition des peñas. Dialogues et choix du jeu inventés."
+      },
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Flamenco_dancer.jpg",
+        "label": "Photographie · Karnivoros, CC BY 4.0",
+        "supports": "Concert de Paco Peña à Amsterdam, 2012 ; auteur et licence. La photographie n’est pas située dans l’Andalousie du récit."
+      }
+    ]
+  },
+  "finlande": {
+    "title": "Le carnet posé près de la porte",
+    "mission": "Aider Aino et Mikko à préparer un petit carnet d’accueil sur la culture du sauna.",
+    "intro": "Le sauna de cette histoire est encore éteint. Aino prépare une visite et Mikko apporte quelques souvenirs pour la table d’accueil. Leur carnet doit présenter le lieu, un mot finnois et les personnes qui font vivre la tradition. Trois légendes se sont détachées.",
+    "places": [
+      {
+        "name": "L’entrée du sauna",
+        "description": "Aino rassemble les cartes qui serviront à la visite.",
+        "shortName": "Entrée"
+      },
+      {
+        "name": "La table du carnet",
+        "description": "Une photographie et deux documents attendent leur place dans le carnet.",
+        "shortName": "Carnet"
+      },
+      {
+        "name": "Le banc de l’accueil",
+        "description": "Mikko vient d’apporter un souvenir qu’il aimerait raconter.",
+        "shortName": "Accueil"
+      }
+    ],
+    "characters": [
+      {
+        "name": "Aino",
+        "role": "organise la visite de ce lieu imaginé",
+        "greeting": "Bienvenue. Nous avons encore un peu de temps avant l’arrivée des visiteurs. Tu peux m’aider à remettre les légendes dans le carnet ? Mikko a aussi une histoire à proposer.",
+        "questions": [
+          {
+            "question": "Que veux-tu montrer pendant la visite ?",
+            "answer": "J’aimerais qu’on regarde le lieu et qu’on entende les souvenirs des gens qui le connaissent. J’ai laissé une place dans le carnet pour une question des visiteurs."
+          },
+          {
+            "question": "Il existe une seule forme de sauna ?",
+            "answer": "La source présente plusieurs formes, dont les saunas électriques, à bois et à fumée. Dans notre carnet, je voudrais montrer cette diversité avec des mots simples."
+          }
+        ]
+      },
+      {
+        "name": "Mikko",
+        "role": "prépare les souvenirs de l’accueil",
+        "greeting": "J’ai apporté une page de mon album. Aino me demande d’être bref ; avec moi, c’est parfois la partie difficile ! Tu m’aideras à choisir par où commencer ?",
+        "questions": [
+          {
+            "question": "Quel souvenir as-tu apporté ?",
+            "answer": "Je me rappelle surtout mon grand-père qui réparait le banc près de la porte. Je lui tenais ses outils et il me racontait les visites de ses amis."
+          },
+          {
+            "question": "Comment les savoirs se transmettent-ils ?",
+            "answer": "Les familles y contribuent beaucoup. Les associations et d’autres lieux d’enseignement partagent aussi les connaissances. Mon souvenir personnel trouvera sa place à côté de ces repères."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "Les bancs en bois",
+        "text": "Des bancs en bois, installés à plusieurs niveaux, occupent les côtés de cette pièce vide."
+      },
+      {
+        "label": "La lumière et le passage",
+        "text": "Des ouvertures laissent entrer la lumière. Les lignes du plancher et des bancs guident le regard dans la longueur de la pièce."
+      },
+      {
+        "label": "Le sauna de Tamminiemi",
+        "text": "La photographie montre l’intérieur du sauna de Tamminiemi, à Helsinki, en 2017. Aino, Mikko et leur visite sont imaginés pour le jeu."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Un lieu dans son cadre",
+        "text": "La photographie documente l’intérieur du sauna de Tamminiemi, à Helsinki. Ses bancs et son aménagement donnent un repère visuel sur ce lieu précis.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Le mot löyly",
+        "text": "Löyly désigne notamment la vapeur produite quand de l’eau rencontre les pierres chauffées. Ce mot est au cœur de la description culturelle donnée par l’UNESCO.",
+        "source": "https://ich.unesco.org/fr/RL/la-culture-du-sauna-en-finlande-01596"
+      },
+      {
+        "id": "partage",
+        "title": "Une tradition qui se transmet",
+        "text": "Le sauna appartient à la vie quotidienne et aux moments de fête. Les connaissances circulent dans les familles et les associations qui font vivre cette culture.",
+        "source": "https://www.museovirasto.fi/en/articles/sauna-culture-intangible-cultural-heritage"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Replace les trois légendes pour qu’Aino puisse terminer le carnet d’accueil.",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Situer un lieu photographié"
+        },
+        {
+          "id": "b",
+          "text": "Comprendre le mot löyly"
+        },
+        {
+          "id": "c",
+          "text": "Découvrir qui transmet cette culture"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie légendée",
+          "text": "Un lieu précis et les informations qui accompagnent son image.",
+          "correct": "a"
+        },
+        {
+          "id": "geste",
+          "name": "La page du mot finnois",
+          "text": "Une courte explication de la vapeur et de sa place dans la tradition.",
+          "correct": "b"
+        },
+        {
+          "id": "partage",
+          "name": "La page des personnes",
+          "text": "Parents, proches et associations : une culture partagée et transmise.",
+          "correct": "c"
+        }
+      ],
+      "hint": "Suis les trois sujets du carnet : le lieu, le mot, puis les personnes."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Terminer le carnet d’accueil",
+        "description": "Disposer les documents pour une visite que chacun pourra parcourir à son rythme.",
+        "reply": "Aino sera contente de voir son carnet prêt. Je vais chercher de quoi tenir les pages ouvertes.",
+        "place": 0,
+        "preparationTitle": "La première page",
+        "preparationPrompt": "Quel repère veux-tu placer à l’ouverture du carnet ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Ouvrir sur la photographie",
+            "reply": "Les visiteurs commenceront par le lieu. Je laisserai une page libre juste après pour leurs observations.",
+            "endingText": "Tu ouvres le carnet sur la photographie. Les visiteurs comparent le document au lieu de la visite, puis Aino présente les deux autres pages. Mikko ajoute son souvenir sur le banc de l’entrée.",
+            "endingReply": "Tout le monde a trouvé un détail à regarder. Ton carnet nous a donné un bon départ."
+          },
+          {
+            "id": "deux",
+            "label": "Ouvrir sur le mot löyly",
+            "reply": "Ce mot suscitera sûrement une question. La photographie viendra juste après pour situer la suite.",
+            "endingText": "Le mot löyly accueille les visiteurs sur la première page. Une personne demande comment le prononcer ; Aino propose de retrouver la ressource officielle, puis poursuit la présentation avec la photographie et la transmission.",
+            "endingReply": "Une question a suffi à ouvrir la visite. Merci d’avoir préparé ces pages."
+          }
+        ],
+        "endingTitle": "Un carnet pour les prochains visiteurs"
+      },
+      {
+        "id": "rencontre",
+        "title": "Commencer par les souvenirs",
+        "description": "Rejoindre Mikko pour ouvrir la visite par une conversation.",
+        "reply": "Je vais poser mon album ici. À toi de choisir la question qui lancera mon histoire.",
+        "place": 2,
+        "preparationTitle": "Le premier souvenir",
+        "preparationPrompt": "Comment souhaites-tu lancer la conversation ?",
+        "options": [
+          {
+            "id": "un",
+            "label": "Demander qui lui a transmis un souvenir",
+            "reply": "Je commencerai par mon grand-père et ce banc. Ensuite, j’aimerais entendre une autre histoire.",
+            "endingText": "Mikko raconte le banc et les outils de son grand-père. Aino montre la page sur la transmission. Un visiteur ajoute le souvenir d’un lieu important pour sa famille et la conversation prend le relais.",
+            "endingReply": "Je m’étais promis d’être bref. Heureusement que les autres avaient aussi des choses à raconter !"
+          },
+          {
+            "id": "deux",
+            "label": "Demander quel lieu lui reste en mémoire",
+            "reply": "Je vais raconter cette entrée et les gens qui y attendaient leurs amis. Tu peux laisser la photographie près de nous.",
+            "endingText": "Mikko ouvre son album et parle de l’entrée de son enfance. Les visiteurs observent la photographie du carnet, puis Aino les invite à raconter un lieu qui compte pour eux.",
+            "endingReply": "Avec cette image entre nous, j’ai retrouvé le début de mon histoire. Merci."
+          }
+        ],
+        "endingTitle": "Des souvenirs sur le banc de l’accueil"
+      }
+    ],
+    "practice": {
+      "title": "Ta carte d’un lieu accueillant",
+      "intro": "Imagine une carte souvenir pour un lieu où tu aimerais accueillir quelqu’un. Tout se compose à l’écran.",
+      "steps": [
+        {
+          "title": "Un cadre pour la carte",
+          "text": "Choisis librement le décor de ton lieu imaginaire.",
+          "options": [
+            {
+              "label": "Des arbres autour d’une petite maison",
+              "reply": "Aino : Ton accueil commence au milieu des arbres."
+            },
+            {
+              "label": "Une porte dans un quartier vivant",
+              "reply": "Aino : Ta carte évoque un lieu près des autres maisons."
+            }
+          ]
+        },
+        {
+          "title": "Un détail à partager",
+          "text": "Quel détail veux-tu garder dans ton carnet ?",
+          "options": [
+            {
+              "label": "Un banc pour la conversation",
+              "reply": "Mikko : J’imagine déjà quelqu’un qui vient y raconter sa journée."
+            },
+            {
+              "label": "Une page pour dessiner",
+              "reply": "Mikko : Tu laisses aux visiteurs une trace à inventer."
+            }
+          ]
+        },
+        {
+          "title": "Le mot d’accueil",
+          "text": "Choisis la phrase qui termine ta carte personnelle.",
+          "options": [
+            {
+              "label": "Entre, on prend le temps",
+              "reply": "Aino : Cette phrase donne à ta carte un rythme tranquille."
+            },
+            {
+              "label": "Quel souvenir apportes-tu ?",
+              "reply": "Aino : Ta carte invite aussi l’autre à raconter."
+            }
+          ]
+        }
+      ],
+      "finishText": "Ta carte d’accueil imaginaire est composée. Tu peux garder cette idée dans ton carnet personnel.",
+      "sourceUrl": "https://ich.unesco.org/fr/RL/la-culture-du-sauna-en-finlande-01596",
+      "sourceLabel": "Repère culturel : la culture du sauna · UNESCO"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/RL/la-culture-du-sauna-en-finlande-01596",
+        "label": "UNESCO · La culture du sauna en Finlande",
+        "supports": "Inscription en 2020 ; sens culturel du löyly ; diversité des formes et des pratiques ; lieux familiaux et publics."
+      },
+      {
+        "url": "https://www.museovirasto.fi/en/articles/sauna-culture-intangible-cultural-heritage",
+        "label": "Finnish Heritage Agency · Un patrimoine vivant",
+        "supports": "Vie quotidienne et fêtes ; transmission familiale et associative ; importance des communautés qui font vivre la tradition. Visite, personnages et souvenirs du jeu inventés."
+      },
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Tamminiemi_sauna_interior.jpg",
+        "label": "Photographie · Ypsilon from Finland, CC0",
+        "supports": "Intérieur du sauna de Tamminiemi, 2017 ; auteur et domaine public."
+      }
+    ]
+  },
+  "egypte": {
+    "title": "Les fils de l’atelier",
+    "mission": "Aider Mariam et Samir à préparer un coin de découverte du tissage, puis choisir ce que les visiteurs feront en premier.",
+    "intro": "Dans un atelier imaginé de Haute-Égypte, Mariam prépare une visite avec Samir, qui apprend auprès d’elle. Ils ont sorti des échantillons et trois documents. Il manque une présentation claire pour que les visiteurs regardent les gestes sans déranger le travail.",
+    "places": [
+      {
+        "name": "L’entrée de l’atelier",
+        "shortName": "Atelier",
+        "description": "Mariam accueille les visiteurs près d’un échantillon de tissu."
+      },
+      {
+        "name": "La table des fils",
+        "shortName": "Fils",
+        "description": "La photographie et deux notes permettent de préparer trois légendes."
+      },
+      {
+        "name": "Le coin de découverte",
+        "shortName": "Découverte",
+        "description": "Samir attend tes idées pour accueillir les premiers curieux."
+      }
+    ],
+    "characters": [
+      {
+        "name": "Mariam",
+        "role": "tisserande dans notre récit",
+        "greeting": "Bonjour ! J’ai sorti les échantillons, mais Samir et moi n’avons pas fini la présentation. Tu nous aides à choisir ce que l’on montre ?",
+        "questions": [
+          {
+            "question": "Je peux toucher le métier ?",
+            "answer": "Attends que je te le propose. Pour notre visite, nous avons prévu un échantillon à regarder de près ; le métier reste mon espace de travail."
+          },
+          {
+            "question": "Pourquoi garder ces essais ?",
+            "answer": "Sur celui-ci, Samir avait changé d’idée en cours de route. Nous l’avons gardé pour parler des essais et des reprises, pas seulement du tissu terminé."
+          }
+        ]
+      },
+      {
+        "name": "Samir",
+        "role": "apprend auprès de Mariam",
+        "greeting": "J’ai les trois documents ! Il faut que les visiteurs comprennent ce que chacun raconte. Après, on pourra préparer notre petit coin de découverte.",
+        "questions": [
+          {
+            "question": "Qu’est-ce qui te demande le plus de patience ?",
+            "answer": "C’est de recommencer sans vouloir aller plus vite. Mariam me demande d’abord d’observer ; mes premiers essais attendront leur tour."
+          },
+          {
+            "question": "On montre le tissu ou le travail ?",
+            "answer": "Les deux m’intéressent. Nous pouvons préparer une table d’échantillons ou commencer par une question aux visiteurs. Choisis, je m’occupe de l’accueil."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "Le métier",
+        "text": "Un tisserand est assis derrière un métier. Des fils tendus et des barres transversales sont visibles devant lui."
+      },
+      {
+        "label": "Une image, un contexte",
+        "text": "La photographie est légendée en Égypte, sans localisation plus précise. Elle ne permet pas d’identifier un atelier particulier de Haute-Égypte."
+      },
+      {
+        "label": "Nos personnages",
+        "text": "Mariam, Samir et leur visite sont inventés. Les personnes éventuellement présentes sur le document ne sont pas les personnages du récit."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Observer un métier",
+        "text": "Le document montre un tisserand et des fils tendus en Égypte. Sa localisation précise n’est pas indiquée : ce n’est pas la preuve d’un atelier du Sa’eed.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Une suite de préparations",
+        "text": "Le tissage à la main demande de préparer le métier et les fils avant de fabriquer l’étoffe. La notice UNESCO insiste sur la précision et la pratique.",
+        "source": "https://ich.unesco.org/fr/USL/le-tissage-a-la-main-en-haute-egypte-sa-eed-01605"
+      },
+      {
+        "id": "partage",
+        "title": "Apprendre auprès des tisserands",
+        "text": "La transmission repose notamment sur l’observation et la reprise des gestes auprès des personnes expérimentées. Le dossier souligne les difficultés économiques qui la fragilisent.",
+        "source": "https://ich.unesco.org/fr/decisions/15.COM/8.a.3"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Prépare les trois légendes de l’atelier : chaque support doit annoncer ce qu’il permet de découvrir.",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Les étapes et la précision du travail"
+        },
+        {
+          "id": "b",
+          "text": "Une installation à observer"
+        },
+        {
+          "id": "c",
+          "text": "L’apprentissage auprès des tisserands"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie",
+          "text": "Un document visuel accompagné de sa légende et de ses crédits.",
+          "correct": "b"
+        },
+        {
+          "id": "geste",
+          "name": "La note sur les préparations",
+          "text": "Elle parle du métier, des fils et du travail nécessaire pour obtenir l’étoffe.",
+          "correct": "a"
+        },
+        {
+          "id": "partage",
+          "name": "La note sur la transmission",
+          "text": "Elle explique comment les gestes s’apprennent et pourquoi leur transmission est fragile.",
+          "correct": "c"
+        }
+      ],
+      "hint": "La photo fait regarder. La première note suit le travail ; la seconde parle des personnes qui l’apprennent."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Installer une table d’échantillons",
+        "description": "Donner aux visiteurs le temps d’observer avant d’échanger avec Mariam.",
+        "reply": "D’accord. Je libère une table. Nous allons choisir ce que l’on pose au milieu.",
+        "place": 0,
+        "preparationTitle": "Un point de départ",
+        "preparationPrompt": "Quelle pièce veux-tu mettre en avant ?",
+        "endingTitle": "Une table qui donne envie de regarder",
+        "options": [
+          {
+            "id": "un",
+            "label": "Mettre un échantillon terminé au centre",
+            "reply": "Je le pose bien à plat. Nous garderons les notes à côté pour les questions.",
+            "endingText": "Tu installes l’échantillon au centre de la table. Un visiteur se penche pour regarder les fils ; Mariam lui propose ensuite de comparer avec un essai.",
+            "endingReply": "Ton installation leur a laissé le temps de voir les détails. Maintenant, je peux raconter le travail."
+          },
+          {
+            "id": "deux",
+            "label": "Présenter un essai avec sa reprise",
+            "reply": "Très bien. Samir pourra dire pourquoi nous l’avons conservé.",
+            "endingText": "L’essai ouvre la visite. Samir explique ce qu’il avait voulu changer, et quelqu’un lui demande de montrer la reprise. Mariam apporte l’échantillon terminé pour comparer.",
+            "endingReply": "Je croyais que personne ne s’intéresserait à mon essai. Il nous a donné une bonne première question !"
+          }
+        ]
+      },
+      {
+        "id": "rencontre",
+        "title": "Commencer par une courte conversation",
+        "description": "Inviter les visiteurs à poser une question avant de regarder les échantillons.",
+        "reply": "Je les accueille ici. Une question suffit pour commencer ; nous avons les documents sous la main.",
+        "place": 2,
+        "preparationTitle": "La première question",
+        "preparationPrompt": "Comment lances-tu la visite ?",
+        "endingTitle": "Une conversation au bord des fils",
+        "options": [
+          {
+            "id": "un",
+            "label": "Demander ce que les visiteurs remarquent",
+            "reply": "Je leur laisse un moment pour regarder avant de parler.",
+            "endingText": "Tu demandes ce que chacun remarque. Les réponses portent sur les fils, l’espace du métier et les détails du tissu. Mariam choisit un de ces regards pour commencer son explication.",
+            "endingReply": "Vous n’avez pas tous vu la même chose. C’est une belle façon d’ouvrir la visite."
+          },
+          {
+            "id": "deux",
+            "label": "Demander comment on apprend un geste",
+            "reply": "Je peux commencer par mon premier essai, puis laisser Mariam raconter le sien.",
+            "endingText": "Ta question amène Samir à raconter un essai manqué. Une visiteuse évoque un geste qu’elle a appris de quelqu’un d’autre. Mariam rapproche les échantillons pour poursuivre l’échange.",
+            "endingReply": "Nous avons commencé par parler d’apprentissage, et maintenant tout le monde veut regarder les tissus."
+          }
+        ]
+      }
+    ],
+    "practice": {
+      "title": "Ton petit échantillon virtuel",
+      "intro": "Compose une petite étude de fils à l’écran. Tes couleurs et ta présentation sont libres ; ce n’est pas la reproduction d’un motif traditionnel.",
+      "steps": [
+        {
+          "title": "Un premier contraste",
+          "text": "Choisis les couleurs que tu aimerais rapprocher pour ton étude.",
+          "options": [
+            {
+              "label": "Bleu et crème",
+              "reply": "Samir : Je garde ces deux couleurs pour ton essai. Elles t’appartiennent, sans signification imposée."
+            },
+            {
+              "label": "Terre et crème",
+              "reply": "Samir : Ce sera ton point de départ. Tu peux imaginer les fils côte à côte."
+            }
+          ]
+        },
+        {
+          "title": "Le rythme des rangées",
+          "text": "Choisis la place des rangées claires dans ta composition.",
+          "options": [
+            {
+              "label": "Une rangée claire",
+              "reply": "Mariam : Une rangée se détache. Nous la présenterons comme ton choix de composition."
+            },
+            {
+              "label": "Deux rangées claires",
+              "reply": "Mariam : Les deux rangées modifient le rythme. Regarde ce que cela change sur ton étude."
+            }
+          ]
+        },
+        {
+          "title": "Un cadre pour ton étude",
+          "text": "Termine la présentation de ton échantillon personnel.",
+          "options": [
+            {
+              "label": "Cadre clair",
+              "reply": "Samir : Ce cadre prolonge les tons clairs. Ton étude reste une création libre."
+            },
+            {
+              "label": "Cadre foncé",
+              "reply": "Samir : Le cadre foncé donne une limite plus marquée à ton étude. C’est ton choix."
+            }
+          ]
+        }
+      ],
+      "finishText": "Ton étude personnelle est prête. Tu peux revenir aux documents pour distinguer cet essai libre du savoir-faire des tisserands.",
+      "sourceUrl": "https://ich.unesco.org/fr/USL/le-tissage-a-la-main-en-haute-egypte-sa-eed-01605",
+      "sourceLabel": "Le tissage à la main en Haute-Égypte · UNESCO"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/USL/le-tissage-a-la-main-en-haute-egypte-sa-eed-01605",
+        "label": "UNESCO · Le tissage à la main en Haute-Égypte",
+        "supports": "Travail de préparation, précision, matériaux et inscription en 2020 sur la Liste de sauvegarde urgente."
+      },
+      {
+        "url": "https://ich.unesco.org/fr/decisions/15.COM/8.a.3",
+        "label": "UNESCO · Décision 15.COM 8.a.3",
+        "supports": "Apprentissage par observation et imitation, fragilité de la transmission et participation des communautés."
+      }
+    ]
+  },
+  "mongolie": {
+    "title": "La maison qui voyage",
+    "mission": "Aider Saran et Bataa à présenter les éléments d’un ger, puis préparer une découverte à hauteur de visiteur.",
+    "intro": "Saran et Bataa ont imaginé une petite présentation du ger pour des visiteurs. Sur leur table, une maquette attend ses légendes. Avant d’ouvrir, ils aimeraient raconter à la fois la structure de l’habitat et le travail des personnes qui le fabriquent.",
+    "places": [
+      {
+        "name": "Le seuil du ger",
+        "shortName": "Le seuil",
+        "description": "Saran t’accueille à côté de la maquette préparée pour la visite."
+      },
+      {
+        "name": "La table des éléments",
+        "shortName": "Éléments",
+        "description": "Photographie, note de structure et note d’apprentissage attendent leur place."
+      },
+      {
+        "name": "Le coin des visiteurs",
+        "shortName": "Accueil",
+        "description": "Bataa prépare les explications et une activité virtuelle."
+      }
+    ],
+    "characters": [
+      {
+        "name": "Saran",
+        "role": "organise la découverte du ger",
+        "greeting": "Bonjour ! Bataa a préparé la maquette. J’aimerais que les visiteurs comprennent ce qu’ils regardent avant que nous ouvrions la discussion.",
+        "questions": [
+          {
+            "question": "C’est un véritable montage ?",
+            "answer": "Aujourd’hui, nous utilisons cette maquette. Nous pouvons déplacer ses éléments sans prétendre apprendre à construire un ger en quelques minutes."
+          },
+          {
+            "question": "Pourquoi cette petite maquette ?",
+            "answer": "On peut la regarder de tous les côtés. J’aimerais m’en servir pour relier les objets visibles à leur rôle, puis parler des personnes qui les fabriquent."
+          }
+        ]
+      },
+      {
+        "name": "Bataa",
+        "role": "prépare les supports de la visite",
+        "greeting": "J’ai posé la photographie et les deux notes ici. Si tu retrouves leur sujet, nous pourrons choisir comment les utiliser avec les visiteurs.",
+        "questions": [
+          {
+            "question": "Tu préfères montrer ou raconter ?",
+            "answer": "J’aime commencer par un objet, puis écouter les questions. Mais Saran fait parfois l’inverse, et cela fonctionne aussi. Tu peux choisir notre départ."
+          },
+          {
+            "question": "Je pourrai essayer quelque chose ?",
+            "answer": "Oui, un assemblage virtuel. Il sert à repérer les grandes parties ; le montage réel demande un savoir-faire et du travail en commun."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "La forme",
+        "text": "La photographie montre un ger couvert dans la steppe. Sa silhouette ronde se distingue ; l’armature est cachée par la couverture."
+      },
+      {
+        "label": "Le contexte",
+        "text": "Le document a été pris près de Mandalgovi. Il présente un lieu précis et ne résume pas toutes les façons d’habiter en Mongolie."
+      },
+      {
+        "label": "La scène du jeu",
+        "text": "La maquette et la rencontre avec Saran et Bataa sont inventées ; la photographie reste un document indépendant."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Un habitat à observer",
+        "text": "La photographie donne un point de départ visuel pour regarder la forme du ger. Sa légende indique le contexte du document.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Une structure démontable",
+        "text": "Le ger associe une armature de bois, des couvertures de feutre et de toile, et des cordes. Ses éléments permettent de le démonter, de le transporter et de le remonter.",
+        "source": "https://ich.unesco.org/en/RL/traditional-craftsmanship-of-the-mongol-ger-and-its-associated-customs-00872"
+      },
+      {
+        "id": "partage",
+        "title": "Des savoirs en commun",
+        "text": "La fabrication réunit plusieurs savoir-faire. Les plus jeunes apprennent notamment auprès d’artisans expérimentés et en observant les opérations familiales.",
+        "source": "https://ich.unesco.org/en/Decisions/8.COM/8.20"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Prépare les trois repères de la maquette : à quoi chaque support sert-il pendant la visite ?",
+      "labels": [
+        {
+          "id": "a",
+          "text": "Regarder la forme du ger"
+        },
+        {
+          "id": "b",
+          "text": "Comprendre les éléments de sa structure"
+        },
+        {
+          "id": "c",
+          "text": "Découvrir le travail et l’apprentissage en commun"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie du ger",
+          "text": "Elle présente un habitat dans un contexte documenté.",
+          "correct": "a"
+        },
+        {
+          "id": "geste",
+          "name": "La note sur les éléments",
+          "text": "Bois, couvertures et cordes : elle distingue les grandes parties.",
+          "correct": "b"
+        },
+        {
+          "id": "partage",
+          "name": "La note sur les personnes",
+          "text": "Elle parle de fabrication, de coopération et d’apprentissage.",
+          "correct": "c"
+        }
+      ],
+      "hint": "Distingue ce que montre l’image, ce qui compose l’habitat et les personnes qui transmettent leurs savoirs."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Préparer une table de maquette",
+        "description": "Présenter les éléments avant la conversation.",
+        "reply": "Je pose la maquette devant nous. Décidons ce que les visiteurs regarderont d’abord.",
+        "place": 0,
+        "preparationTitle": "Un premier repère",
+        "preparationPrompt": "Par quoi commences-tu la présentation ?",
+        "endingTitle": "Les éléments prennent leur place",
+        "options": [
+          {
+            "id": "un",
+            "label": "Montrer l’armature de la maquette",
+            "reply": "Je garde la couverture à côté pour que l’intérieur de la structure reste visible.",
+            "endingText": "La maquette laisse voir son armature. Les visiteurs suivent les éléments du regard, puis Bataa rapproche la note qui décrit les couvertures et les cordes.",
+            "endingReply": "On peut maintenant passer de la petite maquette à la photographie sans perdre les repères."
+          },
+          {
+            "id": "deux",
+            "label": "Comparer la maquette et la photographie",
+            "reply": "Je les installe côte à côte. Les différences nous donneront de quoi parler.",
+            "endingText": "Tu places la maquette près du document. Une visiteuse repère la forme ronde, un autre s’interroge sur ce que la photo ne montre pas. Saran ouvre la note sur les éléments.",
+            "endingReply": "La comparaison nous a donné une question précise. Nous avons de quoi y répondre."
+          }
+        ]
+      },
+      {
+        "id": "rencontre",
+        "title": "Ouvrir l’échange avec les visiteurs",
+        "description": "Partir d’une question, puis utiliser la maquette pour poursuivre.",
+        "reply": "Nous pouvons les accueillir ici. Choisissons une question qui donne envie de regarder.",
+        "place": 2,
+        "preparationTitle": "Une invitation à observer",
+        "preparationPrompt": "Quelle question proposes-tu ?",
+        "endingTitle": "La visite commence par un échange",
+        "options": [
+          {
+            "id": "un",
+            "label": "Qu’aimeriez-vous voir à l’intérieur ?",
+            "reply": "Je note les idées. La maquette nous aidera à en discuter.",
+            "endingText": "Les visiteurs proposent ce qu’ils aimeraient voir. Saran distingue les questions auxquelles la maquette répond de celles qui demanderaient d’autres documents.",
+            "endingReply": "Vous avez choisi de regarder plus loin que la forme extérieure. Gardons vos questions pour la suite."
+          },
+          {
+            "id": "deux",
+            "label": "Quels savoir-faire faut-il réunir ?",
+            "reply": "Je prépare les notes. Nous pourrons relier les éléments aux personnes qui les réalisent.",
+            "endingText": "La conversation commence par les matières et les gestes. Bataa montre la note de transmission, puis Saran s’appuie sur la maquette pour rendre les explications plus concrètes.",
+            "endingReply": "Notre petite maison nous a conduits vers tout un travail en commun. Merci pour cette entrée en matière."
+          }
+        ]
+      }
+    ],
+    "practice": {
+      "title": "Une maquette à composer",
+      "intro": "Compose une maquette illustrée : structure, enveloppe, puis liens extérieurs. Tes couleurs sont libres. L’apparition des éléments est un choix du jeu, pas l’ordre d’un montage réel.",
+      "steps": [
+        {
+          "title": "La structure",
+          "text": "Choisis une teinte pour l’armature de ton modèle illustré.",
+          "options": [
+            {
+              "label": "Bois clair",
+              "reply": "Saran : Les éléments apparaissent dans une teinte claire. C’est ton choix pour cette maquette."
+            },
+            {
+              "label": "Bois foncé",
+              "reply": "Saran : La teinte foncée fait ressortir la structure. Notre dessin reste une étude simplifiée."
+            }
+          ]
+        },
+        {
+          "title": "L’enveloppe",
+          "text": "Ajoute la couverture à ton modèle avec une couleur de ton choix.",
+          "options": [
+            {
+              "label": "Feutre crème",
+              "reply": "Bataa : La couverture crème apparaît sur ton modèle. La note documentaire distingue les matières utilisées dans le ger."
+            },
+            {
+              "label": "Feutre ocre",
+              "reply": "Bataa : Cette teinte ocre appartient à ton modèle libre. Nous ne la présenterons pas comme une règle traditionnelle."
+            }
+          ]
+        },
+        {
+          "title": "Les liens extérieurs",
+          "text": "Choisis comment représenter les liens sur ta maquette, sans en faire un plan de construction.",
+          "options": [
+            {
+              "label": "Deux bandes larges",
+              "reply": "Saran : Ces deux bandes donnent un repère visuel à ta maquette. Leur nombre et leur largeur sont un choix du jeu."
+            },
+            {
+              "label": "Trois bandes fines",
+              "reply": "Saran : Les trois bandes complètent ton illustration. Ce petit modèle n’indique pas comment fixer un ger réel."
+            }
+          ]
+        }
+      ],
+      "finishText": "Ta présentation virtuelle est prête. Le dossier documentaire permet de retrouver les savoir-faire et les coutumes que cette petite maquette ne peut pas résumer.",
+      "sourceUrl": "https://ich.unesco.org/en/RL/traditional-craftsmanship-of-the-mongol-ger-and-its-associated-customs-00872",
+      "sourceLabel": "Artisanat du ger mongol et coutumes associées · UNESCO"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/en/RL/traditional-craftsmanship-of-the-mongol-ger-and-its-associated-customs-00872",
+        "label": "UNESCO · Artisanat du ger mongol",
+        "supports": "Structure, matériaux, démontage et transport ; rôle social et culturel de cet habitat."
+      },
+      {
+        "url": "https://ich.unesco.org/en/Decisions/8.COM/8.20",
+        "label": "UNESCO · Décision 8.COM 8.20",
+        "supports": "Participation familiale et communautaire, transmission entre générations, inscription en 2013."
+      }
+    ]
+  },
+  "senegal": {
+    "title": "Une place autour du plat",
+    "mission": "Aider Awa et Ibrahima à préparer l’accueil d’un repas, avec une présentation qui laisse place aux différentes histoires du ceebu jën.",
+    "intro": "Dans cette rencontre imaginée à Saint-Louis, Awa prépare un repas et Ibrahima accueille les invités. Il a retrouvé une photo et deux notes pour présenter le ceebu jën. Ils te proposent de les aider, puis de choisir comment ouvrir la conversation autour de la table.",
+    "places": [
+      {
+        "name": "La cour de la cuisine",
+        "shortName": "Cuisine",
+        "description": "Awa termine les préparatifs de son repas et garde une place pour tes questions."
+      },
+      {
+        "name": "La petite table des documents",
+        "shortName": "Documents",
+        "description": "Une photographie et deux notes permettent de distinguer le plat, ses variantes et sa transmission."
+      },
+      {
+        "name": "Le coin du repas",
+        "shortName": "Le repas",
+        "description": "Ibrahima prépare l’accueil et attend ton idée pour commencer la rencontre."
+      }
+    ],
+    "characters": [
+      {
+        "name": "Awa",
+        "role": "prépare le repas de notre récit",
+        "greeting": "Bonjour ! Ibrahima a presque fini l’accueil. J’aimerais que nos invités puissent poser leurs questions avant que nous passions à table.",
+        "questions": [
+          {
+            "question": "Tu as suivi une recette unique ?",
+            "answer": "J’ai choisi une version que j’aime préparer. Les recettes changent selon les familles et les régions ; ce repas sera notre façon d’accueillir les visiteurs."
+          },
+          {
+            "question": "Je peux te donner un coup de main ?",
+            "answer": "Oui : aide Ibrahima à préparer la présentation. Moi, je termine ici. Nous garderons le temps de regarder le plat ensemble avant de servir."
+          }
+        ]
+      },
+      {
+        "name": "Ibrahima",
+        "role": "accueille les invités",
+        "greeting": "J’ai la photo, une note sur les ingrédients et une autre sur l’apprentissage. Aide-moi à les présenter, et nous choisirons ensuite comment accueillir tout le monde.",
+        "questions": [
+          {
+            "question": "Que faut-il expliquer d’abord ?",
+            "answer": "J’aimerais qu’on évite de transformer le repas en leçon. Nous pouvons laisser les documents à regarder ou lancer une seule question avant de manger."
+          },
+          {
+            "question": "Qui va raconter son souvenir ?",
+            "answer": "Celles et ceux qui en ont envie. Awa en a un, moi aussi ; les invités pourront apporter le leur sans devoir être d’accord avec nous."
+          }
+        ]
+      }
+    ],
+    "photoNotes": [
+      {
+        "label": "Le plat",
+        "text": "La photographie montre du riz, du poisson et des légumes dans un grand plat métallique. Une main et une cuillère sont visibles."
+      },
+      {
+        "label": "Les limites de l’image",
+        "text": "Une photographie montre une préparation particulière. On ne peut pas en déduire une recette valable pour toutes les familles."
+      },
+      {
+        "label": "Le repas du récit",
+        "text": "Awa, Ibrahima et leurs invités sont inventés ; la photo ne documente pas le repas de ces personnages."
+      }
+    ],
+    "clues": [
+      {
+        "id": "photo",
+        "title": "Regarder une présentation",
+        "text": "La photographie documente une présentation de ceebu jën. Elle permet d’observer le plat, sans dresser la liste complète de sa recette.",
+        "source": "photo"
+      },
+      {
+        "id": "geste",
+        "title": "Un plat et ses variantes",
+        "text": "Le dossier situe les origines du ceebu jën dans les communautés de pêcheurs de l’île de Saint-Louis. Il décrit notamment du riz, du poisson et des légumes, avec des variantes régionales.",
+        "source": "https://ich.unesco.org/fr/RL/le-ceebu-jn-art-culinaire-du-sngal-01748"
+      },
+      {
+        "id": "partage",
+        "title": "Apprendre et participer",
+        "text": "La préparation et les usages du repas se transmettent entre générations. Le dossier décrit un apprentissage oral et une participation progressive des enfants aux tâches.",
+        "source": "https://ich.unesco.org/fr/decisions/16.COM/8.B.36"
+      }
+    ],
+    "puzzle": {
+      "prompt": "Retrouve le sujet des trois supports pour préparer une présentation claire avant le repas.",
+      "labels": [
+        {
+          "id": "a",
+          "text": "L’apprentissage et la participation"
+        },
+        {
+          "id": "b",
+          "text": "Le plat visible sur la photographie"
+        },
+        {
+          "id": "c",
+          "text": "Les ingrédients et les variantes"
+        }
+      ],
+      "supports": [
+        {
+          "id": "photo",
+          "name": "La photographie",
+          "text": "Elle montre une présentation particulière du plat.",
+          "correct": "b"
+        },
+        {
+          "id": "geste",
+          "name": "La note sur la préparation",
+          "text": "Elle évoque riz, poisson, légumes et diversité des recettes.",
+          "correct": "c"
+        },
+        {
+          "id": "partage",
+          "name": "La note sur les générations",
+          "text": "Elle parle des personnes qui apprennent et prennent part aux préparatifs.",
+          "correct": "a"
+        }
+      ],
+      "hint": "L’image montre un plat. Une note parle de ce qui le compose ; l’autre, de celles et ceux qui apprennent à le préparer."
+    },
+    "plans": [
+      {
+        "id": "atelier",
+        "title": "Préparer un coin de découverte",
+        "description": "Laisser les supports à disposition avant de passer à table.",
+        "reply": "Je dégage un coin de la table. Nous pouvons y installer un premier support.",
+        "place": 0,
+        "preparationTitle": "Ce que l’on regarde d’abord",
+        "preparationPrompt": "Quel support mets-tu en avant ?",
+        "endingTitle": "Le repas se découvre avant de se raconter",
+        "options": [
+          {
+            "id": "un",
+            "label": "Placer la photographie en premier",
+            "reply": "Je la pose à côté des deux notes. Nous répondrons aux questions quand tout le monde sera installé.",
+            "endingText": "Les invités commencent par regarder le document. L’un d’eux cherche un ingrédient qu’il reconnaît. Awa explique que la photo et son propre plat sont deux préparations différentes.",
+            "endingReply": "Cette comparaison nous a permis de parler des variantes. Nous pouvons maintenant passer à table."
+          },
+          {
+            "id": "deux",
+            "label": "Ouvrir sur la note des variantes",
+            "reply": "Très bien. Elle nous rappellera de laisser de la place aux différentes recettes.",
+            "endingText": "La note sur les variantes ouvre la découverte. Une invitée évoque une préparation qu’elle connaît ; Ibrahima l’écoute puis lui montre la photographie.",
+            "endingReply": "Nous n’avons pas cherché une seule bonne recette. Nous avons commencé à comparer nos souvenirs."
+          }
+        ]
+      },
+      {
+        "id": "rencontre",
+        "title": "Lancer une conversation à table",
+        "description": "Garder les supports sous la main et commencer par une invitation à parler.",
+        "reply": "Les places sont prêtes. Choisissons une question, puis nous laisserons la conversation suivre son chemin.",
+        "place": 2,
+        "preparationTitle": "Une question avant le repas",
+        "preparationPrompt": "Comment ouvres-tu l’échange ?",
+        "endingTitle": "Une place pour les récits du repas",
+        "options": [
+          {
+            "id": "un",
+            "label": "Qui vous a appris un geste de cuisine ?",
+            "reply": "J’ai un souvenir en tête. Je laisserai d’abord répondre les invités.",
+            "endingText": "Tu poses la question. Une invitée parle de sa grand-mère ; Ibrahima raconte sa première tâche dans une cuisine. Awa apporte le plat pendant que les récits se répondent.",
+            "endingReply": "Nous avons fait de la place aux personnes derrière les recettes. Tu peux t’installer avec nous."
+          },
+          {
+            "id": "deux",
+            "label": "Quel détail aimez-vous dans un repas partagé ?",
+            "reply": "J’aimerais bien entendre les réponses. Je rapproche le plat pour que chacun puisse le voir.",
+            "endingText": "Les réponses évoquent une place gardée, un parfum et le plaisir de retrouver quelqu’un. Ibrahima range les documents à portée de main, puis rejoint les invités.",
+            "endingReply": "Ton invitation a ouvert une conversation toute simple. Le repas peut commencer."
+          }
+        ]
+      }
+    ],
+    "practice": {
+      "title": "Prépare un accueil virtuel",
+      "intro": "Compose une invitation pour le repas du récit. Tes choix sont libres et ne remplacent pas les usages des familles.",
+      "steps": [
+        {
+          "title": "Une place à préparer",
+          "text": "Imagine où les invités découvriront les documents avant le repas.",
+          "options": [
+            {
+              "label": "Sur une petite table à l’entrée",
+              "reply": "Ibrahima : Je les laisse à regarder pendant que chacun arrive."
+            },
+            {
+              "label": "À côté du coin du repas",
+              "reply": "Ibrahima : Nous pourrons les reprendre si une question vient à table."
+            }
+          ]
+        },
+        {
+          "title": "Un repère à garder",
+          "text": "Choisis ce que tu aimerais retenir de cette escale.",
+          "options": [
+            {
+              "label": "La diversité des préparations",
+              "reply": "Awa : Je garde cette idée. Notre version de l’histoire restera une version parmi d’autres."
+            },
+            {
+              "label": "Les personnes qui transmettent",
+              "reply": "Awa : Nous prendrons le temps de penser aux personnes auprès desquelles on apprend."
+            }
+          ]
+        },
+        {
+          "title": "Un mot d’invitation",
+          "text": "Termine ton accueil avec une phrase personnelle.",
+          "options": [
+            {
+              "label": "Prenons le temps de découvrir",
+              "reply": "Ibrahima : Je garde ton invitation près des documents."
+            },
+            {
+              "label": "Une place pour ton histoire",
+              "reply": "Ibrahima : Cette phrase laisse la conversation ouverte. Je la pose près des places."
+            }
+          ]
+        }
+      ],
+      "finishText": "Ton accueil virtuel est prêt. La fiche culturelle distingue les repères documentaires et le repas inventé pour cette rencontre.",
+      "sourceUrl": "https://ich.unesco.org/fr/RL/le-ceebu-jn-art-culinaire-du-sngal-01748",
+      "sourceLabel": "Le ceebu jën, art culinaire du Sénégal · UNESCO"
+    },
+    "sources": [
+      {
+        "url": "https://ich.unesco.org/fr/RL/le-ceebu-jn-art-culinaire-du-sngal-01748",
+        "label": "UNESCO · Le ceebu jën, art culinaire du Sénégal",
+        "supports": "Origines à Saint-Louis, ingrédients et variantes, préparation et usages du repas."
+      },
+      {
+        "url": "https://ich.unesco.org/fr/decisions/16.COM/8.B.36",
+        "label": "UNESCO · Décision 16.COM 8.B.36",
+        "supports": "Transmission orale, participation progressive aux tâches et inscription en 2021."
       }
     ]
   }
