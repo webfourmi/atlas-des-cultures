@@ -67,6 +67,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
     assert.equal(images.length+canvases.length,1,'Exactly one visual is required on '+id+' '+(pane||a.screen));
     if(images.length){const attrs=images[0][1],src=attrs.match(/\bsrc="([^"]+)"/)[1],alt=attrs.match(/\balt="([^"]*)"/)[1];assert(alt.length>20,'Missing useful image alternative');assert(fs.existsSync(path.join(root,src)),'Missing image '+src);}
     else assert(['indonesie',...plain('ATLAS_NEW_IDS')].includes(id),'A creation appeared in another country');
+    if(!pane){assert(markup.includes('class="adventure-guide"'),'Missing next-action guide');assert(markup.indexOf('class="adventure-guide"')<Math.min(...['<img','<svg'].map(tag=>markup.indexOf(tag)).filter(n=>n>=0)),'The instruction appears below the image');}
     if(save)snapshot('world-'+id+'-'+(pane||a.screen)+(a.screen==='practice'&&!pane?'-'+a.practiceStep:a.screen==='puzzle'&&!pane?'-'+a.piece:a.screen==='ending'&&!pane?'-'+a.ending:''));
   };
   const initialXP=run('xp()');
@@ -105,9 +106,9 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
       assert.notEqual(elements.get('app').innerHTML,firstReply);
       primary();check();assert.equal(adventure().screen,'photo');
       visible('world-note','0');primary();assert.equal(adventure().photoNote,2);check();
-      primary();check();assert.equal(adventure().screen,'geste');primary();assert(adventure().clues.includes('geste'));
-      primary();check();assert.equal(adventure().screen,'partage');primary();assert(adventure().clues.includes('partage'));
-      primary();check();assert.equal(adventure().screen,'partner');
+      assert.equal(adventure().screen,'geste');assert(adventure().clues.includes('photo'));
+      primary();check();assert.equal(adventure().screen,'partage');assert(adventure().clues.includes('geste'));
+      primary();check();assert.equal(adventure().screen,'partner');assert(adventure().clues.includes('partage'));
       visible('world-talk','talk:1:0');visible('world-clear-reply');visible('world-talk','talk:1:1');
       primary();check();assert.equal(adventure().screen,'practice');
       const tasks=plain(`worldTasks('${id}',journeyProgress('${id}').adventure)`);
@@ -125,21 +126,23 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
       }else{
         visible('world-practice','skip');assert.equal(adventure().practiceStatus,'skipped');
       }
-      assert.equal(adventure().screen,'route');check();
+      assert.equal(adventure().screen,'puzzle');check();
       assert.deepEqual(plain(`worldTasks('${id}',journeyProgress('${id}').adventure)`),tasks,'The optional activity changed the mission requirements');
-      visible('world-plan',plan.id);primary();check();assert.equal(adventure().screen,'puzzle');
       if(option.id==='un'&&plan.id==='atelier'){
-        for(const support of data.puzzle.supports){const label=['a','b','c'][(['a','b','c'].indexOf(support.correct)+1)%3];visible('world-answer',label);primary();}
-        assert.equal(adventure().checked,true);assert.equal(run(`worldSolved('${id}',journeyProgress('${id}').adventure)`),false);
-        visible('world-hint');check();assert.equal(run('worldPane'),'aide');
-        visible('world-hint');assert.equal(adventure().hint,2);visible('world-pane','play');
+        const first=data.puzzle.supports[0],wrong=['a','b','c'].find(k=>k!==first.correct);
+        visible('world-answer',wrong);assert.match(elements.get('app').innerHTML,/Tu peux essayer une autre réponse/);
+        assert.equal(run(`worldSolved('${id}',journeyProgress('${id}').adventure)`),false);
+        const before=adventure().board;visible('world-reveal',first.id);
+        assert.equal(adventure().board[first.id],first.correct);assert.equal(adventure().board.geste,before.geste,'Revealing a response modified another question');
+        assert.match(elements.get('app').innerHTML,/Oui, c’est cela/);
       }
       for(const p of data.puzzle.supports){visible('world-piece',p.id);visible('world-answer',p.correct);check();}
       const board=adventure().board;
-      assert.equal(act('answer','a',{piece:'photo'}),false,'Answer from another support accepted');
+      assert.equal(act('answer','a',{piece:'photo'}),false,'Answer from another question accepted');
       const other=ids.find(x=>x!==id);assert.equal(run(`worldAction('answer','a','${other}',1,'puzzle','partage')`),false,'Click from another country accepted');
-      primary();check();assert.equal(run(`worldSolved('${id}',journeyProgress('${id}').adventure)`),true);
+      assert.equal(run(`worldSolved('${id}',journeyProgress('${id}').adventure)`),true);
       visible('world-piece','photo');assert.deepEqual(adventure().board,board);visible('world-piece','partage');primary();check();
+      assert.equal(adventure().screen,'route');visible('world-plan',plan.id);primary();check();
       assert.equal(adventure().screen,'preparation');visible('world-prepare',option.id);primary();check();assert.equal(adventure().screen,'ready');
       primary();check();assert.equal(adventure().ending,plan.id);assert.equal(adventure().screen,'ending');
       context.expectedEnding=option.endingText;assert(elements.get('app').innerHTML.includes(run('esc(expectedEnding)')));
@@ -161,6 +164,17 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
     assert.deepEqual(adventure().endings,['atelier','rencontre']);
     click('journey-back');assert(!document.body.classList.contains('india-playing'));
   }
+  for(const id of ids){
+    run(`state.journeys['${id}']={node:'begin',seen:[],completed:false};openJourney('${id}')`);
+    primary();primary();primary();primary();primary();
+    assert.equal(adventure().screen,'partner');visible('world-skip-activity');assert.equal(adventure().screen,'puzzle');assert.equal(adventure().practiceStatus,'skipped');
+    visible('world-answer','a');visible('world-piece','geste');visible('world-answer','a');
+    assert.equal(adventure().board.photo,'a','An independent answer moved the previous answer');
+    const data=plain('WORLD_ADVENTURES.'+id);
+    for(const p of data.puzzle.supports){act('piece',p.id);act('answer',p.correct);}
+    run('journeyProgress(activeJourney).adventure.checked=false');assert.doesNotThrow(()=>run('worldPrimary(activeJourney,journeyProgress(activeJourney).adventure)'));primary();
+    assert.equal(run(`worldSolved('${id}',journeyProgress('${id}').adventure)`),true);
+  }
   assert.equal(directRoutes,ids.length*24);assert.equal(uiRoutes,ids.length*4);assert.equal(run('xp()'),initialXP);
   assert.deepEqual(plain('journeyProgress("inde")'),indiaBefore,'The India adventure changed during other journeys');
   // Current screen, choices and practice survive export/restore; local work wins on a merge.
@@ -170,7 +184,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   act('screen','photo');const local=adventure();await run('importJSON(worldBackupFile)');assert.deepEqual(adventure(),local,'Import overwrote a local in-progress screen');
   // Invalid imported fields cannot introduce actions, unsafe markup or a fabricated ending.
   const corrupt=plain('cleanWorldAdventure("japon",{started:true,place:"<script>",visited:[0,2,"bad"],clues:["photo","bad"],board:{photo:"a",geste:"a",partage:"bad"},practiceStep:999,practiceChoices:[0,"<script>",9],practiceStatus:"bad",screen:"<script>",plan:"atelier",ending:"atelier",endings:["atelier","bad"],log:["<script>","talk:1:0"]})');
-  assert.equal(corrupt.place,0);assert.equal(corrupt.screen,'preparation');assert.equal(corrupt.board.geste,null);assert.equal(corrupt.practiceStep,2);assert.deepEqual(corrupt.practiceChoices,[0,null,null]);assert.equal(corrupt.practiceStatus,null);assert.equal(corrupt.ending,null);assert.deepEqual(corrupt.endings,['atelier']);assert.deepEqual(corrupt.log,['talk:1:0']);
+  assert.equal(corrupt.place,0);assert.equal(corrupt.screen,'preparation');assert.equal(corrupt.board.geste,'a');assert.equal(corrupt.practiceStep,2);assert.deepEqual(corrupt.practiceChoices,[0,null,null]);assert.equal(corrupt.practiceStatus,null);assert.equal(corrupt.ending,null);assert.deepEqual(corrupt.endings,['atelier']);assert.deepEqual(corrupt.log,['talk:1:0']);
   run('show("home")');assert.equal(run('worldAction("start")'),false);
   run('openJourney("inde")');assert.equal(run('worldAction("start")'),false,'World actions affected India');
   // Audio and video stay opt-in; their files and credits remain the existing sources.

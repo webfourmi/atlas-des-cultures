@@ -1,8 +1,8 @@
 {
   "georgie": {
-    "title": "Une jarre, trois histoires",
-    "mission": "Aider Nino et Giorgi à préparer trois légendes pour accueillir les visiteurs de l’atelier.",
-    "intro": "Nino, apprentie adulte, a posé une photographie et deux fiches sur la table. Giorgi, le potier, termine de ranger. Leur petit accueil de visiteurs commence bientôt : à toi de choisir ce que vous raconterez ensemble. L’atelier et les personnages sont fictifs.",
+    "title": "La jarre et ses secrets",
+    "mission": "Aide Nino et Giorgi à présenter le kvevri aux visiteurs de leur atelier.",
+    "intro": "Nino a placé une jarre près de l’entrée. Les visiteurs vont demander à quoi elle sert et comment on apprend à la fabriquer. Tu vas préparer ces explications avec Giorgi, puis choisir le début de la visite.",
     "places": [
       {
         "name": "La cour d’accueil",
@@ -24,7 +24,7 @@
       {
         "name": "Nino",
         "role": "Apprend le travail de la terre cuite",
-        "greeting": "Bonjour ! J’ai préparé trois documents, mais leurs légendes se ressemblent trop. Tu m’aides à les rendre plus claires ?",
+        "greeting": "Bienvenue ! Aide Nino et Giorgi à présenter le kvevri aux visiteurs de leur atelier. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Qu’est-ce que les visiteurs doivent comprendre ?",
@@ -39,7 +39,7 @@
       {
         "name": "Giorgi",
         "role": "Potier",
-        "greeting": "Entre, il y a de la place près de la table. Nino m’a dit que tu nous aidais pour l’accueil. Qu’aimerais-tu demander ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : imaginer une petite jarre. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Pourquoi parler aussi des personnes qui utilisent les jarres ?",
@@ -87,7 +87,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Nino veut éviter trois légendes interchangeables. Associe chaque document à l’idée qu’il explique le mieux.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -107,27 +107,75 @@
           "id": "photo",
           "name": "La photographie du musée",
           "text": "Plusieurs récipients sont visibles : leurs silhouettes peuvent être comparées.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel matériau reconnais-tu dans les récipients photographiés ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "La terre cuite"
+            },
+            {
+              "id": "b",
+              "text": "Le métal poli"
+            },
+            {
+              "id": "c",
+              "text": "Le verre soufflé"
+            }
+          ],
+          "explanation": "La photo montre des récipients de terre cuite présentés au musée. Elle permet d’observer une forme ; elle ne montre pas leur fabrication."
         },
         {
           "id": "geste",
           "name": "La fiche de l’objet",
           "text": "Elle explique la place de la jarre dans une méthode de vinification.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Où place-t-on le kvevri dans la méthode de vinification décrite ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Suspendu au plafond"
+            },
+            {
+              "id": "b",
+              "text": "Enfoui dans le sol"
+            },
+            {
+              "id": "c",
+              "text": "Flottant sur un bassin"
+            }
+          ],
+          "explanation": "Le kvevri est un récipient d’argile ovoïde. La méthode de vinification traditionnelle comprend son enfouissement dans le sol."
         },
         {
           "id": "partage",
           "name": "La fiche des personnes",
           "text": "Elle relie l’apprentissage aux familles et aux proches.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Comment ces savoirs se transmettent-ils notamment ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Uniquement en lisant une étiquette"
+            },
+            {
+              "id": "b",
+              "text": "Sans observer le travail des autres"
+            },
+            {
+              "id": "c",
+              "text": "En observant et en participant auprès des proches"
+            }
+          ],
+          "explanation": "Fabrication des jarres et vinification s’apprennent notamment dans les familles et entre proches, en observant et en participant."
         }
       ],
-      "hint": "Cherche le sujet principal : ce que les yeux distinguent, ce que fait l’objet, puis la manière dont les personnes apprennent."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
         "id": "atelier",
-        "title": "Installer les trois légendes",
+        "title": "Préparer la table de découverte",
         "description": "Préparer avec Nino un petit parcours de lecture pour les visiteurs.",
         "reply": "Bonne idée. Je laisse un peu d’espace entre les documents pour qu’on puisse les regarder tranquillement.",
         "place": 0,
@@ -138,7 +186,7 @@
             "id": "un",
             "label": "Commencer par la photographie",
             "reply": "On pourra demander : qu’est-ce qui attire votre regard ?",
-            "endingText": "Nino invite les visiteurs à comparer les silhouettes. Tu places ensuite les deux autres légendes. Les questions arrivent naturellement, et Giorgi vient rejoindre la table.",
+            "endingText": "Nino invite les visiteurs à comparer les silhouettes des jarres photographiées. Tu lui proposes de poursuivre avec leur usage. Les questions arrivent et Giorgi rejoint la table.",
             "endingReply": "Merci. Nous avons maintenant un point de départ simple pour la conversation."
           },
           {
@@ -149,7 +197,7 @@
             "endingReply": "Ça donne envie de regarder les autres documents. Merci pour le coup de main !"
           }
         ],
-        "endingTitle": "Les légendes trouvent leur place"
+        "endingTitle": "La visite de l’atelier commence"
       },
       {
         "id": "rencontre",
@@ -171,7 +219,7 @@
             "id": "deux",
             "label": "Demander comment les documents se complètent",
             "reply": "Posons-les côte à côte. Chacun peut éclairer un autre aspect.",
-            "endingText": "Giorgi dispose les trois documents. Nino lit vos légendes, puis les visiteurs choisissent leurs questions. Le petit accueil devient une conversation autour de la table.",
+            "endingText": "Giorgi dispose la photo et les deux notes. Nino explique ce que chaque document apporte. Les visiteurs posent leurs premières questions autour de la table.",
             "endingReply": "C’est prêt. Nous aurons plusieurs façons de répondre aux curieux."
           }
         ],
@@ -240,12 +288,16 @@
         "label": "Wikimedia Commons · photographie du musée de Gonio",
         "supports": "Provenance et crédit du document photographique, distinct de l’atelier fictif."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Découvrir le premier moment de la visite que tu as préparée.",
+      "finish": "Faire entrer les visiteurs →"
+    }
   },
   "mexique": {
-    "title": "Trois cartes avant de passer à table",
-    "mission": "Aider Mateo et Luz à préparer trois cartes pour raconter le repas au-delà de l’assiette.",
-    "intro": "Dans une cuisine familiale fictive du Michoacán, Mateo apporte des cartons vierges. Luz, la cuisinière de la famille, veut préparer un petit accueil pour des invités. Ces deux personnages adultes te proposent de choisir ce que vous raconterez autour de la table.",
+    "title": "Le repas commence avant l’assiette",
+    "mission": "Aide Mateo et Luz à présenter le travail du maïs avant d’accueillir leurs invités.",
+    "intro": "Mateo prépare les tortillas et Luz dispose la table. Ils aimeraient raconter le chemin du maïs jusqu’au repas. Tu vas découvrir un geste de cuisine, puis choisir comment recevoir les invités.",
     "places": [
       {
         "name": "La table de Mateo",
@@ -267,7 +319,7 @@
       {
         "name": "Mateo",
         "role": "Donne un coup de main à la cuisine familiale",
-        "greeting": "Bonjour ! Il nous reste une chose à préparer : nos cartes pour les invités. Luz préfère trois idées courtes plutôt qu’un long discours.",
+        "greeting": "Bienvenue ! Aide Mateo et Luz à présenter le travail du maïs avant d’accueillir leurs invités. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "C’est Luz que l’on voit sur la photographie ?",
@@ -282,7 +334,7 @@
       {
         "name": "Luz",
         "role": "Cuisinière de la famille",
-        "greeting": "Viens, j’ai gardé une place près de la table. Mateo m’a parlé des cartes. Qu’est-ce que tu aimerais demander ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : composer un repas virtuel. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Pourquoi le maïs revient-il dans les documents ?",
@@ -330,7 +382,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Trois cartes, trois idées. Aide Mateo à associer chaque support à la légende qui lui correspond.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -350,22 +402,70 @@
           "id": "photo",
           "name": "La photographie de Janitzio",
           "text": "Elle montre le travail d’une pâte sur une pierre.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel geste la photographie montre-t-elle ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Le travail d’une pâte sur un metate"
+            },
+            {
+              "id": "b",
+              "text": "La récolte du maïs dans un champ"
+            },
+            {
+              "id": "c",
+              "text": "La cuisson d’un plat au four"
+            }
+          ],
+          "explanation": "La photo documente le travail d’une pâte sur un metate. Elle ne permet pas, à elle seule, de connaître toutes les étapes précédentes."
         },
         {
           "id": "geste",
           "name": "La fiche du maïs",
           "text": "Elle présente le traitement du maïs appelé nixtamalisation.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Comment appelle-t-on la préparation du maïs à l’eau de chaux ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "La fermentation du cacao"
+            },
+            {
+              "id": "b",
+              "text": "La nixtamalisation"
+            },
+            {
+              "id": "c",
+              "text": "La torréfaction du café"
+            }
+          ],
+          "explanation": "La nixtamalisation, préparation du maïs à l’eau de chaux, fait partie des techniques de cette tradition culinaire."
         },
         {
           "id": "partage",
           "name": "La fiche du repas partagé",
           "text": "Elle relie les cultivateurs, la cuisine et les convives.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Que raconte cette tradition au-delà de la recette ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement le dressage de l’assiette"
+            },
+            {
+              "id": "b",
+              "text": "Seulement la conservation des ustensiles"
+            },
+            {
+              "id": "c",
+              "text": "Les liens entre agriculture, préparation et partage"
+            }
+          ],
+          "explanation": "Les savoirs décrits par l’UNESCO associent agriculture, préparation et partage. Au Michoacán et ailleurs, ils contribuent aux liens communautaires."
         }
       ],
-      "hint": "La photo raconte un moment. Une fiche explique une technique ; l’autre élargit le regard à la chaîne des personnes."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -483,12 +583,16 @@
         "label": "Wikimedia Commons · préparation sur un metate",
         "supports": "Provenance et crédit de la photographie de Janitzio ; la personne représentée n’est pas Luz."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le début du repas et l’échange que tu as préparés.",
+      "finish": "Accueillir les invités →"
+    }
   },
   "bresil": {
-    "title": "Écouter autour du cercle",
-    "mission": "Aider Joana et Paulo à préparer trois repères pour les visiteurs qui découvrent une roda de capoeira.",
-    "intro": "Dans un lieu de répétition fictif au Brésil, Joana dispose des cartes près des chaises. Paulo, musicien, la rejoint avec un dossier. Ces deux personnages adultes souhaitent préparer un accueil où chacun puisse observer et poser ses questions.",
+    "title": "À l’écoute de la roda",
+    "mission": "Aide Joana à accueillir les nouveaux venus autour d’une roda de capoeira.",
+    "intro": "Joana et Paulo attendent des visiteurs qui ne connaissent pas la capoeira. Tu vas découvrir ce qui se passe au centre et autour du cercle, écouter le berimbau si tu le souhaites, puis choisir le début de leur accueil.",
     "places": [
       {
         "name": "Le coin d’accueil",
@@ -510,7 +614,7 @@
       {
         "name": "Joana",
         "role": "Participe à la musique d’un groupe de capoeira",
-        "greeting": "Bonjour ! Pour l’accueil, j’aimerais qu’on sache où regarder sans tout expliquer d’un coup. Tu m’aides à choisir trois repères ?",
+        "greeting": "Bienvenue ! Aide Joana à accueillir les nouveaux venus autour d’une roda de capoeira. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Qui voit-on sur la photo ?",
@@ -525,7 +629,7 @@
       {
         "name": "Paulo",
         "role": "Musicien du groupe",
-        "greeting": "Joana m’a montré vos cartes. Asseyons-nous un instant, je peux répondre à quelques questions.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : une petite pause d’écoute. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "À quoi sert la musique pendant la roda ?",
@@ -573,7 +677,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Joana a trois repères à distribuer. Associe chaque document à ce qu’il aide le mieux à découvrir.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -593,22 +697,70 @@
           "id": "photo",
           "name": "La photographie de la roda",
           "text": "Elle permet de regarder le centre et les personnes autour.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Où regarder pour comprendre la scène photographiée ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Au centre et parmi les personnes autour"
+            },
+            {
+              "id": "b",
+              "text": "Seulement le sol au centre"
+            },
+            {
+              "id": "c",
+              "text": "Seulement les bâtiments au loin"
+            }
+          ],
+          "explanation": "La photographie montre les joueurs et les personnes autour. Un regard sur les bords de l’image complète ce que l’on voit au centre."
         },
         {
           "id": "geste",
           "name": "La fiche du berimbau",
           "text": "Elle relie l’instrument, les chants et le rythme.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Combien de cordes possède le berimbau décrit dans la fiche ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Quatre cordes"
+            },
+            {
+              "id": "b",
+              "text": "Une corde"
+            },
+            {
+              "id": "c",
+              "text": "Six cordes"
+            }
+          ],
+          "explanation": "Le berimbau est un instrument à une corde. Dans la roda, le maître conduit notamment les chants et le rythme."
         },
         {
           "id": "partage",
           "name": "La fiche du groupe",
           "text": "Elle explique la transmission des savoirs et les règles de respect.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Comment apprend-on notamment dans la roda ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Uniquement en étudiant une photographie"
+            },
+            {
+              "id": "b",
+              "text": "Sans relation avec les autres participants"
+            },
+            {
+              "id": "c",
+              "text": "En observant et en imitant auprès du groupe"
+            }
+          ],
+          "explanation": "Cette pratique afro-brésilienne se transmet notamment par observation et imitation. Le cercle porte des règles de respect et une mémoire de résistance à l’oppression."
         }
       ],
-      "hint": "Un support montre une disposition, un autre parle de musique, et le dernier explique comment on apprend avec les autres."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -736,12 +888,16 @@
         "label": "Estela Neto · photographie d’une roda",
         "supports": "Provenance du document photographique, distinct des personnages fictifs Joana et Paulo."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir comment Joana et Paulo commencent la rencontre.",
+      "finish": "Rejoindre le cercle →"
+    }
   },
   "perou": {
-    "title": "Avant la visite du pont",
-    "mission": "Aider Elena et Miguel à préparer trois repères sur le pont Q’eswachaka pour accueillir des visiteurs.",
-    "intro": "Dans un espace d’accueil fictif près du pont, Elena ouvre un dossier. Miguel, artisan adulte, apporte une deuxième fiche. Elena est adulte elle aussi ; ils ont réservé ce moment pour répondre aux questions, à l’écart des travaux. À toi de préparer avec eux une visite documentaire.",
+    "title": "Avant de découvrir le pont",
+    "mission": "Prépare avec Elena et Miguel l’accueil de visiteurs du pont Q’eswachaka.",
+    "intro": "Elena et Miguel attendent un petit groupe près du pont. Tu vas découvrir ses fibres, son renouvellement et le travail des communautés, puis choisir par quoi commencer la visite.",
     "places": [
       {
         "name": "Le petit accueil",
@@ -763,7 +919,7 @@
       {
         "name": "Elena",
         "role": "Participe aux préparatifs du renouvellement du pont",
-        "greeting": "Bonjour ! Nous préparons un accueil pour les visiteurs. J’aimerais leur montrer trois choses sans leur donner trop d’informations à la fois. Tu nous aides ?",
+        "greeting": "Bienvenue ! Prépare avec Elena et Miguel l’accueil de visiteurs du pont Q’eswachaka. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Où se déroule notre visite ?",
@@ -778,7 +934,7 @@
       {
         "name": "Miguel",
         "role": "Artisan",
-        "greeting": "Bonjour ! Elena m’a dit que les documents étaient presque prêts. Prenons quelques minutes pour en parler.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : comprendre un assemblage. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Pourquoi renouveler le pont chaque année ?",
@@ -826,7 +982,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Elena veut trois repères différents. Associe chaque support à ce qu’il raconte le mieux.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -846,22 +1002,70 @@
           "id": "photo",
           "name": "La photographie de Q’eswachaka",
           "text": "L’ouvrage apparaît entre les rives rocheuses, au-dessus de l’eau.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Où le pont photographié est-il installé ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Au-dessus d’une rivière dans une gorge"
+            },
+            {
+              "id": "b",
+              "text": "Sur une grande place urbaine"
+            },
+            {
+              "id": "c",
+              "text": "À l’intérieur d’un bâtiment"
+            }
+          ],
+          "explanation": "La photographie montre le pont Q’eswachaka au-dessus de la rivière. Elle permet de situer l’ouvrage dans son paysage."
         },
         {
           "id": "geste",
           "name": "La fiche des cordes",
           "text": "Elle explique le passage des fibres aux assemblages plus grands.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Avec quoi les cordes du pont sont-elles fabriquées ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Des chaînes de métal"
+            },
+            {
+              "id": "b",
+              "text": "Des fibres végétales réunies progressivement"
+            },
+            {
+              "id": "c",
+              "text": "Des lames de plastique"
+            }
+          ],
+          "explanation": "Le renouvellement annuel utilise des fibres végétales. Les cordelettes sont réunies en cordes plus grandes sous la conduite de spécialistes."
         },
         {
           "id": "partage",
           "name": "La fiche des communautés",
           "text": "Elle met en relation le travail, l’apprentissage et les cérémonies.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Qui participe à cette tradition de renouvellement annuel ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une personne travaillant seule"
+            },
+            {
+              "id": "b",
+              "text": "Seulement les visiteurs du pont"
+            },
+            {
+              "id": "c",
+              "text": "Quatre communautés quechuas"
+            }
+          ],
+          "explanation": "Quatre communautés quechuas participent à cette tradition. Travail collectif, transmission familiale et cérémonies contribuent à leurs liens."
         }
       ],
-      "hint": "Commence par ce qui situe le lieu, puis distingue la préparation des matériaux de la vie des communautés."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -979,6 +1183,10 @@
         "label": "Wikimedia Commons · photographie de Q’eswachaka",
         "supports": "Provenance et crédit du document photographique de 2018, distinct des lieux et personnages fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Découvrir la première explication donnée au groupe grâce à ton choix.",
+      "finish": "Accueillir le groupe →"
+    }
   }
 }

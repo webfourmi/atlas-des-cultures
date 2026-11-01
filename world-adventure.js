@@ -2,7 +2,7 @@
 'use strict';
 const WORLD_SCREEN_KEYS=['intro','host','photo','geste','partage','partner','practice','route','puzzle','preparation','ready','ending'];
 const WORLD_PIECES=['photo','geste','partage'];
-const WORLD_SEQUENCE=['host','photo','geste','partage','partner','practice','route','puzzle','preparation','ready'];
+const WORLD_SEQUENCE=['host','photo','geste','partage','partner','practice','puzzle','route','preparation','ready'];
 const WORLD_ART_DETAILS={
   espagne:'Une guitare et des objets de répétition dans une salle de flamenco imaginée.',
   finlande:'Un banc, des serviettes et une fenêtre sur le lac dans un sauna éteint imaginé.',
@@ -43,8 +43,8 @@ function worldTasks(id,a){
   if(!a.clues.includes('photo'))tasks.push({screen:'photo',text:'Lire la légende de la photographie'});
   for(const key of ['geste','partage'])if(!a.clues.includes(key))tasks.push({screen:key,text:'Examiner : '+data.clues.find(c=>c.id===key).title});
   if(!a.visited.includes(2))tasks.push({screen:'partner',text:'Rencontrer '+data.characters[1].name});
-  if(!worldSolved(id,a))tasks.push({screen:'puzzle',text:'Vérifier les trois associations'});
-  if(!a.plan)tasks.push({screen:'route',text:'Choisir la suite de la rencontre'});
+  if(!worldSolved(id,a))tasks.push({screen:'puzzle',text:'Répondre aux trois questions des visiteurs'});
+  if(!a.plan)tasks.push({screen:'route',text:'Choisir comment accueillir les visiteurs'});
   else if(!worldPreparation(id,a))tasks.push({screen:'preparation',text:worldPlan(id,a).preparationTitle});
   return tasks;
 }
@@ -68,8 +68,8 @@ function cleanWorldAdventure(id,value){
   a.visited=[...new Set([0,...list(value.visited,[0,1,2]),a.place])];
   a.clues=list(value.clues,WORLD_PIECES);
   a.photoNote=[0,1,2].includes(value.photoNote)?value.photoNote:null;
-  const labels=data.puzzle.labels.map(l=>l.id),used=new Set();
-  for(const piece of WORLD_PIECES){const v=value.board?.[piece];if(labels.includes(v)&&!used.has(v)){a.board[piece]=v;used.add(v);}}
+  const labels=data.puzzle.labels.map(l=>l.id);
+  for(const piece of WORLD_PIECES){const v=value.board?.[piece];if(labels.includes(v))a.board[piece]=v;}
   a.piece=WORLD_PIECES.includes(value.piece)?value.piece:WORLD_PIECES.find(p=>!a.board[p])||'photo';
   a.checked=value.checked===true;a.hint=Number.isInteger(value.hint)?Math.max(0,Math.min(2,value.hint)):0;
   a.plan=data.plans.some(p=>p.id===value.plan)?value.plan:null;
@@ -126,12 +126,12 @@ function worldDialogue(id,a,person){
   return `<section class="india-dialogue"><div class="india-person"><span aria-hidden="true">${esc(p.name[0])}</span><div><strong>${esc(p.name)}</strong><small>${esc(p.role)} · personnage fictif</small></div></div>${worldCurrentReply(id,a,keys)||`${journeyLine(p.name,p.greeting)}<div class="india-talk-choices">${p.questions.map((q,i)=>worldButton(id,a,'talk',keys[i],q.question+(a.log.includes(keys[i])?' ✓':''),'journey-choice')).join('')}</div>`}</section>`;
 }
 function worldPhoto(id,a){
-  const p=TRAVEL_PHOTOS[id],data=WORLD_ADVENTURES[id];
-  return `<section class="india-photo-activity"><figure class="india-photo world-document-photo"><a href="${p.local}" target="_blank" rel="noopener" aria-label="Agrandir la photographie"><img src="${p.local}" width="${p.width}" height="${p.height}" alt="${esc(p.caption)}"></a><figcaption>${travelCredit(id)}</figcaption></figure><div class="india-detail-buttons" role="group" aria-label="Observer la photographie">${data.photoNotes.map((n,i)=>worldButton(id,a,'note',i,n.label,'india-detail-button',`aria-pressed="${a.photoNote===i}"`)).join('')}</div><div class="india-observation" aria-live="polite">${a.photoNote===null?'<p>Observe la photographie, puis lis sa légende pour conserver le premier indice.</p>':`<strong>${esc(data.photoNotes[a.photoNote].label)}</strong><p>${esc(data.photoNotes[a.photoNote].text)}</p>${a.photoNote===2?`<p class="world-original-caption">Légende de la source : ${esc(p.caption)}</p><small>✓ Indice conservé</small>`:''}`}</div></section>`;
+  const p=TRAVEL_PHOTOS[id],data=WORLD_ADVENTURES[id],note=a.photoNote===null?2:a.photoNote;
+  return `<section class="india-photo-activity"><figure class="india-photo world-document-photo"><a href="${p.local}" target="_blank" rel="noopener" aria-label="Agrandir la photographie"><img src="${p.local}" width="${p.width}" height="${p.height}" alt="${esc(p.caption)}"></a><figcaption>${travelCredit(id)}</figcaption></figure><div class="india-observation"><strong>${esc(data.photoNotes[note].label)}</strong><p>${esc(data.photoNotes[note].text)}</p></div><details class="adventure-extra"><summary>Observer d’autres détails</summary><div class="india-detail-buttons" role="group" aria-label="Observer la photographie">${data.photoNotes.map((n,i)=>worldButton(id,a,'note',i,n.label,'india-detail-button',`aria-pressed="${note===i}"`)).join('')}</div></details></section>`;
 }
 function worldDocument(id,a,key){
   const clue=WORLD_ADVENTURES[id].clues.find(c=>c.id===key);
-  return `<section class="india-document-card">${a.clues.includes(key)?`<p class="india-document-text">${esc(clue.text)}</p><p class="india-found">✓ Indice conservé dans ton carnet</p><a class="india-source-link" href="${esc(clue.source)}" target="_blank" rel="noopener noreferrer">Vérifier ce repère dans la source officielle ↗</a>`:`<p>Un document de l’escale t’attend : « ${esc(clue.title)} ».</p>${worldButton(id,a,'read',key,'Examiner ce document','btn prime')}`}<small class="india-fiction-small">Le support illustré appartient au récit ; le texte est une synthèse documentaire sourcée.</small></section>`;
+  return `<section class="india-document-card"><p class="india-document-text">${esc(clue.text)}</p><p class="adventure-reading">Ce repère sera ajouté à ton carnet quand tu continueras.</p><details class="adventure-extra"><summary>Source de ce repère</summary><a class="india-source-link" href="${esc(clue.source)}" target="_blank" rel="noopener noreferrer">Lire la source officielle ↗</a></details></section>`;
 }
 function worldPracticeMedia(id){
   const audio=TRAVEL_AUDIO.filter(x=>x.stop===id),video=TRAVEL_VIDEO.find(x=>x.stop===id);
@@ -145,8 +145,8 @@ function worldPractice(id,a){
   return `<section class="india-practice${ATLAS_NEW_IDS.includes(id)?' world-visual-practice':''}">${ATLAS_NEW_IDS.includes(id)?'':`<p class="india-practice-intro">${esc(practice.intro)}</p>`}<div class="india-practice-step"><small>Facultatif · à ton rythme · ${a.practiceStep+1} / 3</small><h3>${esc(step.title)}</h3><p>${esc(step.text)}</p><div class="world-practice-choices" role="group" aria-label="Ton choix dans cette découverte">${step.options.map((o,i)=>worldButton(id,a,'practice-choice',i,o.label,'india-answer',`aria-pressed="${selected===i}"`)).join('')}</div>${selected===null?'':`<p class="world-practice-response" role="status">${esc(step.options[selected].reply)}</p>`}</div>${worldPracticeMedia(id)}${a.practiceStep===2?`<p class="world-practice-finish">${esc(practice.finishText)}</p><details class="india-recap"><summary>Revoir mes choix</summary><ol>${practice.steps.map((item,i)=>`<li>${esc(item.title)} : ${a.practiceChoices[i]===null?'à imaginer':esc(item.options[a.practiceChoices[i]].label)}</li>`).join('')}</ol></details>`:''}${worldButton(id,a,'practice','skip','Passer cette activité →','india-text-button')}<details class="india-practice-sources"><summary>À propos de cette découverte</summary><p>Cette activité imaginée pour le jeu permet d’observer ou de créer librement. Elle ne remplace pas un apprentissage auprès des personnes qui portent la tradition. Aucun choix n’est nécessaire pour terminer l’aventure.</p><a href="${esc(practice.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(practice.sourceLabel)} ↗</a></details></section>`;
 }
 function worldPuzzle(id,a){
-  const data=WORLD_ADVENTURES[id].puzzle,support=data.supports.find(s=>s.id===a.piece),index=WORLD_PIECES.indexOf(a.piece),solved=worldSolved(id,a),errors=data.supports.filter(p=>a.board[p.id]!==p.correct);
-  return `<section class="india-puzzle" aria-label="L’énigme de l’escale"><div class="india-puzzle-heading"><span>Support ${index+1} / 3</span><div role="group" aria-label="Choisir un support">${data.supports.map((p,i)=>worldButton(id,a,'piece',p.id,String(i+1),'india-piece-dot',`aria-label="${esc(p.name)}" aria-pressed="${a.piece===p.id}" aria-invalid="${a.checked&&a.board[p.id]!==p.correct}"`)).join('')}</div></div><div class="india-puzzle-support">${a.piece==='photo'?`<img src="${TRAVEL_PHOTOS[id].local}" width="${TRAVEL_PHOTOS[id].width}" height="${TRAVEL_PHOTOS[id].height}" alt="${esc(TRAVEL_PHOTOS[id].caption)}">`:worldArtImage(id,'atelier')}<div><h3>${esc(support.name)}</h3><p>${esc(support.text)}</p><small>${a.piece==='photo'?'Photographie · crédits dans Sources':'Illustration du récit'}</small></div></div><p class="india-question">${esc(data.prompt)}</p><div class="india-answer-choices" role="group" aria-label="Associer une idée au support">${data.labels.map(label=>worldButton(id,a,'answer',label.id,label.text,'india-answer',`aria-pressed="${a.board[a.piece]===label.id}"`)).join('')}</div>${a.checked?`<p class="india-board-result ${solved?'success':''}" role="status">${solved?'✓ Les trois associations sont justes.':`Il reste ${errors.length} ${errors.length===1?'association à revoir':'associations à revoir'}. Reviens aux supports signalés.`}</p>`:`<p class="india-board-count">${Object.values(a.board).filter(Boolean).length} / 3 idées associées</p>`}${worldButton(id,a,'hint',null,'Un indice','india-text-button')}</section>`;
+  const data=WORLD_ADVENTURES[id].puzzle,support=data.supports.find(s=>s.id===a.piece),index=WORLD_PIECES.indexOf(a.piece),selected=a.board[a.piece],correct=selected===support.correct;
+  return `<section class="india-puzzle" aria-label="Les questions des visiteurs"><div class="india-puzzle-heading"><span>Question ${index+1} / 3</span><div role="group" aria-label="Choisir une question">${data.supports.map((p,i)=>worldButton(id,a,'piece',p.id,String(i+1),'india-piece-dot',`aria-label="Question ${i+1} : ${esc(p.question)}${a.board[p.id]===p.correct?' — comprise':''}" aria-pressed="${a.piece===p.id}"`)).join('')}</div></div><div class="india-puzzle-support">${a.piece==='photo'?`<img src="${TRAVEL_PHOTOS[id].local}" width="${TRAVEL_PHOTOS[id].width}" height="${TRAVEL_PHOTOS[id].height}" alt="${esc(TRAVEL_PHOTOS[id].caption)}">`:worldArtImage(id,'atelier')}<div><h3>${esc(support.name)}</h3></div></div><div class="india-answer-choices" role="group" aria-label="Ta réponse">${support.answers.map(answer=>worldButton(id,a,'answer',answer.id,answer.text,'india-answer',`aria-pressed="${selected===answer.id}"`)).join('')}</div>${selected?`<div class="india-board-result ${correct?'success':''}" role="status"><strong>${correct?'✓ Oui, c’est cela.':'Tu peux essayer une autre réponse.'}</strong><p>${esc(support.explanation)}</p></div>`:'<p class="adventure-reading">Choisis une réponse. Tu auras tout de suite une explication ; tu peux réessayer librement.</p>'}<details class="adventure-extra"><summary>Relire le repère</summary><p>${esc(support.explanation)}</p></details>${!correct?worldButton(id,a,'reveal',a.piece,'Me montrer la réponse','india-text-button'):''}</section>`;
 }
 function worldBranch(id,a){
   const data=WORLD_ADVENTURES[id];
@@ -161,7 +161,7 @@ function worldLegacyNotes(id,saved){
 function worldUtility(id,a,saved){
   const data=WORLD_ADVENTURES[id];
   if(id==='indonesie'&&worldPane==='creations')return batikGallery(a);
-  if(worldPane==='indices')return `<p>${a.clues.length} / 3 indices de cette aventure.</p><div class="india-notebook">${data.clues.filter(c=>a.clues.includes(c.id)).map(c=>`<details><summary>${esc(c.title)}</summary><p>${esc(c.text)}</p><a href="${esc(c.source==='photo'?TRAVEL_PHOTOS[id].source:c.source)}" target="_blank" rel="noopener noreferrer">Vérifier la source ↗</a></details>`).join('')||'<p>Les indices apparaîtront pendant ton exploration.</p>'}</div>${worldLegacyNotes(id,saved)}`;
+  if(worldPane==='indices')return `<p>${a.clues.length} / 3 repères de cette aventure.</p><div class="india-notebook">${data.clues.filter(c=>a.clues.includes(c.id)).map(c=>`<details><summary>${esc(c.title)}</summary><p>${esc(c.text)}</p><a href="${esc(c.source==='photo'?TRAVEL_PHOTOS[id].source:c.source)}" target="_blank" rel="noopener noreferrer">Vérifier la source ↗</a></details>`).join('')||'<p>Les repères apparaîtront pendant ton exploration.</p>'}</div>${worldLegacyNotes(id,saved)}`;
   if(worldPane==='dialogues'){
     const items=worldLogItems(id);
     return `<p>Retrouve les échanges de cette aventure.</p><div class="india-history">${a.log.map(key=>`<details name="world-history"><summary>${esc(items[key].speaker)} · ${esc(items[key].label)}</summary><p>${esc(items[key].reply)}</p></details>`).join('')||'<p>Les conversations seront conservées ici.</p>'}</div>${worldLegacyNotes(id,saved)}`;
@@ -171,20 +171,21 @@ function worldUtility(id,a,saved){
     const place=TRAVEL_PLACES[id];
     return `<p>Ce repère aide à situer l’escale. Les lieux de notre petite aventure sont imaginés ; la tradition existe aussi ailleurs.</p><p><a href="https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lon}#map=9/${place.lat}/${place.lon}" target="_blank" rel="noopener noreferrer">Ouvrir la carte détaillée ↗</a></p><p class="travel-small">Fond <a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noopener noreferrer">Natural Earth, domaine public ↗</a> · <a href="${esc(place.source)}" target="_blank" rel="noopener noreferrer">Coordonnées de référence ↗</a>.</p>`;
   }
-  if(worldPane==='aide')return `<p>${esc(a.hint<2?data.puzzle.hint:data.puzzle.supports.map(p=>p.name+' → '+data.puzzle.labels.find(l=>l.id===p.correct).text).join(' · '))}</p>${a.hint<2?worldButton(id,a,'hint',null,'Voir les trois associations','btn ghost'):''}`;
+  if(worldPane==='aide')return `<p>${esc(a.hint<2?data.puzzle.hint:data.puzzle.supports.map(p=>p.question+' → '+p.answers.find(l=>l.id===p.correct).text).join(' · '))}</p>${a.hint<2?worldButton(id,a,'hint',null,'Voir les réponses expliquées','btn ghost'):''}`;
   const tasks=worldTasks(id,a);
-  return `<p>${esc(data.mission)}</p><p class="india-found">${a.clues.length} / 3 indices · ${a.endings.length} / 2 souvenirs</p>${a.started&&!a.ending&&tasks.length?`<div class="india-mission-next"><strong>La prochaine chose à faire</strong><p>${esc(tasks[0].text)}</p>${worldButton(id,a,'screen',tasks[0].screen,'Y aller →','btn prime')}</div><details class="india-recap"><summary>Tous les préparatifs restants</summary><ul>${tasks.map(t=>`<li>${worldButton(id,a,'screen',t.screen,t.text,'india-task-button')}</li>`).join('')}</ul></details>`:''}${a.ending?data.plans.map(p=>`<p>${a.endings.includes(p.id)?'✓ '+esc(p.endingTitle):'○ Un autre dénouement à découvrir'}</p>`).join(''):''}${a.started?worldButton(id,a,'screen','practice','Retrouver la petite activité →','india-text-button'):''}${RECIPES[id]?`<button class="btn ghost world-recipe" data-action="recipe" data-id="${id}">Retrouver la recette →</button>`:''}${id==='indonesie'?batikButton(a,'gallery',null,'Mes créations · '+(a.workshop?.cards.length||0)):''}${worldLegacyNotes(id,saved)}<details class="india-recap"><summary>Recommencer l’aventure</summary><p>Tes découvertes et les souvenirs déjà obtenus seront conservés.</p>${worldButton(id,a,'replay',null,'Recommencer','btn ghost')}</details>`;
+  return `<p>${esc(data.mission)}</p><p class="india-found">${a.clues.length} / 3 repères · ${a.endings.length} / 2 souvenirs</p>${a.started&&!a.ending&&tasks.length?`<div class="india-mission-next"><strong>La prochaine chose à faire</strong><p>${esc(tasks[0].text)}</p>${worldButton(id,a,'screen',tasks[0].screen,'Y aller →','btn prime')}</div><details class="india-recap"><summary>Tous les préparatifs restants</summary><ul>${tasks.map(t=>`<li>${worldButton(id,a,'screen',t.screen,t.text,'india-task-button')}</li>`).join('')}</ul></details>`:''}${a.ending?data.plans.map(p=>`<p>${a.endings.includes(p.id)?'✓ '+esc(p.endingTitle):'○ Un autre dénouement à découvrir'}</p>`).join(''):''}${a.started?worldButton(id,a,'screen','practice','Retrouver la petite activité →','india-text-button'):''}${RECIPES[id]?`<button class="btn ghost world-recipe" data-action="recipe" data-id="${id}">Retrouver la recette →</button>`:''}${id==='indonesie'?batikButton(a,'gallery',null,'Mes créations · '+(a.workshop?.cards.length||0)):''}${worldLegacyNotes(id,saved)}<details class="india-recap"><summary>Recommencer l’aventure</summary><p>Tes découvertes et les souvenirs déjà obtenus seront conservés.</p>${worldButton(id,a,'replay',null,'Recommencer','btn ghost')}</details>`;
 }
 function worldScreenTitle(id,a){
   const data=WORLD_ADVENTURES[id];
-  return {intro:data.title,host:'Un coup de main à '+data.characters[0].name,photo:'Observer la photographie',geste:data.clues[1].title,partage:data.clues[2].title,partner:'Rencontrer '+data.characters[1].name,practice:data.practice.title,route:'Choisir la suite',puzzle:'Relier les découvertes',preparation:worldPlan(id,a)?.preparationTitle,ready:'Les derniers préparatifs',ending:worldPlan(id,a)?.endingTitle}[a.screen]||data.title;
+  if(a.screen==='puzzle')return data.puzzle.supports.find(p=>p.id===a.piece).question;
+  return {intro:data.title,host:'Un coup de main à '+data.characters[0].name,photo:'Observer la photographie',geste:data.clues[1].title,partage:data.clues[2].title,partner:'Rencontrer '+data.characters[1].name,practice:data.practice.title,route:'Comment accueillir les visiteurs ?',puzzle:'Les questions des visiteurs',preparation:worldPlan(id,a)?.preparationTitle,ready:'Voici ce que tu as préparé',ending:worldPlan(id,a)?.endingTitle}[a.screen]||data.title;
 }
 function worldScreenBody(id,a,saved){
   const data=WORLD_ADVENTURES[id];
   if(worldPane)return worldUtility(id,a,saved);
-  if(a.screen==='intro')return `<p>${esc(data.intro)}</p><p class="world-mission">${esc(data.mission)}</p><p class="india-start-help">Les trois lieux restent accessibles dans la barre du haut.</p>${saved.completed||saved.seen.length?'<p class="travel-small">Tes découvertes et ta rencontre précédentes sont conservées dans le carnet.</p>':''}`;
+  if(a.screen==='intro')return `<p>${esc(data.intro)}</p><div class="adventure-outcome"><strong>Ce que tu vas préparer</strong><p>${esc(data.guide.result)}</p><ol><li>Découvre une photo et deux repères.</li><li>Essaie une activité si tu en as envie.</li><li>Réponds aux visiteurs, puis choisis l’accueil.</li></ol></div>${saved.completed||saved.seen.length?'<p class="travel-small">Tes découvertes et ta rencontre précédentes sont conservées dans le carnet.</p>':''}`;
   if(a.screen==='host')return worldDialogue(id,a,0);
-  if(a.screen==='partner')return worldDialogue(id,a,1);
+  if(a.screen==='partner')return worldDialogue(id,a,1)+(!a.ending?`<div class="adventure-optional"><strong>À toi de choisir</strong><p>La petite activité est facultative. Tu peux la faire maintenant, ou poursuivre la rencontre.</p>${worldButton(id,a,'skip-activity',null,'Continuer sans l’activité →','btn ghost')}</div>`:'');
   if(a.screen==='photo')return worldPhoto(id,a);
   if(['geste','partage'].includes(a.screen))return worldDocument(id,a,a.screen);
   if(a.screen==='practice')return worldPractice(id,a);
@@ -192,36 +193,37 @@ function worldScreenBody(id,a,saved){
   if(['route','preparation'].includes(a.screen))return worldBranch(id,a);
   if(a.screen==='ending'){
     const option=worldPreparation(id,a),plan=worldPlan(id,a),person=data.characters[plan.place===0?0:1];
-    return `<p>${esc(option.endingText)}</p>${journeyLine(person.name,option.endingReply)}<p class="india-found">✓ Souvenir conservé · ${a.endings.length} / 2 dénouements</p>${worldEndingRecap(id,a)}${RECIPES[id]?`<button class="btn ghost world-recipe" data-action="recipe" data-id="${id}">Prolonger avec la recette →</button>`:''}`;
+    return `<p class="adventure-success">✓ Mission accomplie</p><p>${esc(option.endingText)}</p>${journeyLine(person.name,option.endingReply)}<p class="india-found">✓ Souvenir conservé · ${a.endings.length} / 2 dénouements</p>${worldEndingRecap(id,a)}${RECIPES[id]?`<button class="btn ghost world-recipe" data-action="recipe" data-id="${id}">Prolonger avec la recette →</button>`:''}`;
   }
   const tasks=worldTasks(id,a);
-  return tasks.length?`<p>Il reste un préparatif.</p><div class="india-mission-next"><strong>${esc(tasks[0].text)}</strong></div>`:`<p>Les trois découvertes sont reliées et votre dernier choix est prêt.</p><p>${esc(worldPlan(id,a).title)} : ${esc(worldPreparation(id,a).label)}.</p><p>Tu peux rejoindre ${esc(data.characters[worldPlan(id,a).place===0?0:1].name)} pour la suite.</p>`;
+  return tasks.length?`<p>Il reste un préparatif.</p><div class="india-mission-next"><strong>${esc(tasks[0].text)}</strong></div>`:`<p class="adventure-success">✓ Tout est prêt pour accueillir les visiteurs.</p><p>${esc(worldPlan(id,a).title)} : ${esc(worldPreparation(id,a).label)}.</p><p>${esc(data.guide.result)} Le bouton ci-dessous lance cette dernière scène.</p>`;
 }
 function worldPrimary(id,a){
-  const screen=(key,label)=>({action:'screen',key,label});
-  if(a.screen==='practice')return {action:'practice',key:a.practiceStep<2?'next':'done',label:a.practiceStep<2?'Étape suivante →':'Terminer la découverte →'};
+  const data=WORLD_ADVENTURES[id],screen=(key,label)=>({action:'screen',key,label});
+  if(a.screen==='practice')return {action:'practice',key:a.practiceStep<2?'next':'done',label:a.practiceStep<2?'Étape suivante →':'Terminer cette activité →'};
   if(a.ending)return screen('ending','Revoir mon dénouement →');
-  if(a.screen==='intro')return {action:'start',label:'Commencer l’aventure →'};
-  if(a.screen==='host')return screen('photo','Observer la photo →');
-  if(a.screen==='photo')return a.clues.includes('photo')?screen('geste','Continuer la découverte →'):{action:'note',key:2,label:'Lire la légende →'};
-  if(['geste','partage'].includes(a.screen))return a.clues.includes(a.screen)?screen(a.screen==='geste'?'partage':'partner',a.screen==='geste'?'Découvrir le second document →':'Rencontrer '+WORLD_ADVENTURES[id].characters[1].name+' →'):{action:'read',key:a.screen,label:'Lire ce document →'};
-  if(a.screen==='partner')return screen('practice','Essayer une petite activité →');
-  if(a.screen==='route')return a.plan?screen('puzzle','Relier mes découvertes →'):{label:'Choisis la suite ci-dessus',disabled:true};
+  if(a.screen==='intro')return {action:'start',label:'Rencontrer '+data.characters[0].name+' →'};
+  if(a.screen==='host')return screen('photo','Découvrir la photographie →');
+  if(WORLD_PIECES.includes(a.screen))return {action:'collect',key:a.screen,label:a.screen==='photo'?'Continuer : premier repère →':a.screen==='geste'?'Continuer : second repère →':'Rejoindre '+data.characters[1].name+' →'};
+  if(a.screen==='partner')return screen('practice',data.practice.title+' →');
+  if(a.screen==='route')return a.plan?screen('preparation',worldPlan(id,a).preparationTitle+' →'):{label:'Choisis l’accueil ci-dessus',disabled:true};
   if(a.screen==='puzzle'){
-    if(worldSolved(id,a)){const task=worldTasks(id,a)[0];return task?screen(task.screen,'Continuer les préparatifs →'):screen('ready','Tout est prêt →');}
-    if(!a.board[a.piece])return {label:'Choisis une idée ci-dessus',disabled:true};
-    if(a.checked)return {action:'check',label:'Vérifier à nouveau'};
-    const index=WORLD_PIECES.indexOf(a.piece);
-    return index<2?{action:'piece',key:WORLD_PIECES[index+1],label:'Support suivant →'}:{action:'check',label:'Vérifier les associations'};
+    const task=worldTasks(id,a)[0];
+    if(worldSolved(id,a))return task?screen(task.screen,task.screen==='route'?'Choisir la fin de la rencontre →':'Continuer : '+task.text+' →'):screen('ready','Voir mes préparatifs →');
+    const support=data.puzzle.supports.find(p=>p.id===a.piece);
+    if(a.board[a.piece]!==support.correct)return {label:a.board[a.piece]?'Réessaie ou demande la réponse':'Choisis une réponse ci-dessus',disabled:true};
+    const next=data.puzzle.supports.find(p=>a.board[p.id]!==p.correct);
+    if(!next)return {action:'check',label:'Confirmer ces réponses →'};
+    return {action:'piece',key:next.id,label:'Question suivante →'};
   }
-  if(a.screen==='preparation')return worldPreparation(id,a)?screen('ready','Les préparatifs sont prêts →'):{label:'Choisis une proposition',disabled:true};
-  const task=worldTasks(id,a)[0];return task?screen(task.screen,'Poursuivre ce préparatif →'):{action:'finish',label:'Rejoindre la suite →'};
+  if(a.screen==='preparation')return worldPreparation(id,a)?screen('ready','Voir le résultat de mes choix →'):{label:'Choisis une proposition ci-dessus',disabled:true};
+  const task=worldTasks(id,a)[0];return task?screen(task.screen,'Continuer : '+task.text+' →'):{action:'finish',label:data.guide.finish};
 }
 function renderWorldAdventure(id){
   const saved=journeyProgress(id),a=saved.adventure,data=WORLD_ADVENTURES[id],stop=STOPS.find(s=>s.id===id),primary=worldPrimary(id,a),index=WORLD_SEQUENCE.indexOf(a.screen);
   const titles={mission:'Ta mission',indices:'Tes découvertes',dialogues:'Les échanges',sources:'Sources et récit',carte:'Situer cette escale',aide:'Un indice pour l’énigme',creations:'Mes créations · Indonésie'};
   const previous=a.screen==='practice'&&a.practiceStep>0?{action:'practice',key:'previous'}:a.screen==='puzzle'&&a.piece!=='photo'?{action:'piece',key:WORLD_PIECES[WORLD_PIECES.indexOf(a.piece)-1]}:index>0?{action:'screen',key:WORLD_SEQUENCE[index-1]==='preparation'&&!a.plan?'route':WORLD_SEQUENCE[index-1]}:null;
-  app.innerHTML=`<section class="india-player world-player" aria-label="Aventure : ${esc(stop.country)}"><header class="india-player-toolbar"><button class="india-exit" data-action="journey-back">← Atlas</button><div><small>${stop.flag} ${esc(stop.country)}</small><h1 id="journey-title" tabindex="-1">${esc(data.title)}</h1></div>${worldButton(id,a,'pane',worldPane?'play':'mission',worldPane?'Fermer le carnet':'Carnet','india-carnet-button',`aria-pressed="${!!worldPane}"`)}</header><nav class="india-placebar" aria-label="Les trois lieux de l’aventure">${data.places.map((p,i)=>worldButton(id,a,'move',i,p.shortName||p.name,'india-location',`aria-current="${a.place===i?'location':'false'}"`)).join('')}</nav><div class="india-screen-scroll" id="india-screen-scroll"><article class="india-screen" data-world-screen="${worldPane||a.screen}" data-world-journey="${id}"><div class="india-screen-heading"><span class="overline">${worldPane?'Carnet de voyage':a.screen==='intro'?'Une aventure en trois lieux':esc(data.places[a.place].name)}${!worldPane&&index>=0?' · '+(index+1)+' / '+WORLD_SEQUENCE.length:''}</span><h2 id="india-screen-title" tabindex="-1">${esc(worldPane?titles[worldPane]:worldScreenTitle(id,a))}</h2></div>${worldPane&&worldPane!=='aide'?`<nav class="india-carnet-tabs world-carnet-tabs" aria-label="Dans ton carnet">${[['mission','Mission'],['indices','Indices'],['dialogues','Échanges'],['carte','Carte'],['sources','Sources']].map(([key,label])=>worldButton(id,a,'pane',key,label,'india-carnet-tab',`aria-pressed="${worldPane===key}"`)).join('')}</nav>`:''}${a.ending&&a.screen!=='ending'&&!worldPane?'<p class="india-review-note">Aventure terminée · tu peux revoir les lieux et les documents.</p>':''}${worldNotice&&!worldPane?`<p class="india-notice" role="status">${esc(worldNotice)}</p>`:''}${worldMilestones(id,a)}${worldSceneArt(id,a)}${worldScreenBody(id,a,saved)}</article></div><footer class="india-player-controls">${worldPane?`${worldButton(id,a,'pane','play','← Revenir au jeu','btn prime')}<span class="india-control-status">${a.clues.length}/3 indices</span>`:a.screen==='ending'?`${worldButton(id,a,'pane','mission','Mes souvenirs','btn ghost')}${worldButton(id,a,'replay',null,'Rejouer l’aventure','btn prime')}`:`${previous?worldButton(id,a,previous.action,previous.key,'← Précédent','btn ghost'):'<button class="btn ghost" disabled>← Précédent</button>'}<span class="india-control-status">${a.screen==='practice'?'Découverte '+(a.practiceStep+1)+'/3':a.screen==='puzzle'?'Support '+(WORLD_PIECES.indexOf(a.piece)+1)+'/3':a.clues.length+'/3 indices'}</span>${primary.disabled?`<button class="btn prime" disabled>${esc(primary.label)}</button>`:worldButton(id,a,primary.action,primary.key,primary.label,'btn prime')}`}</footer></section>`;
+  app.innerHTML=`<section class="india-player world-player" aria-label="Aventure : ${esc(stop.country)}"><header class="india-player-toolbar"><button class="india-exit" data-action="journey-back">← Atlas</button><div><small>${stop.flag} ${esc(stop.country)}</small><h1 id="journey-title" tabindex="-1">${esc(data.title)}</h1></div>${worldButton(id,a,'pane',worldPane?'play':'mission',worldPane?'Fermer le carnet':'Carnet','india-carnet-button',`aria-pressed="${!!worldPane}"`)}</header><nav class="india-placebar" aria-label="Les trois lieux de l’aventure">${data.places.map((p,i)=>worldButton(id,a,'move',i,p.shortName||p.name,'india-location',`aria-current="${a.place===i?'location':'false'}"`)).join('')}</nav><div class="india-screen-scroll" id="india-screen-scroll"><article class="india-screen" data-world-screen="${worldPane||a.screen}" data-world-journey="${id}"><div class="india-screen-heading"><span class="overline">${worldPane?'Carnet de voyage':a.screen==='intro'?'Une aventure en trois lieux':esc(data.places[a.place].name)}</span><h2 id="india-screen-title" tabindex="-1">${esc(worldPane?titles[worldPane]:worldScreenTitle(id,a))}</h2></div>${worldPane&&worldPane!=='aide'?`<nav class="india-carnet-tabs world-carnet-tabs" aria-label="Dans ton carnet">${[['mission','Mission'],['indices','Indices'],['dialogues','Échanges'],['carte','Carte'],['sources','Sources']].map(([key,label])=>worldButton(id,a,'pane',key,label,'india-carnet-tab',`aria-pressed="${worldPane===key}"`)).join('')}</nav>`:''}${a.ending&&a.screen!=='ending'&&!worldPane?'<p class="india-review-note">Aventure terminée · tu peux revoir les lieux et les documents.</p>':''}${worldNotice&&!worldPane?`<p class="india-notice" role="status">${esc(worldNotice)}</p>`:''}${worldGuide(id,a)}${worldSceneArt(id,a)}${worldScreenBody(id,a,saved)}</article></div><footer class="india-player-controls">${worldPane?`${worldButton(id,a,'pane','play','← Revenir au jeu','btn prime')}<span class="india-control-status">${a.clues.length}/3 repères</span>`:a.screen==='ending'?`${worldButton(id,a,'pane','mission','Mes souvenirs','btn ghost')}${worldButton(id,a,'replay',null,'Rejouer l’aventure','btn prime')}`:`${previous?worldButton(id,a,previous.action,previous.key,'← Précédent','btn ghost'):'<button class="btn ghost" disabled>← Précédent</button>'}<span class="india-control-status">${a.screen==='practice'?'Découverte '+(a.practiceStep+1)+'/3':a.screen==='puzzle'?'Question '+(WORLD_PIECES.indexOf(a.piece)+1)+'/3':a.clues.length+'/3 repères'}</span>${primary.disabled?`<button class="btn prime" disabled>${esc(primary.label)}</button>`:worldButton(id,a,primary.action,primary.key,primary.label,'btn prime')}`}</footer></section>`;
   if(id==='indonesie'&&a.screen==='practice'&&a.practiceStep===0&&!worldPane)bindBatikDrawing();
 }
 function worldAction(action,key,expectedJourney,expectedPlace,expectedScreen,expectedPiece,expectedStep){
@@ -257,13 +259,22 @@ function worldAction(action,key,expectedJourney,expectedPlace,expectedScreen,exp
     a.screen=screen;a.place=worldScreenPlace(id,a,screen);a.visited=[...new Set([...a.visited,a.place])];a.reply=null;
   }else{
     if(!a.started)return false;
-    if(action==='practice'||action==='practice-choice'){
+    if(action==='collect'){
+      if(!WORLD_PIECES.includes(key)||a.screen!==key)return false;
+      a.clues=[...new Set([...a.clues,key])];if(key==='photo')a.photoNote=2;
+      a.screen={photo:'geste',geste:'partage',partage:'partner'}[key];a.place=worldScreenPlace(id,a,a.screen);a.visited=[...new Set([...a.visited,a.place])];a.reply=null;
+    }else if(action==='skip-activity'){
+      if(a.screen!=='partner')return false;a.practiceStatus=a.practiceStatus==='done'?'done':'skipped';
+      a.screen=worldTasks(id,a)[0]?.screen||'ready';a.place=worldScreenPlace(id,a,a.screen);a.visited=[...new Set([...a.visited,a.place])];a.reply=null;
+    }else if(action==='reveal'){
+      if(a.screen!=='puzzle'||key!==a.piece)return false;a.board[key]=data.puzzle.supports.find(p=>p.id===key).correct;a.checked=true;keepFocus=true;
+    }else if(action==='practice'||action==='practice-choice'){
       if(a.screen!=='practice'||a.place!==2||expectedStep!==undefined&&String(expectedStep)!==String(a.practiceStep))return false;
       if(action==='practice-choice'){
         if(!['0','1'].includes(String(key)))return false;a.practiceChoices[a.practiceStep]=Number(key);keepFocus=true;
       }else if(key==='next'&&a.practiceStep<2)a.practiceStep++;
       else if(key==='previous'&&a.practiceStep>0)a.practiceStep--;
-      else if(key==='skip'||key==='done'&&a.practiceStep===2){a.practiceStatus=key==='done'?'done':a.practiceStatus==='done'?'done':'skipped';a.screen=a.ending?'ending':'route';a.place=worldScreenPlace(id,a,a.screen);}
+      else if(key==='skip'||key==='done'&&a.practiceStep===2){a.practiceStatus=key==='done'?'done':a.practiceStatus==='done'?'done':'skipped';a.screen=a.ending?'ending':worldTasks(id,a)[0]?.screen||'ready';a.place=worldScreenPlace(id,a,a.screen);a.visited=[...new Set([...a.visited,a.place])];}
       else return false;
     }else if(action==='clear-reply')a.reply=null;
     else if(action==='talk'){
@@ -280,8 +291,7 @@ function worldAction(action,key,expectedJourney,expectedPlace,expectedScreen,exp
       if(a.place!==1||!WORLD_PIECES.includes(key))return false;a.screen='puzzle';a.piece=key;
     }else if(action==='answer'){
       if(a.place!==1||a.screen!=='puzzle'||expectedPiece&&expectedPiece!==a.piece||!data.puzzle.labels.some(l=>l.id===key))return false;
-      const from=WORLD_PIECES.find(p=>a.board[p]===key),previous=a.board[a.piece];
-      if(from&&from!==a.piece)a.board[from]=previous;a.board[a.piece]=key;a.checked=false;keepFocus=true;
+      a.board[a.piece]=key;a.checked=true;keepFocus=true;
     }else if(action==='check'){
       if(a.place!==1||a.screen!=='puzzle')return false;a.checked=true;
       const wrong=data.puzzle.supports.find(p=>a.board[p.id]!==p.correct);if(wrong)a.piece=wrong.id;
@@ -303,7 +313,7 @@ function worldAction(action,key,expectedJourney,expectedPlace,expectedScreen,exp
   if(saved.adventure.clues.includes('partage')||saved.adventure.clues.includes('photo'))saved.seen=[...new Set([...saved.seen,'voices'])];
   if(saved.adventure.ending)saved.completed=true;
   state.journeys[id]=saved;persist();render();
-  if(keepFocus){app.querySelector(action==='answer'?'[data-action="world-answer"][aria-pressed="true"]':'[data-action="world-practice-choice"][aria-pressed="true"]')?.focus({preventScroll:true});}
+  if(keepFocus){app.querySelector(['answer','reveal'].includes(action)?'[data-action="world-answer"][aria-pressed="true"]':'[data-action="world-practice-choice"][aria-pressed="true"]')?.focus({preventScroll:true});}
   else focus();
   return true;
 }

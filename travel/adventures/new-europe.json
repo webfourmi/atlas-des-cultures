@@ -1,8 +1,8 @@
 {
   "espagne": {
-    "title": "Une place avant la première note",
-    "mission": "Aider Lucía et Diego à préparer la présentation d’une petite rencontre autour du flamenco.",
-    "intro": "Dans une salle de quartier imaginée en Andalousie, Lucía accorde sa guitare pendant que Diego déplie les chaises. La répétition commencera bientôt. Ils aimeraient accueillir les nouveaux venus avec trois repères simples ; les légendes de leurs documents ont été mélangées.",
+    "title": "Avant la première note",
+    "mission": "Aide Lucía et Diego à accueillir le public d’une rencontre de flamenco.",
+    "intro": "Lucía finit d’accorder sa guitare et Diego installe les chaises. Le public arrive bientôt. Tu vas découvrir ce que l’on chante, danse et joue, puis choisir comment ouvrir la rencontre.",
     "places": [
       {
         "name": "La salle de répétition",
@@ -24,7 +24,7 @@
       {
         "name": "Lucía",
         "role": "guitariste, prépare la répétition",
-        "greeting": "Tu peux poser ton carnet ici. Je termine mon accordage. Diego a les documents ; aide-nous à leur rendre leurs légendes, puis nous choisirons comment accueillir le public.",
+        "greeting": "Bienvenue ! Aide Lucía et Diego à accueillir le public d’une rencontre de flamenco. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Qu’aimerais-tu faire entendre aux visiteurs ?",
@@ -39,7 +39,7 @@
       {
         "name": "Diego",
         "role": "bénévole d’une association de flamenco",
-        "greeting": "Les chaises sont prêtes, mais ma présentation ressemble encore à une liste de mots ! On pourrait commencer par les documents, ou laisser Lucía ouvrir la rencontre.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton invitation en trois touches. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Qu’est-ce qu’une peña ?",
@@ -87,7 +87,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Rends à chaque document sa légende. Diego pourra les utiliser dans son accueil.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -107,22 +107,70 @@
           "id": "photo",
           "name": "La photographie légendée",
           "text": "Un instant réel et ses crédits : regarde le détail que tu as choisi.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Qui vois-tu dans cette scène de concert ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une danseuse et des musiciens"
+            },
+            {
+              "id": "b",
+              "text": "Un groupe sans instruments"
+            },
+            {
+              "id": "c",
+              "text": "Un atelier sans artistes"
+            }
+          ],
+          "explanation": "Cette photographie documente une danseuse et les musiciens du groupe de Paco Peña pendant un concert à Amsterdam en 2012."
         },
         {
           "id": "geste",
           "name": "La note des trois mots",
           "text": "Cante, baile, toque : trois portes d’entrée dans l’expression artistique.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Quels trois mots présentent les expressions du flamenco ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement baile et silence"
+            },
+            {
+              "id": "b",
+              "text": "Cante, baile et toque"
+            },
+            {
+              "id": "c",
+              "text": "Seulement toque et peinture"
+            }
+          ],
+          "explanation": "Le flamenco associe le chant, appelé cante, la danse, appelée baile, et le jeu instrumental, appelé toque, notamment à la guitare."
         },
         {
           "id": "partage",
           "name": "La note des rencontres",
           "text": "Familles, artistes, associations et communautés : des personnes qui transmettent.",
-          "correct": "c"
+          "correct": "c",
+          "question": "À quoi peut servir une peña ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement à fabriquer des guitares"
+            },
+            {
+              "id": "b",
+              "text": "Seulement à vendre des billets"
+            },
+            {
+              "id": "c",
+              "text": "À se retrouver pour écouter, apprendre et échanger"
+            }
+          ],
+          "explanation": "Les familles, les artistes et les associations appelées peñas participent à la transmission. Les communautés gitanes ont joué un rôle essentiel dans l’histoire du flamenco."
         }
       ],
-      "hint": "La photographie montre un instant ; les trois mots parlent de l’art ; la dernière note parle des personnes et de la transmission."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -245,12 +293,16 @@
         "label": "Photographie · Karnivoros, CC BY 4.0",
         "supports": "Concert de Paco Peña à Amsterdam, 2012 ; auteur et licence. La photographie n’est pas située dans l’Andalousie du récit."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le public accueilli selon tes choix et retrouver ton invitation si tu en as créé une.",
+      "finish": "Ouvrir la rencontre de flamenco →"
+    }
   },
   "finlande": {
-    "title": "Le carnet posé près de la porte",
-    "mission": "Aider Aino et Mikko à préparer un petit carnet d’accueil sur la culture du sauna.",
-    "intro": "Le sauna de cette histoire est encore éteint. Aino prépare une visite et Mikko apporte quelques souvenirs pour la table d’accueil. Leur carnet doit présenter le lieu, un mot finnois et les personnes qui font vivre la tradition. Trois légendes se sont détachées.",
+    "title": "Bienvenue près du sauna",
+    "mission": "Aide Aino et Mikko à préparer l’accueil de visiteurs autour de la culture du sauna.",
+    "intro": "Aino et Mikko veulent accueillir un petit groupe. Tu vas découvrir un intérieur de sauna et le mot löyly, puis choisir ce que vous raconterez en premier. Tout se déroule à l’écran.",
     "places": [
       {
         "name": "L’entrée du sauna",
@@ -272,7 +324,7 @@
       {
         "name": "Aino",
         "role": "organise la visite de ce lieu imaginé",
-        "greeting": "Bienvenue. Nous avons encore un peu de temps avant l’arrivée des visiteurs. Tu peux m’aider à remettre les légendes dans le carnet ? Mikko a aussi une histoire à proposer.",
+        "greeting": "Bienvenue ! Aide Aino et Mikko à préparer l’accueil de visiteurs autour de la culture du sauna. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Que veux-tu montrer pendant la visite ?",
@@ -287,7 +339,7 @@
       {
         "name": "Mikko",
         "role": "prépare les souvenirs de l’accueil",
-        "greeting": "J’ai apporté une page de mon album. Aino me demande d’être bref ; avec moi, c’est parfois la partie difficile ! Tu m’aideras à choisir par où commencer ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ta carte d’un lieu accueillant. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Quel souvenir as-tu apporté ?",
@@ -335,7 +387,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Replace les trois légendes pour qu’Aino puisse terminer le carnet d’accueil.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -355,22 +407,70 @@
           "id": "photo",
           "name": "La photographie légendée",
           "text": "Un lieu précis et les informations qui accompagnent son image.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel lieu la photographie présente-t-elle ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "L’intérieur du sauna de Tamminiemi"
+            },
+            {
+              "id": "b",
+              "text": "Une salle de repas"
+            },
+            {
+              "id": "c",
+              "text": "Un atelier de tissage"
+            }
+          ],
+          "explanation": "La photographie documente l’intérieur du sauna de Tamminiemi, à Helsinki. Ses bancs et son aménagement donnent un repère visuel sur ce lieu précis."
         },
         {
           "id": "geste",
           "name": "La page du mot finnois",
           "text": "Une courte explication de la vapeur et de sa place dans la tradition.",
-          "correct": "b"
+          "correct": "b",
+          "question": "À quoi le mot löyly renvoie-t-il notamment ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Au nom d’une serviette"
+            },
+            {
+              "id": "b",
+              "text": "À la vapeur produite au contact des pierres chauffées"
+            },
+            {
+              "id": "c",
+              "text": "À la lumière qui entre par la fenêtre"
+            }
+          ],
+          "explanation": "Löyly désigne notamment la vapeur produite quand de l’eau rencontre les pierres chauffées. Ce mot est au cœur de la description culturelle donnée par l’UNESCO."
         },
         {
           "id": "partage",
           "name": "La page des personnes",
           "text": "Parents, proches et associations : une culture partagée et transmise.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Comment cette culture se transmet-elle notamment ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Uniquement dans les guides touristiques"
+            },
+            {
+              "id": "b",
+              "text": "Sans échange entre les générations"
+            },
+            {
+              "id": "c",
+              "text": "Dans les familles et les associations"
+            }
+          ],
+          "explanation": "Le sauna appartient à la vie quotidienne et aux moments de fête. Les connaissances circulent dans les familles et les associations qui font vivre cette culture."
         }
       ],
-      "hint": "Suis les trois sujets du carnet : le lieu, le mot, puis les personnes."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -493,6 +593,10 @@
         "label": "Photographie · Ypsilon from Finland, CC0",
         "supports": "Intérieur du sauna de Tamminiemi, 2017 ; auteur et domaine public."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Découvrir la première page du carnet ou le début de la conversation que tu as choisis.",
+      "finish": "Recevoir les visiteurs →"
+    }
   }
 }

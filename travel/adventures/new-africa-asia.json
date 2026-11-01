@@ -1,8 +1,8 @@
 {
   "egypte": {
-    "title": "Les fils de l’atelier",
-    "mission": "Aider Mariam et Samir à préparer un coin de découverte du tissage, puis choisir ce que les visiteurs feront en premier.",
-    "intro": "Dans un atelier imaginé de Haute-Égypte, Mariam prépare une visite avec Samir, qui apprend auprès d’elle. Ils ont sorti des échantillons et trois documents. Il manque une présentation claire pour que les visiteurs regardent les gestes sans déranger le travail.",
+    "title": "Les fils prennent forme",
+    "mission": "Prépare avec Mariam et Samir une petite découverte du tissage à la main.",
+    "intro": "Mariam dispose les fils et Samir attend les visiteurs. Tu vas découvrir ce qui se prépare avant de tisser, composer un échantillon virtuel si tu le souhaites, puis choisir comment le présenter.",
     "places": [
       {
         "name": "L’entrée de l’atelier",
@@ -24,7 +24,7 @@
       {
         "name": "Mariam",
         "role": "tisserande dans notre récit",
-        "greeting": "Bonjour ! J’ai sorti les échantillons, mais Samir et moi n’avons pas fini la présentation. Tu nous aides à choisir ce que l’on montre ?",
+        "greeting": "Bienvenue ! Prépare avec Mariam et Samir une petite découverte du tissage à la main. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Je peux toucher le métier ?",
@@ -39,7 +39,7 @@
       {
         "name": "Samir",
         "role": "apprend auprès de Mariam",
-        "greeting": "J’ai les trois documents ! Il faut que les visiteurs comprennent ce que chacun raconte. Après, on pourra préparer notre petit coin de découverte.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton petit échantillon virtuel. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Qu’est-ce qui te demande le plus de patience ?",
@@ -87,7 +87,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Prépare les trois légendes de l’atelier : chaque support doit annoncer ce qu’il permet de découvrir.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -107,22 +107,70 @@
           "id": "photo",
           "name": "La photographie",
           "text": "Un document visuel accompagné de sa légende et de ses crédits.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Que peux-tu observer sur la photographie ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une étoffe imprimée à la machine"
+            },
+            {
+              "id": "b",
+              "text": "Un tisserand et des fils tendus"
+            },
+            {
+              "id": "c",
+              "text": "Un atelier de poterie"
+            }
+          ],
+          "explanation": "Le document montre un tisserand et des fils tendus en Égypte. Sa localisation précise n’est pas indiquée : ce n’est pas la preuve d’un atelier du Sa’eed."
         },
         {
           "id": "geste",
           "name": "La note sur les préparations",
           "text": "Elle parle du métier, des fils et du travail nécessaire pour obtenir l’étoffe.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Que faut-il préparer avant de fabriquer l’étoffe ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Le métier et les fils"
+            },
+            {
+              "id": "b",
+              "text": "Seulement le cadre de présentation"
+            },
+            {
+              "id": "c",
+              "text": "Seulement une étiquette de prix"
+            }
+          ],
+          "explanation": "Le tissage à la main demande de préparer le métier et les fils avant de fabriquer l’étoffe. La notice UNESCO insiste sur la précision et la pratique."
         },
         {
           "id": "partage",
           "name": "La note sur la transmission",
           "text": "Elle explique comment les gestes s’apprennent et pourquoi leur transmission est fragile.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Comment apprend-on notamment les gestes du tissage ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "En regardant uniquement une étoffe terminée"
+            },
+            {
+              "id": "b",
+              "text": "En choisissant seulement des couleurs"
+            },
+            {
+              "id": "c",
+              "text": "En observant et en reprenant les gestes auprès de personnes expérimentées"
+            }
+          ],
+          "explanation": "La transmission repose notamment sur l’observation et la reprise des gestes auprès des personnes expérimentées. Le dossier souligne les difficultés économiques qui la fragilisent."
         }
       ],
-      "hint": "La photo fait regarder. La première note suit le travail ; la seconde parle des personnes qui l’apprennent."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -240,12 +288,16 @@
         "label": "UNESCO · Décision 15.COM 8.a.3",
         "supports": "Apprentissage par observation et imitation, fragilité de la transmission et participation des communautés."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir la table d’échantillons ou la conversation que tu as préparées.",
+      "finish": "Ouvrir la visite de l’atelier →"
+    }
   },
   "mongolie": {
     "title": "La maison qui voyage",
-    "mission": "Aider Saran et Bataa à présenter les éléments d’un ger, puis préparer une découverte à hauteur de visiteur.",
-    "intro": "Saran et Bataa ont imaginé une petite présentation du ger pour des visiteurs. Sur leur table, une maquette attend ses légendes. Avant d’ouvrir, ils aimeraient raconter à la fois la structure de l’habitat et le travail des personnes qui le fabriquent.",
+    "mission": "Aide Saran et Bataa à faire découvrir les éléments d’un ger aux visiteurs.",
+    "intro": "Saran et Bataa ont préparé une table de maquette. Tu vas découvrir les éléments du ger, en composer une version illustrée si tu le souhaites, puis choisir comment expliquer cette maison démontable.",
     "places": [
       {
         "name": "Le seuil du ger",
@@ -267,7 +319,7 @@
       {
         "name": "Saran",
         "role": "organise la découverte du ger",
-        "greeting": "Bonjour ! Bataa a préparé la maquette. J’aimerais que les visiteurs comprennent ce qu’ils regardent avant que nous ouvrions la discussion.",
+        "greeting": "Bienvenue ! Aide Saran et Bataa à faire découvrir les éléments d’un ger aux visiteurs. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "C’est un véritable montage ?",
@@ -282,7 +334,7 @@
       {
         "name": "Bataa",
         "role": "prépare les supports de la visite",
-        "greeting": "J’ai posé la photographie et les deux notes ici. Si tu retrouves leur sujet, nous pourrons choisir comment les utiliser avec les visiteurs.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : une maquette à composer. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Tu préfères montrer ou raconter ?",
@@ -330,7 +382,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Prépare les trois repères de la maquette : à quoi chaque support sert-il pendant la visite ?",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -350,22 +402,70 @@
           "id": "photo",
           "name": "La photographie du ger",
           "text": "Elle présente un habitat dans un contexte documenté.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel habitat reconnais-tu sur la photographie ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un ger"
+            },
+            {
+              "id": "b",
+              "text": "Un immeuble en briques"
+            },
+            {
+              "id": "c",
+              "text": "Une maison sur pilotis"
+            }
+          ],
+          "explanation": "La photographie donne un point de départ visuel pour regarder la forme du ger. Sa légende indique le contexte du document."
         },
         {
           "id": "geste",
           "name": "La note sur les éléments",
           "text": "Bois, couvertures et cordes : elle distingue les grandes parties.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Quels éléments entrent dans la structure décrite ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement des murs de pierre"
+            },
+            {
+              "id": "b",
+              "text": "Du bois, des couvertures de feutre et de toile, et des cordes"
+            },
+            {
+              "id": "c",
+              "text": "Seulement des panneaux de verre"
+            }
+          ],
+          "explanation": "Le ger associe une armature de bois, des couvertures de feutre et de toile, et des cordes. Ses éléments permettent de le démonter, de le transporter et de le remonter."
         },
         {
           "id": "partage",
           "name": "La note sur les personnes",
           "text": "Elle parle de fabrication, de coopération et d’apprentissage.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Pourquoi parle-t-on de plusieurs savoir-faire ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une photographie suffit à fabriquer tous les éléments"
+            },
+            {
+              "id": "b",
+              "text": "Chaque élément est toujours fabriqué sans apprentissage"
+            },
+            {
+              "id": "c",
+              "text": "La fabrication réunit des gestes appris auprès des artisans et des proches"
+            }
+          ],
+          "explanation": "La fabrication réunit plusieurs savoir-faire. Les plus jeunes apprennent notamment auprès d’artisans expérimentés et en observant les opérations familiales."
         }
       ],
-      "hint": "Distingue ce que montre l’image, ce qui compose l’habitat et les personnes qui transmettent leurs savoirs."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -483,12 +583,16 @@
         "label": "UNESCO · Décision 8.COM 8.20",
         "supports": "Participation familiale et communautaire, transmission entre générations, inscription en 2013."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le début de ta présentation et ta maquette si tu l’as composée.",
+      "finish": "Présenter le ger aux visiteurs →"
+    }
   },
   "senegal": {
     "title": "Une place autour du plat",
-    "mission": "Aider Awa et Ibrahima à préparer l’accueil d’un repas, avec une présentation qui laisse place aux différentes histoires du ceebu jën.",
-    "intro": "Dans cette rencontre imaginée à Saint-Louis, Awa prépare un repas et Ibrahima accueille les invités. Il a retrouvé une photo et deux notes pour présenter le ceebu jën. Ils te proposent de les aider, puis de choisir comment ouvrir la conversation autour de la table.",
+    "mission": "Aide Awa et Ibrahima à accueillir leurs invités autour du ceebu jën.",
+    "intro": "Awa termine le repas et Ibrahima prépare l’accueil. Tu vas découvrir le plat et son histoire, composer une invitation si tu le souhaites, puis choisir comment lancer la conversation à table.",
     "places": [
       {
         "name": "La cour de la cuisine",
@@ -510,7 +614,7 @@
       {
         "name": "Awa",
         "role": "prépare le repas de notre récit",
-        "greeting": "Bonjour ! Ibrahima a presque fini l’accueil. J’aimerais que nos invités puissent poser leurs questions avant que nous passions à table.",
+        "greeting": "Bienvenue ! Aide Awa et Ibrahima à accueillir leurs invités autour du ceebu jën. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Tu as suivi une recette unique ?",
@@ -525,7 +629,7 @@
       {
         "name": "Ibrahima",
         "role": "accueille les invités",
-        "greeting": "J’ai la photo, une note sur les ingrédients et une autre sur l’apprentissage. Aide-moi à les présenter, et nous choisirons ensuite comment accueillir tout le monde.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : prépare un accueil virtuel. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Que faut-il expliquer d’abord ?",
@@ -573,7 +677,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Retrouve le sujet des trois supports pour préparer une présentation claire avant le repas.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -593,22 +697,70 @@
           "id": "photo",
           "name": "La photographie",
           "text": "Elle montre une présentation particulière du plat.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Quel plat cette photographie présente-t-elle ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un plat de tortillas"
+            },
+            {
+              "id": "b",
+              "text": "Du ceebu jën"
+            },
+            {
+              "id": "c",
+              "text": "Une soupe miso"
+            }
+          ],
+          "explanation": "La photographie documente une présentation de ceebu jën. Elle permet d’observer le plat, sans dresser la liste complète de sa recette."
         },
         {
           "id": "geste",
           "name": "La note sur la préparation",
           "text": "Elle évoque riz, poisson, légumes et diversité des recettes.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Quels ingrédients la fiche du ceebu jën met-elle notamment en avant ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement du riz et du lait"
+            },
+            {
+              "id": "b",
+              "text": "Seulement de la farine et du beurre"
+            },
+            {
+              "id": "c",
+              "text": "Du riz, du poisson et des légumes"
+            }
+          ],
+          "explanation": "Le dossier situe les origines du ceebu jën dans les communautés de pêcheurs de l’île de Saint-Louis. Il décrit notamment du riz, du poisson et des légumes, avec des variantes régionales."
         },
         {
           "id": "partage",
           "name": "La note sur les générations",
           "text": "Elle parle des personnes qui apprennent et prennent part aux préparatifs.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Comment les savoirs du repas se transmettent-ils notamment ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Par les échanges oraux et la participation progressive aux tâches"
+            },
+            {
+              "id": "b",
+              "text": "Uniquement par une recette imprimée"
+            },
+            {
+              "id": "c",
+              "text": "Sans participation des plus jeunes"
+            }
+          ],
+          "explanation": "La préparation et les usages du repas se transmettent entre générations. Le dossier décrit un apprentissage oral et une participation progressive des enfants aux tâches."
         }
       ],
-      "hint": "L’image montre un plat. Une note parle de ce qui le compose ; l’autre, de celles et ceux qui apprennent à le préparer."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -726,6 +878,10 @@
         "label": "UNESCO · Décision 16.COM 8.B.36",
         "supports": "Transmission orale, participation progressive aux tâches et inscription en 2021."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le début du repas que tu as préparé et retrouver la recette.",
+      "finish": "Accueillir les convives →"
+    }
   }
 }

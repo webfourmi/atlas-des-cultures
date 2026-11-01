@@ -11,6 +11,7 @@ const nonempty=v=>assert(typeof v==='string'&&v.trim().length>0,'Missing text');
 const url=v=>assert(/^https:\/\//.test(v),'Invalid URL '+v);
 for(const [id,d] of Object.entries(data)){
   for(const key of ['title','mission','intro'])nonempty(d[key]);
+  for(const key of ['result','finish'])nonempty(d.guide?.[key]);
   assert.equal(d.places.length,3,id);for(const p of d.places){nonempty(p.name);nonempty(p.description);}
   assert.equal(d.characters.length,2,id);
   for(const p of d.characters){for(const key of ['name','role','greeting'])nonempty(p[key]);assert.equal(p.questions.length,2,id);for(const q of p.questions){nonempty(q.question);nonempty(q.answer);}assert.notEqual(p.questions[0].answer,p.questions[1].answer);}
@@ -19,7 +20,11 @@ for(const [id,d] of Object.entries(data)){
   for(const c of d.clues){nonempty(c.title);nonempty(c.text);if(c.id==='photo')assert.equal(c.source,'photo');else url(c.source);}
   nonempty(d.puzzle.prompt);nonempty(d.puzzle.hint);assert.deepEqual(d.puzzle.labels.map(l=>l.id),['a','b','c'],id);for(const l of d.puzzle.labels)nonempty(l.text);
   assert.deepEqual(d.puzzle.supports.map(p=>p.id),['photo','geste','partage'],id);assert.equal(new Set(d.puzzle.supports.map(p=>p.correct)).size,3,id);
-  for(const p of d.puzzle.supports){nonempty(p.name);nonempty(p.text);assert(['a','b','c'].includes(p.correct),id);}
+  for(const p of d.puzzle.supports){
+    nonempty(p.name);nonempty(p.text);nonempty(p.question);nonempty(p.explanation);assert(['a','b','c'].includes(p.correct),id);
+    assert.deepEqual(p.answers.map(a=>a.id),['a','b','c'],id);for(const a of p.answers)nonempty(a.text);
+    assert.equal(new Set(p.answers.map(a=>a.text)).size,3,id);
+  }
   assert.deepEqual(d.plans.map(p=>p.id),['atelier','rencontre'],id);
   for(const [i,p] of d.plans.entries()){
     for(const key of ['title','description','reply','preparationTitle','preparationPrompt','endingTitle'])nonempty(p[key]);assert.equal(p.place,i===0?0:2,id);assert.deepEqual(p.options.map(o=>o.id),['un','deux'],id);

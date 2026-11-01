@@ -2,6 +2,16 @@
 
 PWA statique : 18 escales, 54 questions, cinq recettes, passeport et progression locale.
 
+## Des aventures guidées (v5.3.0)
+
+Les 18 aventures annoncent maintenant un objectif concret et montrent une consigne au-dessus de l’image à chaque écran. Un seul indicateur présente cinq étapes : rencontre, découvertes, petite activité et questions, choix de l’accueil, résultat. Le bouton du bas conduit la progression ; les trois lieux et le carnet restent disponibles pour explorer librement.
+
+Les légendes à déplacer sont remplacées par trois questions concrètes de visiteurs. Chaque choix donne immédiatement une explication. Les réponses sont indépendantes : répondre à une question ne modifie pas les autres. On peut réessayer ou demander la réponse, sans perdre de points. La photographie et les documents sont lisibles directement ; continuer conserve leur repère dans le carnet. Les activités peuvent être passées dès la rencontre avec le second personnage.
+
+Les récits et dialogues annoncent ce qui va être préparé. Les deux derniers choix conduisent à une scène finale qui reprend ces décisions, avec un récapitulatif visible. Les identifiants et valeurs correctes des anciennes sauvegardes sont conservés, y compris pour les aventures terminées et les créations indonésiennes. Un ancien tableau entièrement correct mais encore non validé propose de confirmer les réponses.
+
+[Contrôles et limites de cette évolution](docs/AVENTURES-GUIDEES-53.md).
+
 ## Cinq nouveaux horizons (v5.2.0)
 
 L’Espagne (flamenco), la Finlande (culture du sauna), l’Égypte (tissage du Sa’eed), la Mongolie (ger) et le Sénégal (ceebu jën) rejoignent l’Atlas. Chacune dispose d’une fiche documentée, trois questions, une photographie réelle légendée, deux illustrations de récit et une aventure en trois lieux avec deux suites possibles. Les données sont dans `travel/escales-nouvelles.json`, `travel/new-photos.json`, `travel/new-places.json` et les deux groupes `travel/adventures/new-*.json`.

@@ -1,8 +1,8 @@
 {
   "japon": {
-    "title": "Les trois cartes du repas",
-    "mission": "Retrouver le rôle de trois cartes avec Aiko et Haru, puis choisir comment accueillir les invités.",
-    "intro": "Dans cette scène fictive, Aiko prépare un repas familial du Nouvel An. Son cousin Haru a mélangé les cartes prévues pour présenter la table. Les deux adultes comptent sur toi pour les remettre en place avant l’arrivée des invités.",
+    "title": "Un repas pour accueillir Haru",
+    "mission": "Prépare avec Aiko une table de découverte du washoku, puis choisis comment accueillir Haru.",
+    "intro": "Aiko dispose les plats avant l’arrivée de Haru. Elle te propose de découvrir le repas avec elle, puis de choisir ce que vous présenterez en premier.",
     "places": [
       {
         "name": "La cuisine",
@@ -24,7 +24,7 @@
       {
         "name": "Aiko",
         "role": "prépare le repas familial",
-        "greeting": "Tu tombes bien. Haru a retrouvé mes cartes, mais plus leurs légendes ! Regarde les documents, puis nous déciderons quoi en faire.",
+        "greeting": "Bienvenue ! Prépare avec Aiko une table de découverte du washoku, puis choisis comment accueillir Haru. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Pourquoi ces ingrédients ?",
@@ -39,7 +39,7 @@
       {
         "name": "Haru",
         "role": "cousin d’Aiko, chargé de l’accueil",
-        "greeting": "J’ai voulu ranger trop vite. Les cartes sont là, mais je ne sais plus laquelle explique quoi. Tu as trouvé quelque chose ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton menu imaginaire. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Qui t’a appris à cuisiner ?",
@@ -87,7 +87,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Associe chaque support à ce qu’il permet de découvrir. Aiko pourra alors utiliser les bonnes cartes.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -107,22 +107,70 @@
           "id": "photo",
           "name": "La photographie des boîtes",
           "text": "Deux boîtes ouvertes et leurs compartiments : un document à observer.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Comment les mets sont-ils présentés sur la photo ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Dans des boîtes à compartiments"
+            },
+            {
+              "id": "b",
+              "text": "Dans une grande marmite"
+            },
+            {
+              "id": "c",
+              "text": "Sur une seule brochette"
+            }
+          ],
+          "explanation": "La photo documente la présentation de mets du Nouvel An dans des boîtes jūbako. Elle ne fournit pas la recette de chaque préparation."
         },
         {
           "id": "geste",
           "name": "La note sur les ingrédients",
           "text": "Ce document relie les aliments choisis à la nature et aux ressources locales.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Que vas-tu mettre en avant dans le choix des ingrédients ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un menu identique en toute saison"
+            },
+            {
+              "id": "b",
+              "text": "Leur lien avec la nature et les produits locaux"
+            },
+            {
+              "id": "c",
+              "text": "Seulement la décoration des assiettes"
+            }
+          ],
+          "explanation": "Le washoku réunit des savoirs alimentaires associés au respect de la nature. La notice souligne les ingrédients naturels et locaux."
         },
         {
           "id": "partage",
           "name": "La note sur l’apprentissage",
           "text": "Ce document parle des personnes et des occasions qui permettent d’apprendre.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Qui peut transmettre ces savoirs culinaires ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement les chefs de restaurant"
+            },
+            {
+              "id": "b",
+              "text": "Seulement les auteurs de recettes"
+            },
+            {
+              "id": "c",
+              "text": "Les familles, mais aussi l’enseignement et les associations"
+            }
+          ],
+          "explanation": "Les connaissances culinaires se transmettent notamment au foyer et lors des repas partagés. L’enseignement et les associations contribuent aussi à cette transmission."
         }
       ],
-      "hint": "Cherche le sujet principal de chaque support : ce que l’on voit, ce que l’on choisit, puis ce que l’on apprend ensemble."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -240,12 +288,16 @@
         "label": "Photographie · Osechi, Akihito Kurono, CC0",
         "supports": "Identification de l’osechi et des boîtes jūbako ; auteur et droits de la photographie. Les personnages et le menu du jeu sont fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir la table et le premier échange que tu as choisis.",
+      "finish": "Accueillir Haru →"
+    }
   },
   "coree": {
-    "title": "Une part pour Mina",
-    "mission": "Aider Joon à préparer un accueil autour du kimjang, puis choisir comment partager la rencontre avec Mina.",
-    "intro": "Dans cette scène fictive, les préparatifs de kimjang viennent de s’achever. Joon et sa voisine Mina, tous deux adultes, ont prévu un moment avec les voisins. Trois documents se sont mélangés : à toi de les reconnaître avant de choisir la suite.",
+    "title": "Une invitation pour Mina",
+    "mission": "Aide Joon à accueillir Mina et à lui raconter la préparation et le partage du kimchi.",
+    "intro": "Mina arrive bientôt. Joon veut lui présenter le kimjang et préparer une petite attention pour elle. Tu vas découvrir ce que l’on prépare ensemble et ce que l’on partage.",
     "places": [
       {
         "name": "La table d’accueil",
@@ -267,7 +319,7 @@
       {
         "name": "Joon",
         "role": "participe aux préparatifs du kimjang",
-        "greeting": "Mina arrive bientôt. J’ai mis son bocal à part, mais j’aimerais aussi lui montrer notre petit panneau. Tu peux m’aider à retrouver les légendes ?",
+        "greeting": "Bienvenue ! Aide Joon à accueillir Mina et à lui raconter la préparation et le partage du kimchi. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Pourquoi parler d’un calendrier ?",
@@ -282,7 +334,7 @@
       {
         "name": "Mina",
         "role": "voisine de Joon",
-        "greeting": "Bonjour ! Joon m’a dit que tu l’aidais. Je peux attendre ici pendant que vous finissez. J’ai surtout envie de savoir ce que vous avez choisi de raconter.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : un bocal virtuel à partager. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Ton kimchi est le même que celui de Joon ?",
@@ -330,7 +382,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Retrouve la légende de chaque support pour terminer le panneau de Joon.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -350,22 +402,70 @@
           "id": "photo",
           "name": "La photographie des tables",
           "text": "Des personnes, des légumes et de nombreux récipients sont réunis dans l’image.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Que préparent les personnes sur la photographie ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Du kimchi"
+            },
+            {
+              "id": "b",
+              "text": "Des boîtes de thé"
+            },
+            {
+              "id": "c",
+              "text": "Des pâtes à pain"
+            }
+          ],
+          "explanation": "La photographie montre une préparation de kimchi en Corée du Sud. Elle permet d’observer la disposition des récipients, sans fournir de protocole de fabrication."
         },
         {
           "id": "geste",
           "name": "La note de calendrier",
           "text": "Ce document suit les préparatifs au fil des saisons.",
-          "correct": "b"
+          "correct": "b",
+          "question": "À quel moment prépare-t-on ensemble les grandes réserves pour l’hiver ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Au début de l’été"
+            },
+            {
+              "id": "b",
+              "text": "À la fin de l’automne"
+            },
+            {
+              "id": "c",
+              "text": "Uniquement le jour du Nouvel An"
+            }
+          ],
+          "explanation": "Les préparatifs du kimjang s’étendent sur l’année. À la fin de l’automne, des communautés préparent ensemble une grande quantité de kimchi pour l’hiver."
         },
         {
           "id": "partage",
           "name": "La note sur les échanges",
           "text": "Ce document porte sur les relations entre les familles.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Que partage-t-on entre foyers lors du kimjang ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement des récipients vides"
+            },
+            {
+              "id": "b",
+              "text": "Seulement une liste d’ingrédients"
+            },
+            {
+              "id": "c",
+              "text": "Du kimchi et des savoir-faire"
+            }
+          ],
+          "explanation": "Le kimjang comprend le partage du kimchi. Les échanges entre familles font aussi circuler des idées et des savoir-faire."
         }
       ],
-      "hint": "La photo donne à voir. Le calendrier parle du temps. La dernière note s’intéresse aux personnes qui échangent."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -483,12 +583,16 @@
         "label": "Photographie · Caroline Knox, CC BY-SA 3.0",
         "supports": "Identification d’une préparation de kimchi en Corée du Sud ; auteur et droits. Joon, Mina et la visite sont fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Découvrir l’accueil que tu as préparé pour Mina.",
+      "finish": "Accueillir Mina →"
+    }
   },
   "vietnam": {
-    "title": "Une place pour les voix",
-    "mission": "Aider Linh et Hai à préparer l’accueil des auditeurs, sans confondre la photographie, le principe de réponse et les liens entre villages.",
-    "intro": "Dans cette rencontre fictive, Linh et Hai, deux chanteurs adultes, attendent leurs partenaires et les premiers auditeurs. Ils ont trois documents pour présenter le Quan Họ. Retrouve leurs légendes, puis décide comment ouvrir l’écoute.",
+    "title": "Préparer une rencontre chantée",
+    "mission": "Aide Linh à accueillir les auditeurs et à leur faire découvrir le dialogue des chants Quan Họ.",
+    "intro": "Linh et Hai installent les sièges avant une rencontre chantée. Quelques visiteurs découvrent le Quan Họ : tu vas chercher avec eux ce qu’il faut écouter, puis choisir comment lancer la rencontre.",
     "places": [
       {
         "name": "L’accueil des auditeurs",
@@ -510,7 +614,7 @@
       {
         "name": "Linh",
         "role": "chanteuse, accompagnée d’une partenaire dans la fiction",
-        "greeting": "Bonjour ! Nous avons un peu de temps avant l’arrivée des autres. J’aimerais présenter ce que l’on va écouter sans faire un long discours. Tu m’aides ?",
+        "greeting": "Bienvenue ! Aide Linh à accueillir les auditeurs et à leur faire découvrir le dialogue des chants Quan Họ. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Qui va répondre à ton groupe ?",
@@ -525,7 +629,7 @@
       {
         "name": "Hai",
         "role": "chanteur du groupe partenaire de Linh",
-        "greeting": "Linh m’a parlé des cartes. On pourrait aussi garder une question pour après l’écoute. Qu’est-ce qui t’a donné envie de venir ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : à toi de répondre. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Vous chantez seulement entre vous ?",
@@ -573,7 +677,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Aide Linh à donner le bon rôle à chaque document avant l’arrivée des auditeurs.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -593,22 +697,70 @@
           "id": "photo",
           "name": "La photographie du pavillon",
           "text": "Un groupe visible, un lieu précis et des crédits à consulter.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel moment la photographie documente-t-elle ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un ensemble de Quan Họ à Đền Đô"
+            },
+            {
+              "id": "b",
+              "text": "Un atelier de fabrication d’instruments"
+            },
+            {
+              "id": "c",
+              "text": "Une séance de danse sans musiciens"
+            }
+          ],
+          "explanation": "L’image documente un ensemble de Quan Họ à Đền Đô. Elle renseigne sur cette scène visible, sans résumer toutes les formes de la pratique."
         },
         {
           "id": "geste",
           "name": "La note sur l’alternance",
           "text": "Un document consacré à l’organisation des couplets entre les groupes.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Que proposes-tu aux visiteurs de repérer à l’écoute ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un long solo sans réponse"
+            },
+            {
+              "id": "b",
+              "text": "L’alternance de couplets qui se répondent"
+            },
+            {
+              "id": "c",
+              "text": "Un texte parlé sans mélodie"
+            }
+          ],
+          "explanation": "La forme décrite par l’UNESCO alterne des couplets de deux femmes et de deux hommes. Les mélodies sont similaires, les paroles diffèrent."
         },
         {
           "id": "partage",
           "name": "La note sur les villages",
           "text": "Un document consacré aux relations qui entourent le chant.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Quel lien ces chants contribuent-ils à entretenir ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement la compétition entre chanteurs"
+            },
+            {
+              "id": "b",
+              "text": "Seulement les liens d’une même famille"
+            },
+            {
+              "id": "c",
+              "text": "L’amitié entre communautés de villages"
+            }
+          ],
+          "explanation": "Dans les régions de Bắc Ninh et Bắc Giang décrites par le dossier, les chants contribuent aux liens d’amitié entre communautés."
         }
       ],
-      "hint": "Distingue l’image que l’on regarde, la manière dont les voix s’organisent et les relations que la rencontre entretient."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -731,12 +883,16 @@
         "label": "Photographie · Chrisvomberg, CC BY-SA 3.0",
         "supports": "Identification de l’ensemble et du temple Đền Đô ; auteur et droits. Linh, Hai et la rencontre sont fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir comment commence la rencontre chantée.",
+      "finish": "Accueillir les auditeurs →"
+    }
   },
   "indonesie": {
-    "title": "Les échantillons sans légende",
-    "mission": "Aider Dimas et Sari à présenter le batik : retrouver les trois légendes, puis choisir une démonstration virtuelle ou une visite de la galerie.",
-    "intro": "Dans cet atelier fictif de Java, Dimas, apprenant adulte, prépare une visite avec Sari, artisane. Les cartes de présentation se sont décollées de leurs supports. Retrouve leur place pour que les visiteurs comprennent ce qu’ils regardent.",
+    "title": "Ton motif à l’atelier de batik",
+    "mission": "Découvre avec Dimas comment fonctionne le batik, crée un motif si tu le souhaites, puis prépare sa présentation avec Sari.",
+    "intro": "Dimas termine une étoffe et Sari attend les visiteurs de l’atelier. Avant de les accueillir, ils te proposent de regarder le travail de la cire et d’essayer un motif personnel à l’écran.",
     "places": [
       {
         "name": "La table d’accueil",
@@ -758,7 +914,7 @@
       {
         "name": "Dimas",
         "role": "apprend dans l’atelier de Sari",
-        "greeting": "J’ai les trois cartes, mais plus leurs légendes. Sari m’a demandé de les vérifier avant la visite. Tu peux regarder les documents avec moi ?",
+        "greeting": "Bienvenue ! Découvre avec Dimas comment fonctionne le batik, crée un motif si tu le souhaites, puis prépare sa présentation avec Sari. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "À quoi sert la cire ?",
@@ -773,7 +929,7 @@
       {
         "name": "Sari",
         "role": "artisane de batik, accompagne Dimas",
-        "greeting": "Bonjour. Dimas m’a dit que les cartes avaient glissé. Prenez votre temps : je préfère une présentation courte et juste à des légendes posées au hasard.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton atelier de motifs. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Le batik se porte seulement pour les fêtes ?",
@@ -821,7 +977,7 @@
       }
     ],
     "puzzle": {
-      "prompt": "Associe chaque support à son sujet pour préparer les légendes de l’atelier.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -841,22 +997,70 @@
           "id": "photo",
           "name": "La photographie de l’atelier",
           "text": "Des gestes, des tissus et des outils sont visibles dans une scène réelle.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Que font les artisanes sur la photographie ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Elles appliquent de la cire sur des étoffes"
+            },
+            {
+              "id": "b",
+              "text": "Elles assemblent des carrés de tissu"
+            },
+            {
+              "id": "c",
+              "text": "Elles sculptent des tampons en bois"
+            }
+          ],
+          "explanation": "La photographie montre des artisanes appliquant manuellement la cire sur des étoffes à Java. C’est un document sur un travail réel, distinct de notre atelier fictif."
         },
         {
           "id": "geste",
           "name": "La fiche de la réserve",
           "text": "Ce document explique le rôle technique de la cire face à la teinture.",
-          "correct": "b"
+          "correct": "b",
+          "question": "À quoi sert la cire pendant la teinture ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "À fixer définitivement tous les fils"
+            },
+            {
+              "id": "b",
+              "text": "À protéger certaines zones de l’étoffe"
+            },
+            {
+              "id": "c",
+              "text": "À rendre toute l’étoffe de la même couleur"
+            }
+          ],
+          "explanation": "Les lignes et points de cire résistent à la teinture. Le travail peut être répété avec différentes couleurs pour composer l’étoffe."
         },
         {
           "id": "partage",
           "name": "La fiche des usages",
           "text": "Ce document s’intéresse aux personnes et aux occasions qui entourent les étoffes.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Que vas-tu rappeler en présentant une étoffe ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Que tous les motifs ont le même sens"
+            },
+            {
+              "id": "b",
+              "text": "Qu’elle ne peut servir que de décoration"
+            },
+            {
+              "id": "c",
+              "text": "Ses usages et les significations variées de ses motifs"
+            }
+          ],
+          "explanation": "Les usages du batik vont du quotidien à des occasions particulières. Ses motifs portent des significations variées ; ses savoir-faire se transmettent notamment dans les familles."
         }
       ],
-      "hint": "La première carte aide à regarder, la deuxième explique un mécanisme, la troisième replace le tissu dans la vie des personnes."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -898,14 +1102,14 @@
             "id": "un",
             "label": "Comment Dimas apprend-il à l’atelier ?",
             "reply": "Sari : Je lui proposerai de raconter lui-même ce qu’il a fait aujourd’hui.",
-            "endingText": "Dans la galerie, Dimas raconte comment vous avez retrouvé les légendes. Sari l’écoute et complète son explication. Les visiteurs peuvent ensuite poser leurs questions, sans attribuer une signification aux motifs au hasard.",
+            "endingText": "Dans la galerie, Dimas raconte ce que vous avez découvert sur la cire et la teinture. Sari complète son explication. Les visiteurs peuvent ensuite poser leurs questions et découvrir les étoffes.",
             "endingReply": "Sari : Tu as aidé Dimas à préparer sa présentation. Merci. Nous pouvons poursuivre la visite ensemble."
           },
           {
             "id": "deux",
             "label": "Quelle histoire accompagne une étoffe ?",
             "reply": "Sari : Prenons le temps de regarder une pièce précise. Nous partirons de ce que je peux en expliquer.",
-            "endingText": "Tu demandes à Sari de présenter une étoffe de son atelier fictif. Elle commence par son travail, puis accueille les questions des visiteurs. Dimas garde vos trois cartes à disposition pour éclairer la discussion.",
+            "endingText": "Tu demandes à Sari de présenter une étoffe de son atelier fictif. Elle commence par son travail, puis accueille les questions des visiteurs. Dimas apporte la photo de l’atelier pour montrer un geste de fabrication.",
             "endingReply": "Sari : Une bonne question vaut mieux qu’une légende devinée. Venez, je vais vous montrer la suite."
           }
         ],
@@ -974,6 +1178,10 @@
         "label": "Photographie · Ian Alexander, CC BY-SA 3.0",
         "supports": "Identification d’artisanes appliquant la cire à Yogyakarta ; auteur et droits. Dimas, Sari et l’atelier de l’aventure sont fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le début de ta présentation et retrouver tes motifs dans le carnet.",
+      "finish": "Ouvrir l’atelier aux visiteurs →"
+    }
   }
 }

@@ -1,9 +1,9 @@
 /* Généré depuis travel/adventures/*.json. Escales initiales : 19 octobre 2026 ; cinq ajouts : 1er novembre 2026. */
 const WORLD_ADVENTURES = {
   "japon": {
-    "title": "Les trois cartes du repas",
-    "mission": "Retrouver le rôle de trois cartes avec Aiko et Haru, puis choisir comment accueillir les invités.",
-    "intro": "Dans cette scène fictive, Aiko prépare un repas familial du Nouvel An. Son cousin Haru a mélangé les cartes prévues pour présenter la table. Les deux adultes comptent sur toi pour les remettre en place avant l’arrivée des invités.",
+    "title": "Un repas pour accueillir Haru",
+    "mission": "Prépare avec Aiko une table de découverte du washoku, puis choisis comment accueillir Haru.",
+    "intro": "Aiko dispose les plats avant l’arrivée de Haru. Elle te propose de découvrir le repas avec elle, puis de choisir ce que vous présenterez en premier.",
     "places": [
       {
         "name": "La cuisine",
@@ -25,7 +25,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Aiko",
         "role": "prépare le repas familial",
-        "greeting": "Tu tombes bien. Haru a retrouvé mes cartes, mais plus leurs légendes ! Regarde les documents, puis nous déciderons quoi en faire.",
+        "greeting": "Bienvenue ! Prépare avec Aiko une table de découverte du washoku, puis choisis comment accueillir Haru. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Pourquoi ces ingrédients ?",
@@ -40,7 +40,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Haru",
         "role": "cousin d’Aiko, chargé de l’accueil",
-        "greeting": "J’ai voulu ranger trop vite. Les cartes sont là, mais je ne sais plus laquelle explique quoi. Tu as trouvé quelque chose ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton menu imaginaire. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Qui t’a appris à cuisiner ?",
@@ -88,7 +88,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Associe chaque support à ce qu’il permet de découvrir. Aiko pourra alors utiliser les bonnes cartes.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -108,22 +108,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie des boîtes",
           "text": "Deux boîtes ouvertes et leurs compartiments : un document à observer.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Comment les mets sont-ils présentés sur la photo ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Dans des boîtes à compartiments"
+            },
+            {
+              "id": "b",
+              "text": "Dans une grande marmite"
+            },
+            {
+              "id": "c",
+              "text": "Sur une seule brochette"
+            }
+          ],
+          "explanation": "La photo documente la présentation de mets du Nouvel An dans des boîtes jūbako. Elle ne fournit pas la recette de chaque préparation."
         },
         {
           "id": "geste",
           "name": "La note sur les ingrédients",
           "text": "Ce document relie les aliments choisis à la nature et aux ressources locales.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Que vas-tu mettre en avant dans le choix des ingrédients ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un menu identique en toute saison"
+            },
+            {
+              "id": "b",
+              "text": "Leur lien avec la nature et les produits locaux"
+            },
+            {
+              "id": "c",
+              "text": "Seulement la décoration des assiettes"
+            }
+          ],
+          "explanation": "Le washoku réunit des savoirs alimentaires associés au respect de la nature. La notice souligne les ingrédients naturels et locaux."
         },
         {
           "id": "partage",
           "name": "La note sur l’apprentissage",
           "text": "Ce document parle des personnes et des occasions qui permettent d’apprendre.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Qui peut transmettre ces savoirs culinaires ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement les chefs de restaurant"
+            },
+            {
+              "id": "b",
+              "text": "Seulement les auteurs de recettes"
+            },
+            {
+              "id": "c",
+              "text": "Les familles, mais aussi l’enseignement et les associations"
+            }
+          ],
+          "explanation": "Les connaissances culinaires se transmettent notamment au foyer et lors des repas partagés. L’enseignement et les associations contribuent aussi à cette transmission."
         }
       ],
-      "hint": "Cherche le sujet principal de chaque support : ce que l’on voit, ce que l’on choisit, puis ce que l’on apprend ensemble."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -241,12 +289,16 @@ const WORLD_ADVENTURES = {
         "label": "Photographie · Osechi, Akihito Kurono, CC0",
         "supports": "Identification de l’osechi et des boîtes jūbako ; auteur et droits de la photographie. Les personnages et le menu du jeu sont fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir la table et le premier échange que tu as choisis.",
+      "finish": "Accueillir Haru →"
+    }
   },
   "coree": {
-    "title": "Une part pour Mina",
-    "mission": "Aider Joon à préparer un accueil autour du kimjang, puis choisir comment partager la rencontre avec Mina.",
-    "intro": "Dans cette scène fictive, les préparatifs de kimjang viennent de s’achever. Joon et sa voisine Mina, tous deux adultes, ont prévu un moment avec les voisins. Trois documents se sont mélangés : à toi de les reconnaître avant de choisir la suite.",
+    "title": "Une invitation pour Mina",
+    "mission": "Aide Joon à accueillir Mina et à lui raconter la préparation et le partage du kimchi.",
+    "intro": "Mina arrive bientôt. Joon veut lui présenter le kimjang et préparer une petite attention pour elle. Tu vas découvrir ce que l’on prépare ensemble et ce que l’on partage.",
     "places": [
       {
         "name": "La table d’accueil",
@@ -268,7 +320,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Joon",
         "role": "participe aux préparatifs du kimjang",
-        "greeting": "Mina arrive bientôt. J’ai mis son bocal à part, mais j’aimerais aussi lui montrer notre petit panneau. Tu peux m’aider à retrouver les légendes ?",
+        "greeting": "Bienvenue ! Aide Joon à accueillir Mina et à lui raconter la préparation et le partage du kimchi. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Pourquoi parler d’un calendrier ?",
@@ -283,7 +335,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Mina",
         "role": "voisine de Joon",
-        "greeting": "Bonjour ! Joon m’a dit que tu l’aidais. Je peux attendre ici pendant que vous finissez. J’ai surtout envie de savoir ce que vous avez choisi de raconter.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : un bocal virtuel à partager. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Ton kimchi est le même que celui de Joon ?",
@@ -331,7 +383,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Retrouve la légende de chaque support pour terminer le panneau de Joon.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -351,22 +403,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie des tables",
           "text": "Des personnes, des légumes et de nombreux récipients sont réunis dans l’image.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Que préparent les personnes sur la photographie ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Du kimchi"
+            },
+            {
+              "id": "b",
+              "text": "Des boîtes de thé"
+            },
+            {
+              "id": "c",
+              "text": "Des pâtes à pain"
+            }
+          ],
+          "explanation": "La photographie montre une préparation de kimchi en Corée du Sud. Elle permet d’observer la disposition des récipients, sans fournir de protocole de fabrication."
         },
         {
           "id": "geste",
           "name": "La note de calendrier",
           "text": "Ce document suit les préparatifs au fil des saisons.",
-          "correct": "b"
+          "correct": "b",
+          "question": "À quel moment prépare-t-on ensemble les grandes réserves pour l’hiver ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Au début de l’été"
+            },
+            {
+              "id": "b",
+              "text": "À la fin de l’automne"
+            },
+            {
+              "id": "c",
+              "text": "Uniquement le jour du Nouvel An"
+            }
+          ],
+          "explanation": "Les préparatifs du kimjang s’étendent sur l’année. À la fin de l’automne, des communautés préparent ensemble une grande quantité de kimchi pour l’hiver."
         },
         {
           "id": "partage",
           "name": "La note sur les échanges",
           "text": "Ce document porte sur les relations entre les familles.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Que partage-t-on entre foyers lors du kimjang ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement des récipients vides"
+            },
+            {
+              "id": "b",
+              "text": "Seulement une liste d’ingrédients"
+            },
+            {
+              "id": "c",
+              "text": "Du kimchi et des savoir-faire"
+            }
+          ],
+          "explanation": "Le kimjang comprend le partage du kimchi. Les échanges entre familles font aussi circuler des idées et des savoir-faire."
         }
       ],
-      "hint": "La photo donne à voir. Le calendrier parle du temps. La dernière note s’intéresse aux personnes qui échangent."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -484,12 +584,16 @@ const WORLD_ADVENTURES = {
         "label": "Photographie · Caroline Knox, CC BY-SA 3.0",
         "supports": "Identification d’une préparation de kimchi en Corée du Sud ; auteur et droits. Joon, Mina et la visite sont fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Découvrir l’accueil que tu as préparé pour Mina.",
+      "finish": "Accueillir Mina →"
+    }
   },
   "vietnam": {
-    "title": "Une place pour les voix",
-    "mission": "Aider Linh et Hai à préparer l’accueil des auditeurs, sans confondre la photographie, le principe de réponse et les liens entre villages.",
-    "intro": "Dans cette rencontre fictive, Linh et Hai, deux chanteurs adultes, attendent leurs partenaires et les premiers auditeurs. Ils ont trois documents pour présenter le Quan Họ. Retrouve leurs légendes, puis décide comment ouvrir l’écoute.",
+    "title": "Préparer une rencontre chantée",
+    "mission": "Aide Linh à accueillir les auditeurs et à leur faire découvrir le dialogue des chants Quan Họ.",
+    "intro": "Linh et Hai installent les sièges avant une rencontre chantée. Quelques visiteurs découvrent le Quan Họ : tu vas chercher avec eux ce qu’il faut écouter, puis choisir comment lancer la rencontre.",
     "places": [
       {
         "name": "L’accueil des auditeurs",
@@ -511,7 +615,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Linh",
         "role": "chanteuse, accompagnée d’une partenaire dans la fiction",
-        "greeting": "Bonjour ! Nous avons un peu de temps avant l’arrivée des autres. J’aimerais présenter ce que l’on va écouter sans faire un long discours. Tu m’aides ?",
+        "greeting": "Bienvenue ! Aide Linh à accueillir les auditeurs et à leur faire découvrir le dialogue des chants Quan Họ. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Qui va répondre à ton groupe ?",
@@ -526,7 +630,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Hai",
         "role": "chanteur du groupe partenaire de Linh",
-        "greeting": "Linh m’a parlé des cartes. On pourrait aussi garder une question pour après l’écoute. Qu’est-ce qui t’a donné envie de venir ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : à toi de répondre. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Vous chantez seulement entre vous ?",
@@ -574,7 +678,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Aide Linh à donner le bon rôle à chaque document avant l’arrivée des auditeurs.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -594,22 +698,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie du pavillon",
           "text": "Un groupe visible, un lieu précis et des crédits à consulter.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel moment la photographie documente-t-elle ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un ensemble de Quan Họ à Đền Đô"
+            },
+            {
+              "id": "b",
+              "text": "Un atelier de fabrication d’instruments"
+            },
+            {
+              "id": "c",
+              "text": "Une séance de danse sans musiciens"
+            }
+          ],
+          "explanation": "L’image documente un ensemble de Quan Họ à Đền Đô. Elle renseigne sur cette scène visible, sans résumer toutes les formes de la pratique."
         },
         {
           "id": "geste",
           "name": "La note sur l’alternance",
           "text": "Un document consacré à l’organisation des couplets entre les groupes.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Que proposes-tu aux visiteurs de repérer à l’écoute ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un long solo sans réponse"
+            },
+            {
+              "id": "b",
+              "text": "L’alternance de couplets qui se répondent"
+            },
+            {
+              "id": "c",
+              "text": "Un texte parlé sans mélodie"
+            }
+          ],
+          "explanation": "La forme décrite par l’UNESCO alterne des couplets de deux femmes et de deux hommes. Les mélodies sont similaires, les paroles diffèrent."
         },
         {
           "id": "partage",
           "name": "La note sur les villages",
           "text": "Un document consacré aux relations qui entourent le chant.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Quel lien ces chants contribuent-ils à entretenir ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement la compétition entre chanteurs"
+            },
+            {
+              "id": "b",
+              "text": "Seulement les liens d’une même famille"
+            },
+            {
+              "id": "c",
+              "text": "L’amitié entre communautés de villages"
+            }
+          ],
+          "explanation": "Dans les régions de Bắc Ninh et Bắc Giang décrites par le dossier, les chants contribuent aux liens d’amitié entre communautés."
         }
       ],
-      "hint": "Distingue l’image que l’on regarde, la manière dont les voix s’organisent et les relations que la rencontre entretient."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -732,12 +884,16 @@ const WORLD_ADVENTURES = {
         "label": "Photographie · Chrisvomberg, CC BY-SA 3.0",
         "supports": "Identification de l’ensemble et du temple Đền Đô ; auteur et droits. Linh, Hai et la rencontre sont fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir comment commence la rencontre chantée.",
+      "finish": "Accueillir les auditeurs →"
+    }
   },
   "indonesie": {
-    "title": "Les échantillons sans légende",
-    "mission": "Aider Dimas et Sari à présenter le batik : retrouver les trois légendes, puis choisir une démonstration virtuelle ou une visite de la galerie.",
-    "intro": "Dans cet atelier fictif de Java, Dimas, apprenant adulte, prépare une visite avec Sari, artisane. Les cartes de présentation se sont décollées de leurs supports. Retrouve leur place pour que les visiteurs comprennent ce qu’ils regardent.",
+    "title": "Ton motif à l’atelier de batik",
+    "mission": "Découvre avec Dimas comment fonctionne le batik, crée un motif si tu le souhaites, puis prépare sa présentation avec Sari.",
+    "intro": "Dimas termine une étoffe et Sari attend les visiteurs de l’atelier. Avant de les accueillir, ils te proposent de regarder le travail de la cire et d’essayer un motif personnel à l’écran.",
     "places": [
       {
         "name": "La table d’accueil",
@@ -759,7 +915,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Dimas",
         "role": "apprend dans l’atelier de Sari",
-        "greeting": "J’ai les trois cartes, mais plus leurs légendes. Sari m’a demandé de les vérifier avant la visite. Tu peux regarder les documents avec moi ?",
+        "greeting": "Bienvenue ! Découvre avec Dimas comment fonctionne le batik, crée un motif si tu le souhaites, puis prépare sa présentation avec Sari. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "À quoi sert la cire ?",
@@ -774,7 +930,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Sari",
         "role": "artisane de batik, accompagne Dimas",
-        "greeting": "Bonjour. Dimas m’a dit que les cartes avaient glissé. Prenez votre temps : je préfère une présentation courte et juste à des légendes posées au hasard.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton atelier de motifs. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Le batik se porte seulement pour les fêtes ?",
@@ -822,7 +978,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Associe chaque support à son sujet pour préparer les légendes de l’atelier.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -842,22 +998,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie de l’atelier",
           "text": "Des gestes, des tissus et des outils sont visibles dans une scène réelle.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Que font les artisanes sur la photographie ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Elles appliquent de la cire sur des étoffes"
+            },
+            {
+              "id": "b",
+              "text": "Elles assemblent des carrés de tissu"
+            },
+            {
+              "id": "c",
+              "text": "Elles sculptent des tampons en bois"
+            }
+          ],
+          "explanation": "La photographie montre des artisanes appliquant manuellement la cire sur des étoffes à Java. C’est un document sur un travail réel, distinct de notre atelier fictif."
         },
         {
           "id": "geste",
           "name": "La fiche de la réserve",
           "text": "Ce document explique le rôle technique de la cire face à la teinture.",
-          "correct": "b"
+          "correct": "b",
+          "question": "À quoi sert la cire pendant la teinture ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "À fixer définitivement tous les fils"
+            },
+            {
+              "id": "b",
+              "text": "À protéger certaines zones de l’étoffe"
+            },
+            {
+              "id": "c",
+              "text": "À rendre toute l’étoffe de la même couleur"
+            }
+          ],
+          "explanation": "Les lignes et points de cire résistent à la teinture. Le travail peut être répété avec différentes couleurs pour composer l’étoffe."
         },
         {
           "id": "partage",
           "name": "La fiche des usages",
           "text": "Ce document s’intéresse aux personnes et aux occasions qui entourent les étoffes.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Que vas-tu rappeler en présentant une étoffe ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Que tous les motifs ont le même sens"
+            },
+            {
+              "id": "b",
+              "text": "Qu’elle ne peut servir que de décoration"
+            },
+            {
+              "id": "c",
+              "text": "Ses usages et les significations variées de ses motifs"
+            }
+          ],
+          "explanation": "Les usages du batik vont du quotidien à des occasions particulières. Ses motifs portent des significations variées ; ses savoir-faire se transmettent notamment dans les familles."
         }
       ],
-      "hint": "La première carte aide à regarder, la deuxième explique un mécanisme, la troisième replace le tissu dans la vie des personnes."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -899,14 +1103,14 @@ const WORLD_ADVENTURES = {
             "id": "un",
             "label": "Comment Dimas apprend-il à l’atelier ?",
             "reply": "Sari : Je lui proposerai de raconter lui-même ce qu’il a fait aujourd’hui.",
-            "endingText": "Dans la galerie, Dimas raconte comment vous avez retrouvé les légendes. Sari l’écoute et complète son explication. Les visiteurs peuvent ensuite poser leurs questions, sans attribuer une signification aux motifs au hasard.",
+            "endingText": "Dans la galerie, Dimas raconte ce que vous avez découvert sur la cire et la teinture. Sari complète son explication. Les visiteurs peuvent ensuite poser leurs questions et découvrir les étoffes.",
             "endingReply": "Sari : Tu as aidé Dimas à préparer sa présentation. Merci. Nous pouvons poursuivre la visite ensemble."
           },
           {
             "id": "deux",
             "label": "Quelle histoire accompagne une étoffe ?",
             "reply": "Sari : Prenons le temps de regarder une pièce précise. Nous partirons de ce que je peux en expliquer.",
-            "endingText": "Tu demandes à Sari de présenter une étoffe de son atelier fictif. Elle commence par son travail, puis accueille les questions des visiteurs. Dimas garde vos trois cartes à disposition pour éclairer la discussion.",
+            "endingText": "Tu demandes à Sari de présenter une étoffe de son atelier fictif. Elle commence par son travail, puis accueille les questions des visiteurs. Dimas apporte la photo de l’atelier pour montrer un geste de fabrication.",
             "endingReply": "Sari : Une bonne question vaut mieux qu’une légende devinée. Venez, je vais vous montrer la suite."
           }
         ],
@@ -975,12 +1179,16 @@ const WORLD_ADVENTURES = {
         "label": "Photographie · Ian Alexander, CC BY-SA 3.0",
         "supports": "Identification d’artisanes appliquant la cire à Yogyakarta ; auteur et droits. Dimas, Sari et l’atelier de l’aventure sont fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le début de ta présentation et retrouver tes motifs dans le carnet.",
+      "finish": "Ouvrir l’atelier aux visiteurs →"
+    }
   },
   "vanuatu": {
-    "title": "Le fil du dessin",
-    "mission": "Aider Lina à préparer les trois cartes d’accueil d’une démonstration de Toma.",
-    "intro": "Lina a une photo et deux notes, mais leurs titres sont mélangés. Retrouve leur place, puis choisis comment accueillir le groupe qui vient rencontrer Toma. Cette rencontre et ses deux personnages adultes sont fictifs.",
+    "title": "Un chemin pour entrer dans un récit",
+    "mission": "Aide Lina à préparer une rencontre avec Toma autour des dessins sur le sable.",
+    "intro": "Toma se prépare à présenter un dessin sur le sable. Lina t’invite à regarder un exemple, à découvrir le chemin du doigt, puis à choisir une question à poser avant la démonstration.",
     "places": [
       {
         "name": "Le coin d’accueil",
@@ -1002,11 +1210,11 @@ const WORLD_ADVENTURES = {
       {
         "name": "Lina",
         "role": "accueille les visiteurs",
-        "greeting": "Salut ! J’ai imprimé mes cartes trop vite et mélangé les titres. Tu m’aides à les remettre ensemble avant l’arrivée du groupe ?",
+        "greeting": "Bienvenue ! Aide Lina à préparer une rencontre avec Toma autour des dessins sur le sable. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Tu as besoin de quoi exactement ?",
-            "answer": "De trois titres bien placés. Ensuite, on décidera si on prépare un petit panneau ou si on garde surtout du temps pour les questions."
+            "answer": "J’aimerais que les visiteurs sachent observer le tracé et poser leurs questions à Toma. Ensuite, tu choisiras si l’on commence par la photographie ou directement par un échange."
           },
           {
             "question": "La photo raconte toute l’histoire du dessin ?",
@@ -1017,7 +1225,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Toma",
         "role": "dessinateur",
-        "greeting": "Bonjour ! Vous avancez avec les cartes ? J’ai un peu de temps avant de commencer, si un passage vous pose question.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : imagine ton propre chemin. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Qu’est-ce que je peux regarder en premier ?",
@@ -1065,7 +1273,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Quel titre convient à chaque carte d’accueil ? Appuie-toi sur son contenu, sans essayer de décoder le dessin photographié.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -1085,29 +1293,77 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie",
           "text": "Le dessin visible et les limites de ce que montre cette image.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel support vois-tu sur la photographie ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Du sable portant un dessin"
+            },
+            {
+              "id": "b",
+              "text": "Un tissu brodé"
+            },
+            {
+              "id": "c",
+              "text": "Une paroi gravée"
+            }
+          ],
+          "explanation": "La photo documente un dessin sur le sable au Vanuatu. Son motif visible ne suffit pas à établir son sens ou les étapes de sa réalisation."
         },
         {
           "id": "geste",
           "name": "La fiche du geste",
           "text": "Le doigt, la ligne et le canevas imaginé.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Comment le tracé décrit dans la fiche est-il réalisé ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Avec plusieurs tampons séparés"
+            },
+            {
+              "id": "b",
+              "text": "D’un doigt, en ligne continue"
+            },
+            {
+              "id": "c",
+              "text": "En assemblant des bandes de papier"
+            }
+          ],
+          "explanation": "Le dessin traditionnel décrit par l’UNESCO est réalisé d’un doigt, en ligne continue, selon une grille imaginée. Le support peut être le sable, la cendre volcanique ou l’argile."
         },
         {
           "id": "partage",
           "name": "La fiche des significations",
           "text": "Les récits, les connaissances et les personnes qui les expliquent.",
-          "correct": "c"
+          "correct": "c",
+          "question": "À qui demander le sens d’un dessin traditionnel ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "À la photographie seule"
+            },
+            {
+              "id": "b",
+              "text": "Au premier motif ressemblant trouvé ailleurs"
+            },
+            {
+              "id": "c",
+              "text": "À une personne qui connaît et transmet cette pratique"
+            }
+          ],
+          "explanation": "Ces dessins peuvent transmettre des récits et des connaissances. Leurs différents sens demandent le savoir de personnes capables de les expliquer : ce ne sont pas seulement des motifs décoratifs."
         }
       ],
-      "hint": "Cherche successivement ce qu’une image donne à voir, comment un geste est réalisé, puis ce qu’une personne peut transmettre."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
         "id": "atelier",
         "title": "Préparer le panneau",
         "description": "Installer les trois cartes au coin d’accueil pour que les visiteurs sachent quoi regarder et quoi demander.",
-        "reply": "Lina : Merci ! Avec des titres clairs, je pourrai accueillir les gens sans leur faire lire un grand texte.",
+        "reply": "Merci ! Nous allons installer un accueil simple : une image pour regarder et une question pour entrer dans le récit.",
         "place": 0,
         "preparationTitle": "La première carte",
         "preparationPrompt": "Lina te laisse choisir ce que les visiteurs découvriront d’abord.",
@@ -1218,12 +1474,16 @@ const WORLD_ADVENTURES = {
         "label": "UNESCO · Sauvegarde des dessins sur le sable",
         "supports": "Souligne la transmission, le rôle des dessinateurs experts et la distinction entre dessins et récits pouvant être présentés publiquement. Le jeu ne reproduit pas de motif traditionnel."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Assister au début de la démonstration ou de la conversation que tu as préparée.",
+      "finish": "Commencer avec Toma →"
+    }
   },
   "turquie": {
-    "title": "Une place autour du plateau",
-    "mission": "Aider Deniz à préparer l’accueil d’Ece en remettant les trois cartes du café à leur place.",
-    "intro": "Deniz attend son amie Ece. Il veut lui montrer son carnet sur le café turc, mais les titres des trois cartes sont mélangés. Observe la photo, lis les notes, puis prépare leur rencontre. Les personnages adultes et cette visite sont fictifs.",
+    "title": "Le café est presque prêt",
+    "mission": "Aide Deniz à préparer le plateau et l’accueil d’Ece autour du café turc.",
+    "intro": "Deniz prépare une visite d’Ece. Tu vas découvrir le service du café, imaginer un plateau si tu le souhaites, puis choisir comment commencer la conversation.",
     "places": [
       {
         "name": "Le coin d’accueil",
@@ -1245,7 +1505,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Deniz",
         "role": "accueille une amie",
-        "greeting": "Salut ! Ece arrive bientôt. Tu peux regarder ces cartes pendant que je fais de la place sur la table ?",
+        "greeting": "Bienvenue ! Aide Deniz à préparer le plateau et l’accueil d’Ece autour du café turc. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Pourquoi préparer un carnet pour une visite ?",
@@ -1260,7 +1520,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Ece",
         "role": "amie de Deniz",
-        "greeting": "Bonjour ! Je suis contente de vous voir. Deniz m’a dit qu’il avait besoin d’un coup de main avec son carnet.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : compose un accueil virtuel. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Tu connais déjà la photo ?",
@@ -1308,7 +1568,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Retrouve le titre de chaque carte du carnet. La photo, la préparation et la rencontre apportent trois éclairages différents.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -1328,22 +1588,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie",
           "text": "Une tasse décorée et sa soucoupe, dans un cadrage précis.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Que montre la photographie de cette escale ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une tasse de café et sa soucoupe"
+            },
+            {
+              "id": "b",
+              "text": "Un moulin en fonctionnement"
+            },
+            {
+              "id": "c",
+              "text": "Une récolte de café"
+            }
+          ],
+          "explanation": "La photographie montre une tasse de café et sa soucoupe décorée. Elle documente une présentation particulière, pas toutes les étapes de préparation."
         },
         {
           "id": "geste",
           "name": "La fiche de préparation",
           "text": "Mouture, chauffe douce, mousse et service.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Avec quoi accompagne-t-on les petites tasses dans le service décrit ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un grand bol de lait obligatoire"
+            },
+            {
+              "id": "b",
+              "text": "Un verre d’eau"
+            },
+            {
+              "id": "c",
+              "text": "Un pichet de jus de fruits obligatoire"
+            }
+          ],
+          "explanation": "La mouture est très fine. Le café chauffe doucement avec de l’eau pour former de la mousse ; le service traditionnel décrit par l’UNESCO associe de petites tasses et un verre d’eau."
         },
         {
           "id": "partage",
           "name": "La fiche de rencontre",
           "text": "Recevoir, échanger et apprendre auprès d’autres personnes.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Quelle place le café prend-il dans cette rencontre ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une épreuve de dégustation à gagner"
+            },
+            {
+              "id": "b",
+              "text": "Un service à terminer en silence"
+            },
+            {
+              "id": "c",
+              "text": "Une occasion d’hospitalité et de conversation"
+            }
+          ],
+          "explanation": "Cette tradition est liée à l’hospitalité, à l’amitié et à la conversation. Les savoirs se transmettent notamment dans les familles, en observant et en participant."
         }
       ],
-      "hint": "Une carte décrit ce qui est visible, une autre un savoir-faire, la dernière la relation entre les personnes."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -1461,12 +1769,16 @@ const WORLD_ADVENTURES = {
         "label": "UNESCO · Notice documentaire sur le café turc",
         "supports": "Confirme les dimensions sociales de la tradition et l’apprentissage familial par observation et participation."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir l’arrivée d’Ece et le début de votre échange.",
+      "finish": "Accueillir Ece →"
+    }
   },
   "georgie": {
-    "title": "Une jarre, trois histoires",
-    "mission": "Aider Nino et Giorgi à préparer trois légendes pour accueillir les visiteurs de l’atelier.",
-    "intro": "Nino, apprentie adulte, a posé une photographie et deux fiches sur la table. Giorgi, le potier, termine de ranger. Leur petit accueil de visiteurs commence bientôt : à toi de choisir ce que vous raconterez ensemble. L’atelier et les personnages sont fictifs.",
+    "title": "La jarre et ses secrets",
+    "mission": "Aide Nino et Giorgi à présenter le kvevri aux visiteurs de leur atelier.",
+    "intro": "Nino a placé une jarre près de l’entrée. Les visiteurs vont demander à quoi elle sert et comment on apprend à la fabriquer. Tu vas préparer ces explications avec Giorgi, puis choisir le début de la visite.",
     "places": [
       {
         "name": "La cour d’accueil",
@@ -1488,7 +1800,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Nino",
         "role": "Apprend le travail de la terre cuite",
-        "greeting": "Bonjour ! J’ai préparé trois documents, mais leurs légendes se ressemblent trop. Tu m’aides à les rendre plus claires ?",
+        "greeting": "Bienvenue ! Aide Nino et Giorgi à présenter le kvevri aux visiteurs de leur atelier. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Qu’est-ce que les visiteurs doivent comprendre ?",
@@ -1503,7 +1815,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Giorgi",
         "role": "Potier",
-        "greeting": "Entre, il y a de la place près de la table. Nino m’a dit que tu nous aidais pour l’accueil. Qu’aimerais-tu demander ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : imaginer une petite jarre. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Pourquoi parler aussi des personnes qui utilisent les jarres ?",
@@ -1551,7 +1863,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Nino veut éviter trois légendes interchangeables. Associe chaque document à l’idée qu’il explique le mieux.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -1571,27 +1883,75 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie du musée",
           "text": "Plusieurs récipients sont visibles : leurs silhouettes peuvent être comparées.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel matériau reconnais-tu dans les récipients photographiés ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "La terre cuite"
+            },
+            {
+              "id": "b",
+              "text": "Le métal poli"
+            },
+            {
+              "id": "c",
+              "text": "Le verre soufflé"
+            }
+          ],
+          "explanation": "La photo montre des récipients de terre cuite présentés au musée. Elle permet d’observer une forme ; elle ne montre pas leur fabrication."
         },
         {
           "id": "geste",
           "name": "La fiche de l’objet",
           "text": "Elle explique la place de la jarre dans une méthode de vinification.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Où place-t-on le kvevri dans la méthode de vinification décrite ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Suspendu au plafond"
+            },
+            {
+              "id": "b",
+              "text": "Enfoui dans le sol"
+            },
+            {
+              "id": "c",
+              "text": "Flottant sur un bassin"
+            }
+          ],
+          "explanation": "Le kvevri est un récipient d’argile ovoïde. La méthode de vinification traditionnelle comprend son enfouissement dans le sol."
         },
         {
           "id": "partage",
           "name": "La fiche des personnes",
           "text": "Elle relie l’apprentissage aux familles et aux proches.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Comment ces savoirs se transmettent-ils notamment ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Uniquement en lisant une étiquette"
+            },
+            {
+              "id": "b",
+              "text": "Sans observer le travail des autres"
+            },
+            {
+              "id": "c",
+              "text": "En observant et en participant auprès des proches"
+            }
+          ],
+          "explanation": "Fabrication des jarres et vinification s’apprennent notamment dans les familles et entre proches, en observant et en participant."
         }
       ],
-      "hint": "Cherche le sujet principal : ce que les yeux distinguent, ce que fait l’objet, puis la manière dont les personnes apprennent."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
         "id": "atelier",
-        "title": "Installer les trois légendes",
+        "title": "Préparer la table de découverte",
         "description": "Préparer avec Nino un petit parcours de lecture pour les visiteurs.",
         "reply": "Bonne idée. Je laisse un peu d’espace entre les documents pour qu’on puisse les regarder tranquillement.",
         "place": 0,
@@ -1602,7 +1962,7 @@ const WORLD_ADVENTURES = {
             "id": "un",
             "label": "Commencer par la photographie",
             "reply": "On pourra demander : qu’est-ce qui attire votre regard ?",
-            "endingText": "Nino invite les visiteurs à comparer les silhouettes. Tu places ensuite les deux autres légendes. Les questions arrivent naturellement, et Giorgi vient rejoindre la table.",
+            "endingText": "Nino invite les visiteurs à comparer les silhouettes des jarres photographiées. Tu lui proposes de poursuivre avec leur usage. Les questions arrivent et Giorgi rejoint la table.",
             "endingReply": "Merci. Nous avons maintenant un point de départ simple pour la conversation."
           },
           {
@@ -1613,7 +1973,7 @@ const WORLD_ADVENTURES = {
             "endingReply": "Ça donne envie de regarder les autres documents. Merci pour le coup de main !"
           }
         ],
-        "endingTitle": "Les légendes trouvent leur place"
+        "endingTitle": "La visite de l’atelier commence"
       },
       {
         "id": "rencontre",
@@ -1635,7 +1995,7 @@ const WORLD_ADVENTURES = {
             "id": "deux",
             "label": "Demander comment les documents se complètent",
             "reply": "Posons-les côte à côte. Chacun peut éclairer un autre aspect.",
-            "endingText": "Giorgi dispose les trois documents. Nino lit vos légendes, puis les visiteurs choisissent leurs questions. Le petit accueil devient une conversation autour de la table.",
+            "endingText": "Giorgi dispose la photo et les deux notes. Nino explique ce que chaque document apporte. Les visiteurs posent leurs premières questions autour de la table.",
             "endingReply": "C’est prêt. Nous aurons plusieurs façons de répondre aux curieux."
           }
         ],
@@ -1704,12 +2064,16 @@ const WORLD_ADVENTURES = {
         "label": "Wikimedia Commons · photographie du musée de Gonio",
         "supports": "Provenance et crédit du document photographique, distinct de l’atelier fictif."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Découvrir le premier moment de la visite que tu as préparée.",
+      "finish": "Faire entrer les visiteurs →"
+    }
   },
   "maroc": {
-    "title": "Avant les premiers mots",
-    "mission": "Aider Youssef et Salma à préparer trois cartes pour un petit rendez-vous d’écoute.",
-    "intro": "Youssef a apporté une vue de Jemaa el-Fna et deux notes documentaires. Salma, une conteuse imaginée pour le jeu, vous attend. Retrouve les titres, puis prépare la rencontre. Les personnages adultes et les espaces de cette rencontre sont fictifs.",
+    "title": "Une histoire va commencer",
+    "mission": "Aide Youssef à accueillir les auditeurs de Salma, puis choisis comment lancer son récit.",
+    "intro": "Salma cherche le bon début pour son rendez-vous d’écoute. Youssef te propose de découvrir la place et l’art des conteurs. Tu pourras inventer un micro-récit avant de rejoindre le public.",
     "places": [
       {
         "name": "Le coin de rendez-vous",
@@ -1731,7 +2095,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Youssef",
         "role": "vient écouter un récit",
-        "greeting": "Salut ! Salma nous rejoint dans un moment. J’ai préparé trois cartes pour les nouveaux venus, mais leurs titres se sont détachés.",
+        "greeting": "Bienvenue ! Aide Youssef à accueillir les auditeurs de Salma, puis choisis comment lancer son récit. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Qu’est-ce que tu préfères quand tu écoutes ?",
@@ -1739,14 +2103,14 @@ const WORLD_ADVENTURES = {
           },
           {
             "question": "On se met où pour la rencontre ?",
-            "answer": "On choisira une place où l’on entend bien en laissant le passage libre. Pour l’instant, j’aimerais surtout finir ces trois cartes."
+            "answer": "On choisira une place où l’on entend bien en laissant le passage libre. Tu pourras ensuite décider si l’on présente d’abord la place ou si l’on laisse Salma commencer son récit."
           }
         ]
       },
       {
         "name": "Salma",
         "role": "conteuse",
-        "greeting": "Bonjour ! Vous avez trouvé les cartes ? Je peux attendre encore un peu. Ce sera plus agréable de commencer quand chacun sera installé.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : invente un micro-récit. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Tu racontes toujours de la même manière ?",
@@ -1794,7 +2158,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Replace les titres : quelle carte présente le lieu, laquelle l’art de raconter et laquelle les échanges entre personnes ?",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -1814,22 +2178,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La vue panoramique",
           "text": "Une photographie générale et sa légende de lieu et de date.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Que permet de voir cette photographie de Jemaa el-Fna ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "La place dans son ensemble en début de soirée"
+            },
+            {
+              "id": "b",
+              "text": "Les gestes d’un conteur en gros plan"
+            },
+            {
+              "id": "c",
+              "text": "Le texte complet d’un conte"
+            }
+          ],
+          "explanation": "La photographie montre Jemaa el-Fna à Marrakech au début de la soirée. C’est une vue d’ensemble, pas le portrait d’un conteur ni la trace sonore d’un récit."
         },
         {
           "id": "geste",
           "name": "La fiche du récit",
           "text": "Les mots, les gestes et l’adaptation d’une histoire à son public.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Sur quoi un conteur peut-il s’appuyer pour raconter ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement une image fixe"
+            },
+            {
+              "id": "b",
+              "text": "La parole et les gestes"
+            },
+            {
+              "id": "c",
+              "text": "Seulement un texte affiché sans voix"
+            }
+          ],
+          "explanation": "L’UNESCO décrit un art oral qui associe parole et gestes. Les récits peuvent être adaptés au public et au monde contemporain à partir de trames anciennes."
         },
         {
           "id": "partage",
           "name": "La fiche des échanges",
           "text": "Différentes activités et des personnes qui se croisent, s’arrêtent ou écoutent.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Pourquoi situer la rencontre sur cette place ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Elle est réservée à une seule forme de spectacle"
+            },
+            {
+              "id": "b",
+              "text": "Elle n’accueille que des visiteurs de passage"
+            },
+            {
+              "id": "c",
+              "text": "Elle réunit des activités et des expressions culturelles"
+            }
+          ],
+          "explanation": "Jemaa el-Fna réunit des activités quotidiennes et des expressions culturelles, dont les contes, la poésie et la musique. Les habitants et les personnes de passage s’y rencontrent."
         }
       ],
-      "hint": "La première carte situe une image ; la deuxième décrit un art ; la troisième rappelle qu’il existe grâce à des rencontres."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -1947,12 +2359,16 @@ const WORLD_ADVENTURES = {
         "label": "UNESCO · Étude de cas sur Jemaa el-Fna",
         "supports": "La place comme espace partagé de rencontres, de pratiques culturelles et d’activités commerciales quotidiennes."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir Salma accueillir le groupe selon ton choix.",
+      "finish": "Laisser la rencontre commencer →"
+    }
   },
   "kenya": {
-    "title": "Une place pour écouter",
-    "mission": "Aider Amani et Neema à préparer trois cartes de découverte avant une fête imaginée.",
-    "intro": "Amani accueille les invités d’une fête imaginée. Neema lui a confié une photo et deux notes sur l’isukuti des communautés Isukha et Idakho. Retrouve les titres, puis prépare un accueil ou une rencontre. Ces deux personnages adultes sont fictifs.",
+    "title": "Trouver sa place pour écouter",
+    "mission": "Aide Amani et Neema à accueillir des visiteurs qui découvrent la danse isukuti.",
+    "intro": "Amani et Neema préparent un moment d’écoute. Pour aider les nouveaux venus à regarder et à écouter, tu vas découvrir les tambours, les voix et les communautés qui font vivre l’isukuti.",
     "places": [
       {
         "name": "La cour d’accueil",
@@ -1974,7 +2390,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Amani",
         "role": "participe aux préparatifs",
-        "greeting": "Salut ! Tu arrives au bon moment. J’ai gardé une place pour toi, mais je voudrais d’abord installer ces trois cartes. Tu regardes avec moi ?",
+        "greeting": "Bienvenue ! Aide Amani et Neema à accueillir des visiteurs qui découvrent la danse isukuti. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "La photo vient de votre fête ?",
@@ -1989,7 +2405,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Neema",
         "role": "musicienne",
-        "greeting": "Bonjour ! Amani m’a dit que vous l’aidiez avec les cartes. Je peux répondre à vos questions avant de retourner auprès du groupe.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : trois angles pour découvrir l’isukuti. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Quels instruments donnent son nom à l’isukuti ?",
@@ -2037,7 +2453,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Associe les cartes à leurs titres : un événement photographié, les composantes de la pratique et son rôle dans la vie collective.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -2057,22 +2473,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie",
           "text": "Une représentation de 2025 lors d’un événement sportif nommé dans sa légende.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Dans quel contexte les danseurs photographiés se produisent-ils ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un événement sportif, The Breastfeeding Run"
+            },
+            {
+              "id": "b",
+              "text": "La fête inventée de notre aventure"
+            },
+            {
+              "id": "c",
+              "text": "Une séance de fabrication de tambours"
+            }
+          ],
+          "explanation": "La photographie documente des danseurs isukuti lors de The Breastfeeding Run. Son contexte sportif est distinct de la fête fictive de cette aventure."
         },
         {
           "id": "geste",
           "name": "La fiche des composantes",
           "text": "Des tambours de tailles différentes, le chant et la danse.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Qu’allez-vous inviter les visiteurs à écouter et regarder ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement une flûte en solo"
+            },
+            {
+              "id": "b",
+              "text": "Les tambours, les chants et la danse"
+            },
+            {
+              "id": "c",
+              "text": "Seulement une danse sans musique"
+            }
+          ],
+          "explanation": "L’isukuti associe danse, tambours et chants. Son nom vient de tambours traditionnellement réunis par trois, de tailles différentes."
         },
         {
           "id": "partage",
           "name": "La fiche des communautés",
           "text": "Les communautés Isukha et Idakho et les occasions de se rassembler.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Quelles communautés portent cette tradition présentée dans la fiche ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Toutes les communautés du Kenya de façon identique"
+            },
+            {
+              "id": "b",
+              "text": "Uniquement les personnes présentes sur la photo"
+            },
+            {
+              "id": "c",
+              "text": "Les Isukha et les Idakho de l’ouest du Kenya"
+            }
+          ],
+          "explanation": "La tradition concerne les communautés Isukha et Idakho de l’ouest du Kenya. Elle accompagne de nombreuses occasions de la vie et participe à la transmission culturelle entre familles et communautés."
         }
       ],
-      "hint": "Garde le contexte précis de la photo à part. Les deux autres cartes concernent la pratique et les personnes qui la font vivre."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -2195,12 +2659,16 @@ const WORLD_ADVENTURES = {
         "label": "UNESCO · Regarder le documentaire officiel",
         "supports": "Accès facultatif au film référencé dans l’escale. Aucun visionnage ni geste physique requis pour finir."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir l’accueil que tu as préparé avec Amani et Neema.",
+      "finish": "Rejoindre la rencontre →"
+    }
   },
   "mexique": {
-    "title": "Trois cartes avant de passer à table",
-    "mission": "Aider Mateo et Luz à préparer trois cartes pour raconter le repas au-delà de l’assiette.",
-    "intro": "Dans une cuisine familiale fictive du Michoacán, Mateo apporte des cartons vierges. Luz, la cuisinière de la famille, veut préparer un petit accueil pour des invités. Ces deux personnages adultes te proposent de choisir ce que vous raconterez autour de la table.",
+    "title": "Le repas commence avant l’assiette",
+    "mission": "Aide Mateo et Luz à présenter le travail du maïs avant d’accueillir leurs invités.",
+    "intro": "Mateo prépare les tortillas et Luz dispose la table. Ils aimeraient raconter le chemin du maïs jusqu’au repas. Tu vas découvrir un geste de cuisine, puis choisir comment recevoir les invités.",
     "places": [
       {
         "name": "La table de Mateo",
@@ -2222,7 +2690,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Mateo",
         "role": "Donne un coup de main à la cuisine familiale",
-        "greeting": "Bonjour ! Il nous reste une chose à préparer : nos cartes pour les invités. Luz préfère trois idées courtes plutôt qu’un long discours.",
+        "greeting": "Bienvenue ! Aide Mateo et Luz à présenter le travail du maïs avant d’accueillir leurs invités. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "C’est Luz que l’on voit sur la photographie ?",
@@ -2237,7 +2705,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Luz",
         "role": "Cuisinière de la famille",
-        "greeting": "Viens, j’ai gardé une place près de la table. Mateo m’a parlé des cartes. Qu’est-ce que tu aimerais demander ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : composer un repas virtuel. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Pourquoi le maïs revient-il dans les documents ?",
@@ -2285,7 +2753,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Trois cartes, trois idées. Aide Mateo à associer chaque support à la légende qui lui correspond.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -2305,22 +2773,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie de Janitzio",
           "text": "Elle montre le travail d’une pâte sur une pierre.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel geste la photographie montre-t-elle ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Le travail d’une pâte sur un metate"
+            },
+            {
+              "id": "b",
+              "text": "La récolte du maïs dans un champ"
+            },
+            {
+              "id": "c",
+              "text": "La cuisson d’un plat au four"
+            }
+          ],
+          "explanation": "La photo documente le travail d’une pâte sur un metate. Elle ne permet pas, à elle seule, de connaître toutes les étapes précédentes."
         },
         {
           "id": "geste",
           "name": "La fiche du maïs",
           "text": "Elle présente le traitement du maïs appelé nixtamalisation.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Comment appelle-t-on la préparation du maïs à l’eau de chaux ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "La fermentation du cacao"
+            },
+            {
+              "id": "b",
+              "text": "La nixtamalisation"
+            },
+            {
+              "id": "c",
+              "text": "La torréfaction du café"
+            }
+          ],
+          "explanation": "La nixtamalisation, préparation du maïs à l’eau de chaux, fait partie des techniques de cette tradition culinaire."
         },
         {
           "id": "partage",
           "name": "La fiche du repas partagé",
           "text": "Elle relie les cultivateurs, la cuisine et les convives.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Que raconte cette tradition au-delà de la recette ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement le dressage de l’assiette"
+            },
+            {
+              "id": "b",
+              "text": "Seulement la conservation des ustensiles"
+            },
+            {
+              "id": "c",
+              "text": "Les liens entre agriculture, préparation et partage"
+            }
+          ],
+          "explanation": "Les savoirs décrits par l’UNESCO associent agriculture, préparation et partage. Au Michoacán et ailleurs, ils contribuent aux liens communautaires."
         }
       ],
-      "hint": "La photo raconte un moment. Une fiche explique une technique ; l’autre élargit le regard à la chaîne des personnes."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -2438,12 +2954,16 @@ const WORLD_ADVENTURES = {
         "label": "Wikimedia Commons · préparation sur un metate",
         "supports": "Provenance et crédit de la photographie de Janitzio ; la personne représentée n’est pas Luz."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le début du repas et l’échange que tu as préparés.",
+      "finish": "Accueillir les invités →"
+    }
   },
   "bresil": {
-    "title": "Écouter autour du cercle",
-    "mission": "Aider Joana et Paulo à préparer trois repères pour les visiteurs qui découvrent une roda de capoeira.",
-    "intro": "Dans un lieu de répétition fictif au Brésil, Joana dispose des cartes près des chaises. Paulo, musicien, la rejoint avec un dossier. Ces deux personnages adultes souhaitent préparer un accueil où chacun puisse observer et poser ses questions.",
+    "title": "À l’écoute de la roda",
+    "mission": "Aide Joana à accueillir les nouveaux venus autour d’une roda de capoeira.",
+    "intro": "Joana et Paulo attendent des visiteurs qui ne connaissent pas la capoeira. Tu vas découvrir ce qui se passe au centre et autour du cercle, écouter le berimbau si tu le souhaites, puis choisir le début de leur accueil.",
     "places": [
       {
         "name": "Le coin d’accueil",
@@ -2465,7 +2985,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Joana",
         "role": "Participe à la musique d’un groupe de capoeira",
-        "greeting": "Bonjour ! Pour l’accueil, j’aimerais qu’on sache où regarder sans tout expliquer d’un coup. Tu m’aides à choisir trois repères ?",
+        "greeting": "Bienvenue ! Aide Joana à accueillir les nouveaux venus autour d’une roda de capoeira. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Qui voit-on sur la photo ?",
@@ -2480,7 +3000,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Paulo",
         "role": "Musicien du groupe",
-        "greeting": "Joana m’a montré vos cartes. Asseyons-nous un instant, je peux répondre à quelques questions.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : une petite pause d’écoute. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "À quoi sert la musique pendant la roda ?",
@@ -2528,7 +3048,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Joana a trois repères à distribuer. Associe chaque document à ce qu’il aide le mieux à découvrir.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -2548,22 +3068,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie de la roda",
           "text": "Elle permet de regarder le centre et les personnes autour.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Où regarder pour comprendre la scène photographiée ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Au centre et parmi les personnes autour"
+            },
+            {
+              "id": "b",
+              "text": "Seulement le sol au centre"
+            },
+            {
+              "id": "c",
+              "text": "Seulement les bâtiments au loin"
+            }
+          ],
+          "explanation": "La photographie montre les joueurs et les personnes autour. Un regard sur les bords de l’image complète ce que l’on voit au centre."
         },
         {
           "id": "geste",
           "name": "La fiche du berimbau",
           "text": "Elle relie l’instrument, les chants et le rythme.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Combien de cordes possède le berimbau décrit dans la fiche ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Quatre cordes"
+            },
+            {
+              "id": "b",
+              "text": "Une corde"
+            },
+            {
+              "id": "c",
+              "text": "Six cordes"
+            }
+          ],
+          "explanation": "Le berimbau est un instrument à une corde. Dans la roda, le maître conduit notamment les chants et le rythme."
         },
         {
           "id": "partage",
           "name": "La fiche du groupe",
           "text": "Elle explique la transmission des savoirs et les règles de respect.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Comment apprend-on notamment dans la roda ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Uniquement en étudiant une photographie"
+            },
+            {
+              "id": "b",
+              "text": "Sans relation avec les autres participants"
+            },
+            {
+              "id": "c",
+              "text": "En observant et en imitant auprès du groupe"
+            }
+          ],
+          "explanation": "Cette pratique afro-brésilienne se transmet notamment par observation et imitation. Le cercle porte des règles de respect et une mémoire de résistance à l’oppression."
         }
       ],
-      "hint": "Un support montre une disposition, un autre parle de musique, et le dernier explique comment on apprend avec les autres."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -2691,12 +3259,16 @@ const WORLD_ADVENTURES = {
         "label": "Estela Neto · photographie d’une roda",
         "supports": "Provenance du document photographique, distinct des personnages fictifs Joana et Paulo."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir comment Joana et Paulo commencent la rencontre.",
+      "finish": "Rejoindre le cercle →"
+    }
   },
   "perou": {
-    "title": "Avant la visite du pont",
-    "mission": "Aider Elena et Miguel à préparer trois repères sur le pont Q’eswachaka pour accueillir des visiteurs.",
-    "intro": "Dans un espace d’accueil fictif près du pont, Elena ouvre un dossier. Miguel, artisan adulte, apporte une deuxième fiche. Elena est adulte elle aussi ; ils ont réservé ce moment pour répondre aux questions, à l’écart des travaux. À toi de préparer avec eux une visite documentaire.",
+    "title": "Avant de découvrir le pont",
+    "mission": "Prépare avec Elena et Miguel l’accueil de visiteurs du pont Q’eswachaka.",
+    "intro": "Elena et Miguel attendent un petit groupe près du pont. Tu vas découvrir ses fibres, son renouvellement et le travail des communautés, puis choisir par quoi commencer la visite.",
     "places": [
       {
         "name": "Le petit accueil",
@@ -2718,7 +3290,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Elena",
         "role": "Participe aux préparatifs du renouvellement du pont",
-        "greeting": "Bonjour ! Nous préparons un accueil pour les visiteurs. J’aimerais leur montrer trois choses sans leur donner trop d’informations à la fois. Tu nous aides ?",
+        "greeting": "Bienvenue ! Prépare avec Elena et Miguel l’accueil de visiteurs du pont Q’eswachaka. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Où se déroule notre visite ?",
@@ -2733,7 +3305,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Miguel",
         "role": "Artisan",
-        "greeting": "Bonjour ! Elena m’a dit que les documents étaient presque prêts. Prenons quelques minutes pour en parler.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : comprendre un assemblage. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Pourquoi renouveler le pont chaque année ?",
@@ -2781,7 +3353,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Elena veut trois repères différents. Associe chaque support à ce qu’il raconte le mieux.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -2801,22 +3373,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie de Q’eswachaka",
           "text": "L’ouvrage apparaît entre les rives rocheuses, au-dessus de l’eau.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Où le pont photographié est-il installé ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Au-dessus d’une rivière dans une gorge"
+            },
+            {
+              "id": "b",
+              "text": "Sur une grande place urbaine"
+            },
+            {
+              "id": "c",
+              "text": "À l’intérieur d’un bâtiment"
+            }
+          ],
+          "explanation": "La photographie montre le pont Q’eswachaka au-dessus de la rivière. Elle permet de situer l’ouvrage dans son paysage."
         },
         {
           "id": "geste",
           "name": "La fiche des cordes",
           "text": "Elle explique le passage des fibres aux assemblages plus grands.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Avec quoi les cordes du pont sont-elles fabriquées ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Des chaînes de métal"
+            },
+            {
+              "id": "b",
+              "text": "Des fibres végétales réunies progressivement"
+            },
+            {
+              "id": "c",
+              "text": "Des lames de plastique"
+            }
+          ],
+          "explanation": "Le renouvellement annuel utilise des fibres végétales. Les cordelettes sont réunies en cordes plus grandes sous la conduite de spécialistes."
         },
         {
           "id": "partage",
           "name": "La fiche des communautés",
           "text": "Elle met en relation le travail, l’apprentissage et les cérémonies.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Qui participe à cette tradition de renouvellement annuel ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une personne travaillant seule"
+            },
+            {
+              "id": "b",
+              "text": "Seulement les visiteurs du pont"
+            },
+            {
+              "id": "c",
+              "text": "Quatre communautés quechuas"
+            }
+          ],
+          "explanation": "Quatre communautés quechuas participent à cette tradition. Travail collectif, transmission familiale et cérémonies contribuent à leurs liens."
         }
       ],
-      "hint": "Commence par ce qui situe le lieu, puis distingue la préparation des matériaux de la vie des communautés."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -2934,12 +3554,16 @@ const WORLD_ADVENTURES = {
         "label": "Wikimedia Commons · photographie de Q’eswachaka",
         "supports": "Provenance et crédit du document photographique de 2018, distinct des lieux et personnages fictifs."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Découvrir la première explication donnée au groupe grâce à ton choix.",
+      "finish": "Accueillir le groupe →"
+    }
   },
   "espagne": {
-    "title": "Une place avant la première note",
-    "mission": "Aider Lucía et Diego à préparer la présentation d’une petite rencontre autour du flamenco.",
-    "intro": "Dans une salle de quartier imaginée en Andalousie, Lucía accorde sa guitare pendant que Diego déplie les chaises. La répétition commencera bientôt. Ils aimeraient accueillir les nouveaux venus avec trois repères simples ; les légendes de leurs documents ont été mélangées.",
+    "title": "Avant la première note",
+    "mission": "Aide Lucía et Diego à accueillir le public d’une rencontre de flamenco.",
+    "intro": "Lucía finit d’accorder sa guitare et Diego installe les chaises. Le public arrive bientôt. Tu vas découvrir ce que l’on chante, danse et joue, puis choisir comment ouvrir la rencontre.",
     "places": [
       {
         "name": "La salle de répétition",
@@ -2961,7 +3585,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Lucía",
         "role": "guitariste, prépare la répétition",
-        "greeting": "Tu peux poser ton carnet ici. Je termine mon accordage. Diego a les documents ; aide-nous à leur rendre leurs légendes, puis nous choisirons comment accueillir le public.",
+        "greeting": "Bienvenue ! Aide Lucía et Diego à accueillir le public d’une rencontre de flamenco. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Qu’aimerais-tu faire entendre aux visiteurs ?",
@@ -2976,7 +3600,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Diego",
         "role": "bénévole d’une association de flamenco",
-        "greeting": "Les chaises sont prêtes, mais ma présentation ressemble encore à une liste de mots ! On pourrait commencer par les documents, ou laisser Lucía ouvrir la rencontre.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton invitation en trois touches. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Qu’est-ce qu’une peña ?",
@@ -3024,7 +3648,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Rends à chaque document sa légende. Diego pourra les utiliser dans son accueil.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -3044,22 +3668,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie légendée",
           "text": "Un instant réel et ses crédits : regarde le détail que tu as choisi.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Qui vois-tu dans cette scène de concert ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une danseuse et des musiciens"
+            },
+            {
+              "id": "b",
+              "text": "Un groupe sans instruments"
+            },
+            {
+              "id": "c",
+              "text": "Un atelier sans artistes"
+            }
+          ],
+          "explanation": "Cette photographie documente une danseuse et les musiciens du groupe de Paco Peña pendant un concert à Amsterdam en 2012."
         },
         {
           "id": "geste",
           "name": "La note des trois mots",
           "text": "Cante, baile, toque : trois portes d’entrée dans l’expression artistique.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Quels trois mots présentent les expressions du flamenco ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement baile et silence"
+            },
+            {
+              "id": "b",
+              "text": "Cante, baile et toque"
+            },
+            {
+              "id": "c",
+              "text": "Seulement toque et peinture"
+            }
+          ],
+          "explanation": "Le flamenco associe le chant, appelé cante, la danse, appelée baile, et le jeu instrumental, appelé toque, notamment à la guitare."
         },
         {
           "id": "partage",
           "name": "La note des rencontres",
           "text": "Familles, artistes, associations et communautés : des personnes qui transmettent.",
-          "correct": "c"
+          "correct": "c",
+          "question": "À quoi peut servir une peña ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement à fabriquer des guitares"
+            },
+            {
+              "id": "b",
+              "text": "Seulement à vendre des billets"
+            },
+            {
+              "id": "c",
+              "text": "À se retrouver pour écouter, apprendre et échanger"
+            }
+          ],
+          "explanation": "Les familles, les artistes et les associations appelées peñas participent à la transmission. Les communautés gitanes ont joué un rôle essentiel dans l’histoire du flamenco."
         }
       ],
-      "hint": "La photographie montre un instant ; les trois mots parlent de l’art ; la dernière note parle des personnes et de la transmission."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -3182,12 +3854,16 @@ const WORLD_ADVENTURES = {
         "label": "Photographie · Karnivoros, CC BY 4.0",
         "supports": "Concert de Paco Peña à Amsterdam, 2012 ; auteur et licence. La photographie n’est pas située dans l’Andalousie du récit."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le public accueilli selon tes choix et retrouver ton invitation si tu en as créé une.",
+      "finish": "Ouvrir la rencontre de flamenco →"
+    }
   },
   "finlande": {
-    "title": "Le carnet posé près de la porte",
-    "mission": "Aider Aino et Mikko à préparer un petit carnet d’accueil sur la culture du sauna.",
-    "intro": "Le sauna de cette histoire est encore éteint. Aino prépare une visite et Mikko apporte quelques souvenirs pour la table d’accueil. Leur carnet doit présenter le lieu, un mot finnois et les personnes qui font vivre la tradition. Trois légendes se sont détachées.",
+    "title": "Bienvenue près du sauna",
+    "mission": "Aide Aino et Mikko à préparer l’accueil de visiteurs autour de la culture du sauna.",
+    "intro": "Aino et Mikko veulent accueillir un petit groupe. Tu vas découvrir un intérieur de sauna et le mot löyly, puis choisir ce que vous raconterez en premier. Tout se déroule à l’écran.",
     "places": [
       {
         "name": "L’entrée du sauna",
@@ -3209,7 +3885,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Aino",
         "role": "organise la visite de ce lieu imaginé",
-        "greeting": "Bienvenue. Nous avons encore un peu de temps avant l’arrivée des visiteurs. Tu peux m’aider à remettre les légendes dans le carnet ? Mikko a aussi une histoire à proposer.",
+        "greeting": "Bienvenue ! Aide Aino et Mikko à préparer l’accueil de visiteurs autour de la culture du sauna. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Que veux-tu montrer pendant la visite ?",
@@ -3224,7 +3900,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Mikko",
         "role": "prépare les souvenirs de l’accueil",
-        "greeting": "J’ai apporté une page de mon album. Aino me demande d’être bref ; avec moi, c’est parfois la partie difficile ! Tu m’aideras à choisir par où commencer ?",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ta carte d’un lieu accueillant. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Quel souvenir as-tu apporté ?",
@@ -3272,7 +3948,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Replace les trois légendes pour qu’Aino puisse terminer le carnet d’accueil.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -3292,22 +3968,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie légendée",
           "text": "Un lieu précis et les informations qui accompagnent son image.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel lieu la photographie présente-t-elle ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "L’intérieur du sauna de Tamminiemi"
+            },
+            {
+              "id": "b",
+              "text": "Une salle de repas"
+            },
+            {
+              "id": "c",
+              "text": "Un atelier de tissage"
+            }
+          ],
+          "explanation": "La photographie documente l’intérieur du sauna de Tamminiemi, à Helsinki. Ses bancs et son aménagement donnent un repère visuel sur ce lieu précis."
         },
         {
           "id": "geste",
           "name": "La page du mot finnois",
           "text": "Une courte explication de la vapeur et de sa place dans la tradition.",
-          "correct": "b"
+          "correct": "b",
+          "question": "À quoi le mot löyly renvoie-t-il notamment ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Au nom d’une serviette"
+            },
+            {
+              "id": "b",
+              "text": "À la vapeur produite au contact des pierres chauffées"
+            },
+            {
+              "id": "c",
+              "text": "À la lumière qui entre par la fenêtre"
+            }
+          ],
+          "explanation": "Löyly désigne notamment la vapeur produite quand de l’eau rencontre les pierres chauffées. Ce mot est au cœur de la description culturelle donnée par l’UNESCO."
         },
         {
           "id": "partage",
           "name": "La page des personnes",
           "text": "Parents, proches et associations : une culture partagée et transmise.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Comment cette culture se transmet-elle notamment ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Uniquement dans les guides touristiques"
+            },
+            {
+              "id": "b",
+              "text": "Sans échange entre les générations"
+            },
+            {
+              "id": "c",
+              "text": "Dans les familles et les associations"
+            }
+          ],
+          "explanation": "Le sauna appartient à la vie quotidienne et aux moments de fête. Les connaissances circulent dans les familles et les associations qui font vivre cette culture."
         }
       ],
-      "hint": "Suis les trois sujets du carnet : le lieu, le mot, puis les personnes."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -3430,12 +4154,16 @@ const WORLD_ADVENTURES = {
         "label": "Photographie · Ypsilon from Finland, CC0",
         "supports": "Intérieur du sauna de Tamminiemi, 2017 ; auteur et domaine public."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Découvrir la première page du carnet ou le début de la conversation que tu as choisis.",
+      "finish": "Recevoir les visiteurs →"
+    }
   },
   "egypte": {
-    "title": "Les fils de l’atelier",
-    "mission": "Aider Mariam et Samir à préparer un coin de découverte du tissage, puis choisir ce que les visiteurs feront en premier.",
-    "intro": "Dans un atelier imaginé de Haute-Égypte, Mariam prépare une visite avec Samir, qui apprend auprès d’elle. Ils ont sorti des échantillons et trois documents. Il manque une présentation claire pour que les visiteurs regardent les gestes sans déranger le travail.",
+    "title": "Les fils prennent forme",
+    "mission": "Prépare avec Mariam et Samir une petite découverte du tissage à la main.",
+    "intro": "Mariam dispose les fils et Samir attend les visiteurs. Tu vas découvrir ce qui se prépare avant de tisser, composer un échantillon virtuel si tu le souhaites, puis choisir comment le présenter.",
     "places": [
       {
         "name": "L’entrée de l’atelier",
@@ -3457,7 +4185,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Mariam",
         "role": "tisserande dans notre récit",
-        "greeting": "Bonjour ! J’ai sorti les échantillons, mais Samir et moi n’avons pas fini la présentation. Tu nous aides à choisir ce que l’on montre ?",
+        "greeting": "Bienvenue ! Prépare avec Mariam et Samir une petite découverte du tissage à la main. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Je peux toucher le métier ?",
@@ -3472,7 +4200,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Samir",
         "role": "apprend auprès de Mariam",
-        "greeting": "J’ai les trois documents ! Il faut que les visiteurs comprennent ce que chacun raconte. Après, on pourra préparer notre petit coin de découverte.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton petit échantillon virtuel. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Qu’est-ce qui te demande le plus de patience ?",
@@ -3520,7 +4248,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Prépare les trois légendes de l’atelier : chaque support doit annoncer ce qu’il permet de découvrir.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -3540,22 +4268,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie",
           "text": "Un document visuel accompagné de sa légende et de ses crédits.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Que peux-tu observer sur la photographie ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une étoffe imprimée à la machine"
+            },
+            {
+              "id": "b",
+              "text": "Un tisserand et des fils tendus"
+            },
+            {
+              "id": "c",
+              "text": "Un atelier de poterie"
+            }
+          ],
+          "explanation": "Le document montre un tisserand et des fils tendus en Égypte. Sa localisation précise n’est pas indiquée : ce n’est pas la preuve d’un atelier du Sa’eed."
         },
         {
           "id": "geste",
           "name": "La note sur les préparations",
           "text": "Elle parle du métier, des fils et du travail nécessaire pour obtenir l’étoffe.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Que faut-il préparer avant de fabriquer l’étoffe ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Le métier et les fils"
+            },
+            {
+              "id": "b",
+              "text": "Seulement le cadre de présentation"
+            },
+            {
+              "id": "c",
+              "text": "Seulement une étiquette de prix"
+            }
+          ],
+          "explanation": "Le tissage à la main demande de préparer le métier et les fils avant de fabriquer l’étoffe. La notice UNESCO insiste sur la précision et la pratique."
         },
         {
           "id": "partage",
           "name": "La note sur la transmission",
           "text": "Elle explique comment les gestes s’apprennent et pourquoi leur transmission est fragile.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Comment apprend-on notamment les gestes du tissage ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "En regardant uniquement une étoffe terminée"
+            },
+            {
+              "id": "b",
+              "text": "En choisissant seulement des couleurs"
+            },
+            {
+              "id": "c",
+              "text": "En observant et en reprenant les gestes auprès de personnes expérimentées"
+            }
+          ],
+          "explanation": "La transmission repose notamment sur l’observation et la reprise des gestes auprès des personnes expérimentées. Le dossier souligne les difficultés économiques qui la fragilisent."
         }
       ],
-      "hint": "La photo fait regarder. La première note suit le travail ; la seconde parle des personnes qui l’apprennent."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -3673,12 +4449,16 @@ const WORLD_ADVENTURES = {
         "label": "UNESCO · Décision 15.COM 8.a.3",
         "supports": "Apprentissage par observation et imitation, fragilité de la transmission et participation des communautés."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir la table d’échantillons ou la conversation que tu as préparées.",
+      "finish": "Ouvrir la visite de l’atelier →"
+    }
   },
   "mongolie": {
     "title": "La maison qui voyage",
-    "mission": "Aider Saran et Bataa à présenter les éléments d’un ger, puis préparer une découverte à hauteur de visiteur.",
-    "intro": "Saran et Bataa ont imaginé une petite présentation du ger pour des visiteurs. Sur leur table, une maquette attend ses légendes. Avant d’ouvrir, ils aimeraient raconter à la fois la structure de l’habitat et le travail des personnes qui le fabriquent.",
+    "mission": "Aide Saran et Bataa à faire découvrir les éléments d’un ger aux visiteurs.",
+    "intro": "Saran et Bataa ont préparé une table de maquette. Tu vas découvrir les éléments du ger, en composer une version illustrée si tu le souhaites, puis choisir comment expliquer cette maison démontable.",
     "places": [
       {
         "name": "Le seuil du ger",
@@ -3700,7 +4480,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Saran",
         "role": "organise la découverte du ger",
-        "greeting": "Bonjour ! Bataa a préparé la maquette. J’aimerais que les visiteurs comprennent ce qu’ils regardent avant que nous ouvrions la discussion.",
+        "greeting": "Bienvenue ! Aide Saran et Bataa à faire découvrir les éléments d’un ger aux visiteurs. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "C’est un véritable montage ?",
@@ -3715,7 +4495,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Bataa",
         "role": "prépare les supports de la visite",
-        "greeting": "J’ai posé la photographie et les deux notes ici. Si tu retrouves leur sujet, nous pourrons choisir comment les utiliser avec les visiteurs.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : une maquette à composer. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Tu préfères montrer ou raconter ?",
@@ -3763,7 +4543,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Prépare les trois repères de la maquette : à quoi chaque support sert-il pendant la visite ?",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -3783,22 +4563,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie du ger",
           "text": "Elle présente un habitat dans un contexte documenté.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Quel habitat reconnais-tu sur la photographie ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un ger"
+            },
+            {
+              "id": "b",
+              "text": "Un immeuble en briques"
+            },
+            {
+              "id": "c",
+              "text": "Une maison sur pilotis"
+            }
+          ],
+          "explanation": "La photographie donne un point de départ visuel pour regarder la forme du ger. Sa légende indique le contexte du document."
         },
         {
           "id": "geste",
           "name": "La note sur les éléments",
           "text": "Bois, couvertures et cordes : elle distingue les grandes parties.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Quels éléments entrent dans la structure décrite ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement des murs de pierre"
+            },
+            {
+              "id": "b",
+              "text": "Du bois, des couvertures de feutre et de toile, et des cordes"
+            },
+            {
+              "id": "c",
+              "text": "Seulement des panneaux de verre"
+            }
+          ],
+          "explanation": "Le ger associe une armature de bois, des couvertures de feutre et de toile, et des cordes. Ses éléments permettent de le démonter, de le transporter et de le remonter."
         },
         {
           "id": "partage",
           "name": "La note sur les personnes",
           "text": "Elle parle de fabrication, de coopération et d’apprentissage.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Pourquoi parle-t-on de plusieurs savoir-faire ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Une photographie suffit à fabriquer tous les éléments"
+            },
+            {
+              "id": "b",
+              "text": "Chaque élément est toujours fabriqué sans apprentissage"
+            },
+            {
+              "id": "c",
+              "text": "La fabrication réunit des gestes appris auprès des artisans et des proches"
+            }
+          ],
+          "explanation": "La fabrication réunit plusieurs savoir-faire. Les plus jeunes apprennent notamment auprès d’artisans expérimentés et en observant les opérations familiales."
         }
       ],
-      "hint": "Distingue ce que montre l’image, ce qui compose l’habitat et les personnes qui transmettent leurs savoirs."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -3916,12 +4744,16 @@ const WORLD_ADVENTURES = {
         "label": "UNESCO · Décision 8.COM 8.20",
         "supports": "Participation familiale et communautaire, transmission entre générations, inscription en 2013."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le début de ta présentation et ta maquette si tu l’as composée.",
+      "finish": "Présenter le ger aux visiteurs →"
+    }
   },
   "senegal": {
     "title": "Une place autour du plat",
-    "mission": "Aider Awa et Ibrahima à préparer l’accueil d’un repas, avec une présentation qui laisse place aux différentes histoires du ceebu jën.",
-    "intro": "Dans cette rencontre imaginée à Saint-Louis, Awa prépare un repas et Ibrahima accueille les invités. Il a retrouvé une photo et deux notes pour présenter le ceebu jën. Ils te proposent de les aider, puis de choisir comment ouvrir la conversation autour de la table.",
+    "mission": "Aide Awa et Ibrahima à accueillir leurs invités autour du ceebu jën.",
+    "intro": "Awa termine le repas et Ibrahima prépare l’accueil. Tu vas découvrir le plat et son histoire, composer une invitation si tu le souhaites, puis choisir comment lancer la conversation à table.",
     "places": [
       {
         "name": "La cour de la cuisine",
@@ -3943,7 +4775,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Awa",
         "role": "prépare le repas de notre récit",
-        "greeting": "Bonjour ! Ibrahima a presque fini l’accueil. J’aimerais que nos invités puissent poser leurs questions avant que nous passions à table.",
+        "greeting": "Bienvenue ! Aide Awa et Ibrahima à accueillir leurs invités autour du ceebu jën. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
         "questions": [
           {
             "question": "Tu as suivi une recette unique ?",
@@ -3958,7 +4790,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Ibrahima",
         "role": "accueille les invités",
-        "greeting": "J’ai la photo, une note sur les ingrédients et une autre sur l’apprentissage. Aide-moi à les présenter, et nous choisirons ensuite comment accueillir tout le monde.",
+        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : prépare un accueil virtuel. Tu peux aussi passer directement aux trois questions des visiteurs.",
         "questions": [
           {
             "question": "Que faut-il expliquer d’abord ?",
@@ -4006,7 +4838,7 @@ const WORLD_ADVENTURES = {
       }
     ],
     "puzzle": {
-      "prompt": "Retrouve le sujet des trois supports pour préparer une présentation claire avant le repas.",
+      "prompt": "Les visiteurs ont trois questions. Aide-nous à leur répondre avec ce que tu viens de découvrir.",
       "labels": [
         {
           "id": "a",
@@ -4026,22 +4858,70 @@ const WORLD_ADVENTURES = {
           "id": "photo",
           "name": "La photographie",
           "text": "Elle montre une présentation particulière du plat.",
-          "correct": "b"
+          "correct": "b",
+          "question": "Quel plat cette photographie présente-t-elle ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Un plat de tortillas"
+            },
+            {
+              "id": "b",
+              "text": "Du ceebu jën"
+            },
+            {
+              "id": "c",
+              "text": "Une soupe miso"
+            }
+          ],
+          "explanation": "La photographie documente une présentation de ceebu jën. Elle permet d’observer le plat, sans dresser la liste complète de sa recette."
         },
         {
           "id": "geste",
           "name": "La note sur la préparation",
           "text": "Elle évoque riz, poisson, légumes et diversité des recettes.",
-          "correct": "c"
+          "correct": "c",
+          "question": "Quels ingrédients la fiche du ceebu jën met-elle notamment en avant ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Seulement du riz et du lait"
+            },
+            {
+              "id": "b",
+              "text": "Seulement de la farine et du beurre"
+            },
+            {
+              "id": "c",
+              "text": "Du riz, du poisson et des légumes"
+            }
+          ],
+          "explanation": "Le dossier situe les origines du ceebu jën dans les communautés de pêcheurs de l’île de Saint-Louis. Il décrit notamment du riz, du poisson et des légumes, avec des variantes régionales."
         },
         {
           "id": "partage",
           "name": "La note sur les générations",
           "text": "Elle parle des personnes qui apprennent et prennent part aux préparatifs.",
-          "correct": "a"
+          "correct": "a",
+          "question": "Comment les savoirs du repas se transmettent-ils notamment ?",
+          "answers": [
+            {
+              "id": "a",
+              "text": "Par les échanges oraux et la participation progressive aux tâches"
+            },
+            {
+              "id": "b",
+              "text": "Uniquement par une recette imprimée"
+            },
+            {
+              "id": "c",
+              "text": "Sans participation des plus jeunes"
+            }
+          ],
+          "explanation": "La préparation et les usages du repas se transmettent entre générations. Le dossier décrit un apprentissage oral et une participation progressive des enfants aux tâches."
         }
       ],
-      "hint": "L’image montre un plat. Une note parle de ce qui le compose ; l’autre, de celles et ceux qui apprennent à le préparer."
+      "hint": "Tu peux relire le repère affiché sous la question, réessayer ou choisir « Me montrer la réponse ». Aucun essai ne fait perdre de points."
     },
     "plans": [
       {
@@ -4159,6 +5039,10 @@ const WORLD_ADVENTURES = {
         "label": "UNESCO · Décision 16.COM 8.B.36",
         "supports": "Transmission orale, participation progressive aux tâches et inscription en 2021."
       }
-    ]
+    ],
+    "guide": {
+      "result": "Voir le début du repas que tu as préparé et retrouver la recette.",
+      "finish": "Accueillir les convives →"
+    }
   }
 };
