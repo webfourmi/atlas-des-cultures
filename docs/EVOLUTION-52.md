@@ -62,4 +62,10 @@ Le navigateur a contrôlé la carte des 18 destinations, le filtre « 5 nouvelle
 
 ![Activité égyptienne dans la fenêtre de 390 pixels](escales-52-mobile.png)
 
-Limites : aucun téléphone physique n’a été utilisé. Le fonctionnement du service worker sur l’origine HTTPS publique reste distinct du contrôle local des ressources. L’ancien test navigateur `tests/recipes.cjs`, prévu pour Edge, n’a pas pu démarrer car Edge n’est pas installé ; ses nombres et destinations ont été actualisés. Les parcours de recettes et de sauvegarde ont été contrôlés par les tests sans navigateur et le navigateur disponible.
+Limites : aucun téléphone physique n’a été utilisé. L’ancien test navigateur `tests/recipes.cjs`, prévu pour Edge, n’a pas pu démarrer car Edge n’est pas installé ; ses nombres et destinations ont été actualisés. Les parcours de recettes et de sauvegarde ont été contrôlés par les tests sans navigateur et le navigateur disponible.
+
+## Correctif de publication — v5.2.1
+
+Le contrôle sur GitHub Pages après une installation de v5.1.0 a montré que la bannière v5.2.0 pouvait laisser la page à 13 escales après activation. Le préchargement utilisait les URL avec la politique HTTP par défaut, qui autorise la réutilisation de réponses encore fraîches. Le nouveau cache porte le numéro v5.2.1 et précharge des objets `Request` avec `cache: reload` pour récupérer les fichiers de la nouvelle édition. La progression locale reste indépendante des caches.
+
+Références : [MDN · Request.cache](https://developer.mozilla.org/en-US/docs/Web/API/Request/cache) et [MDN · Cache.addAll](https://developer.mozilla.org/en-US/docs/Web/API/Cache/addAll). Le test `node tests/service-worker.cjs` vérifie l’installation malgré un cache HTTP ancien, la navigation hors connexion, les fichiers servis et la conservation des caches étrangers à l’Atlas.

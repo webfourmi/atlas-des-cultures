@@ -1,8 +1,9 @@
 {
   "app": "Atlas des cultures",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "date": "2026-11-01",
   "notes": [
+    "Les nouvelles escales s’installent correctement sur une ancienne version",
     "Cinq nouvelles escales : Espagne, Finlande, Égypte, Mongolie et Sénégal",
     "18 aventures et 54 questions, avec cinq nouvelles photographies et dix illustrations",
     "Recherche et filtres des aventures, reprise du dernier voyage et préparatifs visibles",

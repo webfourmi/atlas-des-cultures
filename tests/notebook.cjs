@@ -434,7 +434,7 @@ const click = (action,id,extra={}) => {const button=element();button.dataset={ac
   // The install pre-cache contains every image, stylesheet, script and PDF.
   const worker = fs.readFileSync(path.join(root,'sw.js'),'utf8');
   const listeners={}, cached=[];
-  const workerContext=vm.createContext({self:{addEventListener:(type,fn)=>listeners[type]=fn},caches:{open:async()=>({addAll:async urls=>cached.push(...urls)})}});
+  const workerContext=vm.createContext({Request:class{constructor(url,options){this.url=url;this.cache=options.cache;}},self:{addEventListener:(type,fn)=>listeners[type]=fn},caches:{open:async()=>({addAll:async requests=>cached.push(...requests.map(r=>r.url))})}});
   vm.runInContext(worker,workerContext);
   let installed;listeners.install({waitUntil:p=>installed=p});await installed;
   for(const asset of cached){const local=asset==='./'?'index.html':asset.replace(/^\.\//,'');assert(fs.existsSync(path.join(root,local)),`Missing cached asset ${asset}`)}

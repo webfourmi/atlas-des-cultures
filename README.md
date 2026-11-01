@@ -12,7 +12,7 @@ Les cinq découvertes proposent un résultat visuel qui change avec les choix : 
 
 La recette sénégalaise propose les portions adaptables, le mode cuisine et une nouvelle fiche PDF A4 illustrée. Elle est présentée comme une adaptation familiale simplifiée, avec ses substitutions. Un troisième documentaire musical, consacré au flamenco, se charge à la demande dans Écouter et dans l’activité espagnole ; la présentation est en anglais. Le passeport distingue les souvenirs d’aventure des tampons des quiz ; son export SVG s’allonge pour garder les 18 tampons lisibles.
 
-Les anciens identifiants et la clé locale restent inchangés. Aucun compte ni envoi de progression n’est ajouté. Le cache contient les cinq photos, les dix illustrations, les nouveaux scripts et la nouvelle fiche PDF. Les images générées ont leur provenance et leurs prompts dans `ART-NOUVELLES-RENCONTRES.md` et `ART-NOUVEAUX-ATELIERS.md`.
+Les anciens identifiants et la clé locale restent inchangés. Aucun compte ni envoi de progression n’est ajouté. La version 5.2.1 recharge les ressources depuis le réseau pendant l’installation pour éviter qu’une ancienne page reste dans le nouveau cache. Le cache contient les cinq photos, les dix illustrations, les nouveaux scripts et la nouvelle fiche PDF. Les images générées ont leur provenance et leurs prompts dans `ART-NOUVELLES-RENCONTRES.md` et `ART-NOUVEAUX-ATELIERS.md`.
 
 ## Atelier de motifs en Indonésie (v5.1.0)
 
