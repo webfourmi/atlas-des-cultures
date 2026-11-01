@@ -69,3 +69,7 @@ Limites : aucun téléphone physique n’a été utilisé. L’ancien test navig
 Le contrôle sur GitHub Pages après une installation de v5.1.0 a montré que la bannière v5.2.0 pouvait laisser la page à 13 escales après activation. Le préchargement utilisait les URL avec la politique HTTP par défaut, qui autorise la réutilisation de réponses encore fraîches. Le nouveau cache porte le numéro v5.2.1 et précharge des objets `Request` avec `cache: reload` pour récupérer les fichiers de la nouvelle édition. La progression locale reste indépendante des caches.
 
 Références : [MDN · Request.cache](https://developer.mozilla.org/en-US/docs/Web/API/Request/cache) et [MDN · Cache.addAll](https://developer.mozilla.org/en-US/docs/Web/API/Cache/addAll). Le test `node tests/service-worker.cjs` vérifie l’installation malgré un cache HTTP ancien, la navigation hors connexion, les fichiers servis et la conservation des caches étrangers à l’Atlas.
+
+Le correctif a ensuite été vérifié sur l’adresse HTTPS habituelle : depuis la page conservée en v5.1.0, « Rechercher une mise à jour » puis « Mettre à jour » ont affiché v5.2.1, 18 escales et 54 questions. Le filtre « 5 nouvelles » a retourné exactement Espagne, Finlande, Égypte, Mongolie et Sénégal. Le déploiement GitHub Pages du correctif est terminé avec succès.
+
+![Deux nouvelles aventures et le pied de page v5.2.1 sur le site publié](escales-52-publication.jpg)
