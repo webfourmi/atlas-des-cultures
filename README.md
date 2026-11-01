@@ -2,6 +2,22 @@
 
 PWA statique : 18 escales, 54 questions, cinq recettes, passeport et progression locale.
 
+## Trois aventures à jouer (v5.4.0)
+
+Trois entrées sur l’accueil et dans **Voyages → Aventures**, ainsi que le filtre **À jouer**, ouvrent les nouvelles découvertes :
+
+- **Japon — Une table pour un ami** : choisir Haru ou Nao, lire sa demande et poser les plats sur une table qui change avec les choix. La réaction du personnage reprend le repas réellement composé. La recette imprimable de soupe miso reste accessible.
+- **Maroc — Le conte qui change avec toi** : un objet, un détour et une décision construisent un conte personnel en français. Les trois objets et leurs embranchements donnent douze récits distincts, sans attribuer ces histoires inventées à une tradition.
+- **Brésil — À toi de composer l’écoute** : deux documents sonores de berimbau, une reconnaissance guidée de l’instrument, puis trois blocs à réordonner. Le parcours fait entendre cinq secondes d’Angola, cinq secondes d’Iúna et une pause de deux secondes, dans l’ordre choisi. Le point d’attention choisi apparaît dans la scène finale.
+
+Ces trois aventures commencent directement par la création. La photographie, les documents et les questions de révision restent disponibles librement, notamment depuis le carnet. Il est également possible de poursuivre une visite sans créer. Les quinze autres aventures gardent leur déroulement.
+
+Chaque escale conserve ses créations dans **Carnet → Créations**, avec une carte SVG à télécharger. Un parcours sonore conservé peut être réécouté depuis sa carte. Rejouer commence un nouvel essai en gardant les créations et les dénouements déjà acquis. Le résultat de la scène terminée reste stable quand on revient essayer une autre création. Les sauvegardes JSON réunissent les cartes et donnent priorité à l’essai local déjà commencé. Les anciennes activités ne fabriquent pas automatiquement de nouvelles créations.
+
+Le module `pilot-adventures.js` et sa feuille de styles utilisent des dessins vectoriels composés par le code. Les enregistrements existants restent crédités et aucun son ne commence automatiquement. Les lectures et leur séquence s’arrêtent lorsqu’on quitte l’écran. Les trois aventures fonctionnent hors connexion après installation complète de l’édition.
+
+[Vérifications de cette évolution](docs/AVENTURES-JOUABLES-54.md).
+
 ## Des aventures guidées (v5.3.0)
 
 Les 18 aventures annoncent maintenant un objectif concret et montrent une consigne au-dessus de l’image à chaque écran. Un seul indicateur présente cinq étapes : rencontre, découvertes, petite activité et questions, choix de l’accueil, résultat. Le bouton du bas conduit la progression ; les trois lieux et le carnet restent disponibles pour explorer librement.

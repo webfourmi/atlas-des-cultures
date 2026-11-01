@@ -50,6 +50,7 @@ function journeyProgress(id) {
   return cleanJourneys({[id]:state.journeys[id] || {node:'begin',seen:[],completed:false}})[id];
 }
 function pauseTravelMedia() {
+  if(typeof pilotStopPlayback==='function')pilotStopPlayback();
   app.querySelectorAll?.('audio, video').forEach(player => player.pause());
 }
 function travelYear(photo) { return photo.date.match(/\d{4}/)?.[0] || 'date non précisée'; }
@@ -78,7 +79,7 @@ function renderTravelMap() {
   return `${worldMap()}<div class="map-country-buttons" aria-label="Choisir une escale">${STOPS.map((stop,i) => `<button class="chip ${stop.id === s.id ? 'active' : ''}" data-action="travel-select" data-id="${stop.id}" aria-pressed="${stop.id === s.id}">${i+1}. ${stop.flag} ${esc(stop.country)}</button>`).join('')}</div><section class="travel-selected" aria-live="polite"><div>${travelFigure(s.id,true)}</div><div class="travel-selected-copy"><span class="overline">${s.flag} ${esc(s.country)}</span><h2>${esc(s.topic)}</h2><p>${esc(GUIDES[s.id].lead)}</p>${regionalMap(s.id)}<strong>${esc(place.name)}</strong><p class="travel-small">Repère géographique choisi pour situer l’escale ; ce point ne représente pas toutes les communautés qui portent la tradition.</p><p class="travel-small"><a href="${esc(place.source)}" target="_blank" rel="noopener noreferrer">Coordonnées de référence ↗</a> · <a href="https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lon}#map=9/${place.lat}/${place.lon}" target="_blank" rel="noopener noreferrer">Carte détaillée en ligne ↗</a></p>${travelStopLinks(s.id)}</div></section>`;
 }
 function renderTravelStories() {
-  return `${renderResumeCard()}${travelSelectionControls()}<p class="fiction-note">Personnages et dialogues imaginés, traditions documentées. Une activité à la fois, trois lieux toujours visibles et deux dénouements par aventure. Les personnes photographiées ne représentent pas les personnages.</p><div id="travel-story-results" class="journey-cards"></div>`;
+  return `${pilotEntryChoices()}${renderResumeCard()}${travelSelectionControls()}<p class="fiction-note">Personnages et dialogues imaginés, traditions documentées. Une activité à la fois, trois lieux toujours visibles et deux dénouements par aventure. Les personnes photographiées ne représentent pas les personnages.</p><div id="travel-story-results" class="journey-cards"></div>`;
 }
 function travelAudioCard(item) {
   return `<article class="sound-card"><div class="overline">🇧🇷 Brésil · extrait sonore</div><h2>${esc(item.title)}</h2><p>${esc(item.guide)}</p><audio controls preload="none" aria-label="${esc(item.title)}"><source src="${item.src}" type="${item.type}">Ton navigateur ne lit pas cet extrait. <a href="${item.src}">Ouvrir le fichier audio</a>.</audio><p class="travel-small">${esc(item.duration)} · ${esc(item.author)} · ${esc(item.license)} · <a href="${esc(item.source)}" target="_blank" rel="noopener noreferrer">Crédit et enregistrement source ↗</a></p><p class="media-fallback" hidden>Le lecteur ne parvient pas à charger l’extrait. <a href="${item.src}" target="_blank" rel="noopener">Ouvrir le fichier audio ↗</a></p><button class="btn ghost" data-action="journey" data-id="${item.stop}">Rencontrer Joana</button></article>`;

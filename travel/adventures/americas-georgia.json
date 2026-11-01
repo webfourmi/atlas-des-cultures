@@ -590,31 +590,31 @@
     }
   },
   "bresil": {
-    "title": "À l’écoute de la roda",
-    "mission": "Aide Joana à accueillir les nouveaux venus autour d’une roda de capoeira.",
-    "intro": "Joana et Paulo attendent des visiteurs qui ne connaissent pas la capoeira. Tu vas découvrir ce qui se passe au centre et autour du cercle, écouter le berimbau si tu le souhaites, puis choisir le début de leur accueil.",
+    "title": "À toi de composer l’écoute",
+    "mission": "Explore les sons du berimbau avec Joana et Paulo, puis compose une courte écoute à partager.",
+    "intro": "Joana a apporté deux enregistrements de berimbau. Paulo aimerait les faire découvrir aux nouveaux venus. Tu vas reconnaître l’instrument, choisir l’ordre de deux extraits et d’une pause, puis décider ce que tu souhaites faire remarquer.",
     "places": [
       {
-        "name": "Le coin d’accueil",
+        "name": "L’accueil de la roda",
         "description": "Joana prépare une place pour les visiteurs et rassemble les documents.",
-        "shortName": "Accueil"
+        "shortName": "Roda"
       },
       {
-        "name": "La table d’écoute",
+        "name": "Les repères du cercle",
         "description": "Une photographie et deux fiches invitent à regarder au-delà des deux joueurs.",
-        "shortName": "Écoute"
+        "shortName": "Repères"
       },
       {
-        "name": "La salle de répétition",
+        "name": "Le coin d’écoute",
         "description": "Paulo te rejoint pour discuter de la musique et de la place du groupe.",
-        "shortName": "Répétition"
+        "shortName": "Écoute"
       }
     ],
     "characters": [
       {
         "name": "Joana",
         "role": "Participe à la musique d’un groupe de capoeira",
-        "greeting": "Bienvenue ! Aide Joana à accueillir les nouveaux venus autour d’une roda de capoeira. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
+        "greeting": "Joana t’a préparé deux documents sonores. Tu peux les écouter, puis composer leur ordre avec une pause. La photo et les repères expliquent aussi la place du berimbau dans la roda.",
         "questions": [
           {
             "question": "Qui voit-on sur la photo ?",
@@ -629,7 +629,7 @@
       {
         "name": "Paulo",
         "role": "Musicien du groupe",
-        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : une petite pause d’écoute. Tu peux aussi passer directement aux trois questions des visiteurs.",
+        "greeting": "Tu peux écouter les deux documents et déplacer les blocs pour composer un petit parcours. Il y a aussi une description sonore si tu préfères lire les repères.",
         "questions": [
           {
             "question": "À quoi sert la musique pendant la roda ?",
@@ -765,59 +765,59 @@
     "plans": [
       {
         "id": "atelier",
-        "title": "Préparer un coin d’écoute",
-        "description": "Avec Joana, installer les documents et proposer les extraits du carnet.",
-        "reply": "Je vais rapprocher les chaises. Les visiteurs pourront lancer un extrait s’ils le souhaitent.",
+        "title": "Présenter la séquence avec Joana",
+        "description": "Faire découvrir les documents et l’ordre que tu as composé.",
+        "reply": "Joana prépare les deux documents et votre séquence.",
         "place": 0,
-        "preparationTitle": "Le premier repère",
-        "preparationPrompt": "Choisis l’entrée de votre petit accueil.",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Par quoi commencez-vous ?",
         "options": [
           {
             "id": "un",
-            "label": "Inviter à regarder la photographie",
-            "reply": "Je commencerai par demander où chacun a regardé en premier.",
-            "endingText": "Joana montre la photographie. Un visiteur remarque un instrument sur le côté ; un autre parle des joueurs. Vous placez les fiches à côté et proposez une écoute facultative.",
-            "endingReply": "Les questions viennent toutes seules. Merci, le coin d’accueil est prêt."
+            "label": "Annoncer ce que l’on va écouter",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par annoncer ce que l’on va écouter. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Proposer une première écoute",
-            "reply": "Présentons bien l’extrait : il s’agit d’une démonstration, pas du son de toute la roda.",
-            "endingText": "Les visiteurs qui le souhaitent écoutent un extrait de berimbau. Joana leur montre ensuite la photo et vos cartes. D’autres commencent directement par les documents.",
-            "endingReply": "Chacun a pu choisir son entrée. C’est exactement ce qu’il nous fallait."
+            "label": "Laisser entendre la séquence d’abord",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — laisser entendre la séquence d’abord — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Une place pour l’écoute"
+        "endingTitle": "Un moment préparé ensemble"
       },
       {
         "id": "rencontre",
-        "title": "Préparer les questions pour Paulo",
-        "description": "Garder une place à la conversation dans la salle de répétition.",
-        "reply": "Avec plaisir. On peut partir de ce que vous avez remarqué plutôt que suivre un exposé.",
+        "title": "Écouter et échanger avec Paulo",
+        "description": "Partager vos impressions autour des sons.",
+        "reply": "Paulo invite les visiteurs à prendre un moment d’écoute.",
         "place": 2,
-        "preparationTitle": "De quoi parler d’abord ?",
-        "preparationPrompt": "Choisis la question qui lancera votre échange.",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Quelle place donnes-tu aux premières impressions ?",
         "options": [
           {
             "id": "un",
-            "label": "Comment écouter quand on découvre ?",
-            "reply": "Prenons le temps de nommer ce qu’on entend, même si on ne sait pas encore l’expliquer.",
-            "endingText": "Paulo écoute les remarques des visiteurs. Joana apporte les trois cartes pour retrouver un mot ou une idée. Votre échange avance au fil des questions.",
-            "endingReply": "Personne n’avait besoin de tout connaître avant de commencer à écouter."
+            "label": "Demander un mot pour décrire le son",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par demander un mot pour décrire le son. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Que demander aux personnes du groupe ?",
-            "reply": "Pourquoi ne pas commencer par ce qu’elles aimeraient montrer elles-mêmes ?",
-            "endingText": "Joana choisit un détail de la photographie, puis Paulo revient sur l’une des fiches. Les visiteurs posent leurs questions et vous laissez la discussion se poursuivre.",
-            "endingReply": "Merci d’avoir préparé une rencontre où l’on peut aussi s’écouter parler."
+            "label": "Demander ce qui change entre les deux extraits",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — demander ce qui change entre les deux extraits — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Les questions entrent dans le cercle"
+        "endingTitle": "Une création à partager"
       }
     ],
     "practice": {
-      "title": "Une petite pause d’écoute",
+      "title": "Créer mon parcours d’écoute",
       "intro": "Joana et Paulo te proposent une pause avec les vrais extraits de berimbau du carnet. Choisis un point d’écoute, puis une question à garder pour le groupe.",
       "steps": [
         {
@@ -890,8 +890,8 @@
       }
     ],
     "guide": {
-      "result": "Voir comment Joana et Paulo commencent la rencontre.",
-      "finish": "Rejoindre le cercle →"
+      "result": "Entendre ta séquence et garder une carte de ton parcours d’écoute.",
+      "finish": "Partager notre parcours d’écoute →"
     }
   },
   "perou": {

@@ -109,6 +109,7 @@
 <link rel="stylesheet" href="./travel.css">
 <link rel="stylesheet" href="./india-adventure.css">
 <link rel="stylesheet" href="./world-adventure.css">
+<link rel="stylesheet" href="./pilot-adventures.css">
 <link rel="stylesheet" href="./batik-workshop.css">
 <link rel="stylesheet" href="./travel-tools.css">
 <link rel="stylesheet" href="./discovery-workshops.css">
@@ -116,7 +117,7 @@
 <body>
 <header class="sitehead"><div class="wrap navwrap"><button class="brand" data-action="home" aria-label="Accueil"><span class="brandlogo">🧭</span><span><span class="brandstrong">Atlas des cultures</span><span class="brandsmall">LE MONDE A MILLE HISTOIRES</span></span></button><nav class="nav" aria-label="Navigation"><button data-action="home" id="nav-home">Explorer</button><button data-action="challenge" id="nav-challenge">Défi éclair</button><button data-action="passport" id="nav-passport">Passeport</button><button data-action="library" id="nav-library">Bibliothèque</button><button data-action="recipes" id="nav-recipes">Recettes</button><button data-action="travel" id="nav-travel">Voyages</button><button data-action="settings" id="nav-settings" aria-label="Installation et sauvegardes">⚙️ Options</button><button data-action="install" id="install-header" hidden>📲 Installer</button><span class="xpheader" id="nav-xp">✨ 0 XP</span></nav></div></header>
 <main class="main wrap" id="app" aria-live="polite"></main>
-<footer class="foot wrap"><span>🌏 Atlas des cultures, édition découverte · 18 escales · 54 questions</span><span>Sources UNESCO · Illustrations originales · PWA v<span id="app-version-footer">5.3.0</span> · Mode hors connexion · Sauvegarde locale</span></footer>
+<footer class="foot wrap"><span>🌏 Atlas des cultures, édition découverte · 18 escales · 54 questions</span><span>Sources UNESCO · Illustrations originales · PWA v<span id="app-version-footer">5.4.0</span> · Mode hors connexion · Sauvegarde locale</span></footer>
 <div class="pwa-alert" id="pwa-update-banner" role="status" aria-live="polite">
 <div><strong>✨ Une nouvelle édition est arrivée !</strong><small id="pwa-update-label">Une mise à jour est prête.</small></div>
 <div class="pwa-alert-buttons"><button id="pwa-update-button" type="button">Mettre à jour</button><button class="dismiss" id="pwa-update-later" type="button">Plus tard</button></div></div>
@@ -130,6 +131,7 @@
 <script src="./india-adventure.js"></script>
 <script src="./world-adventure-data.js"></script>
 <script src="./batik-workshop.js"></script>
+<script src="./pilot-adventures.js"></script>
 <script src="./world-adventure.js"></script>
 <script src="./extra-stops.js"></script>
 <script src="./travel-tools.js"></script>
@@ -213,8 +215,8 @@ function render(){pauseTravelMedia();document.body.classList.toggle('recipe-prin
 function show(v){game=null;view=v;render();window.scrollTo({top:0,behavior:'smooth'})}
 function flash(t){let a=document.querySelector('.toast');if(a)a.remove();a=document.createElement('div');a.className='toast';a.setAttribute('role','status');a.textContent=t;document.body.appendChild(a);clearTimeout(toastTimer);toastTimer=setTimeout(()=>a.remove(),2400)}
 function renderHome(){const regions=['Toutes',...new Set(STOPS.map(s=>s.region))];let list=STOPS.filter(s=>filter==='Toutes'||s.region===filter);app.innerHTML=`
-<section class="hero"><div class="hero-left"><span class="eyebrow">✦ Une aventure à travers le patrimoine vivant</span><h1>Le monde est<br><em>un grand livre.</em></h1><p>Pars à la rencontre de traditions, de saveurs, de musiques et de savoir-faire. À chaque escale : une fiche illustrée à lire, trois énigmes et un tampon dans ton passeport.</p><div class="herobuttons"><button class="btn prime" data-action="read" data-id="${STOPS.find(s=>!state.completed[s.id])?.id||STOPS[0].id}">🧭 Commencer l’exploration</button><button class="btn outline" data-action="challenge">⚡ Défi éclair</button><button class="btn outline" data-action="recipes">🍽️ Recettes du monde</button><button class="btn outline" data-action="travel">🗺️ Voyages et rencontres</button></div></div><div class="hero-art" aria-hidden="true"><div class="orbit"></div><div class="globe">🌍</div><span class="orb one">🇯🇵</span><span class="orb two">🇲🇽</span><span class="orb three">🇻🇺</span><span class="orb four">🇰🇪</span></div></section>
-${renderResumeCard()}
+<section class="hero"><div class="hero-left"><span class="eyebrow">✦ Une aventure à travers le patrimoine vivant</span><h1>Le monde est<br><em>un grand livre.</em></h1><p>Compose un repas, invente un conte, explore des sons. Puis poursuis ton voyage parmi 18 traditions, leurs images, leurs récits et leurs savoir-faire.</p><div class="herobuttons"><button class="btn prime" data-action="read" data-id="${STOPS.find(s=>!state.completed[s.id])?.id||STOPS[0].id}">🧭 Commencer l’exploration</button><button class="btn outline" data-action="challenge">⚡ Défi éclair</button><button class="btn outline" data-action="recipes">🍽️ Recettes du monde</button><button class="btn outline" data-action="travel">🗺️ Voyages et rencontres</button></div></div><div class="hero-art" aria-hidden="true"><div class="orbit"></div><div class="globe">🌍</div><span class="orb one">🇯🇵</span><span class="orb two">🇲🇽</span><span class="orb three">🇻🇺</span><span class="orb four">🇰🇪</span></div></section>
+${pilotEntryChoices()}${renderResumeCard()}
 <section class="summary-strip" aria-label="Ta progression"><div class="mini-stat"><span class="mini-ico">🛂</span><div><strong>${countDone()}/${STOPS.length}</strong><span>tampons obtenus</span></div></div><div class="mini-stat"><span class="mini-ico">✨</span><div><strong>${xp()}</strong><span>points de savoir</span></div></div><div class="mini-stat"><span class="mini-ico">🧩</span><div><strong>${Object.keys(state.seen).length}/${ATLAS_QUESTION_COUNT}</strong><span>énigmes explorées</span></div></div></section>
 <div class="sectionhead"><div><h2>Choisis ta prochaine escale</h2><p>Lis la fiche, observe l’illustration, puis tente les énigmes.</p></div><span class="smalltag">${STOPS.length} traditions à découvrir</span></div><div class="filters" aria-label="Filtrer par région">${regions.map(r=>`<button class="chip ${filter===r?'active':''}" data-action="filter" data-filter="${esc(r)}" aria-pressed="${filter===r}">${esc(r)}</button>`).join('')}</div><section class="cards" aria-label="Destinations">${list.map(card).join('')}</section>
 <div class="explain"><strong>🌱 Un jeu pour explorer sans caricaturer.</strong> Chaque escale présente une tradition particulière, située dans son contexte. Aucun pays ne se réduit à une seule coutume. Toutes les fiches renvoient aux sources UNESCO correspondantes.</div>`}
@@ -244,7 +246,7 @@ function reset(){const ok=confirm('Effacer tous tes tampons, les réponses explo
 document.addEventListener('click',ev=>{let b=ev.target.closest('[data-action]');if(!b)return;let a=b.dataset.action;if(a==='home'||a==='passport'||a==='challenge'||a==='library'||a==='recipes'||a==='travel')show(a==='home'?'home':a);else if(a==='start')startTour(b.dataset.id);else if(a==='recipe')openRecipe(b.dataset.id);else if(a==='back-recipe')closeRecipe();else if(a==='print-recipe')printRecipe();else if(a==='read')openDetail(b.dataset.id);else if(a==='back-detail')closeDetail();else if(a==='filter'){filter=b.dataset.filter;render()}else if(a==='answer')answer(Number(b.dataset.index));else if(a==='next')next();else if(a==='redo-challenge')startChallenge();else if(a==='reset')reset()});
 
 /* Atlas des cultures v3 : installation PWA, sauvegardes et mises à jour. */
-const APP_VERSION='5.3.0';
+const APP_VERSION='5.4.0';
 document.getElementById('app-version-footer').textContent=APP_VERSION;
 const BACKUP_FORMAT='atlas-des-cultures/progression-v1';
 const ALERTS_KEY='atlas-cultures-system-update-alerts';

@@ -1,22 +1,22 @@
 /* Généré depuis travel/adventures/*.json. Escales initiales : 19 octobre 2026 ; cinq ajouts : 1er novembre 2026. */
 const WORLD_ADVENTURES = {
   "japon": {
-    "title": "Un repas pour accueillir Haru",
-    "mission": "Prépare avec Aiko une table de découverte du washoku, puis choisis comment accueillir Haru.",
-    "intro": "Aiko dispose les plats avant l’arrivée de Haru. Elle te propose de découvrir le repas avec elle, puis de choisir ce que vous présenterez en premier.",
+    "title": "Une table pour un ami",
+    "mission": "Prépare avec Aiko un repas pour Haru ou Nao : découvre sa demande, compose sa table et regarde sa réaction.",
+    "intro": "Aiko termine la cuisine. Haru et Nao viendront partager un repas ; chacun a une petite envie particulière. Tu vas choisir un invité, disposer les plats pour lui faire plaisir, puis décider comment présenter votre table.",
     "places": [
       {
-        "name": "La cuisine",
+        "name": "La cuisine d’Aiko",
         "description": "Aiko termine les préparatifs. Trois cartes sans légende attendent près des bols.",
         "shortName": "Cuisine"
       },
       {
-        "name": "La table des souvenirs",
+        "name": "Le coin des découvertes",
         "description": "Une photographie et deux notes permettent de comprendre ce que les cartes racontent.",
-        "shortName": "Souvenirs"
+        "shortName": "Repères"
       },
       {
-        "name": "La salle à manger",
+        "name": "La table des invités",
         "description": "Haru prépare les places des invités. Il hésite encore sur la façon de présenter le repas.",
         "shortName": "Table"
       }
@@ -25,7 +25,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Aiko",
         "role": "prépare le repas familial",
-        "greeting": "Bienvenue ! Prépare avec Aiko une table de découverte du washoku, puis choisis comment accueillir Haru. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
+        "greeting": "Bienvenue ! Haru et Nao arrivent bientôt. Tu peux choisir un invité et composer son repas sur notre petite table. Si tu veux en savoir plus, la photo et les notes restent au coin des découvertes.",
         "questions": [
           {
             "question": "Pourquoi ces ingrédients ?",
@@ -40,7 +40,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Haru",
         "role": "cousin d’Aiko, chargé de l’accueil",
-        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton menu imaginaire. Tu peux aussi passer directement aux trois questions des visiteurs.",
+        "greeting": "Tu peux nous préparer un petit repas à l’écran. Chaque plat que tu choisis apparaîtra sur la table. Commence par choisir pour qui tu cuisines.",
         "questions": [
           {
             "question": "Qui t’a appris à cuisiner ?",
@@ -176,59 +176,59 @@ const WORLD_ADVENTURES = {
     "plans": [
       {
         "id": "atelier",
-        "title": "Préparer une table à découvrir",
-        "description": "Installer les trois cartes pour que les invités puissent les lire à leur rythme.",
-        "reply": "Aiko : Bonne idée. Nos cartes auront enfin une place. Choisissons celle que l’on verra en premier.",
+        "title": "Présenter le repas avec Aiko",
+        "description": "Rejoindre Aiko et expliquer les plats que tu as choisis.",
+        "reply": "Aiko te propose de présenter votre table ensemble.",
         "place": 0,
-        "preparationTitle": "La première carte",
-        "preparationPrompt": "Par quoi veux-tu commencer la présentation ?",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Par quoi commences-tu ?",
         "options": [
           {
             "id": "un",
-            "label": "Mettre la photographie en premier",
-            "reply": "Aiko : Les invités commenceront par regarder les boîtes. Les autres cartes seront juste à côté.",
-            "endingText": "Tu poses la photographie à l’entrée de la table. Les premiers invités s’arrêtent devant les compartiments, puis découvrent les deux notes que tu as classées.",
-            "endingReply": "Aiko : Merci ! J’entends déjà une question. Je vais chercher Haru pour qu’il nous rejoigne."
+            "label": "Montrer les ingrédients choisis",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par montrer les ingrédients choisis. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Commencer par la note sur les ingrédients",
-            "reply": "Aiko : Je la pose près du menu. La photographie et la note sur l’apprentissage suivront.",
-            "endingText": "La note sur les ingrédients accueille les invités. L’un d’eux demande à Aiko comment elle a choisi son repas. Haru apporte les derniers bols pendant que la conversation commence.",
-            "endingReply": "Aiko : Tout est en place. Tu peux t’installer avec nous."
+            "label": "Présenter la demande de l’invité",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — présenter la demande de l’invité — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Les cartes trouvent leur place"
+        "endingTitle": "Un moment préparé ensemble"
       },
       {
         "id": "rencontre",
-        "title": "Ouvrir la conversation à table",
-        "description": "Garder les cartes sous la main pour une discussion menée par Haru.",
-        "reply": "Haru : D’accord. Une seule question pour commencer, puis chacun parlera s’il en a envie.",
+        "title": "S’asseoir avec l’invité",
+        "description": "Partager un moment autour du repas que tu as composé.",
+        "reply": "Votre invité est prêt à prendre place.",
         "place": 2,
-        "preparationTitle": "Une question pour commencer",
-        "preparationPrompt": "Quelle ouverture proposes-tu à Haru ?",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Comment ouvres-tu ce moment ?",
         "options": [
           {
             "id": "un",
-            "label": "Demander le souvenir d’un repas",
-            "reply": "Haru : J’ai déjà une histoire de casserole à raconter. Je vais laisser les autres commencer !",
-            "endingText": "Une fois les invités installés, Haru demande un souvenir de repas. Les réponses font sourire Aiko. Tu gardes les cartes à portée de main pour les questions qui suivront.",
-            "endingReply": "Haru : On avait besoin de quelqu’un pour lancer la discussion. Merci du coup de main."
+            "label": "Demander quel plat attire son regard",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par demander quel plat attire son regard. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Demander à qui l’on doit un savoir-faire",
-            "reply": "Haru : Je parlerai de ma tante. Aiko aura sûrement son propre souvenir.",
-            "endingText": "Haru demande qui a appris aux invités une chose qu’ils aiment préparer. Aiko écoute, puis raconte son souvenir. La table est prête et les cartes deviennent des appuis à la conversation.",
-            "endingReply": "Haru : Les cartes sont rangées, les invités aussi. Enfin, presque ! Il nous reste une chaise pour toi."
+            "label": "Laisser l’invité raconter un souvenir de repas",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — laisser l’invité raconter un souvenir de repas — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Une place dans la conversation"
+        "endingTitle": "Une création à partager"
       }
     ],
     "practice": {
-      "title": "Ton menu imaginaire",
+      "title": "Composer le repas",
       "intro": "Aiko te propose de composer un menu imaginaire. Choisis un ingrédient, une présentation et une invitation.",
       "steps": [
         {
@@ -288,11 +288,16 @@ const WORLD_ADVENTURES = {
         "url": "https://commons.wikimedia.org/wiki/File:Osechi.jpg",
         "label": "Photographie · Osechi, Akihito Kurono, CC0",
         "supports": "Identification de l’osechi et des boîtes jūbako ; auteur et droits de la photographie. Les personnages et le menu du jeu sont fictifs."
+      },
+      {
+        "label": "MAFF · Traditional Dietary Cultures of the Japanese",
+        "url": "https://www.maff.go.jp/e/data/publish/attach/pdf/index-20.pdf",
+        "supports": "Place du riz, de la soupe et des accompagnements ; le menu du jeu reste une scène simplifiée et fictive."
       }
     ],
     "guide": {
-      "result": "Voir la table et le premier échange que tu as choisis.",
-      "finish": "Accueillir Haru →"
+      "result": "Voir le repas que tu as composé et garder ta table dans tes créations.",
+      "finish": "Servir et partager le repas →"
     }
   },
   "coree": {
@@ -2071,31 +2076,31 @@ const WORLD_ADVENTURES = {
     }
   },
   "maroc": {
-    "title": "Une histoire va commencer",
-    "mission": "Aide Youssef à accueillir les auditeurs de Salma, puis choisis comment lancer son récit.",
-    "intro": "Salma cherche le bon début pour son rendez-vous d’écoute. Youssef te propose de découvrir la place et l’art des conteurs. Tu pourras inventer un micro-récit avant de rejoindre le public.",
+    "title": "Le conte qui change avec toi",
+    "mission": "Invente un conte avec Salma : choisis un objet, ajoute un détour et décide ce que fera le personnage.",
+    "intro": "Salma prépare un moment de récit près de la place. « Aujourd’hui, inventons une histoire ensemble », te propose-t-elle. Un objet donnera le départ ; ton détour et ta décision changeront vraiment la suite. Le conte sera votre création personnelle, écrite en français pour le jeu.",
     "places": [
       {
-        "name": "Le coin de rendez-vous",
+        "name": "L’entrée de la place",
         "description": "Un point d’accueil fictif près de la place, où Youssef vérifie ses cartes avant la rencontre.",
-        "shortName": "Rendez-vous"
+        "shortName": "Place"
       },
       {
-        "name": "La table des carnets",
+        "name": "Les documents de la place",
         "description": "Une petite table inventée pour comparer la photo et les deux notes sur l’art de raconter.",
-        "shortName": "Carnets"
+        "shortName": "Repères"
       },
       {
         "name": "Le cercle d’écoute",
         "description": "Salma a prévu une rencontre fictive avec quelques personnes. Le groupe laisse les passages libres.",
-        "shortName": "Écoute"
+        "shortName": "Salma"
       }
     ],
     "characters": [
       {
         "name": "Youssef",
         "role": "vient écouter un récit",
-        "greeting": "Bienvenue ! Aide Youssef à accueillir les auditeurs de Salma, puis choisis comment lancer son récit. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
+        "greeting": "Salma t’attend pour inventer un petit conte. Choisis un objet, puis un détour et une décision. La photo et les notes te permettent aussi de découvrir les conteurs de la place.",
         "questions": [
           {
             "question": "Qu’est-ce que tu préfères quand tu écoutes ?",
@@ -2110,7 +2115,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Salma",
         "role": "conteuse",
-        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : invente un micro-récit. Tu peux aussi passer directement aux trois questions des visiteurs.",
+        "greeting": "Commençons par un objet. Je poserai ensuite une nouvelle situation, et tu décideras ce que fait ton personnage. Nous garderons le conte que nous aurons créé.",
         "questions": [
           {
             "question": "Tu racontes toujours de la même manière ?",
@@ -2246,59 +2251,59 @@ const WORLD_ADVENTURES = {
     "plans": [
       {
         "id": "atelier",
-        "title": "Préparer les cartes d’accueil",
-        "description": "Installer avec Youssef les cartes qui permettront aux nouveaux venus de se repérer.",
-        "reply": "Youssef : Merci. Je pourrai les montrer en quelques mots, puis laisser les gens s’installer.",
+        "title": "Confier le conte à Youssef",
+        "description": "Faire lire votre création à Youssef.",
+        "reply": "Youssef ouvre son carnet pour accueillir votre conte.",
         "place": 0,
-        "preparationTitle": "Une entrée dans la rencontre",
-        "preparationPrompt": "Par quoi souhaites-tu commencer les cartes ?",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Que lui proposes-tu de regarder d’abord ?",
         "options": [
           {
             "id": "un",
-            "label": "Situer la place avec la photo",
-            "reply": "Youssef : D’accord. La vue donne un repère, et les deux notes invitent ensuite à s’intéresser aux personnes.",
-            "endingText": "Youssef présente la photographie. Tu montres les deux notes, puis vous accompagnez les nouveaux venus vers les places libres.",
-            "endingReply": "Youssef : On est prêts. Je vais enfin pouvoir écouter moi aussi."
+            "label": "Le début et l’objet choisi",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par le début et l’objet choisi. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Commencer par « Qu’aimez-vous écouter ? »",
-            "reply": "Youssef : J’aime bien. Chacun peut répondre s’il en a envie ; personne n’est obligé de parler.",
-            "endingText": "Les premières réponses font sourire le groupe. Youssef montre ensuite les cartes et propose d’aller s’installer.",
-            "endingReply": "Youssef : On a déjà quelque chose à se raconter après le récit."
+            "label": "La fin et la décision du personnage",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — la fin et la décision du personnage — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Le groupe peut s’installer"
+        "endingTitle": "Un moment préparé ensemble"
       },
       {
         "id": "rencontre",
-        "title": "Rejoindre Salma",
-        "description": "Emporter les cartes dans le cercle d’écoute et choisir une courte ouverture avec elle.",
-        "reply": "Salma : Venez, il reste de la place ici. Vous voulez me présenter, ou préférez-vous que je commence tout de suite ?",
+        "title": "Raconter le conte avec Salma",
+        "description": "Partager votre histoire avec le petit groupe.",
+        "reply": "Salma te propose de raconter avec elle.",
         "place": 2,
-        "preparationTitle": "Avant le récit",
-        "preparationPrompt": "Comment veux-tu ouvrir cette rencontre ?",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Comment commence votre récit ?",
         "options": [
           {
             "id": "un",
-            "label": "Demander à Salma ce qu’elle aime raconter",
-            "reply": "Salma : Bonne question. Je peux commencer par ce qui m’a donné envie de raconter aujourd’hui.",
-            "endingText": "Salma partage un souvenir. Le groupe l’écoute, puis Youssef lui fait signe qu’il est prêt pour la suite.",
-            "endingReply": "Salma : Merci. Maintenant que nous avons fait connaissance, je peux commencer."
+            "label": "Montrer d’abord l’objet du conte",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par montrer d’abord l’objet du conte. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Laisser le récit commencer",
-            "reply": "Salma : D’accord. Gardez vos questions pour après si vous en avez envie.",
-            "endingText": "Vous prenez place. Salma commence : « Au matin, une lettre attendait sur le seuil… » Youssef se tourne vers elle pour ne pas manquer la suite.",
-            "endingReply": "Youssef : On en reparlera après. J’ai envie de savoir à qui cette lettre était destinée."
+            "label": "Commencer directement par la première phrase",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — commencer directement par la première phrase — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Les premiers mots"
+        "endingTitle": "Une création à partager"
       }
     ],
     "practice": {
-      "title": "Invente un micro-récit",
+      "title": "Inventer mon conte",
       "intro": "Invente avec Salma un micro-récit en français. Choisis un début, un détail inattendu et une fin pour cette histoire créée dans le jeu.",
       "steps": [
         {
@@ -2361,8 +2366,8 @@ const WORLD_ADVENTURES = {
       }
     ],
     "guide": {
-      "result": "Voir Salma accueillir le groupe selon ton choix.",
-      "finish": "Laisser la rencontre commencer →"
+      "result": "Lire le conte que tes trois choix ont créé et le garder dans ton carnet.",
+      "finish": "Faire vivre notre conte →"
     }
   },
   "kenya": {
@@ -2961,31 +2966,31 @@ const WORLD_ADVENTURES = {
     }
   },
   "bresil": {
-    "title": "À l’écoute de la roda",
-    "mission": "Aide Joana à accueillir les nouveaux venus autour d’une roda de capoeira.",
-    "intro": "Joana et Paulo attendent des visiteurs qui ne connaissent pas la capoeira. Tu vas découvrir ce qui se passe au centre et autour du cercle, écouter le berimbau si tu le souhaites, puis choisir le début de leur accueil.",
+    "title": "À toi de composer l’écoute",
+    "mission": "Explore les sons du berimbau avec Joana et Paulo, puis compose une courte écoute à partager.",
+    "intro": "Joana a apporté deux enregistrements de berimbau. Paulo aimerait les faire découvrir aux nouveaux venus. Tu vas reconnaître l’instrument, choisir l’ordre de deux extraits et d’une pause, puis décider ce que tu souhaites faire remarquer.",
     "places": [
       {
-        "name": "Le coin d’accueil",
+        "name": "L’accueil de la roda",
         "description": "Joana prépare une place pour les visiteurs et rassemble les documents.",
-        "shortName": "Accueil"
+        "shortName": "Roda"
       },
       {
-        "name": "La table d’écoute",
+        "name": "Les repères du cercle",
         "description": "Une photographie et deux fiches invitent à regarder au-delà des deux joueurs.",
-        "shortName": "Écoute"
+        "shortName": "Repères"
       },
       {
-        "name": "La salle de répétition",
+        "name": "Le coin d’écoute",
         "description": "Paulo te rejoint pour discuter de la musique et de la place du groupe.",
-        "shortName": "Répétition"
+        "shortName": "Écoute"
       }
     ],
     "characters": [
       {
         "name": "Joana",
         "role": "Participe à la musique d’un groupe de capoeira",
-        "greeting": "Bienvenue ! Aide Joana à accueillir les nouveaux venus autour d’une roda de capoeira. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
+        "greeting": "Joana t’a préparé deux documents sonores. Tu peux les écouter, puis composer leur ordre avec une pause. La photo et les repères expliquent aussi la place du berimbau dans la roda.",
         "questions": [
           {
             "question": "Qui voit-on sur la photo ?",
@@ -3000,7 +3005,7 @@ const WORLD_ADVENTURES = {
       {
         "name": "Paulo",
         "role": "Musicien du groupe",
-        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : une petite pause d’écoute. Tu peux aussi passer directement aux trois questions des visiteurs.",
+        "greeting": "Tu peux écouter les deux documents et déplacer les blocs pour composer un petit parcours. Il y a aussi une description sonore si tu préfères lire les repères.",
         "questions": [
           {
             "question": "À quoi sert la musique pendant la roda ?",
@@ -3136,59 +3141,59 @@ const WORLD_ADVENTURES = {
     "plans": [
       {
         "id": "atelier",
-        "title": "Préparer un coin d’écoute",
-        "description": "Avec Joana, installer les documents et proposer les extraits du carnet.",
-        "reply": "Je vais rapprocher les chaises. Les visiteurs pourront lancer un extrait s’ils le souhaitent.",
+        "title": "Présenter la séquence avec Joana",
+        "description": "Faire découvrir les documents et l’ordre que tu as composé.",
+        "reply": "Joana prépare les deux documents et votre séquence.",
         "place": 0,
-        "preparationTitle": "Le premier repère",
-        "preparationPrompt": "Choisis l’entrée de votre petit accueil.",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Par quoi commencez-vous ?",
         "options": [
           {
             "id": "un",
-            "label": "Inviter à regarder la photographie",
-            "reply": "Je commencerai par demander où chacun a regardé en premier.",
-            "endingText": "Joana montre la photographie. Un visiteur remarque un instrument sur le côté ; un autre parle des joueurs. Vous placez les fiches à côté et proposez une écoute facultative.",
-            "endingReply": "Les questions viennent toutes seules. Merci, le coin d’accueil est prêt."
+            "label": "Annoncer ce que l’on va écouter",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par annoncer ce que l’on va écouter. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Proposer une première écoute",
-            "reply": "Présentons bien l’extrait : il s’agit d’une démonstration, pas du son de toute la roda.",
-            "endingText": "Les visiteurs qui le souhaitent écoutent un extrait de berimbau. Joana leur montre ensuite la photo et vos cartes. D’autres commencent directement par les documents.",
-            "endingReply": "Chacun a pu choisir son entrée. C’est exactement ce qu’il nous fallait."
+            "label": "Laisser entendre la séquence d’abord",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — laisser entendre la séquence d’abord — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Une place pour l’écoute"
+        "endingTitle": "Un moment préparé ensemble"
       },
       {
         "id": "rencontre",
-        "title": "Préparer les questions pour Paulo",
-        "description": "Garder une place à la conversation dans la salle de répétition.",
-        "reply": "Avec plaisir. On peut partir de ce que vous avez remarqué plutôt que suivre un exposé.",
+        "title": "Écouter et échanger avec Paulo",
+        "description": "Partager vos impressions autour des sons.",
+        "reply": "Paulo invite les visiteurs à prendre un moment d’écoute.",
         "place": 2,
-        "preparationTitle": "De quoi parler d’abord ?",
-        "preparationPrompt": "Choisis la question qui lancera votre échange.",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Quelle place donnes-tu aux premières impressions ?",
         "options": [
           {
             "id": "un",
-            "label": "Comment écouter quand on découvre ?",
-            "reply": "Prenons le temps de nommer ce qu’on entend, même si on ne sait pas encore l’expliquer.",
-            "endingText": "Paulo écoute les remarques des visiteurs. Joana apporte les trois cartes pour retrouver un mot ou une idée. Votre échange avance au fil des questions.",
-            "endingReply": "Personne n’avait besoin de tout connaître avant de commencer à écouter."
+            "label": "Demander un mot pour décrire le son",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par demander un mot pour décrire le son. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Que demander aux personnes du groupe ?",
-            "reply": "Pourquoi ne pas commencer par ce qu’elles aimeraient montrer elles-mêmes ?",
-            "endingText": "Joana choisit un détail de la photographie, puis Paulo revient sur l’une des fiches. Les visiteurs posent leurs questions et vous laissez la discussion se poursuivre.",
-            "endingReply": "Merci d’avoir préparé une rencontre où l’on peut aussi s’écouter parler."
+            "label": "Demander ce qui change entre les deux extraits",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — demander ce qui change entre les deux extraits — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Les questions entrent dans le cercle"
+        "endingTitle": "Une création à partager"
       }
     ],
     "practice": {
-      "title": "Une petite pause d’écoute",
+      "title": "Créer mon parcours d’écoute",
       "intro": "Joana et Paulo te proposent une pause avec les vrais extraits de berimbau du carnet. Choisis un point d’écoute, puis une question à garder pour le groupe.",
       "steps": [
         {
@@ -3261,8 +3266,8 @@ const WORLD_ADVENTURES = {
       }
     ],
     "guide": {
-      "result": "Voir comment Joana et Paulo commencent la rencontre.",
-      "finish": "Rejoindre le cercle →"
+      "result": "Entendre ta séquence et garder une carte de ton parcours d’écoute.",
+      "finish": "Partager notre parcours d’écoute →"
     }
   },
   "perou": {

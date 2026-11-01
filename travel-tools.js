@@ -8,7 +8,7 @@ function travelMatches(){
   const query=recipeSearchText(travelQuery.trim());
   return STOPS.filter(s=>{
     const a=adventureState(s.id),data=s.id==='inde'?{title:'Bienvenue à l’école de yoga',mission:INDIA_GOAL}:WORLD_ADVENTURES[s.id];
-    return (travelRegion==='all'||s.region===travelRegion)&&(!query||recipeSearchText([s.country,s.topic,data.title].join(' ')).includes(query))&&(travelStatus==='all'||travelStatus==='new'&&ATLAS_NEW_IDS.includes(s.id)||travelStatus==='ongoing'&&a.started&&!a.ending||travelStatus==='done'&&!!a.ending);
+    return (travelRegion==='all'||s.region===travelRegion)&&(!query||recipeSearchText([s.country,s.topic,data.title].join(' ')).includes(query))&&(travelStatus==='all'||travelStatus==='interactive'&&isPilot(s.id)||travelStatus==='new'&&ATLAS_NEW_IDS.includes(s.id)||travelStatus==='ongoing'&&a.started&&!a.ending||travelStatus==='done'&&!!a.ending);
   }).sort((a,b)=>Number(ATLAS_NEW_IDS.includes(b.id))-Number(ATLAS_NEW_IDS.includes(a.id)));
 }
 function latestJourney(){
@@ -23,7 +23,7 @@ function renderResumeCard(){
 }
 function travelSelectionControls(){
   const regions=[...new Set(STOPS.map(s=>s.region))];
-  return `<section class="travel-tools" aria-label="Choisir une aventure"><div><label for="travel-search">Une destination, une tradition…</label><input id="travel-search" type="search" value="${esc(travelQuery)}" placeholder="Flamenco, Sénégal, tissage…" autocomplete="off"></div><div><label for="travel-region">Région</label><select id="travel-region"><option value="all">Toutes les régions</option>${regions.map(r=>`<option value="${esc(r)}"${travelRegion===r?' selected':''}>${esc(r)}</option>`).join('')}</select></div><div class="travel-status-filters" role="group" aria-label="Avancement des aventures">${[['all','Toutes'],['new','5 nouvelles'],['ongoing','En cours'],['done','Terminées']].map(([key,label])=>`<button class="chip${travelStatus===key?' active':''}" data-action="travel-status" data-status="${key}" aria-pressed="${travelStatus===key}">${label}</button>`).join('')}</div></section><p id="travel-results-count" class="travel-results-count" role="status" aria-live="polite"></p>`;
+  return `<section class="travel-tools" aria-label="Choisir une aventure"><div><label for="travel-search">Une destination, une tradition…</label><input id="travel-search" type="search" value="${esc(travelQuery)}" placeholder="Flamenco, Sénégal, tissage…" autocomplete="off"></div><div><label for="travel-region">Région</label><select id="travel-region"><option value="all">Toutes les régions</option>${regions.map(r=>`<option value="${esc(r)}"${travelRegion===r?' selected':''}>${esc(r)}</option>`).join('')}</select></div><div class="travel-status-filters" role="group" aria-label="Avancement des aventures">${[['all','Toutes'],['interactive','À jouer'],['new','5 nouvelles'],['ongoing','En cours'],['done','Terminées']].map(([key,label])=>`<button class="chip${travelStatus===key?' active':''}" data-action="travel-status" data-status="${key}" aria-pressed="${travelStatus===key}">${label}</button>`).join('')}</div></section><p id="travel-results-count" class="travel-results-count" role="status" aria-live="polite"></p>`;
 }
 function renderTravelStoryResults(){
   const target=document.getElementById('travel-story-results');if(!target)return;
@@ -35,7 +35,7 @@ function travelStoryCard(s){
   const saved=journeyProgress(s.id),a=saved.adventure,data=s.id==='inde'?{title:'Bienvenue à l’école de yoga',mission:INDIA_GOAL}:WORLD_ADVENTURES[s.id];
   const status=a.ending?'✓ Aventure terminée':a.started?'Aventure en cours':'À découvrir';
   const label=a.ending?'Revoir le dénouement':a.started?'Reprendre l’aventure':'Commencer l’aventure';
-  return `<article class="journey-card"${s.id==='inde'?' data-pilot="true"':''}><img class="journey-cover" src="${TRAVEL_PHOTOS[s.id].local}" alt="${esc(TRAVEL_PHOTOS[s.id].caption)}" loading="lazy"><div class="journey-card-copy"><span class="overline">${s.flag} ${esc(s.country)} · ${status}</span>${ATLAS_NEW_IDS.includes(s.id)?'<span class="travel-new">Nouvelle escale</span>':''}<h2>${esc(data.title)}</h2><p>${esc(data.mission||data.goal)}</p><div class="india-card-tag">Un objectif clair · activité facultative · 2 fins</div><div class="travel-small">${a.visited.length}/3 lieux explorés · ${a.endings.length}/2 souvenirs</div><button class="btn prime" data-action="journey" data-id="${s.id}">${label} →</button>${s.id==='indonesie'?'<button class="btn ghost batik-entry" data-action="batik-open">Mon atelier de motifs →</button>':''}${travelCredit(s.id)}</div></article>`;
+  return `<article class="journey-card"${s.id==='inde'?' data-pilot="true"':''}><img class="journey-cover" src="${TRAVEL_PHOTOS[s.id].local}" alt="${esc(TRAVEL_PHOTOS[s.id].caption)}" loading="lazy"><div class="journey-card-copy"><span class="overline">${s.flag} ${esc(s.country)} · ${status}</span>${ATLAS_NEW_IDS.includes(s.id)?'<span class="travel-new">Nouvelle escale</span>':''}<h2>${esc(data.title)}</h2><p>${esc(data.mission||data.goal)}</p>${isPilot(s.id)?'<span class="pilot-trip-tag">À jouer · création personnelle · révision libre</span>':'<div class="india-card-tag">Un objectif clair · activité facultative · 2 fins</div>'}<div class="travel-small">${a.visited.length}/3 lieux explorés · ${a.endings.length}/2 souvenirs</div><button class="btn prime" data-action="journey" data-id="${s.id}">${label} →</button>${s.id==='indonesie'?'<button class="btn ghost batik-entry" data-action="batik-open">Mon atelier de motifs →</button>':''}${travelCredit(s.id)}</div></article>`;
 }
 function adventureOverview(){
   const progress=STOPS.map(s=>({s,a:adventureState(s.id)}));
@@ -53,6 +53,7 @@ function adventureGuidePanel(goal,stage,instruction){
 }
 function worldGuide(id,a){
   if(worldPane)return '';
+  if(isPilot(id))return pilotGuide(id,a);
   const data=WORLD_ADVENTURES[id],names=data.characters;
   const instructions={
     intro:[1,data.mission],
@@ -79,6 +80,6 @@ document.addEventListener('input',event=>{if(event.target.id==='travel-search'){
 document.addEventListener('change',event=>{if(event.target.id==='travel-region'){travelRegion=event.target.value;renderTravelStoryResults();}});
 document.addEventListener('click',event=>{
   const b=event.target.closest('[data-action]');if(!b)return;
-  if(b.dataset.action==='travel-status'&&['all','new','ongoing','done'].includes(b.dataset.status)){travelStatus=b.dataset.status;renderTravelHub();document.querySelector(`[data-action="travel-status"][data-status="${travelStatus}"]`)?.focus({preventScroll:true});}
+  if(b.dataset.action==='travel-status'&&['all','interactive','new','ongoing','done'].includes(b.dataset.status)){travelStatus=b.dataset.status;renderTravelHub();document.querySelector(`[data-action="travel-status"][data-status="${travelStatus}"]`)?.focus({preventScroll:true});}
   if(b.dataset.action==='travel-reset-filters'){travelQuery='';travelRegion='all';travelStatus='all';renderTravelHub();document.getElementById('travel-search')?.focus();}
 });

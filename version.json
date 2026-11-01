@@ -1,12 +1,13 @@
 {
   "app": "Atlas des cultures",
-  "version": "5.3.0",
+  "version": "5.4.0",
   "date": "2026-11-01",
   "notes": [
-    "18 aventures guidées : objectif annoncé et consigne visible à chaque écran",
-    "Des questions concrètes avec réponse expliquée immédiatement, essais libres et aide directe",
-    "Un fil plus simple : découvrir, essayer si on le souhaite, puis choisir et voir le résultat",
-    "Les activités peuvent être passées dès la rencontre avec le personnage",
-    "Les choix, souvenirs, recettes et créations déjà sauvegardés sont conservés"
+    "Trois aventures à jouer : Japon, Maroc et Brésil",
+    "Japon : une table à composer pour son invité et une réaction liée au repas servi",
+    "Maroc : un conte personnel qui change avec l’objet, le détour et la décision choisis",
+    "Brésil : deux documents sonores, un instrument à reconnaître et une séquence à réordonner et écouter",
+    "Créations conservées dans le carnet et cartes à télécharger",
+    "Révision facultative dans les trois aventures ; anciens progrès et ateliers conservés"
   ]
 }

@@ -1,21 +1,21 @@
 {
   "japon": {
-    "title": "Un repas pour accueillir Haru",
-    "mission": "Prépare avec Aiko une table de découverte du washoku, puis choisis comment accueillir Haru.",
-    "intro": "Aiko dispose les plats avant l’arrivée de Haru. Elle te propose de découvrir le repas avec elle, puis de choisir ce que vous présenterez en premier.",
+    "title": "Une table pour un ami",
+    "mission": "Prépare avec Aiko un repas pour Haru ou Nao : découvre sa demande, compose sa table et regarde sa réaction.",
+    "intro": "Aiko termine la cuisine. Haru et Nao viendront partager un repas ; chacun a une petite envie particulière. Tu vas choisir un invité, disposer les plats pour lui faire plaisir, puis décider comment présenter votre table.",
     "places": [
       {
-        "name": "La cuisine",
+        "name": "La cuisine d’Aiko",
         "description": "Aiko termine les préparatifs. Trois cartes sans légende attendent près des bols.",
         "shortName": "Cuisine"
       },
       {
-        "name": "La table des souvenirs",
+        "name": "Le coin des découvertes",
         "description": "Une photographie et deux notes permettent de comprendre ce que les cartes racontent.",
-        "shortName": "Souvenirs"
+        "shortName": "Repères"
       },
       {
-        "name": "La salle à manger",
+        "name": "La table des invités",
         "description": "Haru prépare les places des invités. Il hésite encore sur la façon de présenter le repas.",
         "shortName": "Table"
       }
@@ -24,7 +24,7 @@
       {
         "name": "Aiko",
         "role": "prépare le repas familial",
-        "greeting": "Bienvenue ! Prépare avec Aiko une table de découverte du washoku, puis choisis comment accueillir Haru. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
+        "greeting": "Bienvenue ! Haru et Nao arrivent bientôt. Tu peux choisir un invité et composer son repas sur notre petite table. Si tu veux en savoir plus, la photo et les notes restent au coin des découvertes.",
         "questions": [
           {
             "question": "Pourquoi ces ingrédients ?",
@@ -39,7 +39,7 @@
       {
         "name": "Haru",
         "role": "cousin d’Aiko, chargé de l’accueil",
-        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : ton menu imaginaire. Tu peux aussi passer directement aux trois questions des visiteurs.",
+        "greeting": "Tu peux nous préparer un petit repas à l’écran. Chaque plat que tu choisis apparaîtra sur la table. Commence par choisir pour qui tu cuisines.",
         "questions": [
           {
             "question": "Qui t’a appris à cuisiner ?",
@@ -175,59 +175,59 @@
     "plans": [
       {
         "id": "atelier",
-        "title": "Préparer une table à découvrir",
-        "description": "Installer les trois cartes pour que les invités puissent les lire à leur rythme.",
-        "reply": "Aiko : Bonne idée. Nos cartes auront enfin une place. Choisissons celle que l’on verra en premier.",
+        "title": "Présenter le repas avec Aiko",
+        "description": "Rejoindre Aiko et expliquer les plats que tu as choisis.",
+        "reply": "Aiko te propose de présenter votre table ensemble.",
         "place": 0,
-        "preparationTitle": "La première carte",
-        "preparationPrompt": "Par quoi veux-tu commencer la présentation ?",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Par quoi commences-tu ?",
         "options": [
           {
             "id": "un",
-            "label": "Mettre la photographie en premier",
-            "reply": "Aiko : Les invités commenceront par regarder les boîtes. Les autres cartes seront juste à côté.",
-            "endingText": "Tu poses la photographie à l’entrée de la table. Les premiers invités s’arrêtent devant les compartiments, puis découvrent les deux notes que tu as classées.",
-            "endingReply": "Aiko : Merci ! J’entends déjà une question. Je vais chercher Haru pour qu’il nous rejoigne."
+            "label": "Montrer les ingrédients choisis",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par montrer les ingrédients choisis. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Commencer par la note sur les ingrédients",
-            "reply": "Aiko : Je la pose près du menu. La photographie et la note sur l’apprentissage suivront.",
-            "endingText": "La note sur les ingrédients accueille les invités. L’un d’eux demande à Aiko comment elle a choisi son repas. Haru apporte les derniers bols pendant que la conversation commence.",
-            "endingReply": "Aiko : Tout est en place. Tu peux t’installer avec nous."
+            "label": "Présenter la demande de l’invité",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — présenter la demande de l’invité — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Les cartes trouvent leur place"
+        "endingTitle": "Un moment préparé ensemble"
       },
       {
         "id": "rencontre",
-        "title": "Ouvrir la conversation à table",
-        "description": "Garder les cartes sous la main pour une discussion menée par Haru.",
-        "reply": "Haru : D’accord. Une seule question pour commencer, puis chacun parlera s’il en a envie.",
+        "title": "S’asseoir avec l’invité",
+        "description": "Partager un moment autour du repas que tu as composé.",
+        "reply": "Votre invité est prêt à prendre place.",
         "place": 2,
-        "preparationTitle": "Une question pour commencer",
-        "preparationPrompt": "Quelle ouverture proposes-tu à Haru ?",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Comment ouvres-tu ce moment ?",
         "options": [
           {
             "id": "un",
-            "label": "Demander le souvenir d’un repas",
-            "reply": "Haru : J’ai déjà une histoire de casserole à raconter. Je vais laisser les autres commencer !",
-            "endingText": "Une fois les invités installés, Haru demande un souvenir de repas. Les réponses font sourire Aiko. Tu gardes les cartes à portée de main pour les questions qui suivront.",
-            "endingReply": "Haru : On avait besoin de quelqu’un pour lancer la discussion. Merci du coup de main."
+            "label": "Demander quel plat attire son regard",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par demander quel plat attire son regard. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Demander à qui l’on doit un savoir-faire",
-            "reply": "Haru : Je parlerai de ma tante. Aiko aura sûrement son propre souvenir.",
-            "endingText": "Haru demande qui a appris aux invités une chose qu’ils aiment préparer. Aiko écoute, puis raconte son souvenir. La table est prête et les cartes deviennent des appuis à la conversation.",
-            "endingReply": "Haru : Les cartes sont rangées, les invités aussi. Enfin, presque ! Il nous reste une chaise pour toi."
+            "label": "Laisser l’invité raconter un souvenir de repas",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — laisser l’invité raconter un souvenir de repas — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Une place dans la conversation"
+        "endingTitle": "Une création à partager"
       }
     ],
     "practice": {
-      "title": "Ton menu imaginaire",
+      "title": "Composer le repas",
       "intro": "Aiko te propose de composer un menu imaginaire. Choisis un ingrédient, une présentation et une invitation.",
       "steps": [
         {
@@ -287,11 +287,16 @@
         "url": "https://commons.wikimedia.org/wiki/File:Osechi.jpg",
         "label": "Photographie · Osechi, Akihito Kurono, CC0",
         "supports": "Identification de l’osechi et des boîtes jūbako ; auteur et droits de la photographie. Les personnages et le menu du jeu sont fictifs."
+      },
+      {
+        "label": "MAFF · Traditional Dietary Cultures of the Japanese",
+        "url": "https://www.maff.go.jp/e/data/publish/attach/pdf/index-20.pdf",
+        "supports": "Place du riz, de la soupe et des accompagnements ; le menu du jeu reste une scène simplifiée et fictive."
       }
     ],
     "guide": {
-      "result": "Voir la table et le premier échange que tu as choisis.",
-      "finish": "Accueillir Haru →"
+      "result": "Voir le repas que tu as composé et garder ta table dans tes créations.",
+      "finish": "Servir et partager le repas →"
     }
   },
   "coree": {

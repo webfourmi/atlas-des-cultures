@@ -590,31 +590,31 @@
     }
   },
   "maroc": {
-    "title": "Une histoire va commencer",
-    "mission": "Aide Youssef à accueillir les auditeurs de Salma, puis choisis comment lancer son récit.",
-    "intro": "Salma cherche le bon début pour son rendez-vous d’écoute. Youssef te propose de découvrir la place et l’art des conteurs. Tu pourras inventer un micro-récit avant de rejoindre le public.",
+    "title": "Le conte qui change avec toi",
+    "mission": "Invente un conte avec Salma : choisis un objet, ajoute un détour et décide ce que fera le personnage.",
+    "intro": "Salma prépare un moment de récit près de la place. « Aujourd’hui, inventons une histoire ensemble », te propose-t-elle. Un objet donnera le départ ; ton détour et ta décision changeront vraiment la suite. Le conte sera votre création personnelle, écrite en français pour le jeu.",
     "places": [
       {
-        "name": "Le coin de rendez-vous",
+        "name": "L’entrée de la place",
         "description": "Un point d’accueil fictif près de la place, où Youssef vérifie ses cartes avant la rencontre.",
-        "shortName": "Rendez-vous"
+        "shortName": "Place"
       },
       {
-        "name": "La table des carnets",
+        "name": "Les documents de la place",
         "description": "Une petite table inventée pour comparer la photo et les deux notes sur l’art de raconter.",
-        "shortName": "Carnets"
+        "shortName": "Repères"
       },
       {
         "name": "Le cercle d’écoute",
         "description": "Salma a prévu une rencontre fictive avec quelques personnes. Le groupe laisse les passages libres.",
-        "shortName": "Écoute"
+        "shortName": "Salma"
       }
     ],
     "characters": [
       {
         "name": "Youssef",
         "role": "vient écouter un récit",
-        "greeting": "Bienvenue ! Aide Youssef à accueillir les auditeurs de Salma, puis choisis comment lancer son récit. Regarde d’abord la photographie et les deux repères. Nous préparerons ensuite l’accueil ensemble.",
+        "greeting": "Salma t’attend pour inventer un petit conte. Choisis un objet, puis un détour et une décision. La photo et les notes te permettent aussi de découvrir les conteurs de la place.",
         "questions": [
           {
             "question": "Qu’est-ce que tu préfères quand tu écoutes ?",
@@ -629,7 +629,7 @@
       {
         "name": "Salma",
         "role": "conteuse",
-        "greeting": "Tu as de quoi présenter cette découverte. Si tu veux essayer avant la rencontre : invente un micro-récit. Tu peux aussi passer directement aux trois questions des visiteurs.",
+        "greeting": "Commençons par un objet. Je poserai ensuite une nouvelle situation, et tu décideras ce que fait ton personnage. Nous garderons le conte que nous aurons créé.",
         "questions": [
           {
             "question": "Tu racontes toujours de la même manière ?",
@@ -765,59 +765,59 @@
     "plans": [
       {
         "id": "atelier",
-        "title": "Préparer les cartes d’accueil",
-        "description": "Installer avec Youssef les cartes qui permettront aux nouveaux venus de se repérer.",
-        "reply": "Youssef : Merci. Je pourrai les montrer en quelques mots, puis laisser les gens s’installer.",
+        "title": "Confier le conte à Youssef",
+        "description": "Faire lire votre création à Youssef.",
+        "reply": "Youssef ouvre son carnet pour accueillir votre conte.",
         "place": 0,
-        "preparationTitle": "Une entrée dans la rencontre",
-        "preparationPrompt": "Par quoi souhaites-tu commencer les cartes ?",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Que lui proposes-tu de regarder d’abord ?",
         "options": [
           {
             "id": "un",
-            "label": "Situer la place avec la photo",
-            "reply": "Youssef : D’accord. La vue donne un repère, et les deux notes invitent ensuite à s’intéresser aux personnes.",
-            "endingText": "Youssef présente la photographie. Tu montres les deux notes, puis vous accompagnez les nouveaux venus vers les places libres.",
-            "endingReply": "Youssef : On est prêts. Je vais enfin pouvoir écouter moi aussi."
+            "label": "Le début et l’objet choisi",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par le début et l’objet choisi. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Commencer par « Qu’aimez-vous écouter ? »",
-            "reply": "Youssef : J’aime bien. Chacun peut répondre s’il en a envie ; personne n’est obligé de parler.",
-            "endingText": "Les premières réponses font sourire le groupe. Youssef montre ensuite les cartes et propose d’aller s’installer.",
-            "endingReply": "Youssef : On a déjà quelque chose à se raconter après le récit."
+            "label": "La fin et la décision du personnage",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — la fin et la décision du personnage — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Le groupe peut s’installer"
+        "endingTitle": "Un moment préparé ensemble"
       },
       {
         "id": "rencontre",
-        "title": "Rejoindre Salma",
-        "description": "Emporter les cartes dans le cercle d’écoute et choisir une courte ouverture avec elle.",
-        "reply": "Salma : Venez, il reste de la place ici. Vous voulez me présenter, ou préférez-vous que je commence tout de suite ?",
+        "title": "Raconter le conte avec Salma",
+        "description": "Partager votre histoire avec le petit groupe.",
+        "reply": "Salma te propose de raconter avec elle.",
         "place": 2,
-        "preparationTitle": "Avant le récit",
-        "preparationPrompt": "Comment veux-tu ouvrir cette rencontre ?",
+        "preparationTitle": "Choisir le début de ce moment",
+        "preparationPrompt": "Comment commence votre récit ?",
         "options": [
           {
             "id": "un",
-            "label": "Demander à Salma ce qu’elle aime raconter",
-            "reply": "Salma : Bonne question. Je peux commencer par ce qui m’a donné envie de raconter aujourd’hui.",
-            "endingText": "Salma partage un souvenir. Le groupe l’écoute, puis Youssef lui fait signe qu’il est prêt pour la suite.",
-            "endingReply": "Salma : Merci. Maintenant que nous avons fait connaissance, je peux commencer."
+            "label": "Montrer d’abord l’objet du conte",
+            "reply": "D’accord, nous commencerons ainsi. Le reste de ta création restera disponible.",
+            "endingText": "Vous commencez par montrer d’abord l’objet du conte. La rencontre se poursuit autour de ce que tu as préparé.",
+            "endingReply": "Merci. Nous avons un point de départ à partager."
           },
           {
             "id": "deux",
-            "label": "Laisser le récit commencer",
-            "reply": "Salma : D’accord. Gardez vos questions pour après si vous en avez envie.",
-            "endingText": "Vous prenez place. Salma commence : « Au matin, une lettre attendait sur le seuil… » Youssef se tourne vers elle pour ne pas manquer la suite.",
-            "endingReply": "Youssef : On en reparlera après. J’ai envie de savoir à qui cette lettre était destinée."
+            "label": "Commencer directement par la première phrase",
+            "reply": "Oui, cela donnera une autre entrée dans ce que tu as préparé.",
+            "endingText": "Ton choix — commencer directement par la première phrase — ouvre une conversation. Les autres personnes découvrent à leur tour la création et les documents.",
+            "endingReply": "Ta proposition donne aux autres une place dans cet échange."
           }
         ],
-        "endingTitle": "Les premiers mots"
+        "endingTitle": "Une création à partager"
       }
     ],
     "practice": {
-      "title": "Invente un micro-récit",
+      "title": "Inventer mon conte",
       "intro": "Invente avec Salma un micro-récit en français. Choisis un début, un détail inattendu et une fin pour cette histoire créée dans le jeu.",
       "steps": [
         {
@@ -880,8 +880,8 @@
       }
     ],
     "guide": {
-      "result": "Voir Salma accueillir le groupe selon ton choix.",
-      "finish": "Laisser la rencontre commencer →"
+      "result": "Lire le conte que tes trois choix ont créé et le garder dans ton carnet.",
+      "finish": "Faire vivre notre conte →"
     }
   },
   "kenya": {
